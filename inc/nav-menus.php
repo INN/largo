@@ -51,19 +51,19 @@ class Argo_Categories_Walker extends Walker {
         $li_class = ( $output ) ? '' : ' class="first"';
         $output .= '<li' . $li_class . '><a href="' . $item->url . '">' . 
              $item->title  . '</a>';
-        $output .= '<div class="sub"><ul><li><div class="inner-menu">';
+        $output .= '<div class="sub container_12"><ul><li><div class="inner-menu">';
 
-        $output .= '<div class="mega-feature">';
+        $output .= '<div class="mega-feature grid_4">';
         $cat = get_category( $item->object_id );
         $output .= '<h2>' . $cat->description . '</h2>';
         $output .= '</div>';
 
-        $output .= '<div class="category-topics">';
+        $output .= '<div class="category-topics grid_4">';
         $output .= '<h3>RELATED TOPICS</h3>';
         $output .= argo_get_related_topics_for_category( $item );
         $output .= '</div>';
 
-        $output .= '<div class="category-articles">';
+        $output .= '<div class="category-articles grid_4">';
         $output .= '<h3>LATEST POSTS</h3>';
         $output .= argo_get_latest_posts_for_category( $item );
         $output .= '</div>';

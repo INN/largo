@@ -149,7 +149,7 @@ button {  width: auto; overflow: visible; }
 /* Basic HTML */
 
 body {
-	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	color: #333;
 }
@@ -187,21 +187,41 @@ hr {
 	margin-bottom: 15px;
 }
 
- h1 {
-	font-size: 50px;
+h1, h2, h3, h4, h5, h6, h7, h8 {
+	font: 16px Georgia, Times, "Times New Roman", serif;
+	
+}
+
+h1 {
+	font-size: 3.375em;
 	line-height: 1;
 }
 
 h2 {
-	font-size: 30px;
+	font-size: 2.75em;
 	font-weight: normal;
 	line-height: 1;
 }
 
 h3 {
-	font-size: 21px;
+	font-size: 2.25em;
 	font-weight: normal;
 	line-height: 1;
+}
+h4 {
+	font-size: 1.833em;
+	font-weight:normal;
+	line-height:1;
+}
+h5 {
+	font-size: 1.5em;
+	font-weight:normal;
+	line-height:1;
+}
+h6 {
+	font-size: 1.222em;
+	font-weight:normal;
+	line-height:1;
 }
 
 
@@ -336,9 +356,6 @@ form.inline p { margin-bottom:0; }
 }
 
 .global-nav {
-	margin-left: auto;
-	margin-right: auto;
-	width: 940px;
 	color: #fff;
 	font-size: 11px;
 	position: relative;
@@ -480,10 +497,12 @@ margin-left: 70px;
 
 #topics-bar h4 {
 	margin: 0;
+	font-size:1.5em;
 }
 
 #topics-bar ul {
-	width: 862px;
+	/*width: 862px;*/
+	width:100%;
 }
 
 #topics-bar h5 {
@@ -513,17 +532,17 @@ margin-left: 70px;
 }
 
 .search-submit {
-font-family: helvetica, arial, sans-serif;
-font-weight: bold;
-color: #eee;
-font-size: 12px;
-background-color: #000;
-border: none;
-padding: 4px 3px;
+	font-family: helvetica, arial, sans-serif;
+	font-weight: bold;
+	color: #eee;
+	font-size: 12px;
+	background-color: #000;
+	border: none;
+	padding: 4px 3px;
 }
 
 .search-submit:hover {
-background-color: #333;
+	background-color: #333;
 }
 
 #searchform-footer {
@@ -559,7 +578,7 @@ background-color: #333;
 }
 
 .ie6 #follow-us {
-display: none;
+	display: none;
 }
 
 #follow-us li {
@@ -602,12 +621,9 @@ display: none;
 /* mega menu */
 
 #main-nav {
-	margin-left: auto;
-	margin-right: auto;
 	margin-top: 5px;
 	margin-bottom: 10px;
-	width: 940px;
-	min-height: 32px;
+	min-height: 38px;
 	position: relative;
 	z-index: 100;
 }
@@ -631,7 +647,7 @@ display: none;
 
 #topnav li a {
 	float: left; 
-	padding: 5px 22px 5px 5px;
+	padding: 8px 25px 8px 8px;
 	margin: 0 5px;
 	color: #000;
 	background: transparent url(../img/arrow-down.png) no-repeat 95% 50%;
@@ -654,7 +670,6 @@ display: none;
 	top: 31px; 
 	left: -5px;
 	float: left;
-	width: 925px;
 	display: none;
 	border: 4px solid #999;
 }
@@ -668,8 +683,8 @@ display: none;
 
 #topnav li .sub ul{
 	list-style: none;
-	margin: 0; padding: 0;
-	width: 915px;
+	margin: 0;
+	padding: 0;
 	float: left;
 	background-color: #fff;
 }
@@ -679,7 +694,6 @@ display: none;
 	color: #333;
 	border: none;
 	background-color: #fff !important;
-	padding: 5px;
 }
 
 #topnav .sub ul li a {
@@ -702,8 +716,7 @@ display: none;
 }
 
 .inner-menu {
-	width: 920px;
-	padding: 10px;
+	padding: 10px 0;
 }
 
 #topnav .sub .inner-menu a {
@@ -718,13 +731,12 @@ display: none;
 
 
 .mega-feature {
-	width: 320px;
 	float: left;
 }
 
 .mega-feature h2 {
-	font-size: 24px;
-	line-height: 1.2;
+	font-size: 1.5em;
+	line-height: 1.222;
 	color: #666;
 	padding-bottom: 15px;
 }
@@ -735,8 +747,8 @@ display: none;
 }
 
 .mega-feature h3 {
-	font-size: 16px;
-	line-height: 1.2;
+	font-size: 1.222em;
+	line-height: 1;
 	margin: 0 0 5px 0;
 }
 
@@ -747,18 +759,16 @@ display: none;
 
 .mega-feature .read-more {
 	font-weight: bold;
-	font-size: 11px;
+	font-size: 0.815em;
 }
 
 .category-articles {
-	width: 320px;
 	float: left;
-	margin-left: 20px;
 }
 
 .category-articles h4 {
-	font-size: 14px;
-	line-height: 1.2;
+	font-size: 1em;
+	line-height: 1;
 	margin: 0 0 10px 0;
 	padding-bottom: 8px !important;
 	border-bottom: 1px solid #ddd;
@@ -771,7 +781,7 @@ display: none;
 }
 
 .category-articles h5 a {
-	font-size: 12px;
+	font-size: 0.815em;
 	line-height: 1;
 	margin: 0 0 5px 0;
 	display: block;
@@ -779,20 +789,18 @@ display: none;
 }
 
 #topnav .category-topics ul {
-	width: 200px !important;
 	padding: 0;
 }
 
 #topnav .category-topics li {
+	font: 1em Georgia, Times, "Times New Roman", serif;
 	margin: 0 0 10px 0 !important;
-	font-size: 15px;
-	padding: 0 0 10px !important;
+	line-height:1;
+	padding-bottom: 8px !important;
 	border-bottom: 1px solid #ddd !important;
 }
 
 .category-topics {
-	width: 210px;
-	margin-left: 20px;
 	float: left;
 }
 
@@ -811,15 +819,15 @@ display: none;
 }
 
 .single .post, .page .post {
-padding-bottom: 0;
-border-bottom: none;
+	padding-bottom: 0;
+	border-bottom: none;
 }
 
 .ie6 #content {
 	width: 610px;
 	overflow: hidden;
 }
-
+/*
 #content h2 {
 	margin: 10px 0;
 }
@@ -846,11 +854,13 @@ border-bottom: none;
 	line-height: 1.3;
 	font-weight: bold;
 }
-
-.post ul {
-	list-style: disc;
+*/
+.post ul li {
+	list-style: disc !important;
 }
-
+.post ol li {
+	list-style: decimal !important;
+}
 .post li {
 	margin: 0 0 10px 30px;
 }
@@ -859,11 +869,10 @@ border-bottom: none;
 	margin: 0 0 10px 50px;
 }
 
-.entry-title {
-font-size: 30px;
-margin: 10px 0;
+h2.entry-title {
+	font-size: 2.75em;
+	margin: 10px 0;
 }
-
 #content h2 a {
 	color: #333;
 	font-weight: normal;
@@ -888,7 +897,7 @@ margin: 10px 0;
 }
 
 #content .intro { /*style the first paragraph in a long post */
-	font-size: 18px;
+	font-size: 1.222em;
 	font-style: italic;
 	color: #999;
 	line-height: 1.3;
@@ -914,12 +923,12 @@ margin: 10px 0;
 }
 
 .single .bottom-meta h5 {
-padding-bottom: 10px;
-border-bottom: 1px solid #ddd;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd;
 }
 
 #content .post-meta h6 {
-	font-size: 12px;
+	/*font-size: 0.815 em;*/
 	font-weight: normal;
 	font-style: italic;
 	margin: 0 0 10px 0;
@@ -928,7 +937,7 @@ border-bottom: 1px solid #ddd;
 
 #content .post-meta h5 {
 	font-weight: normal;
-	font-size: 12px !important;
+	font: 0.815em "Helvetica Neue", Helvetica, Arial, sans-serif;
 	margin: 5px 0 0 0;
 	color: #666;
 }
@@ -942,11 +951,13 @@ border-bottom: 1px solid #ddd;
 	margin: 0 0 10px 0;
 	position: relative;
 }
-
+.post ul.meta-gestures li {
+	list-style:none !important;
+}
 .meta-gestures li {
 	float: left;
 	margin: 5px 10px 5px 0;
-	font-size: 11px;
+	font-size: 0.815em;
 }
 
 .ie8 .meta-gestures li, .ie7 .meta-gestures li, .ie6 .meta-gestures li {
@@ -955,9 +966,9 @@ border-bottom: 1px solid #ddd;
 }
 
 .meta-gestures .meta-comments { 
-background: transparent url(../img/comment-icon.gif) no-repeat;
-	height: 18px; 
-	padding-left: 20px;
+	background: transparent url(../img/comment-icon.gif) no-repeat;
+	height: 20px; 
+	padding-left: 22px;
 	float: right;
 }
 
@@ -978,7 +989,7 @@ background: transparent url(../img/comment-icon.gif) no-repeat;
 #content .labels a {
 	background-color: #eeeeee;
 	color: #999;
-	font-size: 11px;
+	font-size: 0.815em;
 	padding: 3px 6px; 
 	text-decoration: none;
 	-moz-border-radius: 3px; 
@@ -993,7 +1004,7 @@ background: transparent url(../img/comment-icon.gif) no-repeat;
 }
 
 #term-view {
-font-weight: bold;
+	font-weight: bold;
 }
 
 .subscribe {/* RSS Icon */
@@ -1014,67 +1025,66 @@ font-weight: bold;
 /* blog hosts */
 
 .hosts img {
-float: left;
-margin-right: 10px;
-border: 1px solid #ddd;
+	float: left;
+	margin-right: 10px;
+	border: 1px solid #ddd;
 }
 
 .hosts div {
-margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 #site-footer .hosts img {
-float: none;
-border: none;
+	float: none;
+	border: none;
 }
 
 .hosts h4 {
-font-size: 16px;
-margin: 0;
+	font-size: 1em;
+	margin: 0;
 }
 
 .hosts p {
-margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 #site-footer .hosts h4 {
-font-size: 12px;
+	font-size: 1em;
 }
 
 #site-footer .hosts p {
-font-size: 11px;
+	font-size: 0.815em;
 }
 
 #page .hosts h4 a {
-font-weight: bold;
+	font-weight: bold;
 }
 
 /* author archive page */
 
 .author #page .vcard a {
-color: #333;
+	color: #333;
 }
 
 /* guest author bio */
 
 .navis-author-bio {
-border-top: 4px solid #ddd;
-margin-bottom: 20px;
-padding-top: 10px;
-font-style: italic;
+	border-top: 4px solid #ddd;
+	margin-bottom: 20px;
+	padding-top: 10px;
+	font-style: italic;
 }
 
 #content .navis-author-bio h4 {
-font-size: 14px;
-margin: 0 0 5px 0;
+	font: 1.222em "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin: 0 0 5px 0;
 }
 
 #content .navis-author-bio p {
-font-size: 12px;
-color: #666;
-background: none;
-padding: 0;
-margin: 0;
+	color: #666;
+	background: none;
+	padding: 0;
+	margin: 0;
 }
 
 /* related posts */
@@ -1084,7 +1094,6 @@ margin: 0;
 	padding-top: 2px;
 	border: 1px solid #eee;
 	border-top: 2px solid #ddd;
-	background: transparent url(../img/rp-background.png) repeat-y;
 }
 
 #related-posts a {
@@ -1093,17 +1102,17 @@ margin: 0;
 
 #related-post-nav { 
 	float:left; 
-	width: 140px;
+	width: 30%;
 	margin: 0;
 	padding: 5px 0;
 }
 
 #related-post-nav li {
-	font-size: 11px;
+	font-size: 0.815em;
 }
 
 #related-post-nav h4 {
-	font-size: 11px;
+	font-size: 1em;
 	margin: 0 0 5px 5px;
 }
 
@@ -1121,15 +1130,18 @@ margin: 0;
 }
 
 #related-post-nav a.selected { 
-color: #fff; 
-background: #000 url("../img/related-arrow.gif") 0 center no-repeat; border: none; font-weight: bold; }
+	color: #fff; 
+	background: #000;
+	border:none; 
+	font-weight:bold;
+}
 
 .items div { 
 	display:none; 
 	float:left; 
-	padding:0 10px 0 20px;
-	width: 445px;
-	font-size: 11px;
+	padding:0 2.5% 0 5%;
+	width:62.5%;
+	font-size: 0.815em;
 }
 
 .ie6 .items div {
@@ -1160,7 +1172,7 @@ background: #000 url("../img/related-arrow.gif") 0 center no-repeat; border: non
 }
 
 #related-posts .top-related h3 {
-	font-size: 14px;
+	font-size: 1em;
 	font-weight: normal;
 	margin: 0 0 5px 0;
 }
@@ -1174,7 +1186,7 @@ background: #000 url("../img/related-arrow.gif") 0 center no-repeat; border: non
 .post-nav, .argo-pag {
 	clear: both;
 	border-bottom: 1px solid #ddd;
-	font-size: 12px;
+	font-size: 1em;
 }
 
 .post-nav li, .argo-pag li {
@@ -1183,7 +1195,7 @@ background: #000 url("../img/related-arrow.gif") 0 center no-repeat; border: non
 
 #content .post-nav h5 {
 	margin: 0;
-	font-size: 14px;
+	font-size: 1em;
 }
 
 #content .post-nav a, #content .argo-pag a {
@@ -1191,20 +1203,20 @@ background: #000 url("../img/related-arrow.gif") 0 center no-repeat; border: non
 }
 
 .p-post {
-	width: 300px;
+	width: 50%;
 	margin: 10px 0;
 	float: left;
 }
 
 .n-post {
 	float: right;
-	width: 300px;
+	width: 50%;
 	text-align: right;
 	margin: 10px 0;
 }
 
 .argo-pag {
-     font-size: 14px;
+     font-size: 1em;
      padding-bottom: 20px;
      border: none;
      float: right;
@@ -1229,11 +1241,11 @@ background: #000 url("../img/related-arrow.gif") 0 center no-repeat; border: non
 }
 
 #content .argo-next {
-margin-right: 0;
+	margin-right: 0;
 }
 
 #content .argo-next a {
-padding-right: 0;
+	padding-right: 0;
 }
 
 /* post page content modules */
@@ -1254,7 +1266,7 @@ padding-right: 0;
 }
 
 #content .module dt {
-	font-size: 14px;
+	font-size: 1em;
 	margin-bottom: 10px;
 }
 
@@ -1263,7 +1275,7 @@ padding-right: 0;
 }
 
 #content .aside p {
-	font-size: 11px;
+	font-size: 0.815em;
 }
 
 .image p {
@@ -1276,7 +1288,7 @@ padding-right: 0;
 }
 
 #content .wp-media-credit {
-	font-size: 10px;
+	font-size: 0.667em;
 	margin: 0;
 	text-align: right;
 	color: #666;
@@ -1285,7 +1297,7 @@ padding-right: 0;
 }
 
 #content .wp-caption-text {
-	font-size: 12px;
+	font-size: 0.815em;
 	margin: 5px 0 0 0;
 	color: #666;
 	font-style: italic;
@@ -1294,8 +1306,8 @@ padding-right: 0;
 }
 
 #content .half {
-	width: 300px;
-	font-size: 11px;
+	width: 50%;
+	font-size: 0.815em;
 }
 
 #content .aligncenter {
@@ -1317,24 +1329,25 @@ padding-right: 0;
 }
 
 #content .pull-quote {
-	width: 300px;
+	width: 50%;
 	border-bottom: none;
 	border-left: 4px solid #333;
 	padding-left: 20px;
-	font-size: 24px;
+	font-size: 1.5em;
 	font-style: italic;
 	line-height: 1.3;
 	margin: 20px;
+	font: 16px Georgia, Times, "Times New Roman", serif;
 }
 
 #content .pull-quote h6 {
-	font-size: 12px;
+	font-size: 0.815em;
 	font-style: italic;
 	margin: 0
 }
 
 #content .pull-quote p {
-	font-size: 24px;
+	font-size: 1.5em;
 }
 
 /* = Customized comment form styles via the twenty eleven theme
@@ -1342,7 +1355,7 @@ http://wordpress.org/extend/themes/twentyeleven
 ----------------------------------------------- */
 
 #content #comments-title {
-	font-size: 24px;
+	font-size: 1.5em;
 	margin-bottom: 20px;
 	font-weight: bold;
 }
@@ -1350,7 +1363,7 @@ http://wordpress.org/extend/themes/twentyeleven
 .nopassword,
 .nocomments {
 	color: #aaa;
-	font-size: 24px;
+	font-size: 1.5em;
 	font-weight: 100;
 	margin: 26px 0;
 	text-align: center;
@@ -1395,7 +1408,7 @@ http://wordpress.org/extend/themes/twentyeleven
 }
 .comment-meta {
 	color: #666;
-	font-size: 12px;
+	font-size: 0.815em;
 	line-height: 2.2em;
 }
 .commentlist .children li.comment .comment-meta {
@@ -1518,7 +1531,7 @@ a.comment-reply-link > span {
 	box-shadow: 1px 2px 2px rgba(204,204,204,0.8);
 	color: #555;
 	display: inline-block;
-	font-size: 13px;
+	font-size: 0.815em;
 	left: 4px;
 	min-width: 60px;
 	padding: 4px 10px;
@@ -1547,7 +1560,7 @@ a.comment-reply-link > span {
 }
 #respond .comment-notes,
 #respond .logged-in-as {
-	font-size: 13px;
+	font-size: 0.815em;
 }
 #respond p {
 	margin: 10px 0;
@@ -1584,7 +1597,7 @@ background: #555;
 }
 #respond #cancel-comment-reply-link {
 	color: #666;
-	margin-left: 10px;
+	margin-left: 0.667em;
 	text-decoration: none;
 }
 #respond .logged-in-as a:hover,
@@ -1597,14 +1610,14 @@ background: #555;
 }
 #reply-title {
 	color: #373737;
-	font-size: 24px;
+	font-size: 1.5em;
 	font-weight: bold;
 	line-height: 30px;
 }
 #cancel-comment-reply-link {
 	color: #888;
 	display: block;
-	font-size: 10px;
+	font-size: 0.667em;
 	font-weight: normal;
 	line-height: 2.2em;
 	letter-spacing: 0.05em;
@@ -1628,7 +1641,7 @@ background: #555;
 	width: 75%;
 }
 #respond p {
-	font-size: 12px;
+	font-size: 0.815em;
 }
 p.comment-form-comment {
 	margin: 0;
@@ -1655,7 +1668,7 @@ p.comment-form-comment {
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
     color: #666;
-    font-size: 12px;
+    font-size: 0.815em;
 }
 
 #content .sticky img {
@@ -1677,7 +1690,7 @@ p.comment-form-comment {
 
 
 #content .sticky h2 {
-    font-size: 22px;
+    font-size: 1.5em;
     margin-bottom: 10px;
     margin-top: -2px;
 }
@@ -1685,7 +1698,7 @@ p.comment-form-comment {
 
 #content .sticky p {
     margin-bottom: 0;
-    font-size: 14px;
+    font-size: 1em;
 }
 
 #content .sticky a {
@@ -1744,21 +1757,21 @@ p.comment-form-comment {
 /**************** ARCHIVE PAGE ***********************/
 
 #archive-intro {
-border-bottom: 4px solid #ddd;
-margin-bottom: 20px;
-padding-bottom: 10px;
+	border-bottom: 4px solid #ddd;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
 }
 
 #archive-intro h3 {
-font-size: 20px;
-margin-bottom: 5px;
+	font-size: 1.5em;
+	margin-bottom: 5px;
 }
 
 #archive-intro p {
-font-size: 12px;
-color: #666;
-font-style: italic;
-margin-bottom: 5px;
+	font-size: 1em;
+	color: #666;
+	font-style: italic;
+	margin-bottom: 5px;
 }
 
 .archive-dropdown {
@@ -1766,7 +1779,7 @@ margin-bottom: 5px;
 }
 
 #content .recent-posts, .tag #content .recent-posts {
-	font-size: 14px;
+	font-size: 1em;
 	color: #666;
 	margin-bottom: 10px;
 	padding: 10px 0;
@@ -1788,7 +1801,7 @@ margin-bottom: 5px;
 }
 
 #content .category-description p {
-	font-size:14px;
+	font-size:1em;
 	color: #666;
 	font-style: italic;
 }
@@ -1796,14 +1809,14 @@ margin-bottom: 5px;
 
 .related-topics {
 	margin: 0;
-	padding: 0 0 10px 0;
+	padding: 10px 0;
 }
 
 #content .related-topics h4 {
-	color: #333;
-	font-size: 13px;
-	margin: 0 0 5px 0;
-	font-weight: bold;
+	color: #666;
+	font-size:0.815em;
+	margin: 0 0 0.75em 0;
+	text-transform:uppercase;
 }
 
 .related-topics ul {
@@ -1814,7 +1827,7 @@ margin-bottom: 5px;
 	float: left;
 	margin: 0 10px 0 0;
 	font-style: italic;
-	font-size: 12px;
+	font-size: 0.815em;
 	border-right: 1px solid #999;
 	padding-right: 10px;
 	line-height: 1;
@@ -1829,7 +1842,7 @@ margin-bottom: 5px;
 /************** SEARCH RESULTS ******************/
 
 .search-term {
-	font-size: 16px;
+	font-size: 1em;
 	font-style: italic;
 	color: #666;
 }
@@ -1839,13 +1852,13 @@ margin-bottom: 5px;
 }
 
 #content .search-results h2 {
-	font-size: 20px;
+	font-size: 1.5em;
 	margin: 10px 0;
 }
 
 #content .search-results {
 	color: #666;
-	font-size: 13px;
+	font-size: 0.815em;
 }
 
 .search-pagination a {
@@ -1871,19 +1884,19 @@ margin-bottom: 5px;
 }
 
 .tag  #content h3 {
-	font-size: 18px;
+	font-size: 1.222em;
 	font-weight: normal;
 }
 
 .topic-background {
 	margin: 0 0 20px 0;
 	color: #666;
-	font-size: 14px;
+	font-size: 1em;
 	font-style: italic;
 }
 
 .topic-background p {
-	font-size: 12px;
+	font-size: 0.815em;
 }
 
 .tag-subscribe {
@@ -1902,11 +1915,11 @@ margin-bottom: 5px;
 /**************** SIDEBARS ***********************/
 
 #sidebar {
-font-size: 13px;
+font-size: 0.815em;
 }
 
 #sidebar .widgettitle, #sidebar widget-title {
-font-size: 21px;
+font-size: 1.833em;
 margin: 0 0 10px 0;
 }
 

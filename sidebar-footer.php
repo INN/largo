@@ -30,7 +30,7 @@
 	</div>
 
 	<div id="ft-archive">
-    	<h3>Browse archives by date</h3>
+    	<h2 class="widgettitle">Browse archives by date</h3>
 		<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'> 
 			<option value="">Select Month</option> 
 			<?php wp_get_archives( array( 'type' => 'monthly', 'format' => 'option', 'show_post_count' => 1 ) ); ?>

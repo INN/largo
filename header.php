@@ -36,6 +36,41 @@
 	?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+
+
+<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/css/master.css" />
+<noscript>
+<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/css/mobile.min.css" />
+</noscript>
+<script>
+// Edit to suit your needs.
+var ADAPT_CONFIG = {
+  // Where is your CSS?
+  path: '<?php bloginfo( 'template_directory' ); ?>/css/',
+
+  // false = Only run once, when page first loads.
+  // true = Change on window resize and page tilt.
+  dynamic: true,
+
+  // First range entry is the minimum.
+  // Last range entry is the maximum.
+  // Separate ranges by "to" keyword.
+  range: [
+    '0px    to 760px  = mobile.min.css',
+    '760px  to 980px  = 720.min.css',
+    '980px  to 1280px = 960.min.css',
+    '1280px to 1600px = 1200.min.css',
+    '1600px to 1940px = 1560.min.css',
+    '1940px to 2540px = 1920.min.css',
+    '2540px           = 2520.min.css'
+  ]
+};
+</script>
+<script src="<?php bloginfo( 'template_directory' ); ?>/js/adapt.min.js"></script>
+
+
+
+
 <?php
 	wp_enqueue_style( 'argo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
 	wp_enqueue_script( 'argo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
@@ -59,8 +94,8 @@
 <div id="page" class="hfeed">
    
    <div class="global-nav-bg"> 
-		<div class="global-nav">
-			<nav>
+		<div class="global-nav container_12">
+			<nav class="grid_12">
         		<span class="visuallyhidden">
         			<a href="#main" title="Skip to content">Skip to content</a>
         		</span>
@@ -79,17 +114,17 @@
 				if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
 					$style = ' style="display:none;"';
 			?>
-				<div id="branding" class="grid_6">
+				<div id="branding" class="grid_12">
 			<?php 
 				// Has the header image been hidden?
 				elseif ( ! $header_image ) :
 			?>
-				<div id="branding" class="grid_6">
+				<div id="branding" class="grid_12">
 			<?php
 				else :
 				$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
 			?>
-				<div id="branding" class="grid_6 brand-image">
+				<div id="branding" class="grid_12 brand-image">
 			<?php endif; ?>
 			
 			    <?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
@@ -109,55 +144,17 @@
 				</a>
 			<?php endif; ?>
 			
-		</div><!-- end .grid_6 -->
-		<div class="grid_6 featured-posts">
-            <?php $featured = argo_get_featured_posts(); 
-                  $slot = 1;
-                  while ( $featured->have_posts() ) : $featured->the_post(); ?>
-
-                <div id="feature<?php echo $slot; ?>" class="features">
-                    <a href="<?php the_permalink(); ?>" title="headline">
-                        <?php the_post_thumbnail(); ?></a>
-                    <h3 class="features-caption unitPng"><a href="<?php the_permalink(); ?>" title="headline"><?php the_title(); ?></a></h3>
-                </div>
-
-            <?php
-            	$slot++;
-            	endwhile;
-            	wp_reset_postdata();
-            ?>		
-		</div> <!-- end .grid_6 -->
+		</div><!-- end .grid_12 -->
 		
 	</div> <!--/ .container_12 -->
 
 	</header></div>
 <!-- ============= / #header  ============= -->
-	<div id="main-nav">
-		<nav>
+	<div id="main-nav" class="container_12">
+		<nav class="grid_12">
         <?php wp_nav_menu( array( 'theme_location' => 'categories', 'container' => false , 'menu_id' => 'topnav', 'walker' => new Argo_Categories_Walker, 'depth' => 1 ) ); ?>
 		</nav><!-- /#main-nav -->
-		<nav id="utility-nav">
-			<div id="header-search">
-				<?php get_search_form(); ?>
-			</div>
-
-            <ul id="follow-us">
-                <?php if ( $facebook = get_option( 'facebook_link' ) ) : ?>
-                <li class="icon-fb-header"><a href="<?php echo esc_url( $facebook ); ?>" title="Facebook">Facebook</a></li>
-                <?php endif; ?>
-                <?php if ( $twitter = get_option( 'twitter_link' ) ) : ?>
-                <li class="icon-twitter-header"><a href="<?php echo esc_url( $twitter ); ?>" title="Twitter">Twitter</a></li>
-                <?php endif; unset( $facebook, $twitter ); ?>
-            </ul> <!-- /#follow-us -->
-
-        </nav> <!-- /utility-nav -->
+		
     </div> <!-- /main-nav -->
-    <div id="secondary-nav" class="container_12 clearfix">
-    	<nav>
-    		<div id="topics-bar" class="grid_12">
-				<?php wp_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>
-			</div> <!--/.grid_12-->
-		</nav>
-	</div><!--/.container_12-->
- 
-	<div id="main" class="container_12 clearfix">
+    
+<div id="main" class="container_12 clearfix">

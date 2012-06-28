@@ -40,13 +40,13 @@ if ( get_option( 'show_related_content', true ) ) :
 	if ( $rel_topics = argo_get_post_related_topics( 6 ) ) :
 ?>
 	<div id="related-posts" class="idTabs clearfix">
-		<ul id="related-post-nav">
+		<ul id="related-post-nav" class="grid2">
 			<li><h4>MORE POSTS ABOUT</h4></li>
 			<?php foreach ( $rel_topics as $count => $topic ) : ?>
 			<li><a href="#rp<?php echo $count; ?>"><?php echo $topic->name; ?></a></li>
 			<?php endforeach; ?>
 		</ul>
-	<div class="items">
+	<div class="items grid6">
 		<?php foreach ( $rel_topics as $count => $topic ): ?>
 			<div id="rp<?php echo $count; ?>">  
 				<?php $rel_posts = argo_get_recent_posts_for_term( $topic, 3 ); ?>

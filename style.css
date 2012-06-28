@@ -1,9 +1,9 @@
 /*
-Theme Name: Argo
-Description: A feature-rich starter theme designed as a foundation to extend or use in conjunction with an Argo child theme 
-Author: Project Argo
-Version: 1.0
+Theme Name: Largo
+Description: A responsive news theme by Media Toybox based on the Argo theme developed at NPR by Project Argo
+Author: Media Toybox
+Version: 0.1
 */
 
-@import url(css/960.css);
+/*@import url(css/960.css);*/
 @import url(css/foundation.css);
