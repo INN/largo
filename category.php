@@ -6,7 +6,7 @@
 
 <?php get_header(); ?>
 
-		<div id="content" class="grid_8" role="main">
+		<div id="content" class="stories span8" role="main">
 
 			<?php if ( have_posts() ) : ?>
 
@@ -20,17 +20,17 @@
 						echo '<div class="category-description">' . $category_description . '</div>';
 				?>
 
-				<div class="related-topics clearfix">
-					<h4>Key topics in this category:</h4>
+				<div class="related-topics">
+					<h5>Key topics in this category:</h5>
 					<?php echo argo_get_related_topics_for_category( get_queried_object() ); ?>
 				</div> <!-- /.related-topics -->
 			</div> <!-- /.category-background -->
-			
+
 			<h3 class="recent-posts">Recent posts</h3>
 
 				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>				
-				<?php 
+				<?php while ( have_posts() ) : the_post(); ?>
+				<?php
 				/* Run the loop for the category page to output the posts.
 				* If you want to overload this in a child theme then include a file
 				* called content-category.php and that will be used instead.
@@ -56,7 +56,7 @@
 
 		</div>
 		<!-- /.grid_8 #content -->
-<aside id="sidebar" class="grid_4">
+<aside id="sidebar" class="span4">
 <?php get_sidebar('topic'); ?>
 </aside>
 <!-- /.grid_4 -->

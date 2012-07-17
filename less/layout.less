@@ -1,0 +1,29 @@
+.global-nav,
+#page,
+#page-single {
+	max-width: @containerMaxWidth;
+	padding: 0 5%;
+	.clearfix();
+}
+.single #page,
+.single .global-nav {
+	padding-left:80px;
+}
+
+/****************** LEFT NAV ******************/
+#left-nav {
+	float:left;
+	margin-top:-32px;
+	min-width:50px;
+	position:fixed;
+	height:100%;
+	background-color:@grayLighter;
+	overflow:hidden;
+	display:none;
+	z-index:1;
+	.box-shadow(0 4px 5px 3px @gray);
+}
+
+// Fluid Grid
+#grid > .fluid(@fluidGridColumnWidth, @fluidGridGutterWidth);
+

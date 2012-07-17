@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-		<div id="content" class="grid_8" role="main">
+		<div id="content" class="span8" role="main">
 
 			<?php if ( have_posts() ) : ?>
 
@@ -37,7 +37,7 @@ get_header(); ?>
 
 			</div><!--/.grid_8 #content-->
 
-<div id="sidebar" class="grid_4">
+<div id="sidebar" class="span4">
 <?php get_sidebar(); ?>
 </div><!-- /.grid_4 -->
 <?php get_footer(); ?>

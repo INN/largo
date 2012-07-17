@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-		<div id="content" class="grid_8" role="main">
+		<div id="content" class="stories span8" role="main">
 
 		<?php if ( have_posts() ) : ?>
 
@@ -46,7 +46,7 @@ get_header(); ?>
 
 		</div>
 		<!-- /.grid_8 #content -->
-<aside id="sidebar" class="grid_4">
+<aside id="sidebar" class="span4">
 <?php get_sidebar('topic'); ?>
 <!-- /====== #ARGO add tag sidebar ========== -->
 </aside>

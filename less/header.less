@@ -1,0 +1,141 @@
+.global-nav-bg {
+  background-color: @gray;
+  .gradientBar (@grayDark, @grayDarker);
+  .box-shadow(0 1px 3px 1px @grayLight);
+}
+.global-nav {
+  color: #fff;
+  font-family: @sansFontFamily;
+  font-size:@baseFontSize - 2;
+  position: relative;
+  height: 32px;
+  overflow-y:visible;
+  ul {
+    margin: 0;
+    list-style:none;
+    font-size: @baseFontSize - 2;
+	li {
+	  float: left;
+	  margin: 4px 18px 0 0;
+    }
+    a {
+	  color: @white;
+      &:hover {
+	    text-decoration:none;
+	    color: darken(@white, 15%);
+      }
+    }
+  }
+  .nav-right {
+    float:right;
+    .donate-btn {
+	  float:left;
+	  margin: 4px 10px 0;
+	}
+	.org-logo {
+ 	  float:left;
+ 	  height:50px;
+ 	  .box-shadow(0 3px 4px -2px @black);
+    }
+  }
+}
+.donate-btn {
+  font-size: @baseFontSize - 2;
+  background-color: @red;
+  .border-radius(4px);
+  &:hover {
+    background-color: lighten(@red, 5%);
+  }
+  a {
+    padding:4px 6px;
+    color: @white;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.8);
+    &:hover {
+      text-decoration:none;
+    }
+  }
+  i {
+    margin-right:3px;
+    margin-top:1px;
+  }
+}
+#header-search {
+  float:left;
+  margin-right:10px;
+  margin-top:2px;
+  input {
+    font-size: @baseFontSize - 3;
+	line-height:1.8;
+	font-family: @sansFontFamily;
+	height:14px;
+  }
+  button {
+	height:24px;
+	font-size: @baseFontSize - 3;
+	line-height:1;
+	font-family: @sansFontFamily;
+	text-transform:uppercase;
+  }
+}
+
+/****************** HEADER ******************/
+
+#site-header {
+	.clearfix;
+	margin:0;
+	width:auto;
+}
+#branding {
+	margin:0;
+	height:75px;
+	overflow:hidden;
+	width:100%;
+	&.brand-image {
+		height:120px;
+	}
+}
+#site-title {
+  float:left;
+  font-size: @baseFontSize * 2.75;
+  margin:0;
+  padding-top:10px;
+  line-height:1;
+  a {
+	color: @black;
+	outline: none;
+    &:hover {
+	  text-decoration: none;
+	}
+  }
+}
+#site-description {
+	float:left;
+	font-weight:normal;
+	font-size: @baseFontSize * 1.25;
+	line-height:@baseLineHeight;
+	padding-top: @baseline + 5;
+	color: @gray;
+	padding-left:10px;
+}
+.brand-image {
+  height:120px;
+  img {
+	z-index: -1;
+	position:relative;
+	top:-100px;
+	height:120px;
+	min-width:400px;
+	overflow:hidden;
+  }
+  &.image-only img {
+		top:0;
+	}
+  #site-title {
+    padding-top: 20px;
+  }
+  #site-title,
+  #site-description {
+	color:@black;
+	padding-left: 20px;
+  }
+}

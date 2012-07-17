@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-		<div id="content" class="grid_12" role="main">
+		<div id="content" class="row-fluid" role="main">
 
 			<?php the_post(); ?>
 

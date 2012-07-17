@@ -44,20 +44,105 @@ function my_theme_register_required_plugins() {
 
 		// This is an example of how to include a plugin pre-packaged with a theme
 		array(
-			'name'     				=> 'TGM Example Plugin', // The plugin name
-			'slug'     				=> 'tgm-example-plugin', // The plugin slug (typically the folder name)
-			'source'   				=> get_stylesheet_directory() . '/inc/plugins/tgm-example-plugin.zip', // The plugin source
+			'name'     				=> 'Argo Audio Player', // The plugin name
+			'slug'     				=> 'argo-audio-player', // The plugin slug (typically the folder name)
+			'source'   				=> get_stylesheet_directory() . '/inc/plugins/argo-audio-player.zip', // The plugin source
+			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
+			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
+			'external_url' 			=> 'http://argoproject.org/audio.php', // If set, overrides default API URL and points to an external URL
+		),
+		
+		array(
+			'name'     				=> 'Navis Slideshows', // The plugin name
+			'slug'     				=> 'navis-slideshows', // The plugin slug (typically the folder name)
+			'source'   				=> get_stylesheet_directory() . '/inc/plugins/navis-slideshows.zip', // The plugin source
 			'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
+			'external_url' 			=> 'http://argoproject.org/slideshow.php', // If set, overrides default API URL and points to an external URL
+		),
+		
+		array(
+			'name'     				=> 'Navis Jiffy Posts', // The plugin name
+			'slug'     				=> 'navis-jiffy-posts', // The plugin slug (typically the folder name)
+			'source'   				=> get_stylesheet_directory() . '/inc/plugins/navis-jiffy-posts.zip', // The plugin source
+			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
+			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
+			'external_url' 			=> 'http://argoproject.org/jiffy-post.php', // If set, overrides default API URL and points to an external URL
+		),
+		
+		array(
+			'name'     				=> 'Argo Links', // The plugin name
+			'slug'     				=> 'argo-links', // The plugin slug (typically the folder name)
+			'source'   				=> get_stylesheet_directory() . '/inc/plugins/argo-links.zip', // The plugin source
+			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
+			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
+			'external_url' 			=> 'http://argoproject.org/argo-links.php', // If set, overrides default API URL and points to an external URL
+		),
+		
+		array(
+			'name'     				=> 'Navis Documentcloud', // The plugin name
+			'slug'     				=> 'navis-documentcloud', // The plugin slug (typically the folder name)
+			'source'   				=> get_stylesheet_directory() . '/inc/plugins/navis-documentcloud.zip', // The plugin source
+			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
+			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
+			'external_url' 			=> 'http://argoproject.org/documentcloud.php', // If set, overrides default API URL and points to an external URL
+		),
+		
+		array(
+			'name'     				=> 'Navis Media Credit', // The plugin name
+			'slug'     				=> 'navis-media-credit', // The plugin slug (typically the folder name)
+			'source'   				=> get_stylesheet_directory() . '/inc/plugins/navis-media-credit.zip', // The plugin source
+			'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
+			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+			'force_activation' 		=> true, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
+			'external_url' 			=> 'http://argoproject.org/media-credit.php', // If set, overrides default API URL and points to an external URL
 		),
 
 		// This is an example of how to include a plugin from the WordPress Plugin Repository
 		array(
-			'name' 		=> 'BuddyPress',
-			'slug' 		=> 'buddypress',
+			'name' 		=> 'Facebook',
+			'slug' 		=> 'facebook',
+			'required' 	=> false,
+		),
+		
+		array(
+			'name' 		=> 'Winer Links',
+			'slug' 		=> 'winerlinks',
+			'required' 	=> false,
+		),
+		
+		array(
+			'name' 		=> 'Disqus Comment System',
+			'slug' 		=> 'disqus-comment-system',
+			'required' 	=> false,
+		),
+		
+		array(
+			'name' 		=> 'Better WordPress Google XML Sitemaps',
+			'slug' 		=> 'bwp-google-xml-sitemaps',
+			'required' 	=> false,
+		),
+		
+		array(
+			'name' 		=> 'WP Super Cache',
+			'slug' 		=> 'wp-super-cache',
+			'required' 	=> false,
+		),
+		
+		array(
+			'name' 		=> 'All in One SEO Pack',
+			'slug' 		=> 'all-in-one-seo-pack',
 			'required' 	=> false,
 		),
 

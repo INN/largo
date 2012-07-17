@@ -27,7 +27,7 @@
  * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.
  *
  */
- 
+
  /**
  * Set the content width based on the theme's design and stylesheet.
  */
@@ -78,15 +78,15 @@ function argo_setup() {
 	add_theme_support( 'custom-header');
 
 	// The default header text color
-	define( 'HEADER_TEXTCOLOR', '' );
+	define( 'HEADER_TEXTCOLOR', '333' );
 
 	// Default image, which child themes should include.
-	define( 'HEADER_IMAGE', get_stylesheet_directory_uri() . '/img/headers/default-logo.png' );
+	define( 'HEADER_IMAGE', get_stylesheet_directory_uri() . '/img/headers/largo-text.png' );
 
 	// The height and width of your custom header.
 	// Add a filter to argo_header_image_width and argo_header_image_height to change these values.
-	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'argo_header_image_width', 460 ) );
-	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'argo_header_image_height', 140 ) );
+	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'argo_header_image_width', 1170 ) );
+	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'argo_header_image_height', 120 ) );
 
 	// Add a way for the custom header to be styled in the admin panel that controls
 	// custom headers. See argo_admin_header_style(), below.
@@ -95,13 +95,13 @@ function argo_setup() {
 	// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
 	register_default_headers( array(
 		'wheel' => array(
-			'url' => '%s/img/headers/default-logo.png',
+			'url' => '%s/img/headers/largo-text.png',
 			'thumbnail_url' => '%s/img/headers/default-logo-thumbnail.png',
 			/* translators: header image description */
 			'description' => 'Wheel',
 		),
 	) );
-}	
+}
 endif; // argo_setup
 
 if ( ! function_exists( 'argo_header_style' ) ) :
@@ -157,48 +157,48 @@ function argo_admin_header_style() {
 	.appearance_page_custom-header #branding {
 		border: none;
 	}
-	
+
 	#branding {
 		width: 460px;
 		height: 140px;
 		position: relative;
 	}
-	
+
 	#branding h1,
 	#desc {
 		font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
 	}
-	
+
 	#branding h1 {
 		margin: 0;
 	}
-	
+
 	#branding h1 a {
 		font-size: 42px;
 		line-height: 1;
 		text-decoration: none;
 	}
-	
+
 	#ch-desc{
 		font-size: 24px;
 		line-height: 1;
 	}
-	
+
 	.brand-image #ch-name {
 		padding-top: 30px;
 	}
-	
+
 	.brand-image #ch-name, .brand-image #ch-desc {
 		margin-left: 70px;
 	}
-	
+
 	.brand-image img {
 		position: absolute;
 		top: 0;
 		left: 0;
 		z-index: -1;
 	}
-	
+
 	<?php
 		// If the user has set a custom color for the text use that
 		if ( get_header_textcolor() != HEADER_TEXTCOLOR ) :
@@ -208,7 +208,7 @@ function argo_admin_header_style() {
 			color: #<?php echo get_header_textcolor(); ?>;
 		}
 	<?php endif; ?>
-	
+
 </style>
 <?php
 }
@@ -235,8 +235,8 @@ function argo_admin_header_image() { ?>
 	?>
 		<div id="branding" class="brand-image">
 	<?php endif; ?>
-	
-	
+
+
 		<?php
 		if ( 'blank' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) || '' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) )
 			$style = ' style="display:none;"';
@@ -245,7 +245,7 @@ function argo_admin_header_image() { ?>
 		?>
 		<h1 id="ch-name"><a <?php echo $style; ?> onclick="return false;" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
 		<div id="ch-desc"<?php echo $style; ?>><?php bloginfo( 'description' ); ?></div>
-		
+
 		<?php
 			// Check to see if the header image has been removed
 			$header_image = get_header_image();
@@ -259,20 +259,31 @@ endif; // argo_admin_header_image
 
 // Prints HTML with meta information for the current post-date/time and author.
 
-if ( ! function_exists( 'argo_posted_on' ) ) :
+function largo_time() {
+	// Change to the date after a certain time
+	$time_difference = current_time('timestamp') - get_the_time('U');
+	if($time_difference < 86400) {
+		return '<span class="time-ago">' .human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago</span>';
+	} else {
+		return get_the_date();
+	};
+}
 
-function argo_posted_on() {
-	printf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>',
-		esc_url( get_permalink() ),
-		esc_attr( get_the_time() ),
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
+if ( ! function_exists( 'largo_byline' ) ) :
+
+function largo_byline() {
+	printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
 		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 		esc_attr( sprintf( 'View all posts by %s', get_the_author() ) ),
-		esc_html( get_the_author() )
+		esc_html( get_the_author() ),
+		esc_attr( get_the_date( 'c' ) ),
+		largo_time()
 	);
 }
 endif;
+
+
+
 
 /**
  * Sets the post excerpt length to 35 words.
@@ -313,13 +324,13 @@ function argo_content_nav( $nav_id ) {
 	global $wp_query;
 
 	if ( $wp_query->max_num_pages > 1 ) : ?>
-		
-<nav  id="<?php echo $nav_id; ?>">
-<ul class="post-nav clearfix">
-<li class="n-post"><?php previous_posts_link( 'Newer posts &rarr;' ); ?></li>
-<li class="p-post"><?php next_posts_link( '&larr; Older posts' ); ?></li>
-</ul>
+
+<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
+	<div class="next"><?php previous_posts_link( 'Newer posts &rarr;' ); ?></div>
+	<div class="previous"><?php next_posts_link( '&larr; Older posts' ); ?></div>
 </nav><!-- .post-nav -->
+
+
 	<?php endif;
 }
 
@@ -464,8 +475,11 @@ endif; // ends check for argo_comment()
  * Enqueue JS for the footer
  */
 function argo_enqueue_js() {
+
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
-	
+	wp_enqueue_script( 'bootstrap_dropdown', get_bloginfo('template_url') . '/js/bootstrap-dropdown.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_script( 'bootstrap_collapse', get_bloginfo('template_url') . '/js/bootstrap-collapse.js', array( 'jquery' ), '1.0', true );
+
 	if ( wp_script_is( 'hoverIntent' ) )
 		wp_enqueue_script( 'hoverIntent' );
 	else
@@ -478,33 +492,73 @@ add_action('wp_enqueue_scripts', 'argo_enqueue_js' );
 
 add_action( 'wp_footer', 'argo_footer_js' );
 	function argo_footer_js() { ?>
-	
+
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-			//html5 placeholders
-			$("input[placeholder]").textPlaceholder();
+				//html5 placeholders
+				$("input[placeholder]").textPlaceholder();
 
-			//main navigation	
-			function megaHoverOver(){
-				$(this).find(".sub").stop().fadeTo('fast', 1).show();
-			}
-		
-			function megaHoverOut(){ 
-				$(this).find(".sub").stop().fadeTo('fast', 0, function() {
-				$(this).hide(); 
+				//main navigation
+				//function megaHoverOver(){
+				//	$(this).find(".sub").stop().fadeTo('fast', 1).show();
+				//}
+
+				//function megaHoverOut(){
+				//	$(this).find(".sub").stop().fadeTo('fast', 0, function() {
+				//	$(this).hide();
+				//	});
+				//}
+				//var config = {
+				//	sensitivity: 2, // number = sensitivity threshold (must be 1 or higher)
+				//	interval: 100, // number = milliseconds for onMouseOver polling interval
+				//	over: megaHoverOver, // function = onMouseOver callback (REQUIRED)
+				//	timeout: 500, // number = milliseconds delay before onMouseOut
+				//	out: megaHoverOut // function = onMouseOut callback (REQUIRED)
+				//};
+
+				//$("#topnav li .sub").css({'opacity':'0'});
+				//$("#topnav li").hoverIntent(config);
+				//$('.dropdown-toggle').dropdown();
+
+				$(window).scroll(function(){
+					if (($(window).scrollTop() > 50)) {
+						$('#left-nav').fadeIn(500);
+					} else if (($(window).scrollTop() < 50)) {
+						$('#left-nav').fadeOut(500);
+					}
 				});
-			}
-			var config = {    
-				sensitivity: 2, // number = sensitivity threshold (must be 1 or higher)    
-				interval: 100, // number = milliseconds for onMouseOver polling interval    
-				over: megaHoverOver, // function = onMouseOver callback (REQUIRED)    
-				timeout: 500, // number = milliseconds delay before onMouseOut    
-				out: megaHoverOut // function = onMouseOut callback (REQUIRED)    
-			};
 
-			$("#topnav li .sub").css({'opacity':'0'});
-			$("#topnav li").hoverIntent(config);
+				$('#left-nav').hover(function() {
+			       		$(this).animate({width: '20%',overflow: 'visible'}, { duration: 200, queue: false });
+			       		$('#page').animate({opacity: '0.7'}, 100);
+			        }, function() {
+			        	$(this).animate({width: '4%',overflow: 'hidden'}, { duration: 200, queue: false });
+			        	$('#page').animate({opacity: '1'}, 100);
+			    });
+
+			    // dim sidebar
+			    $(window).scroll(function(){
+					if (($(window).scrollTop() > 300)) {
+						$('#sidebar').animate({opacity: '0.5'}, 100);
+					} else if (($(window).scrollTop() < 300)) {
+						$('#sidebar').animate({opacity: '1'}, 100);
+					}
+				});
+				$('#sidebar').hover(function() {
+			       		$(this).animate({opacity: '1'}, 100);
+			        }, function() {
+			        	if (($(window).scrollTop() < 300)) {
+			        		$(this).animate({opacity: '1'}, 100);
+			        	} else {
+			        		$(this).animate({opacity: '0.5'}, 100);
+			        	};
+			    });
+
 			});
+
 		</script>
-	
+
 	<?php }
+
+//hide the admin bar
+	add_filter( 'show_admin_bar', '__return_false' );

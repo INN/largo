@@ -1,0 +1,49 @@
+// LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET
+// --------------------------------------------------
+
+@media (max-width: 767px) {
+	#sidebar {
+		clear:both;
+		width:100%;
+	}
+	#content {
+		width:100%;
+	}
+	.single #page,
+	.single .global-nav {
+		padding:0 5%;
+	}
+	#left-nav {
+		display:none !important;
+	}
+	#content .half,
+	#content .full {
+		.clearfix();
+		float:none;
+		width:100%;
+		margin: 0 0 @baseline;
+	}
+	#related-post-nav,
+	#related-posts .related-items {
+		float:none;
+		width:100%;
+	}
+	.global-nav-bg {
+		display:none;
+	}
+	h1.entry-title,
+	.stories h2.entry-title {
+		font-size: @baseFontSize * 2;
+		font-weight:bold;
+		line-height:1.3;
+	}
+}
+
+
+// UP TO LANDSCAPE PHONE
+// ---------------------
+@media (max-width: 480px) {
+
+
+}
+

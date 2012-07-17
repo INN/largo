@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-		<div id="content" class="grid_8" role="main">
+		<div id="content" class="stories span8" role="main">
 
 			<?php if ( have_posts() ) : ?>
 
@@ -19,13 +19,13 @@ get_header(); ?>
 						echo '<div class="taxonomy-description">' . $term_description . '</div>';
 				?>
 			</div> <!-- /.category-background -->
-			
+
 			<h3 class="recent-posts">Recent posts</h3>
 
 			<?php
 				/* Start the Loop */
 				while ( have_posts() ) : the_post();
-					get_template_part( 'content', 'taxonomy' ); 
+					get_template_part( 'content', 'taxonomy' );
 				endwhile;
 				argo_content_nav( 'nav-below' );
 
@@ -46,7 +46,7 @@ get_header(); ?>
 
 		</div>
 		<!-- /.grid_8 #content -->
-<aside id="sidebar" class="grid_4">
+<aside id="sidebar" class="span4">
 <?php get_sidebar('topic'); ?>
 </aside>
 <!-- /.grid_4 -->

@@ -1,0 +1,409 @@
+// NAVBAR (FIXED AND STATIC)
+// -------------------------
+
+
+// COMMON STYLES
+// -------------
+
+.navbar {
+  // Fix for IE7's bad z-indexing so dropdowns don't appear below content that follows the navbar
+  *position: relative;
+  *z-index: 2;
+
+  overflow: visible;
+  margin-bottom: @baseLineHeight;
+}
+
+// Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present
+.navbar-inner {
+  min-height: 36px;
+  #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
+  .border-radius(4px);
+  .box-shadow(~"0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1)");
+}
+
+// Set width to auto for default container
+// We then reset it for fixed navbars in the #gridSystem mixin
+.navbar .container {
+  width: auto;
+}
+
+// Override the default collapsed state
+.nav-collapse.collapse {
+  height: auto;
+}
+
+
+// Brand, links, text, and buttons
+.navbar {
+  color: @navbarText;
+  font-family: @sansFontFamily;
+  // Hover and active states
+  // Plain text in topbar
+  .navbar-text {
+    margin-bottom: 0;
+    line-height: @navbarHeight;
+  }
+}
+
+// NAVIGATION
+// ----------
+
+.navbar .nav {
+  position: relative;
+  left: 0;
+  display: block;
+  float: left;
+  margin: 0;
+}
+.navbar .nav.pull-right {
+  float: right; // redeclare due to specificity
+}
+.navbar .nav > li {
+  display: block;
+  float: left;
+  margin-bottom:0;
+  padding-top:5px;
+}
+li.home-link {
+  margin-left:4px;
+  i {
+    margin-top:4px;
+  }
+  &:hover i {
+    .opacity(85);
+  }
+}
+
+// Links
+.navbar .nav > li > a {
+  float: none;
+  // Vertically center the text given @navbarHeight
+  padding: 7px 10px 9px;
+  line-height: @baseLineHeight;
+  color: @navbarLinkColor;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.8);
+}
+.navbar .nav > li > a:hover,
+.navbar .nav > li.open > a {
+  #gradient > .vertical(@navbarBackground, @navbarBackgroundHighlight);
+  color:@grayLighter;
+}
+.navbar .nav > li.home-link > a:hover {
+  background:none;
+}
+
+
+// Active nav items
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+  color: @navbarLinkColorActive;
+  text-decoration: none;
+  background-color: @navbarLinkBackgroundActive;
+}
+
+// Dividers (basically a vertical hr)
+.navbar .divider-vertical {
+  height: @navbarHeight;
+  width: 1px;
+  margin: 0 2px;
+  overflow: hidden;
+  background-color: @navbarBackground;
+  border-right: 1px solid @navbarBackgroundHighlight;
+}
+
+// Secondary (floated right) nav in topbar
+.navbar .nav.pull-right {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+// Navbar button for toggling navbar items in responsive layouts
+// These definitions need to come after '.navbar .btn'
+.navbar .btn-navbar {
+  display: none;
+  float: right;
+  padding: 7px 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top:4px;
+  .buttonBackground(@navbarBackgroundHighlight, @navbarBackground);
+  .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.075)");
+}
+.navbar .btn-navbar .icon-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #f5f5f5;
+  .border-radius(1px);
+  .box-shadow(0 1px 0 rgba(0,0,0,.25));
+}
+.btn-navbar .icon-bar + .icon-bar {
+  margin-top: 3px;
+}
+
+
+// DROPDOWN MENUS
+// --------------
+
+// Use the .menu class on any <li> element within the topbar or ul.tabs and you'll get some superfancy dropdowns
+.dropup,
+.dropdown {
+  position: relative;
+}
+.dropdown-toggle {
+  // The caret makes the toggle a bit too tall in IE7
+  *margin-bottom: -3px;
+}
+.dropdown-toggle:active,
+.open .dropdown-toggle {
+  outline: 0;
+}
+
+// Dropdown arrow/caret
+// --------------------
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  border-top:   6px solid @black;
+  border-right: 5px solid transparent;
+  border-left:  5px solid transparent;
+  content: "";
+  .opacity(80);
+}
+
+// Place the caret
+.dropdown .caret {
+  margin-top: 10px;
+  margin-left: 1px;
+  margin-right: 8px;
+}
+.dropdown:hover .caret,
+.open .caret {
+  .opacity(100);
+}
+
+// The dropdown menu (ul)
+// ----------------------
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: @zindexDropdown;
+  display: none; // none by default, but block on "open" of the menu
+  float: left;
+  min-width: 160px;
+  padding: 4px 0;
+  margin: 10px 0 0; // override default ul
+  list-style: none;
+  background-color: @dropdownBackground;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.2);
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  .border-radius(5px);
+  .box-shadow(0 5px 10px rgba(0,0,0,.2));
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+
+  // Aligns the dropdown menu to right
+  &.pull-right {
+    right: 0;
+    left: auto;
+  }
+
+  // Dividers (basically an hr) within the dropdown
+  .divider {
+    .nav-divider(@dropdownDividerTop, @dropdownDividerBottom);
+  }
+
+  // Links within the dropdown menu
+  a {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: @baseLineHeight;
+    color: @dropdownLinkColor;
+    white-space: nowrap;
+  }
+}
+
+// Hover state
+// -----------
+.dropdown-menu li > a:hover,
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
+  color: @dropdownLinkColorHover;
+  text-decoration: none;
+  background-color: @dropdownLinkBackgroundHover;
+}
+
+// Open state for the dropdown
+// ---------------------------
+.open {
+  // IE7's z-index only goes to the nearest positioned ancestor, which would
+  // make the menu appear below buttons that appeared later on the page
+  *z-index: @zindexDropdown;
+
+  & > .dropdown-menu {
+    display: block;
+  }
+}
+
+// Right aligned dropdowns
+// ---------------------------
+.pull-right > .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+// Allow for dropdowns to go bottom up (aka, dropup-menu)
+// ------------------------------------------------------
+// Just add .dropup after the standard .dropdown class and you're set, bro.
+// TODO: abstract this so that the navbar fixed styles are not placed here?
+.dropup,
+.navbar-fixed-bottom .dropdown {
+  // Reverse the caret
+  .caret {
+    border-top: 0;
+    border-bottom: 4px solid @black;
+    content: "\2191";
+  }
+  // Different positioning for bottom up menu
+  .dropdown-menu {
+    top: auto;
+    bottom: 100%;
+    margin-bottom: 1px;
+  }
+}
+
+// Typeahead
+// ---------
+.typeahead {
+  margin-top: 2px; // give it some space to breathe
+  .border-radius(4px);
+}
+
+// Dropdown menus
+// --------------
+
+// Menu position and menu carets
+.navbar .dropdown-menu {
+  &:before {
+    content: '';
+    display: inline-block;
+    border-left:   10px solid transparent;
+    border-right:  10px solid transparent;
+    border-bottom: 10px solid #ccc;
+    border-bottom-color: @dropdownBorder;
+    position: absolute;
+    top: -10px;
+    left: 9px;
+  }
+  &:after {
+    content: '';
+    display: inline-block;
+    border-left:   9px solid transparent;
+    border-right:  9px solid transparent;
+    border-bottom: 9px solid @dropdownBackground;
+    position: absolute;
+    top: -9px;
+    left: 10px;
+  }
+}
+// Menu position and menu caret support for dropups via extra dropup class
+.navbar-fixed-bottom .dropdown-menu {
+  &:before {
+    border-top: 7px solid #ccc;
+    border-top-color: @dropdownBorder;
+    border-bottom: 0;
+    bottom: -7px;
+    top: auto;
+  }
+  &:after {
+    border-top: 6px solid @dropdownBackground;
+    border-bottom: 0;
+    bottom: -6px;
+    top: auto;
+  }
+}
+// Dropdown toggle caret
+.navbar .nav li.dropdown .dropdown-toggle .caret,
+.navbar .nav li.dropdown.open .caret {
+  border-top-color: @white;
+  border-bottom-color: @white;
+}
+.navbar .nav li.dropdown.active .caret {
+  .opacity(100);
+}
+
+// Remove background color from open dropdown
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  background-color: transparent;
+}
+
+// Dropdown link on hover
+.navbar .nav li.dropdown.active > .dropdown-toggle:hover {
+  color: @white;
+}
+
+// Right aligned menus need alt position
+// TODO: rejigger this at some point to simplify the selectors
+.navbar .pull-right .dropdown-menu,
+.navbar .dropdown-menu.pull-right {
+  left: auto;
+  right: 0;
+  &:before {
+    left: auto;
+    right: 12px;
+  }
+  &:after {
+    left: auto;
+    right: 13px;
+  }
+}
+.dropdown-menu li {
+	margin-bottom: 0;
+}
+/* add support for second level dropdown menus */
+.dropdown-menu .sub-menu {
+    left: 99%;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: 15px;
+}
+.dropdown-menu .icon-arrow-right {
+	position:relative;
+	top:2px;
+	left:5px;
+}
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+    display: block;
+}
+
+.navbar .sub-menu:before {
+    border-bottom: 9px solid transparent;
+    border-left: none;
+    border-right: 9px solid rgba(0, 0, 0, 0.2);
+    border-top: 9px solid transparent;
+    left: -9px;
+    top: 50%;
+}
+.navbar .sub-menu:after {
+    border-top: 8px solid transparent;
+    border-left: none;
+    border-right: 8px solid #fff;
+    border-bottom: 8px solid transparent;
+    left: 10px;
+    top: 51%;
+    left: -8px;
+}

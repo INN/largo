@@ -6,7 +6,7 @@
 
 get_header(); ?>
 
-<div id="content" class="grid_12" role="main">
+<div id="content" class="row-fluid span12" role="main">
 	<?php the_post(); ?>
 	<?php get_template_part( 'content', 'page' ); ?>
 

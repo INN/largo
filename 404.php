@@ -8,13 +8,13 @@
 	<body>
 	<div id="wrapper">
 		<div class="global-nav-bg">
-	<div class="global-nav"> 
+	<div class="global-nav">
 	</div><!-- /.global-nav -->
     </div> <!-- /.global-nav-bg -->
-    
+
     <div id="header">
-    <div class="container_12 clearfix">
-        <div class="grid_6 branding">
+    <div class="row-fluid clearfix">
+        <div class="span6 branding">
 				<h2 id="site-title">
         		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" class="unitPng">
             	<?php bloginfo('name'); ?>
@@ -25,15 +25,15 @@
         <!-- end .grid_6 -->
 	</div> <!--/ .container_12 -->
 	</div> <!-- /header -->
-	
-	<div id="main" class="container_12 clearfix">
-	<div id="content" class="grid_12 search-404">
+
+	<div id="main" class="row-fluid clearfix">
+	<div id="content" class="span12 search-404">
 	<h1 class="entry-title">Not Found</h1>
 <p>Sorry. We can't find the page you were looking for. Please try searching for related posts:</p>
 <?php get_search_form(); ?>
 	</div><!-- /content -->
 	</div><!-- /main -->
 	</div><!-- /wrapper -->
-	
+
 	</body>
 </html>

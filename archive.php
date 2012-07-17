@@ -10,8 +10,8 @@
 
 get_header(); ?>
 
-		<div id="content" class="grid_8" role="main">
-		
+		<div id="content" class="stories span8" role="main">
+
 		<?php if ( have_posts() ) : ?>
 
 		<?php
@@ -56,7 +56,7 @@ get_header(); ?>
 					 */
 					rewind_posts();
 				?>
-				
+
 				<?php /* Start the Loop */ ?>
 				<?php while ( have_posts() ) : the_post(); ?>
 
@@ -83,7 +83,7 @@ get_header(); ?>
 
 			</div><!--/ #content .grid_8-->
 
-<aside id="sidebar" class="grid_4">
+<aside id="sidebar" class="span4">
 <?php get_sidebar(); ?>
 </aside>
 <!-- /.grid_4 -->

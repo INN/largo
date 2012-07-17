@@ -1,10 +1,4 @@
-<?php
-/**
- * The Header for our theme.
- *
- * Displays all of the <head> section and everything up till <div id="main">
- */
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if lt IE 7]> <html <?php language_attributes(); ?> class="no-js ie6"> <![endif]-->
 <!--[if IE 7]>    <html <?php language_attributes(); ?> class="no-js ie7"> <![endif]-->
 <!--[if IE 8]>    <html <?php language_attributes(); ?> class="no-js ie8"> <![endif]-->
@@ -37,39 +31,48 @@
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
+<?php $url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
 
-<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/css/master.css" />
-<noscript>
-<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/css/mobile.min.css" />
-</noscript>
-<script>
-// Edit to suit your needs.
-var ADAPT_CONFIG = {
-  // Where is your CSS?
-  path: '<?php bloginfo( 'template_directory' ); ?>/css/',
-
-  // false = Only run once, when page first loads.
-  // true = Change on window resize and page tilt.
-  dynamic: true,
-
-  // First range entry is the minimum.
-  // Last range entry is the maximum.
-  // Separate ranges by "to" keyword.
-  range: [
-    '0px    to 760px  = mobile.min.css',
-    '760px  to 980px  = 720.min.css',
-    '980px  to 1280px = 960.min.css',
-    '1280px to 1600px = 1200.min.css',
-    '1600px to 1940px = 1560.min.css',
-    '1940px to 2540px = 1920.min.css',
-    '2540px           = 2520.min.css'
-  ]
-};
-</script>
-<script src="<?php bloginfo( 'template_directory' ); ?>/js/adapt.min.js"></script>
-
-
-
+<!-- open graph and twittercard tags
+    to-do: make this dynamic
+-->
+	<?php if ( is_single() ) {
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
+			if ($image != '') {
+				$thumbnailURL = $image[0];
+			} else {
+			    $thumbnailURL = get_bloginfo( 'template_directory' ) . '/assets/img/headshot_500.png';
+		    }; ?>
+	    <meta name="twitter:card" content="summary">
+	    <meta name="twitter:site" content="@mediatoybox">
+	    <meta name="twitter:creator" content="@aschweig">
+	    <meta property="og:title" content="<?php the_title(); ?>" />
+	    <meta property="og:type" content="article" />
+	    <meta property="og:url" content="<?php the_permalink(); ?>"/>
+	    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+	    <meta property="og:description" content="<?php echo strip_tags(get_the_excerpt()); ?>" />
+	    <meta property="og:image" content="<?php echo $thumbnailURL; ?>">
+	<?php } elseif ( is_home() ) { ?>
+		<meta name="twitter:card" content="summary">
+	    <meta name="twitter:site" content="@mediatoybox">
+	    <meta name="twitter:creator" content="@aschweig">
+		<meta property="og:title" content="<?php bloginfo('name'); echo ' - '; bloginfo('description'); ?>" />
+	    <meta property="og:type" content="website" />
+	    <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
+	    <meta property="og:image" content="<?php bloginfo( 'template_directory' ); ?>/assets/img/headshot_500.png" />
+	    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+	    <meta property="og:description" content="<?php bloginfo('description'); ?>" />
+	<?php } else { ?>
+		<meta name="twitter:card" content="summary">
+	    <meta name="twitter:site" content="@mediatoybox">
+	    <meta name="twitter:creator" content="@aschweig">
+		<meta property="og:title" content="<?php bloginfo('name'); wp_title(); ?>" />
+	    <meta property="og:type" content="article" />
+	    <meta property="og:url" content="<?php echo $url; ?>"/>
+	    <meta property="og:image" content="<?php bloginfo( 'template_directory' ); ?>/assets/img/headshot_500.png" />
+	    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+	    <meta property="og:description" content="<?php bloginfo('description'); ?>" />
+	<?php } ?>
 
 <?php
 	wp_enqueue_style( 'argo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
@@ -88,73 +91,146 @@ var ADAPT_CONFIG = {
 	 */
 	wp_head();
 ?>
+
 </head>
 
 <body <?php body_class(); ?>>
+
+<div class="global-nav-bg">
+	<div class="global-nav">
+		<nav id="top-nav" class="span12">
+        	<span class="visuallyhidden">
+        		<a href="#main" title="Skip to content">Skip to content</a>
+        	</span>
+        	<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1 ) ); ?>
+        	<div class="nav-right">
+        		<div class="donate-btn">
+        			<a href=""><i class="icon-heart icon-white"></i>Donate Now</a>
+        		</div>
+
+				<div id="header-search">
+					<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<div class="input-append">
+							<input type="text" placeholder="SEARCH" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn">GO</button>
+						</div>
+					</form>
+				</div>
+
+        		<a href="http://investigativenewsnetwork.org/" target="_blank"><img class="org-logo" src="<?php bloginfo( 'template_directory' ); ?>/img/inn-logo-80-50.jpg" height="50" alt="INN logo" /></a>
+        	</div>
+        </nav>
+    </div> <!-- /.global-nav -->
+</div> <!-- /.global-nav-bg -->
+
+<?php if(is_single()) { ?>
+<div id="left-nav">
+	<ul></ul>
+</div>
+<?php } ?>
+
 <div id="page" class="hfeed">
-   
-   <div class="global-nav-bg"> 
-		<div class="global-nav container_12">
-			<nav class="grid_12">
-        		<span class="visuallyhidden">
-        			<a href="#main" title="Skip to content">Skip to content</a>
-        		</span>
-        		<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1 ) ); ?>
-        	</nav>
-        </div>
-       <!-- /.global-nav -->
-	</div> <!-- /.global-nav-bg -->
 
-	<div id="header"><header>
-	
-	<div class="container_12 clearfix">
-			<?php
-				$header_image = get_header_image();
-				// Has the text been hidden?
-				if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
-					$style = ' style="display:none;"';
-			?>
-				<div id="branding" class="grid_12">
-			<?php 
-				// Has the header image been hidden?
-				elseif ( ! $header_image ) :
-			?>
-				<div id="branding" class="grid_12">
-			<?php
-				else :
-				$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
-			?>
-				<div id="branding" class="grid_12 brand-image">
-			<?php endif; ?>
-			
-			    <?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
-				<<?php echo $heading_tag; ?> id="site-title" <?php echo $style; ?>>
-        		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-            	<?php bloginfo('name'); ?>
-        		</a>
-    		</<?php echo $heading_tag; ?>>
-    		<h2 id="site-description" <?php echo $style; ?>><?php bloginfo('description'); ?></h2>
-    		
-			<?php
-				// Check to see if the header image should be displayed
-				if ( $header_image ) :
-			?>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-					<img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
-				</a>
-			<?php endif; ?>
-			
-		</div><!-- end .grid_12 -->
-		
-	</div> <!--/ .container_12 -->
 
-	</header></div>
-<!-- ============= / #header  ============= -->
-	<div id="main-nav" class="container_12">
-		<nav class="grid_12">
-        <?php wp_nav_menu( array( 'theme_location' => 'categories', 'container' => false , 'menu_id' => 'topnav', 'walker' => new Argo_Categories_Walker, 'depth' => 1 ) ); ?>
-		</nav><!-- /#main-nav -->
-		
-    </div> <!-- /main-nav -->
-    
-<div id="main" class="container_12 clearfix">
+	<header id="site-header">
+
+				<?php
+					$header_image = get_header_image();
+					// Has the text been hidden?
+					if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
+						$style = ' style="display:none;"';
+				?>
+					<div id="branding" class="brand-image image-only">
+				<?php
+					// Has the header image been hidden?
+					elseif ( ! $header_image ) :
+				?>
+					<div id="branding">
+				<?php
+					else :
+					$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
+				?>
+					<div id="branding" class="brand-image">
+
+				<?php endif; ?>
+
+				<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
+
+			    <<?php echo $heading_tag; ?> id="site-title" <?php echo $style; ?>>
+	        	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo('name'); ?></a></<?php echo $heading_tag; ?>>
+	    		<h2 id="site-description" <?php echo $style; ?>><?php bloginfo('description'); ?></h2>
+
+				<?php
+					// Check to see if the header image should be displayed
+					if ( $header_image ) :
+				?>
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<img src="<?php header_image(); ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
+					</a>
+				<?php endif; ?>
+
+	</header>
+
+	<nav id="main-nav" class="navbar">
+	  <div class="navbar-inner">
+	    <div class="container">
+
+	      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </a>
+
+	      <ul class="nav">
+	        	<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
+	        	<li class="divider-vertical"></li>
+	        	<li class="dropdown" id="category-list">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#category-list">
+				      Categories
+				      <b class="caret"></b>
+				    </a>
+				    <ul class="dropdown-menu">
+				      <li><a href="#">Category 1</a></li>
+				      <li><a href="#">Category 2</a></li>
+				      <li><a href="#">Category 3</a></li>
+				    </ul>
+				</li>
+				<!--<li class="dropdown">
+		            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown with Submenu <b class="caret"></b></a>
+		            <ul class="dropdown-menu">
+		              <li><a href="#">Action</a></li>
+		              <li><a href="#">Another action</a></li>
+		              <li>
+		              	<a href="#">Submenu! <i class="icon-arrow-right"></i></a>
+		                <ul class="dropdown-menu sub-menu">
+		                    <li><a href="#">Action</a></li>
+		                    <li><a href="#">Another action</a></li>
+		                    <li><a href="#">Something else here</a></li>
+		                </ul>
+		              </li>
+		              <li class="divider"></li>
+		              <li><a href="#">Separated link</a></li>
+		            </ul>
+			    </li>
+				<li><a href="">Something</a></li>
+				<li><a href="">Something</a></li>-->
+	      </ul>
+
+	      <!-- Everything you want hidden at 940px or less, place within here -->
+	      <div class="nav-collapse">
+	        <ul class="nav">
+	        	<li><a href="">Link</a></li>
+	        	<li><a href="">Link</a></li>
+	        	<li><a href="">Link</a></li>
+	        <span class="visible-phone">
+	        	<li class="divider"></li>
+	        	<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1, 'items_wrap' => '%3$s' ) ); ?>
+	        </span>
+	         </ul>
+	      </div>
+
+	    </div>
+	  </div>
+	</nav>
+
+<div id="main" class="row-fluid clearfix">

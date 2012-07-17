@@ -1,0 +1,90 @@
+// --------------------------------------------
+// A FEW CORE STYLES FOR WP IMAGES
+// BASED ON: http://jeffsebring.com/responsive-wordpress-images/
+// --------------------------------------------
+
+.sticky,
+.bypostauthor,
+.gallery-caption {
+   display: normal;
+}
+
+.alignnone {
+   margin: @baseline / 2;
+}
+
+.aligncenter,
+div.aligncenter {
+   display:block;
+   margin: (@baseline / 2) auto;
+}
+
+.alignright {
+   float:right;
+   margin-top: @baseline / 2;
+   margin-right: 0;
+   margin-bottom: @baseline / 2;
+   margin-left: @baseline / 2;
+}
+
+.alignleft {
+   float:left;
+   margin-top: @baseline / 2;
+   margin-right: @baseline / 2;
+   margin-bottom: @baseline / 2;
+   margin-left: 0;
+}
+
+.aligncenter {
+   display: block;
+   margin: @baseline / 2 auto;
+}
+
+img,
+img[class*="align"],
+img[class*="wp-image-"] {
+   max-width: 100%;
+   height: auto;
+   .clearfix();
+}
+
+img.alignright {
+    margin-top: @baseline / 2;
+    margin-right: 0;
+    margin-bottom: @baseline / 2;
+    margin-left: @baseline / 2;
+}
+
+img.alignleft {
+    margin-top: @baseline / 2;
+    margin-right: @baseline / 2;
+    margin-bottom: @baseline / 2;
+    margin-left: 0;
+}
+
+img.aligncenter{
+   display: block;
+   margin: (@baseline / 2) auto;
+}
+
+// --------------------------------------------
+// SUPPORT FOR IFRAME/OBJECT/EMBED
+// --------------------------------------------
+
+.embed-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16/9 ratio */
+    padding-top: 30px; /* IE6 workaround*/
+    height: 0;
+    overflow: hidden;
+    margin-bottom:28px;
+}
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

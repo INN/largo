@@ -10,12 +10,12 @@
 
 get_header(); ?>
 
-<div id="content" class="grid_8" role="main">
+<div id="content" class="span8" role="main">
 	<?php the_post(); ?>
 	<?php get_template_part( 'content', 'page' ); ?>
 
 </div><!-- /.grid_8 #content -->
-<aside id="sidebar" class="grid_4">
+<aside id="sidebar" class="span4">
 <?php get_sidebar('single'); ?>
 </aside>
 <!-- /.grid_4 -->
