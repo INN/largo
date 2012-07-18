@@ -130,7 +130,7 @@ article.story {
 
 #related-posts {
 	border: 1px solid @grayLighter;
-	border-top: 2px solid @grayLight;
+	border-top: 3px solid @grayLight;
 }
 #related-post-nav {
 	width:27.5%;
@@ -354,24 +354,66 @@ article.story {
 
 
 // --------------------------------------------
-// Category, Tag, etc. pages
+// Category, Tag & Taxonomy
 // --------------------------------------------
 
 .category-background {
-	h1{}
-	p{}
-	h5{}
+	.clearfix();
+	margin-bottom: @baseline*0.815;
+	h1 {
+	  font-size: @baseFontSize*2.75;
+	  margin-bottom: 3px;
+	}
+	p {
+	  font-size: @baseFontSize * 0.815;
+	  margin-bottom: @baseline/3;
+	}
 	.related-topics {
+		font-family: @sansFontFamily;
+		h5 {
+	      display:inline;
+	      float:left;
+	      font-size: @baseFontSize * 0.815;
+	      margin:0 5px 0 0;
+	      line-height:1.3;
+		}
 		ul {
-			list-style:none;
-			margin:0;
-			li {
-				display:inline;
-			}
+		  font-size: @baseFontSize * 0.815;
+		  float:left;
+		  list-style:none;
+		  margin:1px 0 0 0;
+		  line-height:1.3;
+		  li {
+		    display:inline;
+		    margin:0;
+		    padding:0;
+		    &:after {
+			  content: ", ";
+		    }
+		    &:last-child:after {
+			  content: "";
+		    }
+		  }
 		}
 	}
 }
-
+h3.recent-posts {
+  .clearfix();
+  padding:2px 0;
+  margin-bottom: @baseline*0.815;
+  border-top: 1px solid @grayLight;
+  border-bottom: 3px solid @grayLight;
+  a.rss-link {
+	  background: url("../img/rss24.png") no-repeat;
+	  width:24px;
+	  height:24px;
+	  float:right;
+	  margin-top:4px;
+	  &:hover {
+	    .opacity(85);
+	  }
+  }
+}
 // --------------------------------------------
 // CONTACT
 // --------------------------------------------

@@ -8,8 +8,10 @@
 
 	</div> <!-- #main .container_12 -->
 
-	<div id="site-footer" class="clearfix">
-		<footer>
+</div><!-- #page -->
+
+<div class="footer-bg">
+	<footer id="site-footer">
 			<div id="supplementary" class="row-fluid">
 			<?php
 				/* A sidebar in the footer? Yep. You can can customize
@@ -20,14 +22,13 @@
 
 				<div id="boilerplate" class="row-fluid">
 				    <p><?php argo_copyright_message(); ?></p>
-				    <?php wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
+				    <?php //wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
 					<p class="back-to-top"><a href="#page">Back to top &uarr;</a></p>
 				</div><!-- /#boilerplate -->
 
 			</div><!-- /.container_12 -->
-		</footer>
-	</div><!-- #site-footer -->
-</div><!-- #page -->
+	</footer>
+</div>
 <?php wp_footer(); ?>
 
 

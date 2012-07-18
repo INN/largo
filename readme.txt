@@ -1,7 +1,20 @@
-= ARGO =
+= PROJECT LARGO =
 
-* By the Argo team, http://argoproject.org/
+Designed and built by Adam Schweigert (@aschweig) for the Investigative News Network.
 
-== ABOUT ARGO ==
-Argo is a feature-rich starter theme designed as a foundation to extend or use in conjunction with an Argo child theme. For more information on the the theme and people behind it visit: http://argoproject.org/
+VERSION: 0.1
 
+* THIS PROJECT IS UNDER ACTIVE DEVELOPMENT, PLEASE CHECK BACK FOR FREQUENT UPDATES *
+
+== ABOUT LARGO ==
+
+Project Largo is a responsively designed WordPress theme framework designed to support long form journalism.
+
+The project extends work done by NPR's Project Argo (http://argoproject.org/).
+
+== CREDITS ==
+
+* Project Argo: http://argoproject.org/
+* Twitter Bootstrap: http://twitter.github.com/bootstrap/
+* LESS CSS: http://lesscss.org/
+* Glyphicons: http://glyphicons.com/

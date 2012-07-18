@@ -41,7 +41,6 @@ add_filter( 'wp_nav_menu_dont-miss_items', 'argo_add_dont_miss_label', 10, 2 );
 
 class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 
-
 			function start_lvl( &$output, $depth ) {
 
 				$indent = str_repeat( "\t", $depth );
@@ -137,6 +136,5 @@ class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 			}
 
 }
-
 
 ?>

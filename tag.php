@@ -8,18 +8,19 @@ get_header(); ?>
 		<div id="content" class="stories span8" role="main">
 
 		<?php if ( have_posts() ) : ?>
+			<header class="category-background">
 
-			<p class="subscribe tag-subscribe"><a href="<?php echo esc_url( get_tag_feed_link( get_queried_object_id() ) ); ?>">Follow this topic</a></p>
+				<h1 class="page-title"><?php single_tag_title(); ?></h1>
 
-			<h1 class="page-title"><?php single_tag_title(); ?></h1>
+				<?php
+					$tag_description = tag_description();
+					if ( $tag_description )
+						echo '<div class="topic-background">' . $tag_description . '</div>';
+				?>
 
-			<?php
-				$tag_description = tag_description();
-				if ( $tag_description )
-					echo '<div class="topic-background">' . $tag_description . '</div>';
-			?>
+			</header>
 
-			<h3 class="recent-posts">Recent posts</h3>
+			<h3 class="recent-posts">Recent posts<a class="rss-link" href="<?php echo esc_url( get_tag_feed_link( get_queried_object_id() ) ); ?>"></a></h3>
 
 			<?php
 				/* Start the Loop */

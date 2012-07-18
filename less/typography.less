@@ -54,6 +54,10 @@ h1 {
 
 h2 {
 	font-size: @baseFontSize * 2.75;
+	&.widgettitle {
+	  font-size: @baseFontSize * 1.5;
+	  margin-bottom: @baseline/4;
+	}
 }
 
 h3 {
@@ -107,6 +111,9 @@ p {
     font-style:italic;
     font-weight:bold;
   }
+}
+.widget p {
+  font-size: @baseFontSize;
 }
 
 ul, ol {
