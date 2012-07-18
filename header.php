@@ -102,7 +102,14 @@
         	<span class="visuallyhidden">
         		<a href="#main" title="Skip to content">Skip to content</a>
         	</span>
-        	<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1 ) ); ?>
+        	<?php
+				$args = array(
+					'theme_location' => 'global-nav',
+					'depth'		 => 1,
+					'container'	 => false,
+				);
+				wp_nav_menu($args);
+			?>
         	<div class="nav-right">
         		<div class="donate-btn">
         			<a href=""><i class="icon-heart icon-white"></i>Donate Now</a>
@@ -184,53 +191,76 @@
 	      <ul class="nav">
 	        	<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
 	        	<li class="divider-vertical"></li>
-	        	<li class="dropdown" id="category-list">
+	        	<span class="hidden-phone">
+	        		<?php
+						$args = array(
+							'theme_location' => 'navbar-categories',
+							'depth'		 => 0,
+							'container'	 => false,
+							'items_wrap' => '%3$s',
+							'menu_class'	 => 'nav',
+							'walker'	 => new Bootstrap_Walker_Nav_Menu()
+						);
+
+						wp_nav_menu($args);
+					?>
+	        	</span>
+	        	<li class="dropdown visible-phone" id="category-list">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#category-list">
 				      Categories
 				      <b class="caret"></b>
 				    </a>
 				    <ul class="dropdown-menu">
-				      <li><a href="#">Category 1</a></li>
-				      <li><a href="#">Category 2</a></li>
-				      <li><a href="#">Category 3</a></li>
+				    	<?php
+							$args = array(
+								'theme_location' => 'navbar-categories',
+								'depth'		 => 1,
+								'container'	 => false,
+								'items_wrap' => '%3$s'
+							);
+
+							wp_nav_menu($args);
+						?>
 				    </ul>
 				</li>
-				<!--<li class="dropdown">
-		            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown with Submenu <b class="caret"></b></a>
-		            <ul class="dropdown-menu">
-		              <li><a href="#">Action</a></li>
-		              <li><a href="#">Another action</a></li>
-		              <li>
-		              	<a href="#">Submenu! <i class="icon-arrow-right"></i></a>
-		                <ul class="dropdown-menu sub-menu">
-		                    <li><a href="#">Action</a></li>
-		                    <li><a href="#">Another action</a></li>
-		                    <li><a href="#">Something else here</a></li>
-		                </ul>
-		              </li>
-		              <li class="divider"></li>
-		              <li><a href="#">Separated link</a></li>
-		            </ul>
-			    </li>
-				<li><a href="">Something</a></li>
-				<li><a href="">Something</a></li>-->
 	      </ul>
 
 	      <!-- Everything you want hidden at 940px or less, place within here -->
 	      <div class="nav-collapse">
 	        <ul class="nav">
-	        	<li><a href="">Link</a></li>
-	        	<li><a href="">Link</a></li>
-	        	<li><a href="">Link</a></li>
-	        <span class="visible-phone">
-	        	<li class="divider"></li>
-	        	<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1, 'items_wrap' => '%3$s' ) ); ?>
-	        </span>
+	        	<?php
+					$args = array(
+						'theme_location' => 'navbar-supplemental',
+						'depth'		 => 1,
+						'container'	 => false,
+						'items_wrap' => '%3$s'
+					);
+
+					wp_nav_menu($args);
+				?>
+				<span class="visible-phone">
+		        	<li class="divider"></li>
+		        	<?php
+						$args = array(
+							'theme_location' => 'global-nav',
+							'depth'		 => 1,
+							'container'	 => false,
+							'items_wrap' => '%3$s'
+						);
+
+						wp_nav_menu($args);
+					?>
+	        	</span>
 	         </ul>
 	      </div>
 
 	    </div>
 	  </div>
+	</nav>
+	<nav id="secondary-nav">
+    	<div id="topics-bar" class="span12 hidden-phone">
+			<?php wp_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>
+		</div>
 	</nav>
 
 <div id="main" class="row-fluid clearfix">
