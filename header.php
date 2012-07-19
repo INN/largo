@@ -122,8 +122,9 @@
 						</div>
 					</form>
 				</div>
-
-        		<a href="http://investigativenewsnetwork.org/" target="_blank"><img class="org-logo" src="<?php bloginfo( 'template_directory' ); ?>/img/inn-logo-80-50.jpg" height="50" alt="INN logo" /></a>
+				<div class="org-logo">
+        			<a href="http://investigativenewsnetwork.org/" target="_blank"><img src="<?php bloginfo( 'template_directory' ); ?>/img/inn-logo-80-50.jpg" height="50" alt="INN logo" /></a>
+				</div>
         	</div>
         </nav>
     </div> <!-- /.global-nav -->
