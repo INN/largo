@@ -282,9 +282,6 @@ function largo_byline() {
 }
 endif;
 
-
-
-
 /**
  * Sets the post excerpt length to 35 words.
  *

@@ -10,7 +10,7 @@
 
 			<?php if ( have_posts() ) : ?>
 
-			<header class="category-background">
+			<header class="category-background clearfix">
 				<h1 class="page-title"><?php single_cat_title(); ?></h1>
 				<?php
 					$category_description = category_description();
@@ -24,7 +24,7 @@
 
 			</header> <!-- /.category-background -->
 
-			<h3 class="recent-posts">Recent posts<a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"></a></h3>
+			<h3 class="recent-posts clearfix">Recent posts<a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"></a></h3>
 
 				<?php /* Start the Loop */ ?>
 				<?php while ( have_posts() ) : the_post(); ?>

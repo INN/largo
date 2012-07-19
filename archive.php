@@ -24,7 +24,7 @@ get_header(); ?>
 			the_post();
 		?>
 
-		<div id="archive-intro">
+		<div id="archive-intro clearfix">
 			<?php if ( !is_author() ): ?>
 				<nav class="archive-dropdown">
 					<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value="">Select Month</option>

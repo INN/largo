@@ -10,7 +10,7 @@
 
 </div><!-- #page -->
 
-<div class="footer-bg">
+<div class="footer-bg clearfix">
 	<footer id="site-footer">
 			<div id="supplementary" class="row-fluid">
 			<?php
@@ -20,13 +20,14 @@
 				get_sidebar( 'footer' );
 			?>
 
-				<div id="boilerplate" class="row-fluid">
-				    <p><?php argo_copyright_message(); ?></p>
-				    <?php //wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
-					<p class="back-to-top"><a href="#page">Back to top &uarr;</a></p>
-				</div><!-- /#boilerplate -->
 
-			</div><!-- /.container_12 -->
+
+			</div>
+			<div id="boilerplate" class="row-fluid clearfix">
+				<p><?php argo_copyright_message(); ?></p>
+				<?php //wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
+				<p class="back-to-top"><a href="#page">Back to top &uarr;</a></p>
+			</div><!-- /#boilerplate -->
 	</footer>
 </div>
 <?php wp_footer(); ?>

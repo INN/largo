@@ -8,7 +8,7 @@ get_header(); ?>
 		<div id="content" class="stories span8" role="main">
 
 		<?php if ( have_posts() ) : ?>
-			<header class="category-background">
+			<header class="category-background clearfix">
 
 				<h1 class="page-title"><?php single_tag_title(); ?></h1>
 
@@ -20,7 +20,7 @@ get_header(); ?>
 
 			</header>
 
-			<h3 class="recent-posts">Recent posts<a class="rss-link" href="<?php echo esc_url( get_tag_feed_link( get_queried_object_id() ) ); ?>"></a></h3>
+			<h3 class="recent-posts clearfix">Recent posts<a class="rss-link" href="<?php echo esc_url( get_tag_feed_link( get_queried_object_id() ) ); ?>"></a></h3>
 
 			<?php
 				/* Start the Loop */

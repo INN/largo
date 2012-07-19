@@ -135,10 +135,10 @@
 </div>
 <?php } ?>
 
-<div id="page" class="hfeed">
+<div id="page" class="hfeed clearfix">
 
 
-	<header id="site-header">
+	<header id="site-header" class="clearfix">
 
 				<?php
 					$header_image = get_header_image();
@@ -177,7 +177,7 @@
 
 	</header>
 
-	<nav id="main-nav" class="navbar">
+	<nav id="main-nav" class="navbar clearfix">
 	  <div class="navbar-inner">
 	    <div class="container">
 
@@ -257,7 +257,7 @@
 	    </div>
 	  </div>
 	</nav>
-	<nav id="secondary-nav">
+	<nav id="secondary-nav" class="clearfix">
     	<div id="topics-bar" class="span12 hidden-phone">
 			<?php wp_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>
 		</div>
