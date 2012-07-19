@@ -19,13 +19,10 @@
 				 */
 				get_sidebar( 'footer' );
 			?>
-
-
-
 			</div>
 			<div id="boilerplate" class="row-fluid clearfix">
-				<p><?php argo_copyright_message(); ?></p>
 				<?php //wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
+				<p><?php argo_copyright_message(); ?></p>
 				<p class="back-to-top"><a href="#page">Back to top &uarr;</a></p>
 			</div><!-- /#boilerplate -->
 	</footer>

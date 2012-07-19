@@ -13,18 +13,20 @@
 http://wordpress.org/extend/themes/twentyeleven
 ----------------------------------------------- */
 
+#comments {
+	clear:both;
+}
 #content #comments-title {
-	font-size: 1.5em;
-	margin-bottom: 20px;
+	font-size: @baseFontSize *1.5;
+	margin-bottom: @baseline/2;
 	font-weight: bold;
 }
-
 .nopassword,
 .nocomments {
-	color: #aaa;
-	font-size: 1.5em;
+	color: @grayLight;
+	font-size: @baseFontSize *1.5;
 	font-weight: 100;
-	margin: 26px 0;
+	margin: @baseline 0;
 	text-align: center;
 }
 .commentlist {

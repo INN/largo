@@ -152,6 +152,10 @@ textarea {
 .single .global-nav {
   padding-left: 80px;
 }
+#page,
+#page-single {
+  padding-bottom: 24px;
+}
 /****************** LEFT NAV ******************/
 #left-nav {
   float: left;
@@ -1171,6 +1175,7 @@ article.story {
 .pager {
   list-style: none;
   text-align: center;
+  margin-bottom: 24px;
 }
 .pager h5 {
   margin-bottom: 6px;
@@ -1193,6 +1198,7 @@ article.story {
 .pager .next {
   float: right;
   text-align: right;
+  margin-bottom: 12px;
 }
 .pager .previous {
   float: left;
@@ -1476,17 +1482,20 @@ h3.recent-posts a.rss-link:hover {
 /* = Customized comment form styles via the twenty eleven theme
 http://wordpress.org/extend/themes/twentyeleven
 ----------------------------------------------- */
+#comments {
+  clear: both;
+}
 #content #comments-title {
-  font-size: 1.5em;
-  margin-bottom: 20px;
+  font-size: 24px;
+  margin-bottom: 12px;
   font-weight: bold;
 }
 .nopassword,
 .nocomments {
-  color: #aaa;
-  font-size: 1.5em;
+  color: #999999;
+  font-size: 24px;
   font-weight: 100;
-  margin: 26px 0;
+  margin: 24px 0;
   text-align: center;
 }
 .commentlist {
@@ -3830,7 +3839,8 @@ img.aligncenter {
   #page,
   #site-footer {
     margin: 0 auto;
-    padding: 0 3%;
+    padding-left: 3%;
+    padding-right: 3%;
   }
 }
 @media screen and (min-width: 1600px) {
@@ -3838,27 +3848,34 @@ img.aligncenter {
   #page,
   #page-single,
   #site-footer {
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
   .global-nav,
   #page,
   #site-footer {
-    padding: 0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 @media (max-width: 767px) {
-  #sidebar {
+  #sidebar,
+  #site-footer .widget-area {
     clear: both;
     width: 100%;
+  }
+  #site-footer .widget-area {
+    margin-left: 0;
   }
   #content {
     width: 100%;
   }
   .single #page,
   .single .global-nav {
-    padding: 0 5%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
   #left-nav {
     display: none !important;
