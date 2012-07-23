@@ -2201,6 +2201,9 @@ table .span24 {
 #page-single {
   padding-bottom: 24px;
 }
+#main {
+  margin-top: 24px;
+}
 /****************** LEFT NAV ******************/
 #left-nav {
   float: left;
@@ -2963,7 +2966,6 @@ li.home-link:hover i {
 }
 #secondary-nav {
   *zoom: 1;
-  margin-bottom: 24px;
 }
 #secondary-nav:before,
 #secondary-nav:after {

@@ -550,5 +550,28 @@ add_action( 'wp_footer', 'argo_footer_js' );
 
 	<?php }
 
+add_action( 'wp_footer', 'largo_google_analytics' );
+
+// add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
+
+function largo_google_analytics() {
+
+	if ( get_option( 'ga_id', true ) // make sure the ga_id setting is defined
+		&& ( !is_user_logged_in() ) ) : // don't track logged in users
+	?>
+	<script>
+	    var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', '<?php echo get_option( "ga_id" ) ?>']);
+	    _gaq.push(['_trackPageview']);
+
+	    (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+	<?php endif;
+}
+
 //hide the admin bar
 	add_filter( 'show_admin_bar', '__return_false' );

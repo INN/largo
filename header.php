@@ -34,7 +34,7 @@
 <?php $url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
 
 <!-- open graph and twittercard tags
-    to-do: make this dynamic
+    to-do: make this dynamic and hook to wp_head
 -->
 	<?php if ( is_single() ) {
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
@@ -257,10 +257,12 @@
 	    </div>
 	  </div>
 	</nav>
+	<?php if ( get_option( 'show_dont_miss_menu', true ) ) : ?>
 	<nav id="secondary-nav" class="clearfix">
     	<div id="topics-bar" class="span12 hidden-phone">
 			<?php wp_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>
 		</div>
 	</nav>
+	<?php endif; ?>
 
 <div id="main" class="row-fluid clearfix">

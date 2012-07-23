@@ -46,8 +46,11 @@ function largo_donate_button () {
 }
 
 function argo_add_dont_miss_label( $items, $args ) {
-    // XXX: make this label configurable via a setting
-    return "<li><h4>Don't miss</h4></li>" . $items;
+
+    $msg = get_option( 'dont_miss_label' );
+    if ( ! $msg )
+    	$msg = 'Don\'t Miss';
+    return "<li><h4>" . $msg . "</h4></li>" . $items;
 }
 add_filter( 'wp_nav_menu_dont-miss_items', 'argo_add_dont_miss_label', 10, 2 );
 
