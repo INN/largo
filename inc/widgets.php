@@ -1,12 +1,12 @@
 <?php
 
-function argo_load_widgets() {
+function largo_load_widgets() {
     register_widget( 'Argo_follow_Widget' );
     register_widget( 'Argo_more_featured_Widget' );
     register_widget( 'Argo_about_Widget' );
     register_widget( 'Argo_hosts_Widget' );
 }
-add_action( 'widgets_init', 'argo_load_widgets' );
+add_action( 'widgets_init', 'largo_load_widgets' );
 
 /*
  * Argo Follow Widget
@@ -18,8 +18,8 @@ class Argo_follow_Widget extends WP_Widget {
 	 */
 	function Argo_follow_Widget() {
 		/* Widget settings. */
-		$widget_ops = array( 
-			'classname' => 'argo-follow', 
+		$widget_ops = array(
+			'classname' => 'argo-follow',
 			'description' => 'Display links to social media sites set in Argo theme options',
 		);
 
@@ -40,7 +40,7 @@ class Argo_follow_Widget extends WP_Widget {
 		/* Display the widget title if one was input */
 		if ( $title )
 			echo $before_title . $title . $after_title; ?>
-			
+
 			<ul>
 				<li class="subscribe"><?php echo the_feed_link( 'RSS' ); ?></li>
 
@@ -78,15 +78,15 @@ class Argo_follow_Widget extends WP_Widget {
 					<a href="<?php echo esc_url( get_option( 'gplus_link' ) ); ?>?rel=author" title="Google+">Google+</a>
 				</li>
 			<?php endif; ?>
-			
+
 			<?php if ( get_option( 'podcast_link' ) ) :?>
 				<li class="podcast">
 				<a href="<?php echo esc_url( get_option( 'podcast_link' ) ); ?>">Podcast</a>
 				</li>
 			<?php endif; ?>
-			
+
 		</ul>
-		<?php 
+		<?php
 		/* After widget */
 		echo $after_widget;
 	}
@@ -129,8 +129,8 @@ class Argo_more_featured_Widget extends WP_Widget {
 	 */
 	function Argo_more_featured_Widget() {
 		/* Widget settings. */
-		$widget_ops = array( 
-		'classname' => 'argo-more-featured', 
+		$widget_ops = array(
+		'classname' => 'argo-more-featured',
 		'description' => __('Show the fourth and fifth most recently featured posts with thumbnails and excerpts', 'argo-more-featured') );
 
 		/* Create the widget. */
@@ -148,8 +148,8 @@ class Argo_more_featured_Widget extends WP_Widget {
 		/* Display the widget title if one was input */
 		if ( $title )
 			echo $before_title . $title . $after_title;?>
-			
-			<?php $missedit = argo_get_featured_posts( array( 'offset' => 3, 'showposts' => 2 ) );
+
+			<?php $missedit = argo_get_featured_posts( array( 'offset' => 0, 'showposts' => 2 ) );
           	if ( $missedit->have_posts() ) : ?>
              	 <?php while ( $missedit->have_posts() ) : $missedit->the_post(); ?>
                   	<div class="post-lead">
@@ -160,10 +160,10 @@ class Argo_more_featured_Widget extends WP_Widget {
             <?php endwhile; ?>
             <?php else: ?>
     		<p class="error">You're currently featuring 3 or fewer posts. Mark more posts as featured on the add/edit post screen to populate this region.</p>
-        
+
          <?php endif; // end more featured posts ?>
-         
-		<?php 
+
+		<?php
 		/* After widget (defined by themes). */
 		echo $after_widget;
 	}
@@ -210,8 +210,8 @@ class Argo_about_Widget extends WP_Widget {
 	 */
 	function Argo_about_Widget() {
 		/* Widget settings. */
-		$widget_ops = array( 
-		'classname' => 'argo-about', 
+		$widget_ops = array(
+		'classname' => 'argo-about',
 		'description' => __('Show the site description from your theme options page') );
 
 		/* Create the widget. */
@@ -233,14 +233,14 @@ class Argo_about_Widget extends WP_Widget {
 		/* Display the widget title if one was input (before and after defined by themes). */
 		if ( $title )
 			echo $before_title . $title . $after_title;?>
-			
+
 			<?php if ( get_option( 'site_blurb' ) ) : ?>
                 <p><?php echo get_option( 'site_blurb' ); ?></p>
 			<?php else: ?>
     			<p class="error"><strong>You have not set a description for your site.</strong> Add a site description by visiting the Argo Theme Options page, or add a different widget to this region.</p>
         	<?php endif; // end about site ?>
-         
-		<?php 
+
+		<?php
 		/* After widget (defined by themes). */
 		echo $after_widget;
 	}
@@ -289,8 +289,8 @@ class Argo_hosts_Widget extends WP_Widget {
 	 */
 	function Argo_hosts_Widget() {
 		/* Widget settings. */
-		$widget_ops = array( 
-		'classname' => 'hosts', 
+		$widget_ops = array(
+		'classname' => 'hosts',
 		'description' => __('Show an gravatar, Twitter ID and link to the blog host author page') );
 
 		/* Create the widget. */
@@ -310,27 +310,27 @@ class Argo_hosts_Widget extends WP_Widget {
 		/* Display the widget title */
 		if ( $title )
 			echo $before_title . $title . $after_title;?>
-			
+
 			<?php if ( argo_get_staff() ): ?>
     		<?php $users = argo_get_staff(); ?>
     		<?php foreach ( $users as $user ): ?>
-    
+
         		<div class="clearfix">
             		<a href="<?php echo get_author_posts_url( $user->ID ); ?>"><?php echo get_avatar( $user->ID, 60 ); ?></a>
             		<h4><a href="<?php echo get_author_posts_url( $user->ID ); ?>"><?php the_author_meta( 'display_name', $user->ID ); ?></a></h4>
             		<?php if ( get_the_author_meta( 'argo_twitter', $user->ID ) ): ?>
-						<p><strong>Twitter:</strong> 
+						<p><strong>Twitter:</strong>
     					<a href="http://twitter.com/<?php the_author_meta( 'argo_twitter', $user->ID ); ?>">@<?php the_author_meta( 'argo_twitter', $user->ID ); ?></a></p>
 					<?php endif; ?>
         		</div><!-- /.ft-reporter -->
     	<?php endforeach; ?>
-    	
+
     	<?php else: ?>
     		<p><strong>Your blog has no hosts.</strong> Add a host by selecting the blog host checkbox on any user profile screen.</p>
-    	
+
 	<?php endif; // end argo get staff ?>
-         
-		<?php 
+
+		<?php
 		/* After widget */
 		echo $after_widget;
 	}

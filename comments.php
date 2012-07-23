@@ -8,7 +8,7 @@
  * located in the functions.php file.
  */
 ?>
-	<div id="comments">
+	<div id="comments" class="clearfix">
 	<?php if ( post_password_required() ) : ?>
 		<p class="nopassword">This post is password protected. Enter the password to view any comments.</p>
 	</div><!-- #comments -->

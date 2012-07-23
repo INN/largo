@@ -111,9 +111,8 @@
 				wp_nav_menu($args);
 			?>
         	<div class="nav-right">
-        		<div class="donate-btn">
-        			<a href=""><i class="icon-heart icon-white"></i>Donate Now</a>
-        		</div>
+
+        		<?php largo_donate_button(); ?>
 
 				<div id="header-search">
 					<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">

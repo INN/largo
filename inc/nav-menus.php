@@ -33,6 +33,18 @@ function argo_register_custom_menus() {
 
 add_action( 'after_setup_theme', 'argo_register_custom_menus' );
 
+function largo_donate_button () {
+	$msg = get_option( 'donate_link' );
+
+	if ( $msg )
+		printf( '
+	        <div class="donate-btn">
+	        	<a href="%1$s"><i class="icon-heart icon-white"></i>Donate Now</a>
+	        </div> ',
+	    $msg
+	    );
+}
+
 function argo_add_dont_miss_label( $items, $args ) {
     // XXX: make this label configurable via a setting
     return "<li><h4>Don't miss</h4></li>" . $items;

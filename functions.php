@@ -39,7 +39,7 @@ require_once( TEMPLATEPATH . '/inc/sidebars.php' );
 require_once( TEMPLATEPATH . '/inc/widgets.php' );
 require_once( TEMPLATEPATH . '/inc/nav-menus.php' );
 require_once( TEMPLATEPATH . '/inc/taxonomies.php' );
-require_once( TEMPLATEPATH . '/inc/argo-theme-settings.php' );
+require_once( TEMPLATEPATH . '/inc/largo-theme-settings.php' );
 require_once( TEMPLATEPATH . '/inc/editor.php' );
 require_once( TEMPLATEPATH . '/inc/images.php' );
 require_once( TEMPLATEPATH . '/inc/related-content.php' );
@@ -257,7 +257,7 @@ function argo_admin_header_image() { ?>
 <?php }
 endif; // argo_admin_header_image
 
-// Prints HTML with meta information for the current post-date/time and author.
+// For posts in the last 24 hours, show time since posted instead of the regular date and time
 
 function largo_time() {
 	// Change to the date after a certain time
@@ -269,7 +269,7 @@ function largo_time() {
 	};
 }
 
-if ( ! function_exists( 'largo_byline' ) ) :
+// Print the byline
 
 function largo_byline() {
 	printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
@@ -280,7 +280,15 @@ function largo_byline() {
 		largo_time()
 	);
 }
-endif;
+
+// print the copyright message in the footer
+
+function largo_copyright_message() {
+    $msg = get_option( 'copyright_msg' );
+    if ( ! $msg )
+    	$msg = 'Copyright %s';
+    printf( $msg, date( 'Y' ) );
+}
 
 /**
  * Sets the post excerpt length to 35 words.
@@ -477,11 +485,6 @@ function argo_enqueue_js() {
 	wp_enqueue_script( 'bootstrap_dropdown', get_bloginfo('template_url') . '/js/bootstrap-dropdown.js', array( 'jquery' ), '1.0', true );
 	wp_enqueue_script( 'bootstrap_collapse', get_bloginfo('template_url') . '/js/bootstrap-collapse.js', array( 'jquery' ), '1.0', true );
 
-	if ( wp_script_is( 'hoverIntent' ) )
-		wp_enqueue_script( 'hoverIntent' );
-	else
-		wp_enqueue_script( 'hoverIntent', includes_url( "/js/hoverIntent.js" ), array('jquery'), '20090102', true );
-
 	if ( get_option( 'show_related_content', true ) )
 		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 }
@@ -494,28 +497,6 @@ add_action( 'wp_footer', 'argo_footer_js' );
 			jQuery(document).ready(function($) {
 				//html5 placeholders
 				$("input[placeholder]").textPlaceholder();
-
-				//main navigation
-				//function megaHoverOver(){
-				//	$(this).find(".sub").stop().fadeTo('fast', 1).show();
-				//}
-
-				//function megaHoverOut(){
-				//	$(this).find(".sub").stop().fadeTo('fast', 0, function() {
-				//	$(this).hide();
-				//	});
-				//}
-				//var config = {
-				//	sensitivity: 2, // number = sensitivity threshold (must be 1 or higher)
-				//	interval: 100, // number = milliseconds for onMouseOver polling interval
-				//	over: megaHoverOver, // function = onMouseOver callback (REQUIRED)
-				//	timeout: 500, // number = milliseconds delay before onMouseOut
-				//	out: megaHoverOut // function = onMouseOut callback (REQUIRED)
-				//};
-
-				//$("#topnav li .sub").css({'opacity':'0'});
-				//$("#topnav li").hoverIntent(config);
-				//$('.dropdown-toggle').dropdown();
 
 				$(window).scroll(function(){
 					if (($(window).scrollTop() > 50)) {
@@ -536,12 +517,12 @@ add_action( 'wp_footer', 'argo_footer_js' );
 			    // dim sidebar
 			    $(window).scroll(function(){
 					if (($(window).scrollTop() > 300)) {
-						$('#sidebar').animate({opacity: '0.5'}, 100);
+						$('.showey-hidey').animate({opacity: '0.5'}, 100);
 					} else if (($(window).scrollTop() < 300)) {
-						$('#sidebar').animate({opacity: '1'}, 100);
+						$('.showey-hidey').animate({opacity: '1'}, 100);
 					}
 				});
-				$('#sidebar').hover(function() {
+				$('.showey-hidey').hover(function() {
 			       		$(this).animate({opacity: '1'}, 100);
 			        }, function() {
 			        	if (($(window).scrollTop() < 300)) {
@@ -554,6 +535,18 @@ add_action( 'wp_footer', 'argo_footer_js' );
 			});
 
 		</script>
+
+		<!-- FB and Twitter buttons -->
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=375948615804689";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 	<?php }
 

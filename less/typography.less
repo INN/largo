@@ -13,12 +13,15 @@ body {
 // --------------------------------------------
 
 a {
-  	color: @linkColor;
-  	text-decoration: none;
-  	&:hover {
-	  	color: @linkColorHover;
-	  	text-decoration: underline;
-	}
+  color: @linkColor;
+  text-decoration: none;
+  &:hover {
+    color: @linkColorHover;
+    text-decoration: underline;
+  }
+  &.more-link {
+    white-space: nowrap;
+  }
 }
 
 // --------------------------------------------
@@ -54,10 +57,6 @@ h1 {
 
 h2 {
 	font-size: @baseFontSize * 2.75;
-	&.widgettitle {
-	  font-size: @baseFontSize * 1.5;
-	  margin-bottom: @baseline/4;
-	}
 }
 
 h3 {
@@ -91,11 +90,10 @@ h1, h2, h3, h4, h5, h6, h7, h8 {
     	font-size: 0.815em;
     }
 }
-
 p {
   font-size: @baseFontSize + 3;
   line-height: 1.5;
-  margin: 0 0 (@baseline * 0.815);
+  margin: 0 0 @baseline*0.815;
   small,
   &.small {
     font-size: @baseFontSize * 0.815;
@@ -183,7 +181,8 @@ del {
 
 
 blockquote {
-  padding: 0 15px;
+  clear:both;
+  padding: 5px 15px;
   margin: 0 0 @baseline;
   background-color: @grayLighter;
   border-left: 5px solid @grayLight;
