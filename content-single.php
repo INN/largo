@@ -38,7 +38,7 @@
 
 <!-- Related posts -->
 <?php
-if ( get_option( 'show_related_content', true ) ) :
+if ( of_get_option( 'show_related_content' ) ) :
 	if ( $rel_topics = argo_get_post_related_topics( 6 ) ) :
 ?>
 	<div id="related-posts" class="idTabs row-fluid clearfix">

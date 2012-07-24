@@ -74,6 +74,10 @@
 	    <meta property="og:description" content="<?php bloginfo('description'); ?>" />
 	<?php } ?>
 
+	<?php if ( of_get_option( 'gplus_link' ) ) : ?>
+		<link href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>" rel="publisher" />
+	<?php endif; ?>
+
 <?php
 	wp_enqueue_style( 'argo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
 	wp_enqueue_script( 'argo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
@@ -111,8 +115,9 @@
 				wp_nav_menu($args);
 			?>
         	<div class="nav-right">
-
-        		<?php largo_donate_button(); ?>
+        		<?php if ( of_get_option( 'show_donate_button') ) :
+        			largo_donate_button();
+        		endif; ?>
 
 				<div id="header-search">
 					<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
@@ -257,7 +262,7 @@
 	    </div>
 	  </div>
 	</nav>
-	<?php if ( get_option( 'show_dont_miss_menu', true ) ) : ?>
+	<?php if ( of_get_option( 'show_dont_miss_menu') ) : ?>
 	<nav id="secondary-nav" class="clearfix">
     	<div id="topics-bar" class="span12 hidden-phone">
 			<?php wp_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>

@@ -18,3 +18,4 @@ The project extends work done by NPR's Project Argo (http://argoproject.org/).
 * Twitter Bootstrap: http://twitter.github.com/bootstrap/
 * LESS CSS: http://lesscss.org/
 * Glyphicons: http://glyphicons.com/
+* Options Framework: https://github.com/devinsays/options-framework-theme

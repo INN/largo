@@ -34,18 +34,22 @@
 if ( ! isset( $content_width ) )
 	$content_width = 620;
 
+if ( !function_exists( 'optionsframework_init' ) ) {
+	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/options-framework/' );
+	require_once dirname( __FILE__ ) . '/inc/options-framework/options-framework.php';
+}
 require_once( TEMPLATEPATH . '/inc/users.php' );
 require_once( TEMPLATEPATH . '/inc/sidebars.php' );
 require_once( TEMPLATEPATH . '/inc/widgets.php' );
 require_once( TEMPLATEPATH . '/inc/nav-menus.php' );
 require_once( TEMPLATEPATH . '/inc/taxonomies.php' );
-require_once( TEMPLATEPATH . '/inc/largo-theme-settings.php' );
 require_once( TEMPLATEPATH . '/inc/editor.php' );
 require_once( TEMPLATEPATH . '/inc/images.php' );
 require_once( TEMPLATEPATH . '/inc/related-content.php' );
 require_once( TEMPLATEPATH . '/inc/featured-content.php' );
 require_once( TEMPLATEPATH . '/inc/special-functionality.php' );
 require_once( TEMPLATEPATH . '/inc/tgm-plugin-init.php' );
+
 
 /**
  * Tell WordPress to run argo_setup() when the 'after_setup_theme' hook is run.
@@ -284,7 +288,7 @@ function largo_byline() {
 // print the copyright message in the footer
 
 function largo_copyright_message() {
-    $msg = get_option( 'copyright_msg' );
+    $msg = of_get_option( 'copyright_msg' );
     if ( ! $msg )
     	$msg = 'Copyright %s';
     printf( $msg, date( 'Y' ) );
@@ -536,7 +540,11 @@ add_action( 'wp_footer', 'argo_footer_js' );
 
 		</script>
 
-		<!-- FB and Twitter buttons -->
+		<!--
+		Social Media API Calls
+		-->
+
+		<!--Facebook-->
 		<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -546,7 +554,18 @@ add_action( 'wp_footer', 'argo_footer_js' );
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
 
+		<!--Twitter-->
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+		<!--Google Plus-->
+		<script type="text/javascript">
+		  (function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/plusone.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		  })();
+		</script>
+
 
 	<?php }
 
@@ -561,7 +580,7 @@ function largo_google_analytics() {
 	?>
 	<script>
 	    var _gaq = _gaq || [];
-	    _gaq.push(['_setAccount', '<?php echo get_option( "ga_id" ) ?>']);
+	    _gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
 	    _gaq.push(['_trackPageview']);
 
 	    (function() {

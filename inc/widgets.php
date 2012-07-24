@@ -1,7 +1,7 @@
 <?php
 
 function largo_load_widgets() {
-    register_widget( 'Argo_follow_Widget' );
+    register_widget( 'largo_follow_Widget' );
     register_widget( 'Argo_more_featured_Widget' );
     register_widget( 'Argo_about_Widget' );
     register_widget( 'Argo_hosts_Widget' );
@@ -11,20 +11,20 @@ add_action( 'widgets_init', 'largo_load_widgets' );
 /*
  * Argo Follow Widget
  */
-class Argo_follow_Widget extends WP_Widget {
+class largo_follow_Widget extends WP_Widget {
 
 	/**
 	 * Widget setup.
 	 */
-	function Argo_follow_Widget() {
+	function largo_follow_Widget() {
 		/* Widget settings. */
 		$widget_ops = array(
-			'classname' => 'argo-follow',
-			'description' => 'Display links to social media sites set in Argo theme options',
+			'classname' => 'largo-follow',
+			'description' => 'Display links to social media sites set in Largo theme options',
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'argo-follow-widget', 'Argo Follow', $widget_ops );
+		$this->WP_Widget( 'largo-follow-widget', 'Largo Follow', $widget_ops );
 	}
 
 	/**
@@ -41,52 +41,29 @@ class Argo_follow_Widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title; ?>
 
-			<ul>
-				<li class="subscribe"><?php echo the_feed_link( 'RSS' ); ?></li>
 
-			<?php if ( get_option( 'facebook_link' ) ) : ?>
-				<li>
-					<img src="<?php bloginfo('template_directory'); ?>/img/fb16.png" alt="facebook-fav" width="16" height="16" />
-					<a href="<?php echo esc_url( get_option( 'facebook_link' ) ); ?>" title="Facebook">Facebook</a>
-				</li>
+			<?php
+				$feed = get_feed_link();
+				if ( of_get_option( 'rss_link' ) )
+					$feed = of_get_option( 'rss_link' );
+				printf('
+					<div class="subscribe">
+						<a href="%1$s"><i class="social-icons small rss"></i>Subscribe via RSS</a>
+					</div>',
+					$feed
+				);
+			?>
+
+			<?php if ( of_get_option( 'twitter_link' ) ) : ?>
+				<a href="<?php echo esc_url( of_get_option( 'twitter_link' ) ); ?>" class="twitter-follow-button" data-width="100%" data-align="left" data-size="large">Follow @INN</a>
 			<?php endif; ?>
 
-			<?php if ( get_option( 'twitter_link' ) ) : ?>
-				<li>
-					<img src="<?php bloginfo('template_directory'); ?>/img/twitter16.png" alt="twitter-fav" width="16" height="16" />
-					<a href="<?php echo esc_url( get_option( 'twitter_link' ) ); ?>" title="twitter">Twitter</a>
-				</li>
+			<?php if ( of_get_option( 'facebook_link' ) ) : ?>
+				<div class="fb-like" data-href="<?php echo esc_url( of_get_option( 'facebook_link' ) ); ?>" data-send="false" data-show-faces="false"></div>
 			<?php endif; ?>
 
-			<?php if ( get_option( 'youtube_link' ) ) : ?>
-				<li>
-					<img src="<?php bloginfo('template_directory'); ?>/img/youtube16.png" alt="youtube-fav" width="16" height="16" />
-					<a href="<?php echo esc_url( get_option( 'youtube_link' ) ); ?>" title="youtube">YouTube</a>
-				</li>
-			<?php endif; ?>
-
-			<?php if ( get_option( 'flickr_link' ) ) : ?>
-				<li>
-					<img src="<?php bloginfo('template_directory'); ?>/img/flickr16.png" alt="flickr-fav" width="16" height="16" />
-					<a href="<?php echo esc_url( get_option( 'flickr_link' ) ); ?>" title="flickr">Flickr</a>
-				</li>
-			<?php endif; ?>
-
-			<?php if ( get_option( 'gplus_link' ) ) : ?>
-				<li>
-					<img src="<?php bloginfo('template_directory'); ?>/img/gplus16.png" alt="gplus-fav" width="16" height="16" />
-					<a href="<?php echo esc_url( get_option( 'gplus_link' ) ); ?>?rel=author" title="Google+">Google+</a>
-				</li>
-			<?php endif; ?>
-
-			<?php if ( get_option( 'podcast_link' ) ) :?>
-				<li class="podcast">
-				<a href="<?php echo esc_url( get_option( 'podcast_link' ) ); ?>">Podcast</a>
-				</li>
-			<?php endif; ?>
-
-		</ul>
 		<?php
+
 		/* After widget */
 		echo $after_widget;
 	}

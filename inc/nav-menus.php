@@ -34,23 +34,19 @@ function argo_register_custom_menus() {
 add_action( 'after_setup_theme', 'argo_register_custom_menus' );
 
 function largo_donate_button () {
-	$msg = get_option( 'donate_link' );
-
-	if ( $msg )
-		printf( '
+	$donate_link = of_get_option( 'donate_link' );
+	if ( $donate_link )
+		printf('
 	        <div class="donate-btn">
-	        	<a href="%1$s"><i class="icon-heart icon-white"></i>Donate Now</a>
+	        	<a href="%1$s"><i class="icon-heart icon-white"></i>%2$s</a>
 	        </div> ',
-	    $msg
+	    $donate_link,
+	    of_get_option( 'donate_button_text' )
 	    );
 }
 
 function argo_add_dont_miss_label( $items, $args ) {
-
-    $msg = get_option( 'dont_miss_label' );
-    if ( ! $msg )
-    	$msg = 'Don\'t Miss';
-    return "<li><h4>" . $msg . "</h4></li>" . $items;
+    return "<li><h4>" . of_get_option( 'dont_miss_label') . "</h4></li>" . $items;
 }
 add_filter( 'wp_nav_menu_dont-miss_items', 'argo_add_dont_miss_label', 10, 2 );
 
