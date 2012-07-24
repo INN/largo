@@ -50,7 +50,6 @@ require_once( TEMPLATEPATH . '/inc/featured-content.php' );
 require_once( TEMPLATEPATH . '/inc/special-functionality.php' );
 require_once( TEMPLATEPATH . '/inc/tgm-plugin-init.php' );
 
-
 /**
  * Tell WordPress to run argo_setup() when the 'after_setup_theme' hook is run.
  */

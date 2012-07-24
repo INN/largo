@@ -34,7 +34,7 @@ function argo_register_custom_menus() {
 add_action( 'after_setup_theme', 'argo_register_custom_menus' );
 
 function largo_donate_button () {
-	$donate_link = of_get_option( 'donate_link' );
+	$donate_link = esc_url( of_get_option( 'donate_link' ) );
 	if ( $donate_link )
 		printf('
 	        <div class="donate-btn">

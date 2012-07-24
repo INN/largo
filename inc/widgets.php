@@ -45,7 +45,7 @@ class largo_follow_Widget extends WP_Widget {
 			<?php
 				$feed = get_feed_link();
 				if ( of_get_option( 'rss_link' ) )
-					$feed = of_get_option( 'rss_link' );
+					$feed = esc_url (of_get_option( 'rss_link' ) );
 				printf('
 					<div class="subscribe">
 						<a href="%1$s"><i class="social-icons small rss"></i>Subscribe via RSS</a>
