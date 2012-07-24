@@ -6,7 +6,7 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 	<?php if ( is_front_page() && is_sticky() && ! is_paged() ):  ?>
 		<?php if ( argo_post_has_features() ):
 			$feature = argo_get_the_main_feature();

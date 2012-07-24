@@ -72,7 +72,7 @@ if ( ! function_exists( 'argo_setup' ) ):
 function argo_setup() {
 
 	// This theme styles the visual editor with editor-style.css to match the theme style.
-	add_editor_style();
+	add_editor_style('/css/editor-style.css');
 
 	// Add default posts and comments RSS feed links to <head>.
 	add_theme_support( 'automatic-feed-links' );

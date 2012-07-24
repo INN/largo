@@ -25,7 +25,9 @@ article.story {
 .tags,
 .pager,
 #related-posts {
+  clear:both;
   margin: 0 0 @baseline / 2;
+  width:100%;
   font-family: @sansFontFamily;
 }
 .tags,
@@ -229,7 +231,7 @@ article.story {
 	  margin: 0 0 @baseline/2 0;
     }
 }
-#content .aside p {
+.aside p {
 	font-size: 0.815em;
 }
 .image p {
@@ -259,7 +261,7 @@ article.story {
 }
 .half {
 	width: 50%;
-	font-size: @baseFontSize * 0.815;
+	//font-size: @baseFontSize * 0.815;
 }
 .full {
 	width: 100%;
@@ -286,6 +288,7 @@ article.story {
 	padding-left: 20px;
 	font: @serifFontFamily;
 	font-style: italic;
+	font-size: @baseFontSize * 1.5;
 	line-height:1.3;
     h6 {
 	  font-size: @baseFontSize;

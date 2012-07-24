@@ -25,7 +25,7 @@
         	<?php endif; ?>
 
         	<?php if ( argo_has_categories_or_tags() ): ?>
-    			<div class="tags">
+    			<div class="tags clearfix">
     				<h5>Filed Under:</h5>
     				<ul>
     					<?php echo argo_the_categories_and_tags(); ?>
