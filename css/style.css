@@ -1,12 +1,3 @@
-/*
-Theme Name: Bootstrap
-Theme URI: http://mediatoybox.com
-Author: Adam Schweigert
-Author URI: http://mediatoybox.com
-Description: Test theme using components from Twitter Bootstrap
-Version: 0.1
-License: GNU General Public License
-*/
 article,
 aside,
 details,
@@ -3191,20 +3182,20 @@ article.story {
 #related-posts .related-items p {
   font-size: 13.04px;
 }
-#content .module {
+.module {
   margin-bottom: 12px;
   color: #000000;
 }
-#content .module h3 {
+.module h3 {
   font-size: 16px;
   margin-bottom: 12px;
   font-weight: bold;
 }
-#content .module dl {
+.module dl {
   margin: 0;
 }
-#content .module dt,
-#content .module dd {
+.module dt,
+.module dd {
   font-size: 13.04px;
   margin: 0 0 12px 0;
 }
@@ -3218,14 +3209,14 @@ article.story {
 .image img {
   display: block;
 }
-#content .wp-media-credit {
+.wp-media-credit {
   font-size: 10.672px;
   margin: 0;
   text-align: right;
   color: #555555;
   display: block;
 }
-#content .wp-caption-text {
+.wp-caption-text {
   font-size: 13.04px;
   margin: 5px 0 0 0;
   color: #555555;
@@ -3233,45 +3224,45 @@ article.story {
   line-height: 1.5;
   display: block;
 }
-#content .navis-slideshow .pagination li {
+.navis-slideshow .pagination li {
   list-style-type: none !important;
 }
-#content .half {
+.half {
   width: 50%;
   font-size: 13.04px;
 }
-#content .full {
+.full {
   width: 100%;
   margin: 0 0 12px;
 }
-#content .aligncenter,
-#content .center {
+.aligncenter,
+.center {
   margin: 24px auto;
   clear: both;
   display: block;
 }
-#content .alignleft,
-#content .left {
+.alignleft,
+.left {
   float: left;
   margin: 6px 20px 12px 0;
 }
-#content .alignright,
-#content .right {
+.alignright,
+.right {
   float: right;
   margin: 6px 0 12px 20px;
 }
-#content .pull-quote {
+.pull-quote {
   border-left: 4px solid #333;
   padding-left: 20px;
   font: Georgia, "Times New Roman", Times, serif;
   font-style: italic;
   line-height: 1.3;
 }
-#content .pull-quote h6 {
+.pull-quote h6 {
   font-size: 16px;
   margin: 0;
 }
-#content .pull-quote p {
+.pull-quote p {
   font-size: 24px;
   margin-bottom: 6px;
 }
