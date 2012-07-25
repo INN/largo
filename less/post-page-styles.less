@@ -241,15 +241,15 @@ article.story {
 .image img {
 	display: block;
 }
-.wp-media-credit {
-	font-size: @baseFontSize * 0.667;
+p.wp-media-credit {
+	font-size: @baseFontSize * 0.667 !important;
 	margin: 0;
 	text-align: right;
 	color: @gray;
 	display: block;
 }
-.wp-caption-text {
-	font-size: @baseFontSize * 0.815;
+p.wp-caption-text {
+	font-size: @baseFontSize * 0.815 !important;
 	margin: 5px 0 0 0;
 	color: @gray;
 	font-style: italic;
@@ -404,6 +404,19 @@ h3.recent-posts {
 	  }
   }
 }
+
+
+// Search Results
+span.search-term {
+	background-color: lighten(@blue, 45%);
+	padding:1px 5px;
+}
+
+// Archive Pages
+.archive-dropdown {
+  margin-bottom: @baseline/2;
+}
+
 // --------------------------------------------
 // CONTACT
 // --------------------------------------------

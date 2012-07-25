@@ -74,6 +74,13 @@ function optionsframework_options() {
 		'type' => 'text');
 
 	$options[] = array(
+		'name' => __('Footer Nav Menu', 'largo'),
+		'desc' => __('Enter the <strong>label that appears before the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
+		'id' => 'footer_menu_label',
+		'std' => get_bloginfo('name'),
+		'type' => 'text');
+
+	$options[] = array(
 		'name' => __('Copyright Message', 'largo'),
 		'desc' => __('Enter the <strong>copyright and credit information</strong> to display in the footer. You can use <code>%d</code> to output the current year.', 'largo'),
 		'id' => 'copyright_msg',

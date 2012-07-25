@@ -13,17 +13,12 @@
 <div class="footer-bg clearfix">
 	<footer id="site-footer">
 			<div id="supplementary" class="row-fluid">
-			<?php
-				/* A sidebar in the footer? Yep. You can can customize
-				 * your footer with three columns of widgets.
-				 */
-				get_sidebar( 'footer' );
-			?>
+				<?php get_sidebar( 'footer' ); ?>
 			</div>
 			<div id="boilerplate" class="row-fluid clearfix">
-				<?php //wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
 				<p><?php largo_copyright_message(); ?></p>
-				<p class="back-to-top"><a href="#page">Back to top &uarr;</a></p>
+				<p class="back-to-top"><a href="#top">Back to top &uarr;</a></p>
+				<?php wp_nav_menu( array( 'theme_location' => 'footer-bottom', 'container' => false, 'depth' => 1  ) ); ?>
 			</div><!-- /#boilerplate -->
 	</footer>
 </div>

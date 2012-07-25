@@ -6,6 +6,7 @@ function argo_register_custom_menus() {
         'navbar-supplemental'       => "Navbar Supplemental Links",
         'dont-miss'       => "Don't Miss",
         'footer'          => 'Footer Navigation',
+        'footer-bottom'          => 'Footer Bottom',
     );
     register_nav_menus( $menus );
 
@@ -49,6 +50,11 @@ function argo_add_dont_miss_label( $items, $args ) {
     return "<li><h4>" . of_get_option( 'dont_miss_label') . "</h4></li>" . $items;
 }
 add_filter( 'wp_nav_menu_dont-miss_items', 'argo_add_dont_miss_label', 10, 2 );
+
+function argo_add_footer_menu_label( $items, $args ) {
+    return "<li><h4>" . of_get_option( 'footer_menu_label') . "</h4></li>" . $items;
+}
+add_filter( 'wp_nav_menu_footer-navigation_items', 'argo_add_footer_menu_label', 10, 2 );
 
 class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 

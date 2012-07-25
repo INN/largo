@@ -10,7 +10,8 @@
   font-size: @baseFontSize * 1.5;
   margin-bottom: @baseline/4;
 }
-#sidebar .widget-title {
+#sidebar .widget-title,
+#sidebar .widgettitle {
   margin-bottom: @baseline/3;
   padding:3px 8px;
   border:1px solid #ddd;
@@ -67,6 +68,20 @@
 }
 
 //Follow Widget
+.subscribe {
+  height:33px;
+  margin-bottom: @baseline/2;
+  line-height:33px;
+  font-size: @baseFontSize + 2;
+  font-family:@sansFontFamily;
+  a {
+    color:@gray;
+  }
+  i {
+    float:left;
+    margin-right:8px;
+  }
+}
 .twitter-follow-button {
 	display:block;
 	margin:@baseline/2 0;

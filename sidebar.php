@@ -7,6 +7,6 @@
 
 	<?php
 		if ( ! dynamic_sidebar( 'sidebar-main' ) )
-			the_widget( 'Argo_hosts_Widget', array( 'title' => 'Blog Hosts' ) );
+			the_widget( 'largo_follow_Widget', array( 'title' => 'Follow Us' ) );
 	?>
 </div><!-- #main .widget-area -->

@@ -4,33 +4,24 @@
  */
 ?>
 
-<div class="span2 widget-area" role="complementary">
-
-	<?php
-	if ( ! dynamic_sidebar( 'footer-1' ) )
-		the_widget( 'Argo_follow_Widget', array( 'title' => 'Follow us' ) );
-	?>
-
+<div class="span3 widget-area" role="complementary">
+	<?php wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
 </div> <!-- /.grid_2 -->
 
 <div class="span6 widget-area" role="complementary">
-
-	<?php
-	if ( ! dynamic_sidebar( 'footer-2' ) )
-		the_widget( 'Argo_more_featured_Widget', array( 'title' => "Don't Miss" ) );
-	?>
-
+	<?php the_widget( 'largo_featured_Widget', array( 'title' => "In Case You Missed It" ) ); ?>
 </div> <!-- /.grid_6 -->
 
-<div class="span4 widget-area" role="complementary">
-	<?php if ( ! dynamic_sidebar( 'footer-3' ) ) : ?>
+<div class="span3 widget-area" role="complementary">
+	<?php if ( ! dynamic_sidebar( 'footer-widget-area' ) ) : ?>
 
 	<div id="searchform-footer">
+		<h3 class="widget-title">Search This Site</h3>
 		<?php get_search_form(); ?>
 	</div>
 
 	<div id="ft-archive">
-    	<h2 class="widget-title">Browse archives by date</h3>
+    	<h3 class="widget-title">Browse Archives</h3>
 		<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'>
 			<option value="">Select Month</option>
 			<?php wp_get_archives( array( 'type' => 'monthly', 'format' => 'option', 'show_post_count' => 1 ) ); ?>

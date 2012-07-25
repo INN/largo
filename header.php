@@ -99,7 +99,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-
+<div id="top"></div>
 <div class="global-nav-bg">
 	<div class="global-nav">
 		<nav id="top-nav" class="span12">

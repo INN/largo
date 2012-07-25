@@ -24,23 +24,30 @@ get_header(); ?>
 			the_post();
 		?>
 
-				<header class="clearfix">
-					<nav class="archive-dropdown">
-						<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value="">Select Month</option>
-						<?php wp_get_archives( array('type' => 'monthly', 'format' => 'option' ) ); ?>
-						</select>
-					</nav>
-				</header>
+		<div id="archive-intro clearfix">
+			<?php if ( !is_author() ): ?>
+				<nav class="archive-dropdown">
+					<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value="">Select Month</option>
+					<?php wp_get_archives( array('type' => 'monthly', 'format' => 'option' ) ); ?>
+					</select>
+				</nav>
+			<?php endif; ?>
+			<h3>
+			<?php if ( is_month() ) : ?>
+			<?php printf( 'Monthly Archives: <span>%s</span>', get_the_date('F Y') ); ?>
+			<?php elseif ( is_year() ) : ?>
+			<?php printf( 'Yearly Archives: <span>%s</span>', get_the_date('Y') ); ?>
+			<?php elseif ( is_author() ) : ?>
+			<?php printf( 'Author Archives: %s', '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' ); ?>
+			<?php else : ?>
+			Blog Archives
+			<?php endif; ?>
+			</h3>
 
-				<h3 class="recent-posts clearfix">
-				<?php if ( is_month() ) : ?>
-				<?php printf( 'Monthly Archives: <span>%s</span>', get_the_date('F Y') ); ?>
-				<?php elseif ( is_year() ) : ?>
-				<?php printf( 'Yearly Archives: <span>%s</span>', get_the_date('Y') ); ?>
-				<?php else : ?>
-				Blog Archives
-				<?php endif; ?>
-				</h3>
+		<?php if ( is_author() && get_the_author_meta( 'description' ) ): ?>
+			<p><?php the_author_meta( 'description' ); ?></p>
+		<?php endif; ?>
+		</div>
 
 				<?php
 					/* Since we called the_post() above, we need to

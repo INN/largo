@@ -2,7 +2,7 @@
 
 function largo_load_widgets() {
     register_widget( 'largo_follow_Widget' );
-    register_widget( 'Argo_more_featured_Widget' );
+    register_widget( 'largo_featured_Widget' );
     register_widget( 'Argo_about_Widget' );
     register_widget( 'Argo_hosts_Widget' );
 }
@@ -40,7 +40,6 @@ class largo_follow_Widget extends WP_Widget {
 		/* Display the widget title if one was input */
 		if ( $title )
 			echo $before_title . $title . $after_title; ?>
-
 
 			<?php
 				$feed = get_feed_link();
@@ -97,21 +96,21 @@ class largo_follow_Widget extends WP_Widget {
 }
 
 /*
- * Argo More Featured Posts
+ * Largo Featured Posts
  */
-class Argo_more_featured_Widget extends WP_Widget {
+class largo_featured_Widget extends WP_Widget {
 
 	/**
 	 * Widget setup.
 	 */
-	function Argo_more_featured_Widget() {
+	function largo_featured_Widget() {
 		/* Widget settings. */
 		$widget_ops = array(
-		'classname' => 'argo-more-featured',
-		'description' => __('Show the fourth and fifth most recently featured posts with thumbnails and excerpts', 'argo-more-featured') );
+		'classname' => 'largo-featured',
+		'description' => __('Show two recent featured posts with thumbnails and excerpts', 'largo-featured') );
 
 		/* Create the widget. */
-		$this->WP_Widget( 'argo-more-featured-widget', __('Argo More Featured Posts', 'argo-more-featured'), $widget_ops);
+		$this->WP_Widget( 'largo-featured-widget', __('Largo Featured Posts', 'largo-featured'), $widget_ops);
 	}
 
 	/**
@@ -129,7 +128,7 @@ class Argo_more_featured_Widget extends WP_Widget {
 			<?php $missedit = argo_get_featured_posts( array( 'offset' => 0, 'showposts' => 2 ) );
           	if ( $missedit->have_posts() ) : ?>
              	 <?php while ( $missedit->have_posts() ) : $missedit->the_post(); ?>
-                  	<div class="post-lead">
+                  	<div class="post-lead clearfix">
                       	<?php the_post_thumbnail( '60x60' ); ?>
                       	<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
                      	<?php the_excerpt(); ?>
@@ -163,12 +162,12 @@ class Argo_more_featured_Widget extends WP_Widget {
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
-		$defaults = array( 'title' => __('In case you missed it', 'argo-more-featured'));
+		$defaults = array( 'title' => __('In Case You Missed It', 'largo-featured'));
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<!-- Widget Title: Text Input -->
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'argo-more-featured'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo-featured'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
 		</p>
 

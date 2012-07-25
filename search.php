@@ -5,21 +5,27 @@
 
 get_header(); ?>
 
-		<div id="content" class="span8" role="main">
+		<div id="content" class="stories search-results span8" role="main">
 
 			<?php if ( have_posts() ) : ?>
 
-				<header class="page-header">
-					<h1 class="search-term">Your Search for <?php the_search_query(); ?> returned <strong><?php printf( _n( '%s result', '%s results', $wp_query->found_posts ), number_format_i18n( $wp_query->found_posts ) ); ?> results</strong></h1>
+				<header class="clearfix">
+					<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<div>
+							<input type="text" placeholder="Search" class="searchbox search-query" value="<?php the_search_query(); ?>" name="s" />
+							<input type="submit" value="GO" name="search submit" class="search-submit btn">
+						</div>
+					</form>
 				</header>
+
+				<h3 class="recent-posts clearfix">Your search for <span class="search-term"><?php the_search_query(); ?></span> returned <?php printf( _n( '%s result', '%s results', $wp_query->found_posts ), number_format_i18n( $wp_query->found_posts ) ); ?></h3>
 
 				<?php
 				/* Start the Loop */
 				while ( have_posts() ) : the_post();
 					get_template_part( 'content', 'search' );
 				endwhile;
-    			argo_pagination(); ?>
-				<!-- /.search-pagination -->
+    			argo_content_nav( 'nav-below' ); ?>
 
 			<?php else : ?>
 
