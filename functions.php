@@ -549,7 +549,7 @@ add_action( 'wp_footer', 'argo_footer_js' );
 		  var js, fjs = d.getElementsByTagName(s)[0];
 		  if (d.getElementById(id)) return;
 		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=375948615804689";
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
 
@@ -589,6 +589,21 @@ function largo_google_analytics() {
 		})();
 	</script>
 	<?php endif;
+}
+
+//detemine whether or not an author has a valid gravatar image, see: http://codex.wordpress.org/Using_Gravatars
+
+function has_gravatar($email) {
+	// Craft a potential url and test its headers
+	$hash = md5(strtolower(trim($email)));
+	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
+	$headers = @get_headers($uri);
+	if (!preg_match("|200|", $headers[0])) {
+		$has_valid_avatar = FALSE;
+	} else {
+		$has_valid_avatar = TRUE;
+	}
+	return $has_valid_avatar;
 }
 
 //hide the admin bar

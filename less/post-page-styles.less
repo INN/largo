@@ -210,6 +210,77 @@ article.story {
 	  font-size: @baseFontSize *0.815;
     }
 }
+.author-box {
+  clear:both;
+  margin-bottom: @baseline;
+  h1, h3 {
+    font-size: @baseFontSize * 2.25;
+    margin-bottom: @baseline/5;
+  }
+  img.avatar {
+    float:left;
+    margin:0 20px 0 0;
+    padding:4px;
+    border: 1px solid #ccc;
+  }
+  p {
+    font-size: @baseFontSize;
+    margin-bottom: @baseline/3;
+  }
+  ul {
+    list-style:none;
+    margin:0;
+    li {
+	  display:inline;
+	  float:left;
+	  margin-right:12px;
+	  &.email {
+		background-color: @blue;
+	  	padding:1px 8px 3px 4px;
+	  	.border-radius (4px);
+	  	font-family: @sansFontFamily;
+	  	font-size: @baseFontSize - 2;
+	  	line-height:15px;
+        a {
+          color: @white;
+	       &:hover {
+		     text-decoration:none;
+		     .opacity(90);
+	       }
+        }
+        i {
+	      position:relative;
+	      top:2px;
+        }
+	  }
+	  &.facebook {
+	    position:relative;
+	    top:-2px;
+	  }
+	  &.gplus {
+	  	position:relative;
+	  	top:-5px;
+	  }
+    }
+  }
+  iframe {margin:0;}
+}
+.single-post .author-box {
+	padding:10px 20px;
+	background-color: #efefef;
+	border: 1px solid @grayLighter;
+	border-top: 3px solid @grayLight;
+	h3 {
+	  font-size: @baseFontSize * 1.5;
+	  span {
+		  float:right;
+		  text-align:right;
+		  font-size: @baseFontSize * 0.667;
+		  padding-top:13px;
+	  }
+	}
+
+}
 
 // --------------------------------------------
 // Post Page Content Modules
@@ -332,7 +403,7 @@ p.wp-caption-text {
 .stories .byline {
 	margin-bottom: @baseline/2;
 }
-.stories p {
+.stories .entry-content p {
 	font-size: @baseFontSize + 2;
 	margin-bottom: @baseline / 2;
 }
@@ -343,11 +414,112 @@ p.wp-caption-text {
 	line-height:1.5;
 	margin-bottom:0;
 }
+.sticky-related,
+.sticky-solo {
+  padding:10px;
+  .border-radius(8px);
+  border:1px solid darken(@blue, 5%);
+  .box-shadow(~"0 2px 3px rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.05)");
+   #gradient > .vertical(lighten(@blue, 5%), lighten(@blue, 15%));
+   a {
+     color: darken(@blue, 15%);
+     &:hover {
+	   .opacity(90);
+	   text-decoration:none;
+     }
+   }
+}
+.stories article.sticky {
+  border-bottom:none;
+  margin-bottom: @baseline;
+}
+.sticky-related ul {
+	float:right;
+	width:25%;
+	list-style:none;
+	margin:5px 0;
+	#gradient > .vertical(lighten(@blue, 35%), lighten(@blue, 25%));
+	border-radius:8px;
+	padding:10px;
+	li {
+	  h4 {
+	    color: #333;
+	    font-size:@baseFontSize - 7;
+	    text-transform:uppercase;
+	    margin-bottom:5px;
+	    span {
+		  font-size: @baseFontSize - 4 ;
+	    }
+	  }
+	  font-size: @baseFontSize - 2;
+	  margin-bottom:7px;
+	  line-height:1.2;
+	  &.sticky-all {
+	    font-weight:bold;
+	    font-size: @baseFontSize * 0.667;
+	  }
+	}
+}
+.sticky-main-feature {
+	float:left;
+	width:68%;
+	padding:5px;
+	.image-wrap {
+	  float:left;
+	  padding-top:5px;
+	  height:145px;
+	  h4 {
+	    background-color:@black;
+	    color: @white;
+	    padding:2px 5px;
+	    width: 130px;
+	    .opacity (80);
+	    display:block;
+	    position:relative;
+	    z-index:10;
+	  }
+	  img {
+	    float:left;
+	    margin:0 15px 0 0;
+	    display:block;
+	    position:relative;
+	    top:-20px;
+	    z-index:1;
+	  }
+	}
+	h4 {
+	  font-size:@baseFontSize * 0.815;
+	  margin-bottom:0;
+	  color: #ddd;
+	}
+	h2 {
+	  font-size: @baseFontSize * 1.833;
+	  margin-bottom:0;
+	  a {
+	    color: @white;
+	  }
+	}
+	p {
+	  color:#eee;
+	  font-size: @baseFontSize - 3;
+	  margin-bottom:0;
+	  a {
+	    color: @white;
+	    font-weight:bold;
+	    white-space:nowrap;
+	  }
+	}
+}
+.sticky-solo .sticky-main-feature {
+  width:100%;
+}
 
 
 // --------------------------------------------
-// Category, Tag & Taxonomy
+// Archive Pages
 // --------------------------------------------
+
+// Category, Tag and Taxonomy Pages
 
 .category-background {
 	margin-bottom: @baseline*0.815;
@@ -405,14 +577,15 @@ h3.recent-posts {
   }
 }
 
-
 // Search Results
+
 span.search-term {
 	background-color: lighten(@blue, 45%);
 	padding:1px 5px;
 }
 
-// Archive Pages
+// Date Archive
+
 .archive-dropdown {
   margin-bottom: @baseline/2;
 }

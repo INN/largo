@@ -21,8 +21,8 @@
 	    $contactmethods['twitter'] = 'Twitter<br><em>https://twitter.com/username<em>';
 
 	    // Add Facebook
-	    if ( !isset( $contactmethods['facebook'] ) )
-	    $contactmethods['Facebook'] = 'Facebook<br><em>https://www.facebook.com/username<em>';
+	    if ( !isset( $contactmethods['fb'] ) )
+	    $contactmethods['fb'] = 'Facebook<br><em>https://www.facebook.com/username<em>';
 
 	    return $contactmethods;
 	}

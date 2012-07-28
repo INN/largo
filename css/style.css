@@ -3184,6 +3184,82 @@ article.story {
 #related-posts .related-items p {
   font-size: 13.04px;
 }
+.author-box {
+  clear: both;
+  margin-bottom: 24px;
+}
+.author-box h1,
+.author-box h3 {
+  font-size: 36px;
+  margin-bottom: 4.8px;
+}
+.author-box img.avatar {
+  float: left;
+  margin: 0 20px 0 0;
+  padding: 4px;
+  border: 1px solid #ccc;
+}
+.author-box p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.author-box ul {
+  list-style: none;
+  margin: 0;
+}
+.author-box ul li {
+  display: inline;
+  float: left;
+  margin-right: 12px;
+}
+.author-box ul li.email {
+  background-color: #2275bb;
+  padding: 1px 8px 3px 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 15px;
+}
+.author-box ul li.email a {
+  color: #ffffff;
+}
+.author-box ul li.email a:hover {
+  text-decoration: none;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.author-box ul li.email i {
+  position: relative;
+  top: 2px;
+}
+.author-box ul li.facebook {
+  position: relative;
+  top: -2px;
+}
+.author-box ul li.gplus {
+  position: relative;
+  top: -5px;
+}
+.author-box iframe {
+  margin: 0;
+}
+.single-post .author-box {
+  padding: 10px 20px;
+  background-color: #efefef;
+  border: 1px solid #eeeeee;
+  border-top: 3px solid #999999;
+}
+.single-post .author-box h3 {
+  font-size: 24px;
+}
+.single-post .author-box h3 span {
+  float: right;
+  text-align: right;
+  font-size: 10.672px;
+  padding-top: 13px;
+}
 .module {
   margin-bottom: 12px;
   color: #000000;
@@ -3295,7 +3371,7 @@ p.wp-caption-text {
 .stories .byline {
   margin-bottom: 12px;
 }
-.stories p {
+.stories .entry-content p {
   font-size: 18px;
   margin-bottom: 12px;
 }
@@ -3305,6 +3381,129 @@ p.wp-caption-text {
   font-weight: normal;
   line-height: 1.5;
   margin-bottom: 0;
+}
+.sticky-related,
+.sticky-solo {
+  padding: 10px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid #1e67a5;
+  -webkit-box-shadow: 0 2px 3px rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.05);
+  -moz-box-shadow: 0 2px 3px rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.05);
+  box-shadow: 0 2px 3px rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.05);
+  background-color: #358cd6;
+  background-image: -moz-linear-gradient(top, #2682d1, #4b9bde);
+  background-image: -ms-linear-gradient(top, #2682d1, #4b9bde);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2682d1), to(#4b9bde));
+  background-image: -webkit-linear-gradient(top, #2682d1, #4b9bde);
+  background-image: -o-linear-gradient(top, #2682d1, #4b9bde);
+  background-image: linear-gradient(top, #2682d1, #4b9bde);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2682d1', endColorstr='#4b9bde', GradientType=0);
+}
+.sticky-related a,
+.sticky-solo a {
+  color: #164c7a;
+}
+.sticky-related a:hover,
+.sticky-solo a:hover {
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  text-decoration: none;
+}
+.stories article.sticky {
+  border-bottom: none;
+  margin-bottom: 24px;
+}
+.sticky-related ul {
+  float: right;
+  width: 25%;
+  list-style: none;
+  margin: 5px 0;
+  background-color: #90c1eb;
+  background-image: -moz-linear-gradient(top, #a1cbee, #76b3e6);
+  background-image: -ms-linear-gradient(top, #a1cbee, #76b3e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#a1cbee), to(#76b3e6));
+  background-image: -webkit-linear-gradient(top, #a1cbee, #76b3e6);
+  background-image: -o-linear-gradient(top, #a1cbee, #76b3e6);
+  background-image: linear-gradient(top, #a1cbee, #76b3e6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a1cbee', endColorstr='#76b3e6', GradientType=0);
+  border-radius: 8px;
+  padding: 10px;
+}
+.sticky-related ul li {
+  font-size: 14px;
+  margin-bottom: 7px;
+  line-height: 1.2;
+}
+.sticky-related ul li h4 {
+  color: #333;
+  font-size: 9px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.sticky-related ul li h4 span {
+  font-size: 12px;
+}
+.sticky-related ul li.sticky-all {
+  font-weight: bold;
+  font-size: 10.672px;
+}
+.sticky-main-feature {
+  float: left;
+  width: 68%;
+  padding: 5px;
+}
+.sticky-main-feature .image-wrap {
+  float: left;
+  padding-top: 5px;
+  height: 145px;
+}
+.sticky-main-feature .image-wrap h4 {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 2px 5px;
+  width: 130px;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+.sticky-main-feature .image-wrap img {
+  float: left;
+  margin: 0 15px 0 0;
+  display: block;
+  position: relative;
+  top: -20px;
+  z-index: 1;
+}
+.sticky-main-feature h4 {
+  font-size: 13.04px;
+  margin-bottom: 0;
+  color: #ddd;
+}
+.sticky-main-feature h2 {
+  font-size: 29.328px;
+  margin-bottom: 0;
+}
+.sticky-main-feature h2 a {
+  color: #ffffff;
+}
+.sticky-main-feature p {
+  color: #eee;
+  font-size: 13px;
+  margin-bottom: 0;
+}
+.sticky-main-feature p a {
+  color: #ffffff;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.sticky-solo .sticky-main-feature {
+  width: 100%;
 }
 .category-background {
   margin-bottom: 19.56px;
@@ -4081,6 +4280,17 @@ img.aligncenter {
     padding-left: 20px;
     padding-right: 20px;
   }
+  .sticky-related ul,
+  .sticky-main-feature {
+    clear: both;
+    width: 96%;
+    margin: 0;
+  }
+  .sticky-related ul {
+    margin-top: 6px;
+    padding: 2.5%;
+    width: 95%;
+  }
 }
 @media (max-width: 767px) {
   #sidebar,
@@ -4129,7 +4339,28 @@ img.aligncenter {
     font-size: 18px;
     padding: 8px 0;
   }
+  .sticky-related ul,
+  .sticky-main-feature {
+    clear: both;
+    width: 96%;
+    margin: 0;
+  }
+  .sticky-related ul {
+    margin-top: 6px;
+    padding: 3%;
+    width: 94%;
+  }
 }
 @media (max-width: 480px) {
-  
+  .sticky-related ul,
+  .sticky-main-feature {
+    clear: both;
+    width: 96%;
+    margin: 0;
+  }
+  .sticky-related ul {
+    margin-top: 6px;
+    padding: 4%;
+    width: 92%;
+  }
 }

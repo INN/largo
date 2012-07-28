@@ -1,16 +1,11 @@
 <?php
 /**
- * The template for displaying Archive pages.
- *
- * Used to display archive-type pages if nothing more specific matches a query.
- * For example, puts together date-based pages if no date.php file exists.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ * The template for displaying Author pages.
  */
 
 get_header(); ?>
 
-		<div id="content" class="stories span8" role="main">
+		<div id="content" class="stories author-page span8" role="main">
 
 		<?php if ( have_posts() ) : ?>
 
@@ -24,30 +19,46 @@ get_header(); ?>
 			the_post();
 		?>
 
-		<div id="archive-intro clearfix">
-			<?php if ( !is_author() ): ?>
-				<nav class="archive-dropdown">
-					<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value="">Select Month</option>
-					<?php wp_get_archives( array('type' => 'monthly', 'format' => 'option' ) ); ?>
-					</select>
-				</nav>
-			<?php endif; ?>
-			<h3>
-			<?php if ( is_month() ) : ?>
-			<?php printf( 'Monthly Archives: <span>%s</span>', get_the_date('F Y') ); ?>
-			<?php elseif ( is_year() ) : ?>
-			<?php printf( 'Yearly Archives: <span>%s</span>', get_the_date('Y') ); ?>
-			<?php elseif ( is_author() ) : ?>
-			<?php printf( 'Author Archives: %s', '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' ); ?>
-			<?php else : ?>
-			Blog Archives
-			<?php endif; ?>
-			</h3>
+		<div class="author-box clearfix">
+			<h1><?php echo esc_attr( get_the_author() ); ?></h1>
 
-		<?php if ( is_author() && get_the_author_meta( 'description' ) ): ?>
-			<p><?php the_author_meta( 'description' ); ?></p>
-		<?php endif; ?>
+			<?php if (has_gravatar( get_the_author_meta('user_email') ) ) :
+					echo get_avatar( get_the_author_meta('ID'), 96 );
+				endif;
+			?>
+
+			<?php if ( get_the_author_meta( 'description' ) ) : ?>
+				<p><?php the_author_meta( 'description' ); ?></p>
+			<?php endif; ?>
+
+			<ul class="social-links">
+				<?php if ( get_the_author_meta( 'user_email' ) ) : ?>
+				<li class="email">
+					<a href="mailto:<?php echo esc_attr( get_the_author_meta( 'user_email' ) ); ?>" title="e-mail <?php echo esc_attr( get_the_author() ); ?>"><i class="icon-envelope icon-white"></i> email</a>
+				</li>
+				<?php endif; ?>
+
+				<?php if ( get_the_author_meta( 'fb' ) ) : ?>
+				<li class="facebook">
+					<div class="fb-subscribe" data-href="<?php echo esc_url( get_the_author_meta( 'fb' ) ); ?>" data-layout="button_count" data-show-faces="false" data-width="225"></div>
+				</li>
+				<?php endif; ?>
+
+				<?php if ( get_the_author_meta( 'twitter' ) ) : ?>
+				<li class="twitter">
+					<a href="<?php echo esc_url( get_the_author_meta( 'twitter' ) ); ?>" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @twitterapi</a>
+				</li>
+				<?php endif; ?>
+
+				<?php if ( get_the_author_meta( 'googleplus' ) ) : ?>
+				<li class="gplus">
+					<a href="<?php echo esc_url( get_the_author_meta( 'googleplus' ) ); ?>" title="<?php echo esc_attr( get_the_author() ); ?> on Google+" rel="me"><img src="<?php bloginfo( 'template_directory' ); ?>/img/gplus-19.png" alt="Google+" /></a>
+				</li>
+				<?php endif; ?>
+			</ul>
 		</div>
+
+		<h3 class="recent-posts clearfix">Recent posts<a class="rss-link" href="<?php echo esc_url( get_author_feed_link( get_the_author_meta('ID') ) ); ?>"></a></h3>
 
 				<?php
 					/* Since we called the_post() above, we need to

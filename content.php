@@ -6,39 +6,49 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 	<?php if ( is_front_page() && is_sticky() && ! is_paged() ):  ?>
+		<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix sticky'); ?>>
 		<?php if ( argo_post_has_features() ):
 			$feature = argo_get_the_main_feature();
 			$feature_posts = argo_get_recent_posts_for_term( $feature, 3, 1 );
 			if ( $feature_posts ):
 		?>
 			<div class="sticky-related clearfix">
-				<dl>
-					<dt>More from <?php echo $feature->name; ?>:</dt>
-					<?php foreach ( $feature_posts as $feature_post ): ?>
-						<dd><a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></dd>
-					<?php endforeach; ?>
-					<?php if ( count( $feature_posts ) == 3 ): ?>
-						<dd class="sticky-all"><a href="<?php echo esc_url( get_term_link( $feature ) ); ?>">Full coverage <span class="meta-nav">&rarr;</span></a></dd>
-					<?php endif; ?>
-				</dl>
 		<?php else: // feature_posts ?>
 			<div class="sticky-solo clearfix">
 		<?php endif; // feature_posts
 		else: // argo_post_has_features ?>
 			<div class="sticky-solo clearfix">
 		<?php endif; // argo_post_has_features(); ?>
+				<div class="sticky-main-feature">
 
-			<h5>FEATURED</h5>
-			<?php if ( has_post_thumbnail() ): ?>
-				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
-			<?php endif; ?>
-				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-				<?php the_excerpt(); ?>
+					<?php if ( has_post_thumbnail() ): ?>
+						<div class="image-wrap">
+							<h4>FEATURED</h4>
+							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+						</div>
+					<?php else: ?>
+						<h4>FEATURED</h4>
+					<?php endif; ?>
+						<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+						<?php the_excerpt(); ?>
+				</div>
+				<?php if ( $feature_posts ): ?>
+				<ul>
+					<li><h4>More from<br /><span class="series-name"><?php echo $feature->name; ?></span></h4></li>
+					<?php foreach ( $feature_posts as $feature_post ): ?>
+						<li><a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></li>
+					<?php endforeach; ?>
+					<?php if ( count( $feature_posts ) == 3 ): ?>
+						<li class="sticky-all"><a href="<?php echo esc_url( get_term_link( $feature ) ); ?>">Full coverage <span class="meta-nav">&rarr;</span></a></li>
+					<?php endif; ?>
+				</ul>
+				<?php endif; ?>
 			</div>
+
 	<?php else: ?>
 
+	<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 		<header>
  			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
  			<div class="post-meta">
