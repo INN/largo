@@ -10,6 +10,9 @@
  		<div class="post-meta">
  			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span></h5>
  		</div>
+ 		<div class="post-social">
+ 			<a href="#" onclick="window.print()" title="print this article" rel="nofollow">Print</a>
+ 		</div>
 	</header><!-- / entry header -->
 
 	<div class="entry-content">
@@ -17,18 +20,18 @@
 	</div><!-- .entry-content -->
 	<footer class="post-meta bottom-meta">
 
-            <?php if ( argo_has_custom_taxonomy( get_the_ID() ) ): ?>
+            <?php if ( largo_has_custom_taxonomy( get_the_ID() ) ): ?>
 				<ul class="labels clearfix">
 					<li id="term-view">View More:</li>
-            		<?php argo_the_post_labels( get_the_ID() ); ?>
+            		<?php largo_the_post_labels( get_the_ID() ); ?>
         		</ul>
         	<?php endif; ?>
 
-        	<?php if ( argo_has_categories_or_tags() ): ?>
+        	<?php if ( largo_has_categories_or_tags() ): ?>
     			<div class="tags clearfix">
     				<h5>Filed Under:</h5>
     				<ul>
-    					<?php echo argo_the_categories_and_tags(); ?>
+    					<?php echo largo_the_categories_and_tags(); ?>
     				</ul>
     			</div>
     		<?php endif; ?>
@@ -37,9 +40,12 @@
 </article><!-- #post-<?php the_ID(); ?> -->
 
 <!-- Author bio and social links -->
-<?php if ( of_get_option( 'show_author_box' ) ) : ?>
+<?php
+	$values = get_post_custom( $post->ID );
+	if ( of_get_option( 'show_author_box' ) && get_the_author_meta( 'description' ) && !isset( $values['largo_byline_text'] ) ) :
+?>
 <div class="author-box clearfix">
-	<h3>About <?php echo esc_attr( get_the_author() ); ?><span><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by <?php the_author_meta('display_name'); ?></a></span></h3>
+	<h3>About <?php echo esc_attr( get_the_author() ); ?><span><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h3>
 
 	<?php if (has_gravatar( get_the_author_meta('user_email') ) ) :
 			echo get_avatar( get_the_author_meta('ID'), 96 );
@@ -81,7 +87,7 @@
 <!-- Related posts -->
 <?php
 if ( of_get_option( 'show_related_content' ) ) :
-	if ( $rel_topics = argo_get_post_related_topics( 6 ) ) :
+	if ( $rel_topics = largo_get_post_related_topics( 6 ) ) :
 ?>
 	<div id="related-posts" class="idTabs row-fluid clearfix">
 		<ul id="related-post-nav">
@@ -93,16 +99,16 @@ if ( of_get_option( 'show_related_content' ) ) :
 		<div class="related-items">
 			<?php foreach ( $rel_topics as $count => $topic ): ?>
 				<div id="rp<?php echo $count; ?>">
-					<?php $rel_posts = argo_get_recent_posts_for_term( $topic, 3 ); ?>
+					<?php $rel_posts = largo_get_recent_posts_for_term( $topic, 3 ); ?>
 					<ul>
 						<?php $top_post = array_shift( $rel_posts ); ?>
 						<li class="top-related clearfix">
 							<h3><a href="<?php echo get_permalink( $top_post->ID ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $top_post->post_title; ?></a></h3>
 
 							<?php if ( has_post_thumbnail( $top_post->ID ) ) { ?>
-								<img src="<?php echo argo_get_post_thumbnail_src( $top_post, '60x60' ); ?>" alt="related" width="60" height="60" />
+								<img src="<?php echo largo_get_post_thumbnail_src( $top_post, '60x60' ); ?>" alt="related" width="60" height="60" />
 							<?php } ?>
-							<p><?php echo argo_get_excerpt( $top_post ); ?> <a href="<?php echo esc_url( get_permalink( $top_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"></a></p>
+							<p><?php echo largo_get_excerpt( $top_post ); ?> <a href="<?php echo esc_url( get_permalink( $top_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"></a></p>
 						</li>
 						<?php foreach ( $rel_posts as $rel_post ): ?>
 						<li><a href="<?php echo esc_url( get_permalink( $rel_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $rel_post->post_title; ?></a></li>

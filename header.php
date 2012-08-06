@@ -6,7 +6,11 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html <?php language_attributes(); ?> class="no-js"> <!--<![endif]-->
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
 <title><?php
 	/*
 	 * Print the <title> tag based on what is being viewed.
@@ -31,56 +35,11 @@
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
-<?php $url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
-
-<!-- open graph and twittercard tags
-    to-do: make this dynamic and hook to wp_head
--->
-	<?php if ( is_single() ) {
-			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
-			if ($image != '') {
-				$thumbnailURL = $image[0];
-			} else {
-			    $thumbnailURL = get_bloginfo( 'template_directory' ) . '/assets/img/headshot_500.png';
-		    }; ?>
-	    <meta name="twitter:card" content="summary">
-	    <meta name="twitter:site" content="@mediatoybox">
-	    <meta name="twitter:creator" content="@aschweig">
-	    <meta property="og:title" content="<?php the_title(); ?>" />
-	    <meta property="og:type" content="article" />
-	    <meta property="og:url" content="<?php the_permalink(); ?>"/>
-	    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
-	    <meta property="og:description" content="<?php echo strip_tags(get_the_excerpt()); ?>" />
-	    <meta property="og:image" content="<?php echo $thumbnailURL; ?>">
-	<?php } elseif ( is_home() ) { ?>
-		<meta name="twitter:card" content="summary">
-	    <meta name="twitter:site" content="@mediatoybox">
-	    <meta name="twitter:creator" content="@aschweig">
-		<meta property="og:title" content="<?php bloginfo('name'); echo ' - '; bloginfo('description'); ?>" />
-	    <meta property="og:type" content="website" />
-	    <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
-	    <meta property="og:image" content="<?php bloginfo( 'template_directory' ); ?>/assets/img/headshot_500.png" />
-	    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
-	    <meta property="og:description" content="<?php bloginfo('description'); ?>" />
-	<?php } else { ?>
-		<meta name="twitter:card" content="summary">
-	    <meta name="twitter:site" content="@mediatoybox">
-	    <meta name="twitter:creator" content="@aschweig">
-		<meta property="og:title" content="<?php bloginfo('name'); wp_title(); ?>" />
-	    <meta property="og:type" content="article" />
-	    <meta property="og:url" content="<?php echo $url; ?>"/>
-	    <meta property="og:image" content="<?php bloginfo( 'template_directory' ); ?>/assets/img/headshot_500.png" />
-	    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
-	    <meta property="og:description" content="<?php bloginfo('description'); ?>" />
-	<?php } ?>
-
-	<?php if ( of_get_option( 'gplus_link' ) ) : ?>
-		<link href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>" rel="publisher" />
-	<?php endif; ?>
+<?php $current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
 
 <?php
-	wp_enqueue_style( 'argo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
-	wp_enqueue_script( 'argo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
+	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
+	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
 
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
@@ -134,14 +93,7 @@
     </div> <!-- /.global-nav -->
 </div> <!-- /.global-nav-bg -->
 
-<?php if(is_single()) { ?>
-<div id="left-nav">
-	<ul></ul>
-</div>
-<?php } ?>
-
 <div id="page" class="hfeed clearfix">
-
 
 	<header id="site-header" class="clearfix">
 
@@ -182,15 +134,22 @@
 
 	</header>
 
+	<header class="print-header">
+		<p><strong><?php echo esc_attr( get_bloginfo( 'name' ) ); ?></strong> (<?php echo $current_url ?>)</p>
+	</header>
+
 	<nav id="main-nav" class="navbar clearfix">
 	  <div class="navbar-inner">
 	    <div class="container">
 
 	      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
+	        <div class="label">More</div>
+	        <div class="bars">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+	        </div>
 	      </a>
 
 	      <ul class="nav">

@@ -1,6 +1,6 @@
 <?php
 
-function argo_custom_taxonomies() {
+function largo_custom_taxonomies() {
     // PROMINENCE
     if ( ! taxonomy_exists( 'prominence' ) ) {
         register_taxonomy( 'prominence', 'post', array(
@@ -9,18 +9,18 @@ function argo_custom_taxonomies() {
             'query_var' => true,
             'rewrite' => true,
         ) );
-        wp_insert_term( 'Featured', 'prominence' );
+        wp_insert_term( 'Footer Featured Widget', 'prominence' );
     }
 
     // FEATURES
-    if ( ! taxonomy_exists( 'feature' ) ) {
-        register_taxonomy( 'feature', 'post', array(
+    if ( ! taxonomy_exists( 'series' ) ) {
+        register_taxonomy( 'series', 'post', array(
             'hierarchical' => true,
-            'label' => 'Features',
+            'label' => 'Series',
             'query_var' => true,
             'rewrite' => true,
         ) );
     }
 }
-add_action( 'init', 'argo_custom_taxonomies' );
+add_action( 'init', 'largo_custom_taxonomies' );
 ?>

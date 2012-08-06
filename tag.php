@@ -27,7 +27,7 @@ get_header(); ?>
 				while ( have_posts() ) : the_post();
 					get_template_part( 'content', 'tag' );
 				endwhile;
-				argo_content_nav( 'nav-below' );
+				largo_content_nav( 'nav-below' );
 
 			else : ?>
 
@@ -49,7 +49,6 @@ get_header(); ?>
 		<!-- /.grid_8 #content -->
 <aside id="sidebar" class="span4">
 <?php get_sidebar('topic'); ?>
-<!-- /====== #ARGO add tag sidebar ========== -->
 </aside>
 <!-- /.grid_4 -->
 <?php get_footer(); ?>

@@ -24,6 +24,8 @@
 @pink:                  #c3325f;
 @purple:                #7a43b6;
 
+@baseColor:				@green;
+
 // Links
 // -------------------------
 @linkColor:             @blue;
@@ -46,11 +48,6 @@
 @fluidGridColumnWidth:    6.382978723%;
 @fluidGridGutterWidth:    2.127659574%;
 @gridRowWidth:            100%;
-
-// Links
-// -------------------------
-@linkColor:             #08c;
-@linkColorHover:        darken(@linkColor, 15%);
 
 
 // --------------------------------------------
@@ -152,8 +149,8 @@
 // Navbar
 // -------------------------
 @navbarHeight:                    28px;
-@navbarBackground:                darken(@blue, 10%);
-@navbarBackgroundHighlight:       @blue;
+@navbarBackground:                darken(@baseColor, 10%);
+@navbarBackgroundHighlight:       @baseColor;
 
 @navbarText:                      @white;
 @navbarLinkColor:                 @white;
@@ -174,7 +171,7 @@
 @dropdownBorder:                rgba(0,0,0,.2);
 @dropdownLinkColor:             @grayDark;
 @dropdownLinkColorHover:        @white;
-@dropdownLinkBackgroundHover:   @linkColor;
+@dropdownLinkBackgroundHover:   @baseColor;
 @dropdownDividerTop:            #e5e5e5;
 @dropdownDividerBottom:         @white;
 

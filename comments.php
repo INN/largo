@@ -46,7 +46,7 @@
 				 * define argo_comment() and that will be used instead.
 				 * See argo_comment() in argo/functions.php for more.
 				 */
-				wp_list_comments( array( 'callback' => 'argo_comment' ) );
+				wp_list_comments( array( 'callback' => 'largo_comment' ) );
 			?>
 		</ol>
 

@@ -59,11 +59,11 @@ article.story {
 	  text-shadow: 0 -1px 0 rgba(0,0,0,.8);
 	  margin-bottom:8px;
 	  float:left;
-	  background-color: @blue;
+	  background-color: @baseColor;
 	  padding:5px 12px 5px 8px;
 	  .border-radius(8px);
 	  &:hover {
-	    background-color: darken(@blue, 10%);
+	    background-color: darken(@baseColor, 10%);
 	  }
 	  i {
 		position:relative;
@@ -99,11 +99,11 @@ article.story {
   a {
     display: inline-block;
     padding: 5px 14px;
-    border: 1px solid lighten(@blue, 35%);
+    border: 1px solid lighten(@baseColor, 35%);
     .border-radius(8px);
     &:hover {
   	  text-decoration: none;
-  	  background-color: @blue;
+  	  background-color: @baseColor;
   	  color: @white;
   	  text-shadow: 0 -1px 0 rgba(0,0,0,.8);
     }
@@ -161,7 +161,7 @@ article.story {
 	  }
 	  &.selected {
 	    color: @white;
-	    background: @blue;
+	    background: @baseColor;
 	    border:none;
 	    font-weight:bold;
 	  }
@@ -235,7 +235,7 @@ article.story {
 	  float:left;
 	  margin-right:12px;
 	  &.email {
-		background-color: @blue;
+		background-color: @baseColor;
 	  	padding:1px 8px 3px 4px;
 	  	.border-radius (4px);
 	  	font-family: @sansFontFamily;
@@ -418,11 +418,11 @@ p.wp-caption-text {
 .sticky-solo {
   padding:10px;
   .border-radius(8px);
-  border:1px solid darken(@blue, 5%);
+  border:1px solid darken(@baseColor, 5%);
   .box-shadow(~"0 2px 3px rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.05)");
-   #gradient > .vertical(lighten(@blue, 5%), lighten(@blue, 15%));
+   #gradient > .vertical(darken(@baseColor, 5%), lighten(@baseColor, 10%));
    a {
-     color: darken(@blue, 15%);
+     color: darken(@baseColor, 15%);
      &:hover {
 	   .opacity(90);
 	   text-decoration:none;
@@ -438,7 +438,7 @@ p.wp-caption-text {
 	width:25%;
 	list-style:none;
 	margin:5px 0;
-	#gradient > .vertical(lighten(@blue, 35%), lighten(@blue, 25%));
+	#gradient > .vertical(lighten(@baseColor, 35%), lighten(@baseColor, 25%));
 	border-radius:8px;
 	padding:10px;
 	li {
@@ -580,7 +580,7 @@ h3.recent-posts {
 // Search Results
 
 span.search-term {
-	background-color: lighten(@blue, 45%);
+	background-color: lighten(@baseColor, 45%);
 	padding:1px 5px;
 }
 

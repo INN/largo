@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Full Width Page
- * Description: A Page Template that spans 940px
+ * Description: Expand the content to 100% and hide the sidebar
  */
 
 get_header(); ?>

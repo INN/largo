@@ -10,7 +10,7 @@ remove_action( 'wp_head', 'wp_generator' );
 
 // add to robots.txt
 // http://codex.wordpress.org/Search_Engine_Optimization_for_WordPress#Robots.txt_Optimization
-function argo_robots() {
+function largo_robots() {
 	echo "Disallow: /cgi-bin\n";
 	echo "Disallow: /wp-admin\n";
 	echo "Disallow: /wp-includes\n";
@@ -30,4 +30,4 @@ function argo_robots() {
 	echo "Allow: /wp-content/uploads\n";
 	echo "Allow: /assets";
 }
-add_action( 'do_robots', 'argo_robots' );
+add_action( 'do_robots', 'largo_robots' );

@@ -3,7 +3,7 @@
 /*
  * SIDEBAR REGISTRATION
  */
-function argo_register_sidebars() {
+function largo_register_sidebars() {
 	register_sidebar( array(
 		'name' => 'Main Sidebar',
 		'id' => 'sidebar-main',
@@ -45,4 +45,4 @@ function argo_register_sidebars() {
 	) );
 
 }
-add_action( 'widgets_init', 'argo_register_sidebars' );
+add_action( 'widgets_init', 'largo_register_sidebars' );

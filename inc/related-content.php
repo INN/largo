@@ -15,7 +15,7 @@ endif;
 
  */
 
-function argo_get_related_topics_for_category( $obj ) {
+function largo_get_related_topics_for_category( $obj ) {
     $MAX_RELATED_TOPICS = 5;
 
     if (!isset($obj->post_type)) {
@@ -117,7 +117,7 @@ function _subcategories_for_category( $cat_id ) {
  * @param   object  $cat    Term object
  * @return  string
  */
-function argo_get_latest_posts_for_category( $cat ) {
+function largo_get_latest_posts_for_category( $cat ) {
     $query = new WP_Query( array(
         'showposts' => 4,
         'orderby' => 'date',
@@ -141,7 +141,7 @@ function argo_get_latest_posts_for_category( $cat ) {
  * @param int $max The maximum number of topics to return.
  * @return array of term objects.
  */
-function argo_get_post_related_topics( $max = 5 ) {
+function largo_get_post_related_topics( $max = 5 ) {
     $cats = get_the_category();
     $tags = get_the_tags();
 
@@ -151,7 +151,7 @@ function argo_get_post_related_topics( $max = 5 ) {
             if ( $cat->name == 'Uncategorized' ) {
                 continue;
             }
-            $posts = argo_get_recent_posts_for_term( $cat, 3, 2 );
+            $posts = largo_get_recent_posts_for_term( $cat, 3, 2 );
             if ( $posts ) {
                 $topics[] = $cat;
             }
@@ -160,7 +160,7 @@ function argo_get_post_related_topics( $max = 5 ) {
 
     if ( $tags ) {
         foreach ( $tags as $tag ) {
-            $posts = argo_get_recent_posts_for_term( $tag, 3, 2 );
+            $posts = largo_get_recent_posts_for_term( $tag, 3, 2 );
             if ( $posts ) {
                 $topics[] = $tag;
             }
@@ -178,7 +178,7 @@ function argo_get_post_related_topics( $max = 5 ) {
  * @param int       $min    Minimum number of posts. If not met, returns false.
  * @return array|false of post objects.
  */
-function argo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
+function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
     global $post;
 
     $query_args = array(
@@ -200,8 +200,8 @@ function argo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
     elseif ( $term->taxonomy == 'category' ) {
         $query_args[ 'cat' ] = $term->term_id;
     }
-    elseif ( $term->taxonomy == 'feature' ) {
-        $query_args[ 'feature' ] = $term->slug;
+    elseif ( $term->taxonomy == 'series' ) {
+        $query_args[ 'series' ] = $term->slug;
     }
 
     $query = new WP_Query( $query_args );
@@ -214,7 +214,7 @@ function argo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
 }
 
 
-function argo_has_categories_or_tags() {
+function largo_has_categories_or_tags() {
     if ( get_the_tags() ) {
         return true;
     }
@@ -231,7 +231,7 @@ function argo_has_categories_or_tags() {
     return false;
 }
 
-function argo_the_categories_and_tags() {
+function largo_the_categories_and_tags() {
     $cats = get_the_category();
     $tags = get_the_tags();
 
@@ -242,7 +242,6 @@ function argo_the_categories_and_tags() {
                 continue;
             }
             $links[] = sprintf(
-                //'<span class="post-category-link"><a href="%s" title="%s">%s</a></span>',
                 '<li class="post-category-link"><i class="icon-white icon-tag"></i><a href="%s" title="%s">%s</a></li>',
                 get_category_link( $cat->term_id ), $cat->name,
                 $cat->name
@@ -252,17 +251,15 @@ function argo_the_categories_and_tags() {
     if ( $tags ) {
         foreach ( $tags as $tag ) {
             $links[] = sprintf(
-                //'<span class="post-tag-link"><a href="%s" title="%s">%s</a></span>',
                 '<li class="post-tag-link"><i class="icon-white icon-tag"></i><a href="%s" title="%s">%s</a></li>',
                 get_tag_link( $tag->term_id ), $tag->name, $tag->name
             );
         }
     }
-    //echo implode( ', ', $links );
     echo implode( '', $links );
 }
 
-function argo_homepage_categories_and_tags() {
+function largo_homepage_categories_and_tags() {
     $cats = get_the_category();
     $tags = get_the_tags();
 
@@ -297,7 +294,7 @@ function argo_homepage_categories_and_tags() {
  /*
  * XXX: this may not be necessary the_post_thumbnail takes sizes. -- ML
  */
-function argo_get_post_thumbnail_src( $post, $size = '60x60' ) {
+function largo_get_post_thumbnail_src( $post, $size = '60x60' ) {
     if ( has_post_thumbnail( $post->ID ) ) {
         $thumb = get_post_thumbnail_id( $post->ID );
         $image = wp_get_attachment_image_src( $thumb, $size );
@@ -311,8 +308,8 @@ function argo_get_post_thumbnail_src( $post, $size = '60x60' ) {
  * @param   int     $word_count Number of words (default 40)
  * @return  String
  */
- function argo_split_words( $text, $split_limit = -1 ) {
-    // XXX: deal with the way argo_get_excerpt uses this limit to
+ function largo_split_words( $text, $split_limit = -1 ) {
+    // XXX: deal with the way largo_get_excerpt uses this limit to
     // determine whether to cut off remaining text.
     if ( $split_limit > -1 )
         $split_limit += 1;
@@ -323,7 +320,7 @@ function argo_get_post_thumbnail_src( $post, $size = '60x60' ) {
     return $words;
 }
 
-function argo_get_excerpt( $post, $word_count = 40 ) {
+function largo_get_excerpt( $post, $word_count = 40 ) {
     $text = $post->post_content;
 
     // HACK: This is ripped from wp_trim_excerpt() in
@@ -338,7 +335,7 @@ function argo_get_excerpt( $post, $word_count = 40 ) {
     $text = strip_tags( $text );
     $excerpt_length = apply_filters( 'excerpt_length', $word_count );
     $excerpt_more = apply_filters( 'excerpt_more', ' ' . '[...]' );
-    $words = argo_split_words( $text, $excerpt_length );
+    $words = largo_split_words( $text, $excerpt_length );
 
     if ( count( $words ) > $excerpt_length ) {
         array_pop( $words );

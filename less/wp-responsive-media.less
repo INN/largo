@@ -14,12 +14,14 @@
 }
 
 .aligncenter,
-div.aligncenter {
+div.aligncenter,
+.center {
    display:block;
    margin: (@baseline / 2) auto;
 }
 
-.alignright {
+.alignright,
+.right {
    float:right;
    margin-top: @baseline / 2;
    margin-right: 0;
@@ -27,17 +29,13 @@ div.aligncenter {
    margin-left: @baseline / 2;
 }
 
-.alignleft {
+.alignleft,
+.left {
    float:left;
    margin-top: @baseline / 2;
    margin-right: @baseline / 2;
    margin-bottom: @baseline / 2;
    margin-left: 0;
-}
-
-.aligncenter {
-   display: block;
-   margin: @baseline / 2 auto;
 }
 
 img,
@@ -46,25 +44,6 @@ img[class*="wp-image-"] {
    max-width: 100%;
    height: auto;
    clear:both;
-}
-
-img.alignright {
-    margin-top: @baseline / 2;
-    margin-right: 0;
-    margin-bottom: @baseline / 2;
-    margin-left: @baseline / 2;
-}
-
-img.alignleft {
-    margin-top: @baseline / 2;
-    margin-right: @baseline / 2;
-    margin-bottom: @baseline / 2;
-    margin-left: 0;
-}
-
-img.aligncenter{
-   display: block;
-   margin: (@baseline / 2) auto;
 }
 
 // --------------------------------------------

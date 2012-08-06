@@ -134,18 +134,26 @@ function optionsframework_options() {
 		'type' => 'info');
 
 	$options[] = array(
-		'name' => __('Show Author Box', 'largo'),
-		'desc' => __('<strong>Show/Hide</strong> the author bio at the bottom of single posts.', 'largo'),
+		'desc' => __('<strong>Show/Hide the author bio</strong> at the bottom of single posts.', 'largo'),
 		'id' => 'show_author_box',
 		'std' => '1',
 		'type' => 'checkbox');
 
 	$options[] = array(
-		'name' => __('Show Related Content', 'largo'),
-		'desc' => __('<strong>Show/Hide</strong> related posts at the bottom of single posts.', 'largo'),
+		'desc' => __('<strong>Show/Hide related posts</strong> at the bottom of single posts.', 'largo'),
 		'id' => 'show_related_content',
 		'std' => '1',
 		'type' => 'checkbox');
+
+	$options[] = array(
+		'name' => __('Advanced Settings', 'largo'),
+		'type' => 'heading');
+
+	$options[] = array(
+		'name' => __('Upload a Thumbnail Image (200x200px)', 'largo'),
+		'desc' => __('This is a default image used for Facebook posts when you do not set a featured image for your posts.', 'largo'),
+		'id' => 'logo_thumbnail_sq',
+		'type' => 'upload');
 
 	return $options;
 }

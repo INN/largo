@@ -25,7 +25,7 @@ get_header(); ?>
 				while ( have_posts() ) : the_post();
 					get_template_part( 'content', 'search' );
 				endwhile;
-    			argo_content_nav( 'nav-below' ); ?>
+    			largo_content_nav( 'nav-below' ); ?>
 
 			<?php else : ?>
 

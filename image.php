@@ -61,7 +61,7 @@ get_header(); ?>
 	}
 ?>
 								<?php
-								$attachment_size = apply_filters( 'argo_attachment_size', 848 );
+								$attachment_size = apply_filters( 'largo_attachment_size', 848 );
 								echo wp_get_attachment_image( $post->ID, array( $attachment_size, 1024 ) ); // filterable image width with 1024px limit for image height.
 								?>
 

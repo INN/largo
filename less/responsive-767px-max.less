@@ -15,14 +15,6 @@
 	#content {
 		width:100%;
 	}
-	.single #page,
-	.single .global-nav {
-		padding-left:5%;
-		padding-right:5%;
-	}
-	#left-nav {
-		display:none !important;
-	}
 	#content .half,
 	#content .full {
 		clear:both;
@@ -35,8 +27,20 @@
 		float:none;
 		width:100%;
 	}
-	.global-nav-bg {
+	.global-nav ul {
 		display:none;
+	}
+	.global-nav .nav-right {
+	  width:100%;
+	}
+	.global-nav .nav-right .donate-btn {
+	  float:left;
+	  margin-left:0;
+	}
+	.global-nav .nav-right .org-logo {
+		float:right;
+	}
+	#header-search {
 	}
 	h1.entry-title,
 	.stories h2.entry-title {
@@ -75,6 +79,40 @@
 		margin-top:@baseline/4;
 		padding: 4%;
 		width: 92%;
+	}
+	.global-nav {
+		height:38px;
+		padding-top:2px;
+	}
+	.global-nav .org-logo {
+		display:none;
+	}
+	.donate-btn {
+	  font-size:@baseFontSize;
+	  line-height: 28px;
+	  a {
+	  	padding:5px 8px 5px 5px;
+	  }
+	  i {
+        margin-top:2px;
+	  }
+	}
+	#header-search {
+	  float:right;
+	  margin: 3px 0 0 0;
+	}
+	#header-search input {
+	  font-size:@baseFontSize;
+	  padding:2px 4px 2px;
+	  line-height: 1;
+	  height:23px;
+	  overflow:visible;
+	}
+	#header-search button {
+	  height:29px;
+	}
+	#header-search .input-medium {
+	  width:110px;
 	}
 
 }

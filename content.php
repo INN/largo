@@ -8,18 +8,18 @@
 
 	<?php if ( is_front_page() && is_sticky() && ! is_paged() ):  ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix sticky'); ?>>
-		<?php if ( argo_post_has_features() ):
-			$feature = argo_get_the_main_feature();
-			$feature_posts = argo_get_recent_posts_for_term( $feature, 3, 1 );
+		<?php if ( largo_post_in_series() ):
+			$feature = largo_get_the_main_feature();
+			$feature_posts = largo_get_recent_posts_for_term( $feature, 3, 1 );
 			if ( $feature_posts ):
 		?>
 			<div class="sticky-related clearfix">
 		<?php else: // feature_posts ?>
 			<div class="sticky-solo clearfix">
 		<?php endif; // feature_posts
-		else: // argo_post_has_features ?>
+		else: // largo_post_has_features ?>
 			<div class="sticky-solo clearfix">
-		<?php endif; // argo_post_has_features(); ?>
+		<?php endif; // largo_post_has_features(); ?>
 				<div class="sticky-main-feature">
 
 					<?php if ( has_post_thumbnail() ): ?>
@@ -63,9 +63,9 @@
         		<?php the_content( 'Continue reading <span class="meta-nav">&rarr;</span>' ); ?>
         	<?php endif; ?>
 
-        	<?php if ( argo_has_categories_or_tags() ): ?>
+        	<?php if ( largo_has_categories_or_tags() ): ?>
             	<div class="post-meta bottom-meta">
-    				 <h5><strong>Filed under:</strong> <?php echo argo_homepage_categories_and_tags(); ?></h5>
+    				 <h5><strong>Filed under:</strong> <?php echo largo_homepage_categories_and_tags(); ?></h5>
             	</div><!-- /.post-meta -->
             <?php endif; ?>
 		</div><!-- .entry-content -->

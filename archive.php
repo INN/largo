@@ -57,7 +57,7 @@ get_header(); ?>
 
 				<?php endwhile; ?>
 
-				<?php argo_content_nav( 'nav-below' ); ?>
+				<?php largo_content_nav( 'nav-below' ); ?>
 
 			<?php else : ?>
 

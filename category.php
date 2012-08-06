@@ -19,7 +19,7 @@
 				?>
 				<div class="related-topics">
 					<h5>Related Topics: </h5>
-					<?php echo argo_get_related_topics_for_category( get_queried_object() ); ?>
+					<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
 				</div> <!-- /.related-topics -->
 
 			</header> <!-- /.category-background -->
@@ -36,7 +36,7 @@
 				get_template_part( 'content', 'category' ); ?>
 
 				<?php endwhile; ?>
-				<?php argo_content_nav( 'nav-below' ); ?>
+				<?php largo_content_nav( 'nav-below' ); ?>
 			<?php else : ?>
 
 				<article id="post-0" class="post no-results not-found">
