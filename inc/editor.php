@@ -15,7 +15,7 @@ function register_largo_mce_buttons( $buttons ) {
 
 function largo_add_mce_buttons() {
     if ( get_user_option( 'rich_editing' ) == 'true' ) {
-        add_filter( 'mce_external_plugins', 'add_argo_mce_plugin', 4 );
+        add_filter( 'mce_external_plugins', 'add_largo_mce_plugin', 4 );
         add_filter( 'mce_buttons', 'register_largo_mce_buttons', 4 );
     }
 }

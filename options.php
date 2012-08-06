@@ -34,6 +34,13 @@ function optionsframework_options() {
 		'type' => 'heading');
 
 	$options[] = array(
+		'name' => __('Site Description', 'largo'),
+		'desc' => __('Enter a <strong>short blurb about your site</strong>. This is used in a sidebar widget', 'largo'),
+		'id' => 'site_blurb',
+		'std' => '',
+		'type' => 'textarea');
+
+	$options[] = array(
 		'name' => __('Feed URL', 'largo'),
 		'desc' => __('Enter the <strong>URL for your primary RSS feed.</strong> You can override the default if you use Feedburner or some other service to generate or track your RSS feed', 'largo'),
 		'id' => 'rss_link',

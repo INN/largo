@@ -53,11 +53,11 @@ require_once( TEMPLATEPATH . '/inc/special-functionality.php' );
 require_once( TEMPLATEPATH . '/inc/largo-plugin-init.php' );
 
 /**
- * Tell WordPress to run argo_setup() when the 'after_setup_theme' hook is run.
+ * Tell WordPress to run largo_setup() when the 'after_setup_theme' hook is run.
  */
-add_action( 'after_setup_theme', 'argo_setup' );
+add_action( 'after_setup_theme', 'largo_setup' );
 
-if ( ! function_exists( 'argo_setup' ) ):
+if ( ! function_exists( 'largo_setup' ) ):
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -65,13 +65,13 @@ if ( ! function_exists( 'argo_setup' ) ):
  * before the init hook. The init hook is too late for some features, such as indicating
  * support post thumbnails.
  *
- * To override argo_setup() in a child theme, add your own argo_setup() to your child theme's
+ * To override largo_setup() in a child theme, add your own largo_setup() to your child theme's
  * functions.php file.
  *
  * @uses add_editor_style() To style the visual editor.
  * @uses add_theme_support() To add support for post thumbnails, automatic feed links, and Post Formats.
  */
-function argo_setup() {
+function largo_setup() {
 
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style('/css/editor-style.css');
@@ -79,7 +79,7 @@ function argo_setup() {
 	// Add default posts and comments RSS feed links to <head>.
 	add_theme_support( 'automatic-feed-links' );
 
-	// The next four constants set how argo supports custom headers via the TwentyEleven theme
+	// The next four constants set how largo supports custom headers via the TwentyEleven theme
 	add_theme_support( 'custom-header');
 
 	// The default header text color
@@ -89,13 +89,13 @@ function argo_setup() {
 	define( 'HEADER_IMAGE', get_stylesheet_directory_uri() . '/img/headers/largo-text.png' );
 
 	// The height and width of your custom header.
-	// Add a filter to argo_header_image_width and argo_header_image_height to change these values.
-	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'argo_header_image_width', 1170 ) );
-	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'argo_header_image_height', 120 ) );
+	// Add a filter to largo_header_image_width and largo_header_image_height to change these values.
+	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'largo_header_image_width', 1170 ) );
+	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'largo_header_image_height', 120 ) );
 
 	// Add a way for the custom header to be styled in the admin panel that controls
-	// custom headers. See argo_admin_header_style(), below.
-	add_custom_image_header( 'argo_header_style', 'argo_admin_header_style', 'argo_admin_header_image' );
+	// custom headers. See largo_admin_header_style(), below.
+	add_custom_image_header( 'largo_header_style', 'largo_admin_header_style', 'largo_admin_header_image' );
 
 	// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
 	register_default_headers( array(
@@ -107,15 +107,15 @@ function argo_setup() {
 		),
 	) );
 }
-endif; // argo_setup
+endif; // largo_setup
 
-if ( ! function_exists( 'argo_header_style' ) ) :
+if ( ! function_exists( 'largo_header_style' ) ) :
 /**
  * Styles the header image and text displayed on the blog
  *
- * @since argo 1.0
+ * @since largo 1.0
  */
-function argo_header_style() {
+function largo_header_style() {
 
 	// If no custom options for text are set, let's bail
 	// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value
@@ -146,17 +146,17 @@ function argo_header_style() {
 	</style>
 	<?php
 }
-endif; // argo_header_style
+endif; // largo_header_style
 
-if ( ! function_exists( 'argo_admin_header_style' ) ) :
+if ( ! function_exists( 'largo_admin_header_style' ) ) :
 /**
  * Styles the header image displayed on the Appearance > Header admin panel.
  *
- * Referenced via add_custom_image_header() in argo_setup().
+ * Referenced via add_custom_image_header() in largo_setup().
  *
- * @since argo 1.0
+ * @since largo 1.0
  */
-function argo_admin_header_style() {
+function largo_admin_header_style() {
 ?>
 <style type="text/css">
 	.appearance_page_custom-header #branding {
@@ -217,17 +217,17 @@ function argo_admin_header_style() {
 </style>
 <?php
 }
-endif; // argo_admin_header_style
+endif; // largo_admin_header_style
 
-if ( ! function_exists( 'argo_admin_header_image' ) ) :
+if ( ! function_exists( 'largo_admin_header_image' ) ) :
 /**
  * Custom header image markup displayed on the Appearance > Header admin panel.
  *
- * Referenced via add_custom_image_header() in argo_setup().
+ * Referenced via add_custom_image_header() in largo_setup().
  *
- * @since argo 1.0
+ * @since largo 1.0
  */
-function argo_admin_header_image() { ?>
+function largo_admin_header_image() { ?>
 
 	<?php
 		// Has the text been hidden?
@@ -260,7 +260,7 @@ function argo_admin_header_image() { ?>
 		<?php endif; ?>
 	</div>
 <?php }
-endif; // argo_admin_header_image
+endif; // largo_admin_header_image
 
 // For posts in the last 24 hours, show time since posted instead of the regular date and time
 
@@ -494,7 +494,7 @@ function largo_comment( $comment, $args, $depth ) {
 			break;
 	endswitch;
 }
-endif; // ends check for argo_comment()
+endif; // ends check for largo_comment()
 
  /**
  * Enqueue JS for the footer

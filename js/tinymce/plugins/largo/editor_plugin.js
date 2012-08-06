@@ -1,5 +1,5 @@
 (function() {
-        tinymce.create('tinymce.plugins.argo', {
+        tinymce.create('tinymce.plugins.largo', {
                 /**
                  * Initializes the plugin, this will be executed after the plugin has been created.
                  * This call is done before the editor instance has finished it's initialization so use the onInit event
@@ -18,7 +18,7 @@
                                         height : 200,
                                         inline : 1
                                 }, {
-                                        plugin_url : url 
+                                        plugin_url : url
                                 });
                         });
 
@@ -67,6 +67,6 @@
         });
 
         // Register plugin
-        tinymce.PluginManager.add('modulize', tinymce.plugins.argo);
+        tinymce.PluginManager.add('modulize', tinymce.plugins.largo);
 })();
 

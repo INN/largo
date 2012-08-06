@@ -111,7 +111,7 @@ function largo_the_post_labels( $post_id ) {
         if ( strtolower( $term->name ) == 'featured' ) {
             continue;
         }
-        echo argo_term_to_label( $term );
+        echo largo_term_to_label( $term );
     }
 }
 endif;

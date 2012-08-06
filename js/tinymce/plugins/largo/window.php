@@ -10,7 +10,7 @@ $SITEURL .= $_GET[ 'wpbase' ];
     <script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $SITEURL; ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo $SITEURL; ?>/wp-includes/js/tinymce/utils/form_utils.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $SITEURL; ?>/wp-content/themes/largo/js/tinymce/plugins/argo/tinymce.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $SITEURL; ?>/wp-content/themes/largo/js/tinymce/plugins/largo/tinymce.js"></script>
 
 </head>
 <body onload="tinyMCEPopup.executeOnLoad('init();)'); document.body.style.display='';">

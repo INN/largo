@@ -9,7 +9,9 @@
 </div> <!-- /.grid_2 -->
 
 <div class="span6 widget-area" role="complementary">
-	<?php the_widget( 'largo_featured_Widget', array( 'title' => "In Case You Missed It" ) ); ?>
+	<?php if ( ! dynamic_sidebar( 'footer-featured-posts' ) )
+		the_widget( 'largo_footer_featured_widget', array( 'title' => "In Case You Missed It", 'num_posts' => 2 ) );
+	?>
 </div> <!-- /.grid_6 -->
 
 <div class="span3 widget-area" role="complementary">
