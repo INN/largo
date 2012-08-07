@@ -153,13 +153,41 @@ function optionsframework_options() {
 		'type' => 'checkbox');
 
 	$options[] = array(
-		'name' => __('Advanced Settings', 'largo'),
+		'name' => __('Theme Images', 'largo'),
 		'type' => 'heading');
 
 	$options[] = array(
 		'name' => __('Upload a Thumbnail Image (200x200px)', 'largo'),
 		'desc' => __('This is a default image used for Facebook posts when you do not set a featured image for your posts.', 'largo'),
 		'id' => 'logo_thumbnail_sq',
+		'type' => 'upload');
+
+	$options[] = array(
+		'name' => __('Header Image', 'largo'),
+		'type' => 'info');
+
+	$options[] = array(
+		'desc' => __('<strong>Use only text</strong> in the place of a banner image (uses site title and description).', 'largo'),
+		'id' => 'no_header_image',
+		'std' => '0',
+		'type' => 'checkbox');
+
+	$options[] = array(
+		'name' => __('Small Banner Image (768x200px)', 'largo'),
+		'desc' => __('Used for viewports below 768px wide (mostly phones and some tablets)', 'largo'),
+		'id' => 'banner_image_sm',
+		'type' => 'upload');
+
+	$options[] = array(
+		'name' => __('Medium Banner Image (980x150px)', 'largo'),
+		'desc' => __('Used for viewports between 768px and 980 px (mostly tablets)', 'largo'),
+		'id' => 'banner_image_med',
+		'type' => 'upload');
+
+	$options[] = array(
+		'name' => __('Large Banner Image (1170x120px)', 'largo'),
+		'desc' => __('Used for viewports above 980 px (landscape tablets and desktops)', 'largo'),
+		'id' => 'banner_image_lg',
 		'type' => 'upload');
 
 	return $options;

@@ -52,7 +52,7 @@
 		<header>
  			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
  			<div class="post-meta">
- 				<h5 class="byline"><?php largo_byline(); ?></h5>
+ 				<h5 class="byline"><?php largo_byline(); ?><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
  			</div>
 		</header><!-- / entry header -->
 

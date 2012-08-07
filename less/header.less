@@ -10,6 +10,7 @@
   position: relative;
   height: 32px;
   overflow-y:visible;
+  z-index: 1030;
   ul {
     margin: 0;
     list-style:none;
@@ -80,67 +81,35 @@
 	text-transform:uppercase;
   }
 }
-
-/****************** HEADER ******************/
-
 #site-header {
 	margin:0;
 	width:auto;
+	img {
+      clear:none;
+      margin-top:-13px;
+      margin-bottom:5px;
+	}
+
+}
+#site-header h1.branding,
+#site-header h2.branding {
+	clear:both;
+	margin:0 0 20px;
+	font-size: @baseFontSize * 3.375;
+	line-height:1;
+	a {
+	  color: @textColor;
+	  &:hover {
+	    text-decoration:none;
+	  }
+	}
+	span {
+	  font-size: @baseFontSize * 1.5;
+	  font-weight:normal;
+	  color: @gray;
+	  padding-left:10px;
+	}
 }
 .print-header {
 	display:none;
-}
-#branding {
-	margin:0;
-	height:75px;
-	overflow:hidden;
-	width:100%;
-	&.brand-image {
-		height:120px;
-	}
-}
-#site-title {
-  float:left;
-  font-size: @baseFontSize * 2.75;
-  margin:0;
-  padding-top:10px;
-  line-height:1;
-  a {
-	color: @black;
-	outline: none;
-    &:hover {
-	  text-decoration: none;
-	}
-  }
-}
-#site-description {
-	float:left;
-	font-weight:normal;
-	font-size: @baseFontSize * 1.25;
-	line-height:@baseLineHeight;
-	padding-top: @baseline + 5;
-	color: @gray;
-	padding-left:10px;
-}
-.brand-image {
-  height:120px;
-  img {
-	z-index: -1;
-	position:relative;
-	top:-100px;
-	height:120px;
-	min-width:400px;
-	overflow:hidden;
-  }
-  &.image-only img {
-		top:0;
-	}
-  #site-title {
-    padding-top: 20px;
-  }
-  #site-title,
-  #site-description {
-	color:@black;
-	padding-left: 20px;
-  }
 }

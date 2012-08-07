@@ -8,7 +8,7 @@
 	<header>
  		<h1 class="entry-title"><?php the_title(); ?></h1>
  		<div class="post-meta">
- 			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span></h5>
+ 			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
  		</div>
  		<div class="post-social">
  			<a href="#" onclick="window.print()" title="print this article" rel="nofollow">Print</a>
@@ -21,10 +21,10 @@
 	<footer class="post-meta bottom-meta">
 
             <?php if ( largo_has_custom_taxonomy( get_the_ID() ) ): ?>
-				<ul class="labels clearfix">
-					<li id="term-view">View More:</li>
+				<div class="labels clearfix">
+            		<h4>More In This Series:</h4>
             		<?php largo_the_post_labels( get_the_ID() ); ?>
-        		</ul>
+        		</div>
         	<?php endif; ?>
 
         	<?php if ( largo_has_categories_or_tags() ): ?>
@@ -40,10 +40,7 @@
 </article><!-- #post-<?php the_ID(); ?> -->
 
 <!-- Author bio and social links -->
-<?php
-	$values = get_post_custom( $post->ID );
-	if ( of_get_option( 'show_author_box' ) && get_the_author_meta( 'description' ) && !isset( $values['largo_byline_text'] ) ) :
-?>
+<?php if ( largo_show_author_box() ) : ?>
 <div class="author-box clearfix">
 	<h3>About <?php echo esc_attr( get_the_author() ); ?><span><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h3>
 

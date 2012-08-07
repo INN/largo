@@ -1,11 +1,11 @@
 <?php
 
 if ( !defined( 'LARGE_WIDTH') ) {
-	define( 'LARGE_WIDTH', 620 );
+	define( 'LARGE_WIDTH', 1170 );
 }
 
 if ( !defined( 'MEDIUM_WIDTH') ) {
-	define( 'MEDIUM_WIDTH', 300 );
+	define( 'MEDIUM_WIDTH', 771 );
 }
 
 
@@ -13,7 +13,7 @@ function largo_create_image_sizes() {
     add_theme_support( 'post-thumbnails' );
     set_post_thumbnail_size( 140, 140, true ); // skybox thumbnail
     add_image_size( '60x60', 60, 60, true ); // in case you missed it thumbnail
-    add_image_size( '220', 220, 9999 ); // topic featured image
+    add_image_size( 'half', 336, 9999 ); // topic featured image
     add_image_size( 'medium', MEDIUM_WIDTH, 9999 ); // medium width scaling
     add_image_size( 'large', LARGE_WIDTH, 9999 ); // large width scaling
 }

@@ -32,7 +32,7 @@
  * Set the content width based on the theme's design and stylesheet.
  */
 if ( ! isset( $content_width ) )
-	$content_width = 620;
+	$content_width = 771;
 
 if ( !function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/options-framework/' );
@@ -79,236 +79,8 @@ function largo_setup() {
 	// Add default posts and comments RSS feed links to <head>.
 	add_theme_support( 'automatic-feed-links' );
 
-	// The next four constants set how largo supports custom headers via the TwentyEleven theme
-	add_theme_support( 'custom-header');
-
-	// The default header text color
-	define( 'HEADER_TEXTCOLOR', '333' );
-
-	// Default image, which child themes should include.
-	define( 'HEADER_IMAGE', get_stylesheet_directory_uri() . '/img/headers/largo-text.png' );
-
-	// The height and width of your custom header.
-	// Add a filter to largo_header_image_width and largo_header_image_height to change these values.
-	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'largo_header_image_width', 1170 ) );
-	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'largo_header_image_height', 120 ) );
-
-	// Add a way for the custom header to be styled in the admin panel that controls
-	// custom headers. See largo_admin_header_style(), below.
-	add_custom_image_header( 'largo_header_style', 'largo_admin_header_style', 'largo_admin_header_image' );
-
-	// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
-	register_default_headers( array(
-		'wheel' => array(
-			'url' => '%s/img/headers/largo-text.png',
-			'thumbnail_url' => '%s/img/headers/default-logo-thumbnail.png',
-			/* translators: header image description */
-			'description' => 'Wheel',
-		),
-	) );
 }
 endif; // largo_setup
-
-if ( ! function_exists( 'largo_header_style' ) ) :
-/**
- * Styles the header image and text displayed on the blog
- *
- * @since largo 1.0
- */
-function largo_header_style() {
-
-	// If no custom options for text are set, let's bail
-	// get_header_textcolor() options: HEADER_TEXTCOLOR is default, hide text (returns 'blank') or any hex value
-	if ( HEADER_TEXTCOLOR == get_header_textcolor() )
-		return;
-	// If we get this far, we have custom styles. Let's do this.
-	?>
-	<style type="text/css">
-	<?php
-		// Has the text been hidden?
-		if ( 'blank' == get_header_textcolor() ) :
-	?>
-		#site-title,
-		#site-description {
-			position: absolute !important;
-			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-			clip: rect(1px, 1px, 1px, 1px);
-		}
-	<?php
-		// If the user has set a custom color for the text use that
-		else :
-	?>
-		#site-title a,
-		#site-description {
-			color: #<?php echo get_header_textcolor(); ?> !important;
-		}
-	<?php endif; ?>
-	</style>
-	<?php
-}
-endif; // largo_header_style
-
-if ( ! function_exists( 'largo_admin_header_style' ) ) :
-/**
- * Styles the header image displayed on the Appearance > Header admin panel.
- *
- * Referenced via add_custom_image_header() in largo_setup().
- *
- * @since largo 1.0
- */
-function largo_admin_header_style() {
-?>
-<style type="text/css">
-	.appearance_page_custom-header #branding {
-		border: none;
-	}
-
-	#branding {
-		width: 460px;
-		height: 140px;
-		position: relative;
-	}
-
-	#branding h1,
-	#desc {
-		font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
-	}
-
-	#branding h1 {
-		margin: 0;
-	}
-
-	#branding h1 a {
-		font-size: 42px;
-		line-height: 1;
-		text-decoration: none;
-	}
-
-	#ch-desc{
-		font-size: 24px;
-		line-height: 1;
-	}
-
-	.brand-image #ch-name {
-		padding-top: 30px;
-	}
-
-	.brand-image #ch-name, .brand-image #ch-desc {
-		margin-left: 70px;
-	}
-
-	.brand-image img {
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: -1;
-	}
-
-	<?php
-		// If the user has set a custom color for the text use that
-		if ( get_header_textcolor() != HEADER_TEXTCOLOR ) :
-	?>
-		#site-title a,
-		#site-description {
-			color: #<?php echo get_header_textcolor(); ?>;
-		}
-	<?php endif; ?>
-
-</style>
-<?php
-}
-endif; // largo_admin_header_style
-
-if ( ! function_exists( 'largo_admin_header_image' ) ) :
-/**
- * Custom header image markup displayed on the Appearance > Header admin panel.
- *
- * Referenced via add_custom_image_header() in largo_setup().
- *
- * @since largo 1.0
- */
-function largo_admin_header_image() { ?>
-
-	<?php
-		// Has the text been hidden?
-		$header_image = get_header_image();
-		if ( 'blank' == get_header_textcolor() || ! $header_image ) :
-	?>
-	<div id="branding">
-	<?php
-		else :
-	?>
-		<div id="branding" class="brand-image">
-	<?php endif; ?>
-
-
-		<?php
-		if ( 'blank' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) || '' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) )
-			$style = ' style="display:none;"';
-		else
-			$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
-		?>
-		<h1 id="ch-name"><a <?php echo $style; ?> onclick="return false;" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
-		<div id="ch-desc"<?php echo $style; ?>><?php bloginfo( 'description' ); ?></div>
-
-		<?php
-			// Check to see if the header image has been removed
-			$header_image = get_header_image();
-			if ( ! empty( $header_image ) ) :
-		?>
-			<img src="<?php echo esc_url( $header_image ); ?>" alt="" />
-		<?php endif; ?>
-	</div>
-<?php }
-endif; // largo_admin_header_image
-
-// For posts in the last 24 hours, show time since posted instead of the regular date and time
-
-function largo_time() {
-	// Change to the date after a certain time
-	$time_difference = current_time('timestamp') - get_the_time('U');
-	if($time_difference < 86400) {
-		return '<span class="time-ago">' .human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago</span>';
-	} else {
-		return get_the_date();
-	};
-}
-
-// Print the byline
-
-function largo_byline() {
-	// get post custom fields and use the custom byline if set, if not use default author valuess
-	$values = get_post_custom( $post->ID );
-	$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
-	$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
-	$byline_title_attr = esc_attr( sprintf( 'More from %s', $byline_text ) );
-
-	if ( $byline_text == '' ) :
-		$byline_text = esc_html( get_the_author() );
-	endif;
-	if ( $byline_link == '' ) :
-		$byline_link = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
-		$byline_title_attr = esc_attr( sprintf( 'View all posts by %s', get_the_author() ) );
-	endif;
-
-	// print the byline
-	printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
-		$byline_link,
-		$byline_title_attr,
-		$byline_text,
-		esc_attr( get_the_date( 'c' ) ),
-		largo_time()
-	);
-}
-
-// print the copyright message in the footer
-
-function largo_copyright_message() {
-    $msg = of_get_option( 'copyright_msg' );
-    if ( ! $msg )
-    	$msg = 'Copyright %s';
-    printf( $msg, date( 'Y' ) );
-}
 
 /**
  * Sets the post excerpt length to 35 words.
@@ -496,6 +268,15 @@ function largo_comment( $comment, $args, $depth ) {
 }
 endif; // ends check for largo_comment()
 
+// print the copyright message in the footer
+
+function largo_copyright_message() {
+    $msg = of_get_option( 'copyright_msg' );
+    if ( ! $msg )
+    	$msg = 'Copyright %s';
+    printf( $msg, date( 'Y' ) );
+}
+
  /**
  * Enqueue JS for the footer
  */
@@ -589,21 +370,3 @@ function largo_google_analytics() {
 	</script>
 	<?php endif;
 }
-
-//detemine whether or not an author has a valid gravatar image, see: http://codex.wordpress.org/Using_Gravatars
-
-function has_gravatar($email) {
-	// Craft a potential url and test its headers
-	$hash = md5(strtolower(trim($email)));
-	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
-	$headers = @get_headers($uri);
-	if (!preg_match("|200|", $headers[0])) {
-		$has_valid_avatar = FALSE;
-	} else {
-		$has_valid_avatar = TRUE;
-	}
-	return $has_valid_avatar;
-}
-
-//hide the admin bar
-	add_filter( 'show_admin_bar', '__return_false' );

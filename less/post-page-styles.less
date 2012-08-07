@@ -22,6 +22,7 @@ article.story {
 // POST META
 // --------------------------------------------
 
+.labels,
 .tags,
 .pager,
 #related-posts {
@@ -37,6 +38,43 @@ article.story {
   line-height: 1.6;
 }
 
+// LABELS
+
+.labels {
+	background-color: #fafafa;
+	border: 1px solid @grayLighter;
+	border-top: 3px solid @grayLight;
+	h4 {
+	  font-size:@baseFontSize;
+	  line-height:1;
+	  background-color: #dedede;
+	  margin-bottom:0;
+	  padding:8px;
+	}
+	.series-label {
+		margin:5px;
+		padding:8px;
+		background-color: #efefef;
+		h5 {
+	      font-size:@baseFontSize*1.222;
+	      margin-bottom:2px;
+		  a.rss-link {
+			  background: url("../img/rss24.png") no-repeat;
+			  width:24px;
+			  height:24px;
+			  float:right;
+			  margin-top:4px;
+			  &:hover {
+			    .opacity(85);
+			  }
+		  }
+	    }
+	    p {
+		  font-size:@baseFontSize*0.815;
+		  margin-bottom:0;
+	    }
+	}
+}
 // TAGS
 
 .tags {
@@ -214,7 +252,7 @@ article.story {
   clear:both;
   margin-bottom: @baseline;
   h1, h3 {
-    font-size: @baseFontSize * 2.25;
+    font-size: @baseFontSize * 2;
     margin-bottom: @baseline/5;
   }
   img.avatar {
@@ -224,7 +262,7 @@ article.story {
     border: 1px solid #ccc;
   }
   p {
-    font-size: @baseFontSize;
+    font-size: @baseFontSize * 0.815;
     margin-bottom: @baseline/3;
   }
   ul {
@@ -267,20 +305,31 @@ article.story {
 }
 .single-post .author-box,
 .single-argolinkroundups .author-box {
-	padding:10px 20px;
-	background-color: #efefef;
+	background-color: #fafafa;
 	border: 1px solid @grayLighter;
 	border-top: 3px solid @grayLight;
 	h3 {
-	  font-size: @baseFontSize * 1.5;
+	  font-size:@baseFontSize;
+	  line-height:1;
+	  background-color: #dedede;
+	  margin-bottom:0;
+	  padding:8px;
 	  span {
 		  float:right;
 		  text-align:right;
 		  font-size: @baseFontSize * 0.667;
-		  padding-top:13px;
+		  padding-top:4px;
 	  }
 	}
-
+	img {
+	  margin:10px 20px 10px 10px;
+	}
+	p, ul {
+      margin: 10px;
+	}
+	.gplus img {
+	  margin:0;
+	}
 }
 
 // --------------------------------------------
@@ -397,15 +446,19 @@ p.wp-caption-text {
 	text-transform:uppercase;
 	color: @red;
 }
+.edit-link a {
+    color:@red;
+}
 .stories h2.entry-title {
-	font-size: @baseFontSize *2.25;
+	font-size: @baseFontSize *2;
 	margin-bottom: @baseline/3;
+	line-height:1.1;
 }
 .stories .byline {
 	margin-bottom: @baseline/2;
 }
 .stories .entry-content p {
-	font-size: @baseFontSize + 2;
+	font-size: @baseFontSize;
 	margin-bottom: @baseline / 2;
 }
 .stories .bottom-meta h5 {
@@ -495,7 +548,8 @@ p.wp-caption-text {
 	}
 	h2 {
 	  font-size: @baseFontSize * 1.833;
-	  margin-bottom:0;
+	  margin-bottom:4px;
+	  line-height:1;
 	  a {
 	    color: @white;
 	  }

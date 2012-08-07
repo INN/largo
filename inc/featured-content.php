@@ -98,9 +98,11 @@ function largo_custom_taxonomy_terms( $post_id ) {
 endif;
 
 function largo_term_to_label( $term ) {
-    return sprintf( '<li> <a href="%1$s">%2$s</a></li>',
-                    get_term_link( $term, $term->taxonomy ),
-                    strtoupper( $term->name ) );
+    return sprintf( '<div class="series-label"><h5><a href="%1$s">%2$s</a><a class="rss-link" href="%3$s"></a></h5><p>%4$s</p></div>',
+    	get_term_link( $term, $term->taxonomy ),
+    	esc_attr( $term->name ),
+    	get_term_feed_link( $term->term_id, $term->taxonomy ),
+    	esc_attr( $term->description ) );
 }
 
 if ( ! function_exists( 'largo_the_post_labels' ) ) :
