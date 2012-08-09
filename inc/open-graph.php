@@ -3,7 +3,7 @@
 
 	function twitter_url_to_username ($url) {
 		$urlParts = explode("/", $url);
-		$username = '@' . $urlParts[3];
+		$username = $urlParts[3];
 		return $username;
 	}
 
@@ -28,7 +28,7 @@
 
 			<meta name="twitter:card" content="summary">
 		<?php if ( of_get_option( 'twitter_link' ) ) : ?>
-			<meta name="twitter:site" content="<?php echo twitter_url_to_username( of_get_option( 'twitter_link' ) ); ?>">
+			<meta name="twitter:site" content="@<?php echo twitter_url_to_username( of_get_option( 'twitter_link' ) ); ?>">
 		<?php endif; ?>
 
 		<?php //output appropriate OG tags by page type
@@ -37,7 +37,7 @@
 			if ( have_posts() ) : the_post(); // we need to queue up the post to get the post specific info
 
 				if ( get_the_author_meta( 'twitter' ) ) : ?>
-					<meta name="twitter:creator" content="<?php echo twitter_url_to_username( get_the_author_meta( 'twitter' ) ); ?>">
+					<meta name="twitter:creator" content="@<?php echo twitter_url_to_username( get_the_author_meta( 'twitter' ) ); ?>">
 				<?php endif; ?>
 
 				<meta property="og:title" content="<?php the_title(); ?>" />

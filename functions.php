@@ -281,92 +281,81 @@ function largo_copyright_message() {
  * Enqueue JS for the footer
  */
 function largo_enqueue_js() {
-
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
-	wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
-
 	if ( get_option( 'show_related_content', true ) )
 		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_script( 'largoCore', get_bloginfo('template_url') . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
+	if ( is_single() )
+		wp_enqueue_script( 'sharethis', get_bloginfo('template_url') . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
 }
-add_action('wp_enqueue_scripts', 'largo_enqueue_js' );
+add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 
-add_action( 'wp_footer', 'largo_footer_js' );
-	function largo_footer_js() { ?>
+function largo_header_js() {
+	//decides which size of the banner image to load based on the window width ?>
+	<script>
+		function whichHeader() {
+			var screenWidth = document.documentElement.clientWidth,
+			header_img;
+			if (screenWidth <= 767) {
+				header_img = '<?php echo of_get_option( 'banner_image_sm' ); ?>';
+			} else if (screenWidth > 767 && screenWidth <= 979) {
+				header_img = '<?php echo of_get_option( 'banner_image_med' ); ?>';
+			} else {
+				header_img = '<?php echo of_get_option( 'banner_image_lg' ); ?>';
+			};
+			return header_img;
+		};
+		var banner_img_src = whichHeader();
+	</script>
+<?php
+}
+add_action( 'wp_head', 'largo_header_js' );
 
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				//html5 placeholders
-				$("input[placeholder]").textPlaceholder();
+function largo_footer_js() { ?>
+	<!--Facebook-->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
-			    // dim sidebar
-			    $(window).scroll(function(){
-					if (($(window).scrollTop() > 300)) {
-						$('.showey-hidey').animate({opacity: '0.5'}, 100);
-					} else if (($(window).scrollTop() < 300)) {
-						$('.showey-hidey').animate({opacity: '1'}, 100);
-					}
-				});
-				$('.showey-hidey').hover(function() {
-			       		$(this).animate({opacity: '1'}, 100);
-			        }, function() {
-			        	if (($(window).scrollTop() < 300)) {
-			        		$(this).animate({opacity: '1'}, 100);
-			        	} else {
-			        		$(this).animate({opacity: '0.5'}, 100);
-			        	};
-			    });
-			});
+	<!--Twitter-->
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-		</script>
-
-		<!--
-		Social Media API Calls
-		-->
-
-		<!--Facebook-->
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-
-		<!--Twitter-->
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-		<!--Google Plus-->
-		<script type="text/javascript">
-		  (function() {
-		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		    po.src = 'https://apis.google.com/js/plusone.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		  })();
-		</script>
-
-
-	<?php }
-
-add_action( 'wp_footer', 'largo_google_analytics' );
+	<!--Google Plus-->
+	<script type="text/javascript">
+	  (function() {
+	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		po.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	  })();
+	</script>
+<?php
+}
+add_action( 'wp_enqueue_scripts', 'largo_footer_js' );
 
 // add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
-
 function largo_google_analytics() {
 
 	if ( get_option( 'ga_id', true ) // make sure the ga_id setting is defined
 		&& ( !is_user_logged_in() ) ) : // don't track logged in users
 	?>
-	<script>
-	    var _gaq = _gaq || [];
-	    _gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
-	    _gaq.push(['_trackPageview']);
+		<script>
+		    var _gaq = _gaq || [];
+		    _gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
+		    _gaq.push(['_trackPageview']);
 
-	    (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-	<?php endif;
+		    (function() {
+			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+	<?php
+	endif;
 }
+add_action( 'wp_footer', 'largo_google_analytics' );

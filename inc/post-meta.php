@@ -33,8 +33,7 @@ function largo_meta_box_display( $post )
 
 add_action( 'save_post', 'largo_meta_box_save' );
 
-function largo_meta_box_save( $post_id )
-{
+function largo_meta_box_save( $post_id ) {
 	// Bail if we're doing an auto save
 	if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 
@@ -56,7 +55,6 @@ function largo_meta_box_save( $post_id )
 		update_post_meta( $post_id, 'largo_byline_text', wp_kses( $_POST['largo_byline_text'], $allowed ) );
 	if( isset( $_POST['largo_byline_link'] ) )
 		update_post_meta( $post_id, 'largo_byline_link', wp_kses( $_POST['largo_byline_link'], $allowed ) );
-
 }
 
 function largo_time() {
@@ -76,9 +74,8 @@ function largo_byline() {
 	$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
 	$byline_title_attr = esc_attr( sprintf( 'More from %s', $byline_text ) );
 
-	if ( $byline_text == '' ) :
+	if ( $byline_text == '' )
 		$byline_text = esc_html( get_the_author() );
-	endif;
 	if ( $byline_link == '' ) :
 		$byline_link = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
 		$byline_title_attr = esc_attr( sprintf( 'View all posts by %s', get_the_author() ) );
@@ -94,12 +91,8 @@ function largo_byline() {
 	);
 }
 
-function largo_show_author_box() {
-	$values = get_post_custom( $post->ID );
-	$byline_text = '';
-	if ($values['largo_byline_text'])
-		$byline_text = esc_attr( $values['largo_byline_text'][0] );
-
+function largo_show_author_box($post_id) {
+	$byline_text = get_post_meta( $post_id, 'largo_byline_text' ) ? esc_attr(get_post_meta( $post_id, 'largo_byline_text', true )) : '';
 	if ( of_get_option( 'show_author_box' ) && get_the_author_meta( 'description' ) && $byline_text == '' ) {
 		return true;
 	} else {

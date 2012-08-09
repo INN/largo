@@ -125,7 +125,6 @@ if ( ! function_exists( 'largo_has_custom_taxonomy' ) ) :
 		if ($largo_has_terms) {
         	return true;
 		}
-
 		return false;
 		}
 endif;

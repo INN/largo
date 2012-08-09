@@ -21,7 +21,6 @@ article.story {
 // --------------------------------------------
 // POST META
 // --------------------------------------------
-
 .labels,
 .tags,
 .pager,
@@ -433,7 +432,7 @@ p.wp-caption-text {
 .byline {
 	font-weight:normal;
 	font-size: @baseFontSize *0.815;
-	margin-bottom: @baseline;
+	margin-bottom: @baseline/2;
 	.author {
 	  text-transform:uppercase;
 	  font-weight:bold;
@@ -449,13 +448,48 @@ p.wp-caption-text {
 .edit-link a {
     color:@red;
 }
+.post-social {
+	border-top: 1px solid @grayLighter;
+	border-bottom: 1px solid @grayLighter;
+	min-height:28px;
+	height:auto;
+	padding:2px 0;
+	margin-bottom: @baseline;
+	.right,
+	.left {
+	  margin:0;
+	  height:auto;
+	}
+	span.twitter {
+	 position:relative;
+	 top:4px;
+	 margin-right:4px;
+	}
+	span.st_sharethis,
+	span.st_email {
+     position:relative;
+     top:1px;
+	}
+	span.print {
+     font-family: Verdana, Helvetica, sans-serif;
+     font-size: 11px;
+     position:relative;
+     top:2px;
+     &:hover {
+	  .opacity(85);
+     }
+     a {
+	  color: black;
+	  &:hover {
+	   text-decoration:none;
+	  }
+     }
+	}
+}
 .stories h2.entry-title {
 	font-size: @baseFontSize *2;
 	margin-bottom: @baseline/3;
 	line-height:1.1;
-}
-.stories .byline {
-	margin-bottom: @baseline/2;
 }
 .stories .entry-content p {
 	font-size: @baseFontSize;

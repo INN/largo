@@ -10,14 +10,36 @@
  		<div class="post-meta">
  			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
  		</div>
- 		<div class="post-social">
- 			<a href="#" onclick="window.print()" title="print this article" rel="nofollow">Print</a>
+ 		<div class="post-social top">
+ 			<div class="left">
+ 				<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="<?php echo the_permalink(); ?>" data-text="<?php echo the_title(); ?>" <?php if ( of_get_option( 'twitter_link' ) ) : ?>data-via="<?php echo twitter_url_to_username( of_get_option( 'twitter_link' ) ); ?>"<?php endif; ?> data-count="none">Tweet</a></span>
+ 				<span class="facebook"><fb:like href="<?php echo the_permalink(); ?>" send="false" layout="button_count" show_faces="false" action="recommend" font=""></fb:like></span>
+ 			</div>
+ 			<div class="right">
+ 				<span class='st_sharethis' displayText='Share'></span>
+ 				<span class='st_email' displayText='Email'></span>
+ 				<span class="print"><a href="#" onclick="window.print()" title="print this article" rel="nofollow"><i class="icon-print"></i> Print</a></span>
+ 			</div>
  		</div>
+
 	</header><!-- / entry header -->
 
-	<div class="entry-content">
+	<div class="entry-content clearfix">
+
 		<?php the_content(); ?>
 	</div><!-- .entry-content -->
+
+	<div class="post-social bottom">
+ 			<div class="left">
+ 				<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="<?php echo the_permalink(); ?>" data-text="<?php echo the_title(); ?>" <?php if ( of_get_option( 'twitter_link' ) ) : ?>data-via="<?php echo twitter_url_to_username( of_get_option( 'twitter_link' ) ); ?>"<?php endif; ?> data-count="none">Tweet</a></span>
+ 				<span class="facebook"><fb:like href="<?php echo the_permalink(); ?>" send="false" layout="button_count" show_faces="false" action="recommend" font=""></fb:like></span>
+ 			</div>
+ 			<div class="right">
+ 				<span class='st_sharethis' displayText='Share'></span>
+ 				<span class='st_email' displayText='Email'></span>
+ 				<span class="print"><a href="#" onclick="window.print()" title="print this article" rel="nofollow"><i class="icon-print"></i> Print</a></span>
+ 			</div>
+ 		</div>
 	<footer class="post-meta bottom-meta">
 
             <?php if ( largo_has_custom_taxonomy( get_the_ID() ) ): ?>
@@ -40,7 +62,7 @@
 </article><!-- #post-<?php the_ID(); ?> -->
 
 <!-- Author bio and social links -->
-<?php if ( largo_show_author_box() ) : ?>
+<?php if ( largo_show_author_box( $post->ID ) ) : ?>
 <div class="author-box clearfix">
 	<h3>About <?php echo esc_attr( get_the_author() ); ?><span><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h3>
 

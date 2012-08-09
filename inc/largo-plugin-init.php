@@ -129,8 +129,8 @@ function my_theme_register_required_plugins() {
 		),
 
 		array(
-			'name' 		=> 'WP Super Cache',
-			'slug' 		=> 'wp-super-cache',
+			'name' 		=> 'W3 Total Cache',
+			'slug' 		=> 'w3-total-cache',
 			'required' 	=> false,
 		),
 
@@ -140,6 +140,17 @@ function my_theme_register_required_plugins() {
 			'required' 	=> false,
 		),
 
+		array(
+			'name' 		=> 'Edit Flow',
+			'slug' 		=> 'edit-flow',
+			'required' 	=> false,
+		),
+
+		array(
+			'name' 		=> 'WP Google Ad Manager Plugin',
+			'slug' 		=> 'wp-google-ad-manager-plugin',
+			'required' 	=> false,
+		)
 	);
 
 	// Change this to your theme text domain, used for internationalising strings

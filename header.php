@@ -35,8 +35,6 @@
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
-<?php $current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
-
 <?php
 	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
 	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
@@ -54,10 +52,10 @@
 	 */
 	wp_head();
 ?>
-
 </head>
 
 <body <?php body_class(); ?>>
+<?php echo $header_img; ?>
 <div id="top"></div>
 <div class="global-nav-bg">
 	<div class="global-nav">
@@ -113,9 +111,7 @@
 	    	//show the banner images, TO DO: Make this less ugly, conditionally load images
     	?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<img class="visible-desktop" src="<?php echo of_get_option( 'banner_image_lg' ); ?>" alt="" />
-				<img class="visible-tablet" src="<?php echo of_get_option( 'banner_image_med' ); ?>" alt="" />
-				<img class="visible-phone" src="<?php echo of_get_option( 'banner_image_sm' ); ?>" alt="" />
+				<img class="header_img" src="" alt="" />
 			</a>
 		<?php endif; ?>
 	</header>
@@ -148,7 +144,7 @@
 							'depth'		 => 0,
 							'container'	 => false,
 							'items_wrap' => '%3$s',
-							'menu_class'	 => 'nav',
+							'menu_class' => 'nav',
 							'walker'	 => new Bootstrap_Walker_Nav_Menu()
 						);
 

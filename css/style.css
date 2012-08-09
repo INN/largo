@@ -3391,7 +3391,7 @@ p.wp-caption-text {
 .byline {
   font-weight: normal;
   font-size: 13.04px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 .byline .author {
   text-transform: uppercase;
@@ -3407,13 +3407,49 @@ p.wp-caption-text {
 .edit-link a {
   color: #bd261d;
 }
+.post-social {
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+  min-height: 28px;
+  height: auto;
+  padding: 2px 0;
+  margin-bottom: 24px;
+}
+.post-social .right,
+.post-social .left {
+  margin: 0;
+  height: auto;
+}
+.post-social span.twitter {
+  position: relative;
+  top: 4px;
+  margin-right: 4px;
+}
+.post-social span.st_sharethis,
+.post-social span.st_email {
+  position: relative;
+  top: 1px;
+}
+.post-social span.print {
+  font-family: Verdana, Helvetica, sans-serif;
+  font-size: 11px;
+  position: relative;
+  top: 2px;
+}
+.post-social span.print:hover {
+  opacity: 0.85;
+  filter: alpha(opacity=85);
+}
+.post-social span.print a {
+  color: black;
+}
+.post-social span.print a:hover {
+  text-decoration: none;
+}
 .stories h2.entry-title {
   font-size: 32px;
   margin-bottom: 8px;
   line-height: 1.1;
-}
-.stories .byline {
-  margin-bottom: 12px;
 }
 .stories .entry-content p {
   font-size: 16px;
@@ -4471,6 +4507,9 @@ img[class*="wp-image-"] {
   #site-header h1.branding span,
   #site-header h2.branding span {
     font-size: 16px;
+  }
+  .post-social .print {
+    display: none;
   }
 }
 @media print {
