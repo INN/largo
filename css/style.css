@@ -4036,7 +4036,6 @@ p.comment-form-comment {
 #sidebar .widget.no-bg p,
 #sidebar .widget.no-bg ul {
   background: none;
-  padding: 0;
   border: none;
 }
 #sidebar .widget.no-bg .widget-title {
