@@ -165,7 +165,7 @@ get_header(); ?>
 											<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 										</div>
 									<?php else: ?>
-										<h4>FEATURED</h4>
+										<h4 class="no-image">FEATURED</h4>
 									<?php endif; ?>
 										<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 										<?php the_excerpt(); ?>

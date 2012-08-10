@@ -3523,8 +3523,13 @@ p.wp-caption-text {
 }
 .sticky-main-feature h4 {
   font-size: 13.04px;
-  margin-bottom: 0;
   color: #ddd;
+  margin-bottom: 0;
+}
+.sticky-main-feature h4.no-image {
+  margin: 2px 0 0 15px;
+  position: relative;
+  top: 8px;
 }
 .sticky-main-feature h2 {
   font-size: 24px;

@@ -612,8 +612,13 @@ p.wp-caption-text {
 	}
 	h4 {
 	  font-size:@baseFontSize * 0.815;
-	  margin-bottom:0;
 	  color: #ddd;
+	  margin-bottom:0;
+	  &.no-image {
+	    margin: 2px 0 0 15px;
+	    position:relative;
+	    top: 8px;
+	  }
 	}
 	h2 {
 	  font-size: @baseFontSize * 1.5;
