@@ -64,7 +64,7 @@
 <!-- Author bio and social links -->
 <?php if ( largo_show_author_box( $post->ID ) ) : ?>
 <div class="author-box clearfix">
-	<h3>About <?php echo esc_attr( get_the_author() ); ?><span><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h3>
+	<h4>About <?php echo esc_attr( get_the_author() ); ?><span><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h4>
 
 	<?php if (has_gravatar( get_the_author_meta('user_email') ) ) :
 			echo get_avatar( get_the_author_meta('ID'), 96 );
@@ -109,13 +109,13 @@ if ( of_get_option( 'show_related_content' ) ) :
 	if ( $rel_topics = largo_get_post_related_topics( 6 ) ) :
 ?>
 	<div id="related-posts" class="idTabs row-fluid clearfix">
-		<ul id="related-post-nav">
+		<ul id="related-post-nav" class="span4">
 			<li><h4>More Posts About</h4></li>
 			<?php foreach ( $rel_topics as $count => $topic ) : ?>
 			<li><a href="#rp<?php echo $count; ?>"><?php echo $topic->name; ?></a></li>
 			<?php endforeach; ?>
 		</ul>
-		<div class="related-items">
+		<div class="related-items span8">
 			<?php foreach ( $rel_topics as $count => $topic ): ?>
 				<div id="rp<?php echo $count; ?>">
 					<?php $rel_posts = largo_get_recent_posts_for_term( $topic, 3 ); ?>

@@ -26,6 +26,7 @@
 	#related-posts .related-items {
 		float:none;
 		width:100%;
+		margin:0;
 	}
 	.global-nav ul {
 		display:none;
@@ -58,24 +59,29 @@
 	.sticky-main-feature h2 {
 		font-size: @baseFontSize * 1.5;
 	}
-	#main {
-	  margin-top:10px;
+	#homepage-featured .top-story,
+	#homepage-featured .sub-stories {
+	  clear:both;
+	  width:100%;
+	  padding:10px;
+	  margin:0;
 	}
-	.sticky-related ul,
-	.sticky-main-feature {
+	#homepage-featured .sub-stories {
+	  border-top: 1px solid @grayLighter;
+	}
+	.sticky-main-feature,
+	.sticky-features-list {
 		clear:both;
-		width:96%;
-		margin:0;
-	}
-	.sticky-related ul {
-		margin-top:@baseline/4;
-		padding: 3%;
-		width: 94%;
+		width:100% !important;
+		margin:0 !important;
 	}
 	#menu-footer-navigation li {
 		font-size:@baseFontSize + 2;
 		padding:8px 0;
 	}
+	.carousel-caption {
+      position: static;
+    }
 
 }
 
@@ -83,17 +89,6 @@
 // ---------------------
 @media (max-width: 480px) {
 
-	.sticky-related ul,
-	.sticky-main-feature {
-		clear:both;
-		width:96%;
-		margin:0;
-	}
-	.sticky-related ul {
-		margin-top:@baseline/4;
-		padding: 4%;
-		width: 92%;
-	}
 	.global-nav {
 		height:38px;
 		padding-top:2px;

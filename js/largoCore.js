@@ -29,4 +29,8 @@ jQuery(document).ready(function($) {
 		$('.header_img').attr('src', whichHeader());
 	});
 
+	$('.carousel').carousel({
+	  interval: 6000
+	});
+
 });

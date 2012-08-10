@@ -27,6 +27,8 @@ function optionsframework_option_name() {
 
 function optionsframework_options() {
 
+	$imagepath =  get_template_directory_uri() . '/inc/options-framework/images/';
+
 	$options = array();
 
 	$options[] = array(
@@ -189,6 +191,22 @@ function optionsframework_options() {
 		'desc' => __('Used for viewports above 980 px (landscape tablets and desktops)', 'largo'),
 		'id' => 'banner_image_lg',
 		'type' => 'upload');
+
+	$options[] = array(
+		'name' => __('Homepage Options', 'largo'),
+		'type' => 'heading');
+
+	$options[] = array(
+		'name' => "Homepage Layout",
+		'desc' => "Select the layout to use for the top of the homepage",
+		'id' => "homepage_layout",
+		'std' => "blog",
+		'type' => "images",
+		'options' => array(
+			'blog' => $imagepath . '1col.png',
+			'newsy' => $imagepath . '2cl.png',
+			'slider' => $imagepath . '2cr.png')
+	);
 
 	return $options;
 }

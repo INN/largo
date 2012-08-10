@@ -127,7 +127,6 @@ function largo_content_nav( $nav_id ) {
 	<div class="previous"><?php next_posts_link( '&larr; Older posts' ); ?></div>
 </nav><!-- .post-nav -->
 
-
 	<?php endif;
 }
 
@@ -282,12 +281,15 @@ function largo_copyright_message() {
  */
 function largo_enqueue_js() {
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
-	if ( get_option( 'show_related_content', true ) )
+	if ( is_single() && of_get_option( 'show_related_content' ) )
 		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 	wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
+	if ( is_home() && of_get_option('homepage_layout') == 'slider' )
+		wp_enqueue_script( 'bootstrap-carousel', get_bloginfo('template_url') . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
 	wp_enqueue_script( 'largoCore', get_bloginfo('template_url') . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
 	if ( is_single() )
 		wp_enqueue_script( 'sharethis', get_bloginfo('template_url') . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
+
 }
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 

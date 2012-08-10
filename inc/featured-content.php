@@ -18,8 +18,15 @@ function largo_get_featured_posts( $args = array() ) {
         'offset' => 0,
         'orderby' => 'date',
         'order' => 'DESC',
-        'meta_key' => 'featured',
-        'meta_value' => 'yes',
+        //'meta_key' => 'featured',
+        //'meta_value' => 'yes',
+        'tax_query' => array(
+			array(
+				'taxonomy' => 'prominence',
+				'field' => 'slug',
+				'terms' => 'footer-featured-widget'
+			)
+		),
         'ignore_sticky_posts' => 1,
     );
     $args = wp_parse_args( $args, $defaults );

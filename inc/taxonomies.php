@@ -9,10 +9,15 @@ function largo_custom_taxonomies() {
             'query_var' => true,
             'rewrite' => true,
         ) );
+        wp_insert_term( 'Homepage Featured', 'prominence' );
         wp_insert_term( 'Footer Featured Widget', 'prominence' );
+
+        $parent_term = term_exists( 'Homepage Featured', 'prominence' );
+        $parent_term_id = $parent_term['term_id'];
+        wp_insert_term( 'Top Story', 'prominence', array( 'parent'=> $parent_term_id ) );
     }
 
-    // FEATURES
+    // SERIES
     if ( ! taxonomy_exists( 'series' ) ) {
         register_taxonomy( 'series', 'post', array(
             'hierarchical' => true,

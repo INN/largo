@@ -164,7 +164,17 @@ class largo_footer_featured_widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title;?>
 
-			<?php $missedit = largo_get_featured_posts( array( 'meta_key' => 'footer_featured_widget', 'showposts' => $instance['num_posts'] ) );
+			<?php $missedit = largo_get_featured_posts( array(
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'prominence',
+						'field' => 'slug',
+						'terms' => 'footer-featured-widget'
+					)
+				),
+				'showposts' => $instance['num_posts']
+				)
+			);
           	if ( $missedit->have_posts() ) : ?>
              	 <?php while ( $missedit->have_posts() ) : $missedit->the_post(); ?>
                   	<div class="post-lead clearfix">
@@ -172,11 +182,11 @@ class largo_footer_featured_widget extends WP_Widget {
                       	<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
                      	<?php the_excerpt(); ?>
                   	</div> <!-- /.post-lead -->
-            <?php endwhile; ?>
-            <?php else: ?>
-    		<p class="error">You're currently featuring 2 or fewer posts. Mark more posts as featured on the add/edit post screen to populate this region.</p>
+	            <?php endwhile; ?>
+	            <?php else: ?>
+	    		<p class="error">You're currently featuring 2 or fewer posts. Mark more posts as featured on the add/edit post screen to populate this region.</p>
 
-         <?php endif; // end more featured posts ?>
+    		<?php endif; // end more featured posts ?>
 
 		<?php
 		echo $after_widget;
