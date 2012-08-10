@@ -1,10 +1,14 @@
 /*
-Theme Name: Largo
-Description: A responsive news theme by Media Toybox based on the Argo theme developed at NPR by Project Argo
-Author: Media Toybox
+Theme Name: Project Largo
+Theme URI: http://investigativenewsnetwork.org
+Description: A responsive news theme developed by Media Toybox for the Investigative News Network based on the Argo theme developed at NPR by Project Argo.
+Author: Adam Schweigert (Media Toybox)
+Author URI: http://adamschweigert.com
 Version: 0.1
+Tags: responsive, fluid-width, custom-header, sticky-post, microformats, editor-style, custom-menu
+
+License: GPL-2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
-/*@import url(css/960.css);*/
-/*@import url(css/foundation.css);*/
 @import url(css/style.css);
