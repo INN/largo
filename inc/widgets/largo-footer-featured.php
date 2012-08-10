@@ -7,7 +7,7 @@ class largo_footer_featured_widget extends WP_Widget {
 	function largo_footer_featured_widget() {
 		$widget_ops = array(
 		'classname' => 'largo-footer-featured',
-		'description' => __('Show two recent featured posts with thumbnails and excerpts', 'largo-footer-featured') );
+		'description' => __('Show recent featured posts with thumbnails and excerpts', 'largo-footer-featured') );
 
 		$this->WP_Widget( 'largo-footer-featured-widget', __('Largo Footer Featured Posts', 'largo-footer-featured'), $widget_ops);
 	}
@@ -40,7 +40,7 @@ class largo_footer_featured_widget extends WP_Widget {
                   	</div> <!-- /.post-lead -->
 	            <?php endwhile; ?>
 	            <?php else: ?>
-	    		<p class="error">You're currently featuring 2 or fewer posts. Mark more posts as featured on the add/edit post screen to populate this region.</p>
+	    		<p class="error"><strong>You don't presently have any posts in the footer featured category.</strong> Mark more posts as featured on the add/edit post screen to populate this region.</p>
 
     		<?php endif; // end more featured posts ?>
 
@@ -56,7 +56,6 @@ class largo_footer_featured_widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$defaults = array( 'title' => __('In Case You Missed It', 'largo-footer-featured'));
 		$defaults = array(
 			'title' => 'In Case You Missed It',
 			'num_posts' => 2

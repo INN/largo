@@ -10,6 +10,7 @@ function largo_custom_taxonomies() {
             'rewrite' => true,
         ) );
         wp_insert_term( 'Homepage Featured', 'prominence' );
+        wp_insert_term( 'Sidebar Featured Widget', 'prominence' );
         wp_insert_term( 'Footer Featured Widget', 'prominence' );
 
         $parent_term = term_exists( 'Homepage Featured', 'prominence' );

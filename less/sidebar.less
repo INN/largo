@@ -1,5 +1,5 @@
 #sidebar .widget {
-  margin-bottom: @baseline*0.815;
+  margin-bottom: @baseline;
   padding:12px;
   #gradient > .vertical(#efefef, #fafafa);
   border:1px solid #ddd;
@@ -25,11 +25,9 @@
 }
 #sidebar .widget p,
 #sidebar .widget ul {
-  padding: 0 5px;
+  padding:0 3px;
   font-size:@baseFontSize *0.815;
 }
-#sidebar .widget p {
- }
 #sidebar .widget ul {
   margin: @baseline/5 0 0 16px;
   line-height:1.2;
@@ -83,27 +81,40 @@
   }
 }
 .twitter-follow-button {
-	display:block;
-	margin:@baseline/2 0;
+  display:block;
+  margin:@baseline/2 0;
 }
 .fb-like, .fb-like span, .fb-like.fb_iframe_widget span iframe {
-    width: 100% !important;
+  width: 100% !important;
 }
 //About Widget
 .largo-about p {
-	margin-bottom:0;
+  margin-bottom:0;
 }
 //Donate Widget
 .largo-donate p {
-    margin-bottom:@baseline/3;
+  margin-bottom:@baseline/3;
 }
-//More Featured Widget
-.argo-more-featured {
+//Featured and Recent Posts Widget
+#sidebar .largo-sidebar-featured,
+#sidebar .largo-recent-posts {
+  img {
+    float:left;
+    margin: 5px 10px 0 5px;
+  }
   h5 {
-    font-size:@baseFontSize;
-    margin-bottom:@baseline/4;
+    margin-bottom:2px;
+    padding: 0 3px;
+    font-size: @baseFontSize;
   }
   p {
-    font-size:@baseFontSize*0.815;
+  	font-size: @baseFontSize * 0.667;
+  	margin-bottom: @baseline /2;
   }
+}
+//adjustments for default WP widgets
+#sidebar .widget_archive select,
+#sidebar .widget_categories select,
+#sidebar .widget_search form {
+	margin: @baseline/5 0;
 }

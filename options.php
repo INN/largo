@@ -203,9 +203,9 @@ function optionsframework_options() {
 		'std' => "blog",
 		'type' => "images",
 		'options' => array(
-			'blog' => $imagepath . '1col.png',
-			'newsy' => $imagepath . '2cl.png',
-			'slider' => $imagepath . '2cr.png')
+			'blog' => $imagepath . 'blog.png',
+			'newsy' => $imagepath . 'newsy.png',
+			'slider' => $imagepath . 'slider.png')
 	);
 
 	return $options;

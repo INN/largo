@@ -17,10 +17,12 @@
 					if ( $category_description )
 						echo '<div class="category-description">' . $category_description . '</div>';
 				?>
-				<div class="related-topics">
-					<h5>Related Topics: </h5>
-					<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
-				</div> <!-- /.related-topics -->
+				<?php if (largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) : ?>
+					<div class="related-topics">
+						<h5>Related Topics: </h5>
+						<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
+					</div> <!-- /.related-topics -->
+				<?php endif; ?>
 
 			</header> <!-- /.category-background -->
 
