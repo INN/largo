@@ -46,15 +46,21 @@ function largo_meta_box_save( $post_id ) {
 	// now we can actually save the data
 	$allowed = array(
 		'a' => array( // on allow a tags
-			'href' => array() // and those anchords can only have href attribute
+			'href' => array() // and those anchors can only have href attribute
 		)
 	);
 
-	// Probably a good idea to make sure your data is set
-	if( isset( $_POST['largo_byline_text'] ) )
+	// make sure data is set, if author has removed the field or not populated it, delete it
+	if( isset( $_POST['largo_byline_text'] ) && $_POST['largo_byline_text'] != '' ) {
 		update_post_meta( $post_id, 'largo_byline_text', wp_kses( $_POST['largo_byline_text'], $allowed ) );
-	if( isset( $_POST['largo_byline_link'] ) )
+	} else if ( isset( $_POST['largo_byline_text'] ) && $_POST['largo_byline_text'] == '' ) {
+		delete_post_meta($post_id, 'largo_byline_text');
+	};
+	if( isset( $_POST['largo_byline_link'] ) && $_POST['largo_byline_link'] != '' ) {
 		update_post_meta( $post_id, 'largo_byline_link', wp_kses( $_POST['largo_byline_link'], $allowed ) );
+	} else if ( isset( $_POST['largo_byline_link'] ) && $_POST['largo_byline_link'] == '' ) {
+		delete_post_meta($post_id, 'largo_byline_link');
+	};
 }
 
 function largo_time() {
