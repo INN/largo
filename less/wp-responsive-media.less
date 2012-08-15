@@ -16,6 +16,7 @@
 .aligncenter,
 div.aligncenter,
 .center {
+   clear: both;
    display:block;
    margin: (@baseline / 2) auto;
 }
@@ -23,19 +24,13 @@ div.aligncenter,
 .alignright,
 .right {
    float:right;
-   margin-top: @baseline / 2;
-   margin-right: 0;
-   margin-bottom: @baseline / 2;
-   margin-left: @baseline / 2;
+   margin: @baseline/4 0 @baseline/2 20px;
 }
 
 .alignleft,
 .left {
    float:left;
-   margin-top: @baseline / 2;
-   margin-right: @baseline / 2;
-   margin-bottom: @baseline / 2;
-   margin-left: 0;
+   margin: @baseline/4 20px @baseline/2 0;
 }
 
 img,

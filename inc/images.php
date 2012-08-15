@@ -51,24 +51,4 @@ function largo_get_image_tag( $html, $id, $alt, $title, $align, $size ) {
 }
 add_filter( 'get_image_tag', 'largo_get_image_tag', 10, 6 );
 
-define( 'DEFAULT_ALIGNMENT', 'right' );
-function largo_handle_image_layouts( $atts ) {
-    // Set the max width
-    // XXX: this number should live somewhere else
-    // NEW: not sure we still need this?
-    if ( ! $atts[ 'width' ] )
-        $atts[ 'width' ] = 771;
-
-    if ( $atts[ 'width' ] >= 771 ) {
-        $atts[ 'align' ] = 'aligncenter';
-    }
-    else {
-        if ( ! $atts[ 'align' ] )
-            $atts[ 'align' ] = DEFAULT_ALIGNMENT;
-    }
-
-    return $atts;
-}
-add_filter( 'largo_image_layout_defaults', 'largo_handle_image_layouts', 10, 1 );
-
 ?>

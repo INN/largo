@@ -2995,6 +2995,17 @@ article.story {
 .post-social span.print a:hover {
   text-decoration: none;
 }
+.post-pagination a,
+.post-pagination span {
+  padding: 5px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 13.04px;
+}
+.post-pagination a:first-child,
+.post-pagination span:first-child {
+  padding-left: 0;
+}
 .labels,
 .tags,
 .pager,
@@ -3352,22 +3363,6 @@ p.wp-caption-text {
 .full {
   width: 100%;
   margin: 0 0 12px;
-}
-.aligncenter,
-.center {
-  margin: 24px auto;
-  clear: both;
-  display: block;
-}
-.alignleft,
-.left {
-  float: left;
-  margin: 6px 20px 12px 0;
-}
-.alignright,
-.right {
-  float: right;
-  margin: 6px 0 12px 20px;
 }
 .pull-quote {
   border-left: 4px solid #333;
@@ -4241,24 +4236,19 @@ p.comment-form-comment {
 .aligncenter,
 div.aligncenter,
 .center {
+  clear: both;
   display: block;
   margin: 12px auto;
 }
 .alignright,
 .right {
   float: right;
-  margin-top: 12px;
-  margin-right: 0;
-  margin-bottom: 12px;
-  margin-left: 12px;
+  margin: 6px 0 12px 20px;
 }
 .alignleft,
 .left {
   float: left;
-  margin-top: 12px;
-  margin-right: 12px;
-  margin-bottom: 12px;
-  margin-left: 0;
+  margin: 6px 20px 12px 0;
 }
 img,
 img[class*="align"],

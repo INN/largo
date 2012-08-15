@@ -124,4 +124,102 @@ function has_gravatar($email) {
 	return $has_valid_avatar;
 }
 
+if ( ! function_exists( 'largo_entry_content' ) ) {
+
+	function my_queryvars( $qvars ) {
+    	$qvars[] = 'all';
+    	return $qvars;
+    }
+    add_filter( 'query_vars', 'my_queryvars' );
+
+	function largo_entry_content( $post ) {
+
+		global $wp_query, $numpages;
+		$no_pagination = false;
+
+		if ( isset( $wp_query->query_vars['all'] ) ) {
+		    $no_pagination = $wp_query->query_vars['all'];
+		}
+
+		if( $no_pagination ) {
+		    echo apply_filters( 'the_content', $post->post_content );
+		    $page=$numpages+1;
+		} else {
+		    the_content();
+		    if ( is_singular() && $numpages > 1 )
+		    	largo_custom_wp_link_pages( $args );
+		}
+	}
+}
+
+if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
+/**
+ * Improved wp_link_pages functionality
+ * Based on: http://bavotasan.com/2012/a-better-wp_link_pages-for-wordpress/
+ */
+	function largo_custom_wp_link_pages( $args ) {
+		$defaults = array(
+			'before' => '<div class="post-pagination">',
+			'after' => '</div>',
+			'text_before' => '',
+			'text_after' => '',
+			'nextpagelink' => __( 'Next Page' ),
+			'previouspagelink' => __( 'Previous Page' ),
+			'pagelink' => '%',
+			'echo' => 1
+		);
+
+		$r = wp_parse_args( $args, $defaults );
+		$r = apply_filters( 'wp_link_pages_args', $r );
+		extract( $r, EXTR_SKIP );
+
+		global $page, $numpages, $multipage, $more, $pagenow;
+
+		$output = '';
+		if ( $multipage ) {
+			//if ( 'number' == $next_or_number ) {
+				$output .= $before;
+
+				//previous page
+				$i = $page - 1;
+				if ( $i && $more ) {
+					$output .= _wp_link_page( $i );
+					$output .= $text_before . $previouspagelink . $text_after . '</a>|';
+				}
+
+				//list of page #s
+				for ( $i = 1; $i < ( $numpages + 1 ); $i = $i + 1 ) {
+					$j = str_replace( '%', $i, $pagelink );
+					$output .= ' ';
+					if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
+						$output .= _wp_link_page( $i );
+					else
+						$output .= '<span class="current-post-page">';
+
+					$output .= $text_before . $j . $text_after;
+					if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
+						$output .= '</a>';
+					else
+						$output .= '</span>';
+				}
+
+				//next page
+				$i = $page + 1;
+				if ( $i <= $numpages && $more ) {
+					$output .= '|' . _wp_link_page( $i );
+					$output .= $text_before . $nextpagelink . $text_after . '</a>';
+				}
+
+				$output .= '|<a href="' . add_query_arg( array( 'all' => '1'), get_permalink() ) . '" title="View all pages">View As Single Page</a>';
+
+				$output .= $after;
+		}
+
+		if ( $echo )
+			echo $output;
+
+		return $output;
+	}
+}
+
 ?>

@@ -77,6 +77,18 @@ article.story {
      }
 	}
 }
+// POST PAGINATION
+.post-pagination {
+  a, span {
+    padding:5px;
+    font-family: @sansFontFamily;
+    text-transform:uppercase;
+    font-size: @baseFontSize *0.815;
+    &:first-child {
+	  padding-left:0;
+    }
+  }
+}
 
 // POST META
 
@@ -445,22 +457,6 @@ p.wp-caption-text {
 .full {
 	width: 100%;
 	margin: 0 0 @baseline/2;
-}
-.aligncenter,
-.center {
-	margin: @baseline auto;
-	clear: both;
-	display: block;
-}
-.alignleft,
-.left {
-	float: left;
-	margin: @baseline/4 20px @baseline/2 0;
-}
-.alignright,
-.right {
-	float: right;
-	margin: @baseline/4 0 @baseline/2 20px;
 }
 .pull-quote {
 	border-left: 4px solid #333;
