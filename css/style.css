@@ -3353,22 +3353,6 @@ p.wp-caption-text {
   width: 100%;
   margin: 0 0 12px;
 }
-.aligncenter,
-.center {
-  margin: 24px auto;
-  clear: both;
-  display: block;
-}
-.alignleft,
-.left {
-  float: left;
-  margin: 6px 20px 12px 0;
-}
-.alignright,
-.right {
-  float: right;
-  margin: 6px 0 12px 20px;
-}
 .pull-quote {
   border-left: 4px solid #333;
   padding-left: 20px;
@@ -4241,24 +4225,19 @@ p.comment-form-comment {
 .aligncenter,
 div.aligncenter,
 .center {
+  clear: both;
   display: block;
   margin: 12px auto;
 }
 .alignright,
 .right {
   float: right;
-  margin-top: 12px;
-  margin-right: 0;
-  margin-bottom: 12px;
-  margin-left: 12px;
+  margin: 6px 0 12px 20px;
 }
 .alignleft,
 .left {
   float: left;
-  margin-top: 12px;
-  margin-right: 12px;
-  margin-bottom: 12px;
-  margin-left: 0;
+  margin: 6px 20px 12px 0;
 }
 img,
 img[class*="align"],
