@@ -13,7 +13,7 @@
                 $tag_objs[ $tag->term_id ] = $tag;
 endif;
 
- */
+*/
 
 function largo_get_related_topics_for_category( $obj ) {
     $MAX_RELATED_TOPICS = 5;
@@ -56,7 +56,6 @@ function largo_get_related_topics_for_category( $obj ) {
     $out .= "</ul>";
     return $out;
 }
-
 
 function _tags_associated_with_category( $cat_id, $max = 5 ) {
     $query = new WP_Query( array(
@@ -101,7 +100,6 @@ function _tags_associated_with_category( $cat_id, $max = 5 ) {
     return $return_tags;
 }
 
-
 function _subcategories_for_category( $cat_id ) {
     // XXX: could also use get_term_children().  not sure which is better.
     $cats = get_categories( array(
@@ -110,7 +108,6 @@ function _subcategories_for_category( $cat_id ) {
 
     return $cats;
 }
-
 
 /**
  * Builds links to the latest posts for a given category.
@@ -213,7 +210,6 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
     return $query->posts;
 }
 
-
 function largo_has_categories_or_tags() {
     if ( get_the_tags() ) {
         return true;
@@ -230,61 +226,64 @@ function largo_has_categories_or_tags() {
 
     return false;
 }
+if ( ! function_exists( 'largo_the_categories_and_tags' ) ) {
+	function largo_the_categories_and_tags() {
+	    $cats = get_the_category();
+	    $tags = get_the_tags();
 
-function largo_the_categories_and_tags() {
-    $cats = get_the_category();
-    $tags = get_the_tags();
-
-    $links = array();
-    if ( $cats ) {
-        foreach ( $cats as $cat ) {
-            if ( $cat->name == 'Uncategorized' ) {
-                continue;
-            }
-            $links[] = sprintf(
-                '<li class="post-category-link"><i class="icon-white icon-tag"></i><a href="%s" title="%s">%s</a></li>',
-                get_category_link( $cat->term_id ), $cat->name,
-                $cat->name
-            );
-        }
-    }
-    if ( $tags ) {
-        foreach ( $tags as $tag ) {
-            $links[] = sprintf(
-                '<li class="post-tag-link"><i class="icon-white icon-tag"></i><a href="%s" title="%s">%s</a></li>',
-                get_tag_link( $tag->term_id ), $tag->name, $tag->name
-            );
-        }
-    }
-    echo implode( '', $links );
+	    $links = array();
+	    if ( $cats ) {
+	        foreach ( $cats as $cat ) {
+	            if ( $cat->name == 'Uncategorized' ) {
+	                continue;
+	            }
+	            $links[] = sprintf(
+	                '<li class="post-category-link"><i class="icon-white icon-tag"></i><a href="%s" title="%s">%s</a></li>',
+	                get_category_link( $cat->term_id ), $cat->name,
+	                $cat->name
+	            );
+	        }
+	    }
+	    if ( $tags ) {
+	        foreach ( $tags as $tag ) {
+	            $links[] = sprintf(
+	                '<li class="post-tag-link"><i class="icon-white icon-tag"></i><a href="%s" title="%s">%s</a></li>',
+	                get_tag_link( $tag->term_id ), $tag->name, $tag->name
+	            );
+	        }
+	    }
+	    echo implode( '', $links );
+	}
 }
 
-function largo_homepage_categories_and_tags() {
-    $cats = get_the_category();
-    $tags = get_the_tags();
+if ( ! function_exists( 'largo_homepage_categories_and_tags' ) ) {
+	function largo_homepage_categories_and_tags() {
+	    $cats = get_the_category();
+	    $tags = get_the_tags();
 
-    $links = array();
-    if ( $cats ) {
-        foreach ( $cats as $cat ) {
-            if ( $cat->name == 'Uncategorized' ) {
-                continue;
-            }
-            $links[] = sprintf(
-                '<span class="post-category-link"><a href="%s" title="%s">%s</a></span>',
-                get_category_link( $cat->term_id ), $cat->name,
-                $cat->name
-            );
-        }
-    }
-    if ( $tags ) {
-        foreach ( $tags as $tag ) {
-            $links[] = sprintf(
-                '<span class="post-tag-link"><a href="%s" title="%s">%s</a></span>',
-                get_tag_link( $tag->term_id ), $tag->name, $tag->name
-            );
-        }
-    }
-    echo implode( ', ', $links );
+	    $links = array();
+	    if ( $cats ) {
+	        foreach ( $cats as $cat ) {
+	            if ( $cat->name == 'Uncategorized' ) {
+	                continue;
+	            }
+	            $links[] = sprintf(
+	                '<span class="post-category-link"><a href="%s" title="%s">%s</a></span>',
+	                get_category_link( $cat->term_id ), $cat->name,
+	                $cat->name
+	            );
+	        }
+	    }
+	    if ( $tags ) {
+	        foreach ( $tags as $tag ) {
+	            $links[] = sprintf(
+	                '<span class="post-tag-link"><a href="%s" title="%s">%s</a></span>',
+	                get_tag_link( $tag->term_id ), $tag->name, $tag->name
+	            );
+	        }
+	    }
+	    echo implode( ', ', $links );
+	}
 }
 
 /**
@@ -308,7 +307,7 @@ function largo_get_post_thumbnail_src( $post, $size = '60x60' ) {
  * @param   int     $word_count Number of words (default 40)
  * @return  String
  */
- function largo_split_words( $text, $split_limit = -1 ) {
+function largo_split_words( $text, $split_limit = -1 ) {
     // XXX: deal with the way largo_get_excerpt uses this limit to
     // determine whether to cut off remaining text.
     if ( $split_limit > -1 )
@@ -316,7 +315,6 @@ function largo_get_post_thumbnail_src( $post, $size = '60x60' ) {
 
     $words = preg_split( "/[\n\r\t ]+/", $text, $split_limit,
                          PREG_SPLIT_NO_EMPTY );
-
     return $words;
 }
 
@@ -347,3 +345,5 @@ function largo_get_excerpt( $post, $word_count = 40 ) {
 
     return $text;
 }
+
+?>

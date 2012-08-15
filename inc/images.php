@@ -8,7 +8,6 @@ if ( !defined( 'MEDIUM_WIDTH') ) {
 	define( 'MEDIUM_WIDTH', 771 );
 }
 
-
 function largo_create_image_sizes() {
     add_theme_support( 'post-thumbnails' );
     set_post_thumbnail_size( 140, 140, true ); // skybox thumbnail
@@ -56,10 +55,11 @@ define( 'DEFAULT_ALIGNMENT', 'right' );
 function largo_handle_image_layouts( $atts ) {
     // Set the max width
     // XXX: this number should live somewhere else
+    // NEW: not sure we still need this?
     if ( ! $atts[ 'width' ] )
-        $atts[ 'width' ] = 620;
+        $atts[ 'width' ] = 771;
 
-    if ( $atts[ 'width' ] >= 400 ) {
+    if ( $atts[ 'width' ] >= 771 ) {
         $atts[ 'align' ] = 'aligncenter';
     }
     else {

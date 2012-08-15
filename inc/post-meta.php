@@ -1,37 +1,13 @@
 <?php
 
-/* Adds meta boxes to the post edit screen for custom byline and link
-based on: http://wp.tutsplus.com/tutorials/plugins/how-to-create-custom-wordpress-writemeta-boxes/
-*/
+/** Adds meta boxes to the post edit screen for custom byline and link
+ * based on: http://wp.tutsplus.com/tutorials/plugins/how-to-create-custom-wordpress-writemeta-boxes/
+ */
 
-add_action( 'add_meta_boxes', 'largo_meta_box_add' );
-
-function largo_meta_box_add()
-{
+function largo_meta_box_add() {
 	add_meta_box( 'largo_byline_meta', 'Custom Byline Options', 'largo_meta_box_display', 'post', 'side', 'core' );
 }
-
-function largo_meta_box_display( $post )
-{
-	$values = get_post_custom( $post->ID );
-	$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
-	$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
-	wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
-	?>
-	<p>
-		<label for="largo_byline_text">Byline Text</label>
-		<input type="text" name="largo_byline_text" id="largo_byline_text" value="<?php echo $byline_text; ?>" />
-	</p>
-
-	<p>
-		<label for="largo_byline_link">Byline Link</label>
-		<input type="text" name="largo_byline_link" id="largo_byline_link" value="<?php echo $byline_link; ?>" />
-	</p>
-
-	<?php
-}
-
-add_action( 'save_post', 'largo_meta_box_save' );
+add_action( 'add_meta_boxes', 'largo_meta_box_add' );
 
 function largo_meta_box_save( $post_id ) {
 	// Bail if we're doing an auto save
@@ -62,39 +38,67 @@ function largo_meta_box_save( $post_id ) {
 		delete_post_meta($post_id, 'largo_byline_link');
 	};
 }
+add_action( 'save_post', 'largo_meta_box_save' );
 
-function largo_time() {
-	// Change to the date after a certain time
-	$time_difference = current_time('timestamp') - get_the_time('U');
-	if($time_difference < 86400) {
-		return '<span class="time-ago">' .human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago</span>';
-	} else {
-		return get_the_date();
-	};
-}
-
-function largo_byline() {
-	// get post custom fields and use the custom byline if set, if not use default author valuess
+function largo_meta_box_display( $post ) {
 	$values = get_post_custom( $post->ID );
 	$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
 	$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
-	$byline_title_attr = esc_attr( sprintf( 'More from %s', $byline_text ) );
+	wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
+	?>
+	<p>
+		<label for="largo_byline_text">Byline Text</label>
+		<input type="text" name="largo_byline_text" id="largo_byline_text" value="<?php echo $byline_text; ?>" />
+	</p>
 
-	if ( $byline_text == '' )
-		$byline_text = esc_html( get_the_author() );
-	if ( $byline_link == '' ) :
-		$byline_link = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
-		$byline_title_attr = esc_attr( sprintf( 'View all posts by %s', get_the_author() ) );
-	endif;
+	<p>
+		<label for="largo_byline_link">Byline Link</label>
+		<input type="text" name="largo_byline_link" id="largo_byline_link" value="<?php echo $byline_link; ?>" />
+	</p>
+	<?php
+}
 
-	// print the byline
-	printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
-		$byline_link,
-		$byline_title_attr,
-		$byline_text,
-		esc_attr( get_the_date( 'c' ) ),
-		largo_time()
-	);
+if ( ! function_exists( 'largo_time' ) ) {
+/**
+ * For posts published less than 24 hours ago, show "time ago" instead of date
+ */
+	function largo_time() {
+		$time_difference = current_time('timestamp') - get_the_time('U');
+		if($time_difference < 86400) {
+			return '<span class="time-ago">' .human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago</span>';
+		} else {
+			return get_the_date();
+		};
+	}
+}
+
+if ( ! function_exists( 'largo_byline' ) ) {
+/**
+ * Outputs custom byline and link (if set), otherwise outputs author link and post date
+ */
+	function largo_byline() {
+		// get post custom fields and use the custom byline if set, if not use default author valuess
+		$values = get_post_custom( $post->ID );
+		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
+		$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
+		$byline_title_attr = esc_attr( sprintf( 'More from %s', $byline_text ) );
+
+		if ( $byline_text == '' )
+			$byline_text = esc_html( get_the_author() );
+		if ( $byline_link == '' ) :
+			$byline_link = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
+			$byline_title_attr = esc_attr( sprintf( 'View all posts by %s', get_the_author() ) );
+		endif;
+
+		// print the byline
+		printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
+			$byline_link,
+			$byline_title_attr,
+			$byline_text,
+			esc_attr( get_the_date( 'c' ) ),
+			largo_time()
+		);
+	}
 }
 
 function largo_show_author_box($post_id) {
@@ -119,4 +123,5 @@ function has_gravatar($email) {
 	}
 	return $has_valid_avatar;
 }
+
 ?>

@@ -86,23 +86,23 @@ function largo_get_the_main_feature() {
 
 // add a link to an archive page for terms within the "featured" taxonomy to post meta.
 
-if ( ! function_exists( 'largo_custom_taxonomy_terms' ) ) :
-function largo_custom_taxonomy_terms( $post_id ) {
-	$taxonomies = apply_filters( 'largo_custom_taxnomies', array( 'series' ) );
+if ( ! function_exists( 'largo_custom_taxonomy_terms' ) ) {
+	function largo_custom_taxonomy_terms( $post_id ) {
+		$taxonomies = apply_filters( 'largo_custom_taxnomies', array( 'series' ) );
 
-    $post_terms = array();
-    foreach ( $taxonomies as $tax ) {
-        if ( taxonomy_exists( $tax ) ) {
-            $terms = get_the_terms( $post_id, $tax );
-            if ( $terms ) {
-                $post_terms = array_merge( $post_terms, $terms );
-            }
-        }
-    }
+	    $post_terms = array();
+	    foreach ( $taxonomies as $tax ) {
+	        if ( taxonomy_exists( $tax ) ) {
+	            $terms = get_the_terms( $post_id, $tax );
+	            if ( $terms ) {
+	                $post_terms = array_merge( $post_terms, $terms );
+	            }
+	        }
+	    }
 
-    return $post_terms;
+	    return $post_terms;
+	}
 }
-endif;
 
 function largo_term_to_label( $term ) {
     return sprintf( '<div class="series-label"><h5><a href="%1$s">%2$s</a><a class="rss-link" href="%3$s"></a></h5><p>%4$s</p></div>',
@@ -112,26 +112,28 @@ function largo_term_to_label( $term ) {
     	esc_attr( $term->description ) );
 }
 
-if ( ! function_exists( 'largo_the_post_labels' ) ) :
-function largo_the_post_labels( $post_id ) {
-    $post_terms = largo_custom_taxonomy_terms( $post_id );
-    $all_labels = $post_terms;
-    foreach ( $all_labels as $term ) {
-        if ( strtolower( $term->name ) == 'featured' ) {
-            continue;
-        }
-        echo largo_term_to_label( $term );
-    }
+if ( ! function_exists( 'largo_the_post_labels' ) ) {
+	function largo_the_post_labels( $post_id ) {
+	    $post_terms = largo_custom_taxonomy_terms( $post_id );
+	    $all_labels = $post_terms;
+	    foreach ( $all_labels as $term ) {
+	        if ( strtolower( $term->name ) == 'featured' ) {
+	            continue;
+	        }
+	        echo largo_term_to_label( $term );
+	    }
+	}
 }
-endif;
 
 //new to argo parent
-if ( ! function_exists( 'largo_has_custom_taxonomy' ) ) :
+if ( ! function_exists( 'largo_has_custom_taxonomy' ) ) {
 	function largo_has_custom_taxonomy($post_id) {
 		$largo_has_terms = largo_custom_taxonomy_terms( $post_id );
 		if ($largo_has_terms) {
         	return true;
 		}
 		return false;
-		}
-endif;
+	}
+}
+
+?>

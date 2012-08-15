@@ -114,22 +114,25 @@ function largo_custom_excerpt_more( $output ) {
 }
 add_filter( 'get_the_excerpt', 'largo_custom_excerpt_more' );
 
+if ( ! function_exists( 'largo_content_nav' ) ) {
 /**
  * Display navigation to next/previous pages when applicable
  */
-function largo_content_nav( $nav_id ) {
-	global $wp_query;
+	function largo_content_nav( $nav_id ) {
+		global $wp_query;
 
-	if ( $wp_query->max_num_pages > 1 ) : ?>
+		if ( $wp_query->max_num_pages > 1 ) : ?>
 
-<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-	<div class="next"><?php previous_posts_link( 'Newer posts &rarr;' ); ?></div>
-	<div class="previous"><?php next_posts_link( '&larr; Older posts' ); ?></div>
-</nav><!-- .post-nav -->
+	<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
+		<div class="next"><?php previous_posts_link( 'Newer posts &rarr;' ); ?></div>
+		<div class="previous"><?php next_posts_link( '&larr; Older posts' ); ?></div>
+	</nav><!-- .post-nav -->
 
-	<?php endif;
-}
+		<?php endif;
+	}
+} // ends check for largo_content_nav()
 
+if ( !function_exists( 'largo_pagination' ) ) {
 /**
 * A pagination function
 * @param integer $range: The range of the slider, works best with even numbers
@@ -138,69 +141,70 @@ function largo_content_nav( $nav_id ) {
 * previous_posts_link(' < '); - returns the Previous page link
 * next_posts_link(' > '); - returns the Next page link
 */
-function largo_pagination( $range = 6 ) {
-	// $paged - number of the current page
-	global $paged, $wp_query;
+	function largo_pagination( $range = 6 ) {
+		// $paged - number of the current page
+		global $paged, $wp_query;
 
-	$max_page = $wp_query->max_num_pages;
+		$max_page = $wp_query->max_num_pages;
 
-	// We need the pagination only if there are more than 1 page
-	if ( $max_page <= 1 )
-		return;
+		// We need the pagination only if there are more than 1 page
+		if ( $max_page <= 1 )
+			return;
 
-    if ( ! $paged )
-      $paged = 1;
-?>
+	    if ( ! $paged )
+	      $paged = 1;
+	?>
 
-    <nav>
-		<ul class="largo-pag clearfix">
-		<li class="largo-previous"><?php previous_posts_link( '&larr; Newer posts' ); ?></li>
+	    <nav>
+			<ul class="largo-pag clearfix">
+			<li class="largo-previous"><?php previous_posts_link( '&larr; Newer posts' ); ?></li>
 
-				<?php if ( $max_page > $range ) {
-				// When closer to the beginning
-					if ( $paged < $range ) {
-						for ( $i = 1; $i <= ( $range + 1 ); $i++ ) {
+					<?php if ( $max_page > $range ) {
+					// When closer to the beginning
+						if ( $paged < $range ) {
+							for ( $i = 1; $i <= ( $range + 1 ); $i++ ) {
+								echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
+								if( $i == $paged )
+									echo " class='current'";
+								echo ">$i</a></li>";
+							}
+						}
+						// When closer to the end
+						elseif ( $paged >= ( $max_page - ceil( ( $range / 2 ) ) ) ) {
+							for ( $i = $max_page - $range; $i <= $max_page; $i++ ) {
+								echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
+								if( $i == $paged )
+									echo " class='current'";
+								echo ">$i</a></li>";
+							}
+						}
+						// Somewhere in the middle
+						elseif ( $paged >= $range && $paged < ( $max_page - ceil( ( $range / 2 ) ) ) ) {
+							for ( $i = ( $paged - ceil( $range / 2 ) ); $i <= ( $paged + ceil( ( $range / 2 ) ) ); $i++ ) {
+								echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
+								if( $i == $paged )
+									echo " class='current'";
+								echo ">$i</a></li>";
+							}
+						}
+					}
+	    			// Less pages than the range, no sliding effect needed
+					else {
+						for( $i = 1; $i <= $max_page; $i++ ){
 							echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
 							if( $i == $paged )
 								echo " class='current'";
 							echo ">$i</a></li>";
 						}
-					}
-					// When closer to the end
-					elseif ( $paged >= ( $max_page - ceil( ( $range / 2 ) ) ) ) {
-						for ( $i = $max_page - $range; $i <= $max_page; $i++ ) {
-							echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
-							if( $i == $paged )
-								echo " class='current'";
-							echo ">$i</a></li>";
-						}
-					}
-					// Somewhere in the middle
-					elseif ( $paged >= $range && $paged < ( $max_page - ceil( ( $range / 2 ) ) ) ) {
-						for ( $i = ( $paged - ceil( $range / 2 ) ); $i <= ( $paged + ceil( ( $range / 2 ) ) ); $i++ ) {
-							echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
-							if( $i == $paged )
-								echo " class='current'";
-							echo ">$i</a></li>";
-						}
-					}
-				}
-    			// Less pages than the range, no sliding effect needed
-				else {
-					for( $i = 1; $i <= $max_page; $i++ ){
-						echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
-						if( $i == $paged )
-							echo " class='current'";
-						echo ">$i</a></li>";
-					}
-				} ?>
-			<li class="largo-next"><?php next_posts_link( 'Older posts &rarr;' ); ?></li>
-		</ul>
-	</nav><!-- .post-nav -->
- <?php
-}
+					} ?>
+				<li class="largo-next"><?php next_posts_link( 'Older posts &rarr;' ); ?></li>
+			</ul>
+		</nav><!-- .post-nav -->
+	 <?php
+	}
+} // ends check for largo_pagination()
 
-if ( ! function_exists( 'largo_comment' ) ) :
+if ( ! function_exists( 'largo_comment' ) ) {
 /**
  * Template for comments and pingbacks.
  *
@@ -209,155 +213,175 @@ if ( ! function_exists( 'largo_comment' ) ) :
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
  */
-function largo_comment( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment;
-	switch ( $comment->comment_type ) :
-		case 'pingback' :
-		case 'trackback' :
-	?>
-	<li class="post pingback">
-		<p>Pingback: <?php comment_author_link(); ?><?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?></p>
-	<?php
-			break;
-		default :
-	?>
-	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-		<article id="comment-<?php comment_ID(); ?>" class="comment">
-			<footer class="comment-meta">
-				<div class="comment-author vcard">
-					<?php
-						$avatar_size = 68;
-						if ( '0' != $comment->comment_parent )
-							$avatar_size = 39;
+	function largo_comment( $comment, $args, $depth ) {
+		$GLOBALS['comment'] = $comment;
+		switch ( $comment->comment_type ) :
+			case 'pingback' :
+			case 'trackback' :
+		?>
+		<li class="post pingback">
+			<p>Pingback: <?php comment_author_link(); ?><?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?></p>
+		<?php
+				break;
+			default :
+		?>
+		<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+			<article id="comment-<?php comment_ID(); ?>" class="comment">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<?php
+							$avatar_size = 68;
+							if ( '0' != $comment->comment_parent )
+								$avatar_size = 39;
 
-						echo get_avatar( $comment, $avatar_size );
+							echo get_avatar( $comment, $avatar_size );
 
-						/* translators: 1: comment author, 2: date and time */
-						printf( '%1$s on %2$s <span class="says">said:</span>',
-							sprintf( '<span class="fn">%s</span>', get_comment_author_link() ),
-							sprintf( '<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
-								esc_url( get_comment_link( $comment->comment_ID ) ),
-								get_comment_time( 'c' ),
-								/* translators: 1: date, 2: time */
-								sprintf( '%1$s at %2$s', get_comment_date(), get_comment_time() )
-							)
-						);
-					?>
+							/* translators: 1: comment author, 2: date and time */
+							printf( '%1$s on %2$s <span class="says">said:</span>',
+								sprintf( '<span class="fn">%s</span>', get_comment_author_link() ),
+								sprintf( '<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
+									esc_url( get_comment_link( $comment->comment_ID ) ),
+									get_comment_time( 'c' ),
+									/* translators: 1: date, 2: time */
+									sprintf( '%1$s at %2$s', get_comment_date(), get_comment_time() )
+								)
+							);
+						?>
 
-					<?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?>
-				</div><!-- .comment-author .vcard -->
+						<?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?>
+					</div><!-- .comment-author .vcard -->
 
-				<?php if ( $comment->comment_approved == '0' ) : ?>
-					<em class="comment-awaiting-moderation">Your comment is awaiting moderation.</em>
-					<br />
-				<?php endif; ?>
+					<?php if ( $comment->comment_approved == '0' ) : ?>
+						<em class="comment-awaiting-moderation">Your comment is awaiting moderation.</em>
+						<br />
+					<?php endif; ?>
 
-			</footer>
+				</footer>
 
-			<div class="comment-content"><?php comment_text(); ?></div>
+				<div class="comment-content"><?php comment_text(); ?></div>
 
-			<div class="reply">
-				<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Reply <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-			</div><!-- .reply -->
-		</article><!-- #comment-## -->
+				<div class="reply">
+					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Reply <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+				</div><!-- .reply -->
+			</article><!-- #comment-## -->
 
-	<?php
-			break;
-	endswitch;
-}
-endif; // ends check for largo_comment()
+		<?php
+				break;
+		endswitch;
+	}
+} // ends check for largo_comment()
 
-// print the copyright message in the footer
+if ( ! function_exists( 'largo_copyright_message' ) ) {
+/**
+ * print the copyright message in the footer
+ */
+	function largo_copyright_message() {
+	    $msg = of_get_option( 'copyright_msg' );
+	    if ( ! $msg )
+	    	$msg = 'Copyright %s';
+	    printf( $msg, date( 'Y' ) );
+	}
+} // ends check for largo_copyright_message()
 
-function largo_copyright_message() {
-    $msg = of_get_option( 'copyright_msg' );
-    if ( ! $msg )
-    	$msg = 'Copyright %s';
-    printf( $msg, date( 'Y' ) );
-}
-
- /**
+if ( ! function_exists( 'largo_enqueue_js' ) ) {
+/**
  * Enqueue JS for the footer
  */
-function largo_enqueue_js() {
-	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
-	if ( is_single() && of_get_option( 'show_related_content' ) )
-		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
-	wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
-	if ( is_home() && of_get_option('homepage_layout') == 'slider' )
-		wp_enqueue_script( 'bootstrap-carousel', get_bloginfo('template_url') . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
-	wp_enqueue_script( 'largoCore', get_bloginfo('template_url') . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
-	if ( is_single() )
-		wp_enqueue_script( 'sharethis', get_bloginfo('template_url') . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
+	function largo_enqueue_js() {
+		wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
+		if ( is_single() && of_get_option( 'show_related_content' ) )
+			wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
+		wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
+		if ( is_home() && of_get_option('homepage_layout') == 'slider' )
+			wp_enqueue_script( 'bootstrap-carousel', get_bloginfo('template_url') . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
+		wp_enqueue_script( 'largoCore', get_bloginfo('template_url') . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
+		if ( is_single() )
+			wp_enqueue_script( 'sharethis', get_bloginfo('template_url') . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
 
-}
-add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
+	}
+	add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
+} // ends check for largo_enqueue_js()
 
-function largo_header_js() {
-	//decides which size of the banner image to load based on the window width ?>
-	<script>
-		function whichHeader() {
-			var screenWidth = document.documentElement.clientWidth,
-			header_img;
-			if (screenWidth <= 767) {
-				header_img = '<?php echo of_get_option( 'banner_image_sm' ); ?>';
-			} else if (screenWidth > 767 && screenWidth <= 979) {
-				header_img = '<?php echo of_get_option( 'banner_image_med' ); ?>';
-			} else {
-				header_img = '<?php echo of_get_option( 'banner_image_lg' ); ?>';
-			};
-			return header_img;
-		};
-		var banner_img_src = whichHeader();
-	</script>
-<?php
-}
-add_action( 'wp_head', 'largo_header_js' );
-
-function largo_footer_js() { ?>
-	<!--Facebook-->
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-
-	<!--Twitter-->
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-	<!--Google Plus-->
-	<script type="text/javascript">
-	  (function() {
-	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		po.src = 'https://apis.google.com/js/plusone.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-	  })();
-	</script>
-<?php
-}
-add_action( 'wp_enqueue_scripts', 'largo_footer_js' );
-
-// add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
-function largo_google_analytics() {
-
-	if ( get_option( 'ga_id', true ) // make sure the ga_id setting is defined
-		&& ( !is_user_logged_in() ) ) : // don't track logged in users
-	?>
+if ( ! function_exists( 'largo_header_js' ) ) {
+/**
+ * determine which size of the banner image to load based on the window width
+ */
+	function largo_header_js() { ?>
 		<script>
-		    var _gaq = _gaq || [];
-		    _gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
-		    _gaq.push(['_trackPageview']);
-
-		    (function() {
-			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
+			function whichHeader() {
+				var screenWidth = document.documentElement.clientWidth,
+				header_img;
+				if (screenWidth <= 767) {
+					header_img = '<?php echo of_get_option( 'banner_image_sm' ); ?>';
+				} else if (screenWidth > 767 && screenWidth <= 979) {
+					header_img = '<?php echo of_get_option( 'banner_image_med' ); ?>';
+				} else {
+					header_img = '<?php echo of_get_option( 'banner_image_lg' ); ?>';
+				};
+				return header_img;
+			};
+			var banner_img_src = whichHeader();
 		</script>
 	<?php
-	endif;
-}
-add_action( 'wp_footer', 'largo_google_analytics' );
+	}
+	add_action( 'wp_head', 'largo_header_js' );
+} // ends check for largo_header_js()
+
+if ( ! function_exists( 'largo_footer_js' ) ) {
+/**
+ * additional scripts to load in the footer (mostly for various social widgets)
+ */
+	function largo_footer_js() { ?>
+		<!--Facebook-->
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+		<!--Twitter-->
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+		<!--Google Plus-->
+		<script type="text/javascript">
+		  (function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		  })();
+		</script>
+	<?php
+	}
+	add_action( 'wp_enqueue_scripts', 'largo_footer_js' );
+} // ends check for largo_footer_js()
+
+if ( ! function_exists( 'largo_google_analytics' ) ) {
+/**
+ * add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
+ */
+	function largo_google_analytics() {
+
+		if ( get_option( 'ga_id', true ) // make sure the ga_id setting is defined
+			&& ( !is_user_logged_in() ) ) : // don't track logged in users
+		?>
+			<script>
+			    var _gaq = _gaq || [];
+			    _gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
+			    _gaq.push(['_trackPageview']);
+
+			    (function() {
+				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+			</script>
+		<?php
+		endif;
+	}
+	add_action( 'wp_footer', 'largo_google_analytics' );
+} // ends check for largo_google_analytics()
+
+?>

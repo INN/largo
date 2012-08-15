@@ -31,3 +31,5 @@ function largo_robots() {
 	echo "Allow: /assets";
 }
 add_action( 'do_robots', 'largo_robots' );
+
+?>

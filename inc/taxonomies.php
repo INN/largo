@@ -29,4 +29,5 @@ function largo_custom_taxonomies() {
     }
 }
 add_action( 'init', 'largo_custom_taxonomies' );
+
 ?>
