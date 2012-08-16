@@ -1,19 +1,8 @@
 <?php
 
 /**
- *
  * Show related tags and subcategories for each main category
- *
-
- if (isset($tags[$tag->term_id])) {
-                	$tags[ $tag->term_id ]++;
-                } else {
-                	$tags[ $tag->term_id ] = 0;
-                }
-                $tag_objs[ $tag->term_id ] = $tag;
-endif;
-
-*/
+ */
 
 function largo_get_related_topics_for_category( $obj ) {
     $MAX_RELATED_TOPICS = 5;
