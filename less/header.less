@@ -2,6 +2,7 @@
   background-color: @gray;
   .gradientBar (@grayDark, @grayDarker);
   .box-shadow(0 1px 3px 1px @grayLight);
+  height:32px;
 }
 .global-nav {
   color: #fff;
@@ -9,7 +10,7 @@
   font-size:@baseFontSize - 2;
   position: relative;
   height: 32px;
-  overflow-y:visible;
+  overflow:visible;
   z-index: 1030;
   ul {
     margin: 0;
@@ -89,7 +90,6 @@
       margin-top:-13px;
       margin-bottom:5px;
 	}
-
 }
 #site-header h1.branding,
 #site-header h2.branding {
@@ -109,6 +109,11 @@
 	  color: @gray;
 	  padding-left:10px;
 	}
+}
+.ie7 #site-header h1.branding,
+.ie8 #site-header h1.branding,
+.ie9 #site-header h1.branding {
+	margin-top:12px;
 }
 .print-header {
 	display:none;

@@ -46,7 +46,7 @@ function my_theme_register_required_plugins() {
 		array(
 			'name'     				=> 'Argo Audio Player', // The plugin name
 			'slug'     				=> 'argo-audio-player', // The plugin slug (typically the folder name)
-			'source'   				=> get_stylesheet_directory() . '/inc/plugins/argo-audio-player.zip', // The plugin source
+			'source'   				=> get_template_directory_uri() . '/inc/plugins/argo-audio-player.zip', // The plugin source
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
@@ -57,7 +57,7 @@ function my_theme_register_required_plugins() {
 		array(
 			'name'     				=> 'Navis Slideshows', // The plugin name
 			'slug'     				=> 'navis-slideshows', // The plugin slug (typically the folder name)
-			'source'   				=> get_stylesheet_directory() . '/inc/plugins/navis-slideshows.zip', // The plugin source
+			'source'   				=> get_template_directory_uri() . '/inc/plugins/navis-slideshows.zip', // The plugin source
 			'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
@@ -68,7 +68,7 @@ function my_theme_register_required_plugins() {
 		array(
 			'name'     				=> 'Navis Jiffy Posts', // The plugin name
 			'slug'     				=> 'navis-jiffy-posts', // The plugin slug (typically the folder name)
-			'source'   				=> get_stylesheet_directory() . '/inc/plugins/navis-jiffy-posts.zip', // The plugin source
+			'source'   				=> get_template_directory_uri() . '/inc/plugins/navis-jiffy-posts.zip', // The plugin source
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
@@ -79,7 +79,7 @@ function my_theme_register_required_plugins() {
 		array(
 			'name'     				=> 'Argo Links', // The plugin name
 			'slug'     				=> 'argo-links', // The plugin slug (typically the folder name)
-			'source'   				=> get_stylesheet_directory() . '/inc/plugins/argo-links.zip', // The plugin source
+			'source'   				=> get_template_directory_uri() . '/inc/plugins/argo-links.zip', // The plugin source
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
@@ -90,7 +90,7 @@ function my_theme_register_required_plugins() {
 		array(
 			'name'     				=> 'Navis Documentcloud', // The plugin name
 			'slug'     				=> 'navis-documentcloud', // The plugin slug (typically the folder name)
-			'source'   				=> get_stylesheet_directory() . '/inc/plugins/navis-documentcloud.zip', // The plugin source
+			'source'   				=> get_template_directory_uri() . '/inc/plugins/navis-documentcloud.zip', // The plugin source
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
@@ -101,7 +101,7 @@ function my_theme_register_required_plugins() {
 		array(
 			'name'     				=> 'Navis Media Credit', // The plugin name
 			'slug'     				=> 'navis-media-credit', // The plugin slug (typically the folder name)
-			'source'   				=> get_stylesheet_directory() . '/inc/plugins/navis-media-credit.zip', // The plugin source
+			'source'   				=> get_template_directory_uri() . '/inc/plugins/navis-media-credit.zip', // The plugin source
 			'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> true, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch

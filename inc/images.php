@@ -19,6 +19,24 @@ function largo_create_image_sizes() {
 add_action( 'after_setup_theme', 'largo_create_image_sizes' );
 
 /**
+ * Replace all the defaults in settings > media with our preferred settins
+ */
+function largo_set_media_options() {
+	update_option('thumbnail_size_w', 140);
+    update_option('thumbnail_size_h', 140);
+    update_option('thumbnail_crop', 1);
+    update_option('medium_size_w', 336);
+    update_option('medium_size_h', 9999);
+    update_option('large_size_w', 771);
+    update_option('large_size_h', 9999);
+	update_option('embed_autourls', 1);
+	update_option('embed_size_w', 771);
+	update_option('embed_size_h', 9999);
+}
+add_action( 'after_setup_theme', 'largo_set_media_options' );
+
+
+/**
  * largo_get_image_tag(): Renders an <img /> tag for attachments, scaling it
  * to $size and guaranteeing that it's not wider than the content well.
  *

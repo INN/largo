@@ -63,20 +63,26 @@ h3 {
 	font-size: @baseFontSize * 2.25;
 }
 h4,
+.entry-content h1,
+.entry-content h2,
 .entry-content h3 {
 	font-size: @baseFontSize * 1.833;
 }
 h5,
-.stories h3 {
+.stories h3,
+.entry-content h4 {
 	font-size: @baseFontSize * 1.5;
 }
-h6 {
+h6,
+.entry-content h5 {
 	font-size: @baseFontSize * 1.222;
 }
-h7 {
+h7,
+.entry-content h6 {
 	font-size: @baseFontSize;
 }
-h8 {
+h8,
+.entry-content h7 {
 	font-size: @baseFontSize * 0.815;
 }
 
@@ -104,10 +110,9 @@ p {
 	color: @grayLight;
   }
   &.intro {
-    font-size: @baseFontSize + 5;
+    font-size: @baseFontSize + 6;
     color: @gray;
     font-style:italic;
-    font-weight:bold;
   }
 }
 .widget p {
@@ -131,6 +136,12 @@ ul {
 }
 ol {
   list-style: decimal;
+  ol {
+    list-style: lower-alpha;
+    ol {
+	  list-style: lower-roman;
+    }
+  }
 }
 li {
   margin-bottom: @baseline * 0.5;

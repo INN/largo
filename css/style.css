@@ -184,20 +184,26 @@ h3 {
   font-size: 36px;
 }
 h4,
+.entry-content h1,
+.entry-content h2,
 .entry-content h3 {
   font-size: 29.328px;
 }
 h5,
-.stories h3 {
+.stories h3,
+.entry-content h4 {
   font-size: 24px;
 }
-h6 {
+h6,
+.entry-content h5 {
   font-size: 19.552px;
 }
-h7 {
+h7,
+.entry-content h6 {
   font-size: 16px;
 }
-h8 {
+h8,
+.entry-content h7 {
   font-size: 13.04px;
 }
 h1,
@@ -239,10 +245,9 @@ p.xsmall {
   color: #999999;
 }
 p.intro {
-  font-size: 21px;
+  font-size: 22px;
   color: #555555;
   font-style: italic;
-  font-weight: bold;
 }
 .widget p {
   font-size: 16px;
@@ -265,6 +270,12 @@ ul {
 }
 ol {
   list-style: decimal;
+}
+ol ol {
+  list-style: lower-alpha;
+}
+ol ol ol {
+  list-style: lower-roman;
 }
 li {
   margin-bottom: 12px;
@@ -2188,6 +2199,7 @@ table .span24 {
   -webkit-box-shadow: 0 1px 3px 1px #999999;
   -moz-box-shadow: 0 1px 3px 1px #999999;
   box-shadow: 0 1px 3px 1px #999999;
+  height: 32px;
 }
 .global-nav {
   color: #fff;
@@ -2195,7 +2207,7 @@ table .span24 {
   font-size: 14px;
   position: relative;
   height: 32px;
-  overflow-y: visible;
+  overflow: visible;
   z-index: 1030;
 }
 .global-nav ul {
@@ -2301,6 +2313,11 @@ table .span24 {
   font-weight: normal;
   color: #555555;
   padding-left: 10px;
+}
+.ie7 #site-header h1.branding,
+.ie8 #site-header h1.branding,
+.ie9 #site-header h1.branding {
+  margin-top: 12px;
 }
 .print-header {
   display: none;
@@ -3309,12 +3326,15 @@ p.wp-caption-text {
 .navis-slideshow .pagination li {
   list-style-type: none !important;
 }
+.half,
+.full {
+  margin: 0 0 24px;
+}
 .half {
   width: 50%;
 }
 .full {
   width: 100%;
-  margin: 0 0 12px;
 }
 .pull-quote {
   border-left: 4px solid #333;
@@ -4183,14 +4203,14 @@ p.comment-form-comment {
   display: normal;
 }
 .alignnone {
-  margin: 12px;
+  margin: 18px;
 }
 .aligncenter,
 div.aligncenter,
 .center {
   clear: both;
   display: block;
-  margin: 12px auto;
+  margin: 18px auto;
 }
 .alignright,
 .right {
