@@ -4,7 +4,7 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews item' ); ?>>
 	<header>
  		<h1 class="entry-title"><?php the_title(); ?></h1>
  		<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>

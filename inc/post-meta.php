@@ -91,7 +91,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		endif;
 
 		// print the byline
-		printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
+		printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date updated dtstamp pubdate" datetime="%4$s">%5$s</time>',
 			$byline_link,
 			$byline_title_attr,
 			$byline_text,

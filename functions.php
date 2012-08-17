@@ -355,7 +355,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		</script>
 	<?php
 	}
-	add_action( 'wp_enqueue_scripts', 'largo_footer_js' );
+	add_action( 'wp_footer', 'largo_footer_js' );
 } // ends check for largo_footer_js()
 
 if ( ! function_exists( 'largo_google_analytics' ) ) {

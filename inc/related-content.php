@@ -236,7 +236,7 @@ if ( ! function_exists( 'largo_the_categories_and_tags' ) ) {
 	    if ( $tags ) {
 	        foreach ( $tags as $tag ) {
 	            $links[] = sprintf(
-	                '<li class="post-tag-link"><i class="icon-white icon-tag"></i><a href="%s" title="%s">%s</a></li>',
+	                '<li class="post-tag-link" rel="tag"><i class="icon-white icon-tag"></i><a href="%s" title="%s">%s</a></li>',
 	                get_tag_link( $tag->term_id ), $tag->name, $tag->name
 	            );
 	        }
