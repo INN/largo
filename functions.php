@@ -283,6 +283,32 @@ if ( ! function_exists( 'largo_copyright_message' ) ) {
 	}
 } // ends check for largo_copyright_message()
 
+if ( ! function_exists( 'largo_social_links' ) ) {
+/**
+ * outputs all of the social media links from the theme options
+ */
+	function largo_social_links () {
+
+		$fields = array(
+			'rss' => 'Link to RSS Feed',
+			'facebook' => 'Link to Facebook Profile',
+			'twitter' => 'Link to Twitter Page',
+			'youtube' => 'Link to YouTube Page',
+			'flickr' => 'Link to Flickr Page',
+			'gplus' => 'Link to Google Plus Page'
+		);
+
+		foreach ( $fields as $field => $title ) {
+			$field_link =  $field . '_link';
+
+			if ( of_get_option( $field_link ) ) {
+				echo '<li><a href="' . esc_url( of_get_option( $field_link ) ) . '" title="' . $title . '"><i class="social-icons ' . $field . '"></i></a></li>';
+			}
+		}
+	}
+} // ends check for largo_social_links()
+
+
 if ( ! function_exists( 'largo_enqueue_js' ) ) {
 /**
  * Enqueue JS for the footer

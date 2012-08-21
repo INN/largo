@@ -1462,43 +1462,32 @@ table .span24 {
 .social-icons {
   display: block;
   background: url("../img/social-icons.png") no-repeat;
-  width: 32px;
-  height: 33px;
-}
-.social-icons.gplus {
-  background-position: 0px -66px;
-}
-.social-icons.vimeo {
-  background-position: 0px -33px;
-}
-.social-icons.pinterest {
-  background-position: 0px -264px;
+  width: 24px;
+  height: 24px;
 }
 .social-icons.facebook {
   background-position: 0px 0px;
 }
-.social-icons.rss {
-  background-position: 0px -165px;
-}
-.social-icons.twitter {
-  background-position: 0px -99px;
-}
-.social-icons.flickr {
-  background-position: 0px -198px;
-}
-.social-icons.tumblr {
-  background-position: -64px -99px;
-}
-.social-icons.youtube {
-  background-position: 0px -231px;
+.social-icons.gplus {
+  background-position: 0px -24px;
 }
 .social-icons.rss24 {
-  background-position: 0px -297px;
-  width: 24px;
-  height: 24px;
+  background-position: 0px -48px;
+}
+.social-icons.youtube {
+  background-position: 0px -72px;
+}
+.social-icons.rss {
+  background-position: 0px -96px;
+}
+.social-icons.flickr {
+  background-position: 0px -120px;
+}
+.social-icons.twitter {
+  background-position: 0px -144px;
 }
 .social-icons.gplus-19 {
-  background-position: 0px -321px;
+  background-position: 0px -168px;
   width: 19px;
   height: 19px;
 }
@@ -3451,10 +3440,9 @@ p.comment-form-comment {
   color: #ffffff;
 }
 .subscribe {
-  height: 33px;
-  margin-bottom: 12px;
-  line-height: 33px;
-  font-size: 18px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .subscribe a {
@@ -3466,7 +3454,7 @@ p.comment-form-comment {
 }
 .twitter-follow-button {
   display: block;
-  margin: 12px 0;
+  margin: 8px 0 10px;
 }
 .fb-like,
 .fb-like span,
@@ -3606,6 +3594,17 @@ p.comment-form-comment {
 #site-footer input.search-submit {
   max-width: 25%;
   padding: 1px 8px 1px;
+}
+ul#ft-social li {
+  float: left;
+  display: inline;
+  margin-right: 8px;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+ul#ft-social li:hover {
+  opacity: 0.75;
+  filter: alpha(opacity=75);
 }
 #supplementary {
   padding-bottom: 12px;

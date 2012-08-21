@@ -30,5 +30,10 @@
 		</select>
 	</div>
 
-<?php endif; // end sidebar widget area ?>
-</div> <!-- /.grid_4 -->
+	<?php endif; // end sidebar widget area ?>
+
+	<ul id="ft-social">
+		<?php largo_social_links(); ?>
+	</ul>
+
+</div> <!-- /.span3 -->
