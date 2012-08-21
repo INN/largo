@@ -1456,6 +1456,9 @@ table .span24 {
 .icon-tag {
   background-position: 0 -48px;
 }
+.icon-print {
+  background-position: -96px -48px;
+}
 .social-icons {
   display: block;
   background: url("../img/social-icons.png") no-repeat;
