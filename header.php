@@ -55,7 +55,6 @@
 </head>
 
 <body <?php body_class(); ?>>
-<?php echo $header_img; ?>
 <div id="top"></div>
 <div class="global-nav-bg">
 	<div class="global-nav">

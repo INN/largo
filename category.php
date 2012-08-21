@@ -26,7 +26,7 @@
 
 			</header> <!-- /.category-background -->
 
-			<h3 class="recent-posts clearfix">Recent posts<a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"></a></h3>
+			<h3 class="recent-posts clearfix">Recent posts<a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"><i class="social-icons rss24"></i></a></h3>
 
 				<?php /* Start the Loop */ ?>
 				<?php while ( have_posts() ) : the_post(); ?>

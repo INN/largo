@@ -13,7 +13,10 @@ get_header(); ?>
 
 			<div id="content" class="stories span8" role="main">
 
-			<?php global $ids; ?>
+			<?php
+				global $ids;
+				$ids = array();
+			?>
 
 			<?php if (of_get_option('homepage_layout') == 'newsy') { ?>
 				<div id="homepage-featured" class="row-fluid clearfix">

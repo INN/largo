@@ -37,7 +37,7 @@
 
 		<?php if ( get_the_author_meta( 'googleplus' ) ) : ?>
 		<li class="gplus">
-			<a href="<?php echo esc_url( get_the_author_meta( 'googleplus' ) ); ?>" title="<?php echo esc_attr( get_the_author() ); ?> on Google+" rel="me"><img src="<?php bloginfo( 'template_directory' ); ?>/img/gplus-19.png" alt="Google+" /></a>
+			<a href="<?php echo esc_url( get_the_author_meta( 'googleplus' ) ); ?>" title="<?php echo esc_attr( get_the_author() ); ?> on Google+" rel="me"><i class="social-icons gplus-19"></i></a>
 		</li>
 		<?php endif; ?>
 	</ul>

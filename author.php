@@ -21,7 +21,7 @@ get_header(); ?>
 
 		<?php get_template_part( 'largo-author-box' ); ?>
 
-		<h3 class="recent-posts clearfix">Recent posts<a class="rss-link" href="<?php echo esc_url( get_author_feed_link( get_the_author_meta('ID') ) ); ?>"></a></h3>
+		<h3 class="recent-posts clearfix">Recent posts<a class="rss-link" href="<?php echo esc_url( get_author_feed_link( get_the_author_meta('ID') ) ); ?>"><i class="social-icons rss24"></i></a></h3>
 
 				<?php
 					/* Since we called the_post() above, we need to

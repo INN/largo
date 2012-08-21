@@ -57,8 +57,7 @@
     }
   }
   i {
-    margin-right:3px;
-    margin-top:1px;
+    margin: 1px 3px 0 0;
   }
 }
 #header-search {
@@ -67,18 +66,17 @@
   form {
     margin:0;
   }
-  input {
-    font-size: @baseFontSize - 3;
-	line-height:1;
+  input, button {
 	font-family: @sansFontFamily;
+	font-size: @baseFontSize - 3;
+	line-height:1;
+  }
+  input {
 	height:14px;
 	padding: 6px 4px 2px 4px
   }
   button {
 	height:24px;
-	font-size: @baseFontSize - 3;
-	line-height:1;
-	font-family: @sansFontFamily;
 	text-transform:uppercase;
   }
 }
@@ -87,8 +85,7 @@
 	width:auto;
 	img {
       clear:none;
-      margin-top:-13px;
-      margin-bottom:5px;
+      margin:-13px 0 5px;
 	}
 }
 #site-header h1.branding,

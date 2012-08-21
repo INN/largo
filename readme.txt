@@ -4,6 +4,8 @@ Project Largo is a responsively designed WordPress parent theme designed and opt
 
 The project extends work done by NPR's Project Argo (http://argoproject.org/).
 
+Documentation and more information at: http://largoproject.org
+
 VERSION: 0.1
 
 == SETUP ==
@@ -32,4 +34,5 @@ This project builds on a number of great open source projects, including:
 * LESS CSS: http://lesscss.org/
 * Glyphicons: http://glyphicons.com/
 * Options Framework: https://github.com/devinsays/options-framework-theme
+* TGM Plugin Activation Library: https://github.com/thomasgriffin/TGM-Plugin-Activation
 
