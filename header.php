@@ -37,7 +37,7 @@
 
 <?php
 	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
-	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
+	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr-2.5.3.min.js' );
 
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
