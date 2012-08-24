@@ -347,6 +347,7 @@ if ( ! function_exists( 'largo_header_js' ) ) {
 				};
 				return header_img;
 			};
+			var banner_img_src = whichHeader();
 		</script>
 	<?php
 	}

@@ -29,7 +29,6 @@ jQuery(document).ready(function($) {
 	});
 
 	//get the correct sized image for the header, replace it with a new one if the window is resized
-	var banner_img_src = whichHeader();
 	$('.header_img').attr('src', banner_img_src);
 	$(window).resize(function() {
 		$('.header_img').attr('src', whichHeader());
