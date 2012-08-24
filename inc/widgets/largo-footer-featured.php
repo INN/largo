@@ -6,9 +6,9 @@ class largo_footer_featured_widget extends WP_Widget {
 
 	function largo_footer_featured_widget() {
 		$widget_ops = array(
-		'classname' => 'largo-footer-featured',
-		'description' => __('Show recent featured posts with thumbnails and excerpts', 'largo-footer-featured') );
-
+			'classname' => 'largo-footer-featured',
+			'description' => 'Show recent featured posts with thumbnails and excerpts', 'largo-footer-featured'
+		);
 		$this->WP_Widget( 'largo-footer-featured-widget', __('Largo Footer Featured Posts', 'largo-footer-featured'), $widget_ops);
 	}
 

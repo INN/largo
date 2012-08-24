@@ -34,7 +34,7 @@ get_header(); ?>
 							) );
 			          	if ( $topstory->have_posts() ) : ?>
 			             	 <?php while ( $topstory->have_posts() ) : $topstory->the_post(); $ids[] = get_the_ID(); ?>
-			                 	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
+			                 	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
 			                    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 			                    <h5 class="byline"><?php largo_byline(); ?><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
 			                    <?php the_excerpt(); ?>

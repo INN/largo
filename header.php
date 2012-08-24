@@ -37,7 +37,7 @@
 
 <?php
 	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
-	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr-2.5.3.min.js' );
+	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
 
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
@@ -83,7 +83,7 @@
 					</form>
 				</div>
 				<div class="org-logo">
-        			<a href="http://investigativenewsnetwork.org/" target="_blank"><img src="<?php bloginfo( 'template_directory' ); ?>/img/inn-logo-80-50.jpg" height="50" alt="INN logo" /></a>
+        			<a href="http://investigativenewsnetwork.org/" target="_blank"><img src="<?php get_template_directory_uri(); ?>/img/inn-logo-80-50.jpg" height="50" alt="INN logo" /></a>
 				</div>
         	</div>
         </nav>
@@ -107,7 +107,6 @@
 	    		esc_attr( get_bloginfo('description') )
 	    	);
 	    	if ($header_class != 'branding') :
-	    	//show the banner images, TO DO: Make this less ugly, conditionally load images
     	?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<img class="header_img" src="" alt="" />

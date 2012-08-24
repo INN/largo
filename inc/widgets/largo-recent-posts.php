@@ -6,9 +6,9 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function largo_recent_posts_widget() {
 		$widget_ops = array(
-		'classname' => 'largo-recent-posts',
-		'description' => __('Show your most recent posts with thumbnails and excerpts', 'largo-recent-posts') );
-
+			'classname' => 'largo-recent-posts',
+			'description' => 'Show your most recent posts with thumbnails and excerpts', 'largo-recent-posts'
+		);
 		$this->WP_Widget( 'largo-recent-posts-widget', __('Largo Recent Posts', 'largo-recent-posts'), $widget_ops);
 	}
 

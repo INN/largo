@@ -55,7 +55,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 				<meta property="og:title" content="<?php bloginfo('name'); echo ' - '; bloginfo('description'); ?>" />
 				<meta property="og:type" content="website" />
-				<meta property="og:url" content="<?php bloginfo('url'); ?>"/>
+				<meta property="og:url" content="<?php echo home_url(); ?>"/>
 				<meta property="og:description" content="<?php bloginfo('description'); ?>" />
 
 			<?php } else { ?>

@@ -17,13 +17,13 @@ function largo_unregister_widgets() {
 add_action( 'widgets_init', 'largo_unregister_widgets' );
 
 // load our new widgets
-require_once( TEMPLATEPATH . '/inc/widgets/largo-follow.php' );
-require_once( TEMPLATEPATH . '/inc/widgets/largo-footer-featured.php' );
-require_once( TEMPLATEPATH . '/inc/widgets/largo-sidebar-featured.php' );
-require_once( TEMPLATEPATH . '/inc/widgets/largo-about.php' );
-require_once( TEMPLATEPATH . '/inc/widgets/largo-donate.php' );
-require_once( TEMPLATEPATH . '/inc/widgets/largo-twitter.php' );
-require_once( TEMPLATEPATH . '/inc/widgets/largo-recent-posts.php' );
+require_once( get_template_directory() . '/inc/widgets/largo-follow.php' );
+require_once( get_template_directory() . '/inc/widgets/largo-footer-featured.php' );
+require_once( get_template_directory() . '/inc/widgets/largo-sidebar-featured.php' );
+require_once( get_template_directory() . '/inc/widgets/largo-about.php' );
+require_once( get_template_directory() . '/inc/widgets/largo-donate.php' );
+require_once( get_template_directory() . '/inc/widgets/largo-twitter.php' );
+require_once( get_template_directory() . '/inc/widgets/largo-recent-posts.php' );
 
 // ...and then register them
 function largo_load_widgets() {

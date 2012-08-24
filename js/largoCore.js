@@ -1,7 +1,12 @@
 jQuery(document).ready(function($) {
 
+	Modernizr.load({
+		test: Modernizr.mq('only all'),
+		nope: 'respond.min.js'
+	});
+
 	//html5 placeholders
-	$("input[placeholder]").textPlaceholder();
+	$('input[placeholder], textarea[placeholder]').placeholder();
 
 	// dim sidebar
 	$(window).scroll(function(){
@@ -23,14 +28,18 @@ jQuery(document).ready(function($) {
 			};
 	});
 
+	//get the correct sized image for the header, replace it with a new one if the window is resized
+	var banner_img_src = whichHeader();
 	$('.header_img').attr('src', banner_img_src);
-
 	$(window).resize(function() {
 		$('.header_img').attr('src', whichHeader());
 	});
 
-	$('.carousel').carousel({
-	  interval: 6000
-	});
+	//the homepage carousel, make sure we don't load this unless .carousel is defined
+	if(jQuery().carousel) {
+		$('.carousel').carousel({
+			interval: 6000
+		});
+	};
 
 });

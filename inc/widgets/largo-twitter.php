@@ -6,9 +6,9 @@ class largo_twitter_widget extends WP_Widget {
 
 	function largo_twitter_widget() {
 		$widget_ops = array(
-		'classname' => 'largo-twitter',
-		'description' => __('Show a Twitter profile, list or search widget') );
-
+			'classname' => 'largo-twitter',
+			'description' => 'Show a Twitter profile, list or search widget'
+		);
 		$this->WP_Widget( 'largo-twitter-widget', __('Largo Twitter Widget', 'largo-twitter'), $widget_ops);
 	}
 

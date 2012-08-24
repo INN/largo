@@ -9,7 +9,7 @@
 			<div class="photo">
 			<?php echo get_avatar( get_the_author_meta('ID'), 96, '', get_the_author_meta('display_name') ); ?>
 			</div>
-		<? endif;
+		<?php endif;
 	?>
 
 	<?php if ( get_the_author_meta( 'description' ) ) : ?>

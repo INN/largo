@@ -6,9 +6,9 @@ class largo_about_widget extends WP_Widget {
 
 	function largo_about_widget() {
 		$widget_ops = array(
-		'classname' => 'largo-about',
-		'description' => __('Show the site description from your theme options page') );
-
+			'classname' => 'largo-about',
+			'description' => 'Show the site description from your theme options page'
+		);
 		$this->WP_Widget( 'largo-about-widget', __('Largo About Site', 'largo-about'), $widget_ops);
 	}
 

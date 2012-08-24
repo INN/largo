@@ -38,19 +38,19 @@ if ( !function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/options-framework/' );
 	require_once dirname( __FILE__ ) . '/inc/options-framework/options-framework.php';
 }
-require_once( TEMPLATEPATH . '/inc/users.php' );
-require_once( TEMPLATEPATH . '/inc/sidebars.php' );
-require_once( TEMPLATEPATH . '/inc/widgets.php' );
-require_once( TEMPLATEPATH . '/inc/nav-menus.php' );
-require_once( TEMPLATEPATH . '/inc/open-graph.php' );
-require_once( TEMPLATEPATH . '/inc/taxonomies.php' );
-require_once( TEMPLATEPATH . '/inc/editor.php' );
-require_once( TEMPLATEPATH . '/inc/post-meta.php' );
-require_once( TEMPLATEPATH . '/inc/images.php' );
-require_once( TEMPLATEPATH . '/inc/related-content.php' );
-require_once( TEMPLATEPATH . '/inc/featured-content.php' );
-require_once( TEMPLATEPATH . '/inc/special-functionality.php' );
-require_once( TEMPLATEPATH . '/inc/largo-plugin-init.php' );
+require_once( get_template_directory() . '/inc/users.php' );
+require_once( get_template_directory() . '/inc/sidebars.php' );
+require_once( get_template_directory() . '/inc/widgets.php' );
+require_once( get_template_directory() . '/inc/nav-menus.php' );
+require_once( get_template_directory() . '/inc/open-graph.php' );
+require_once( get_template_directory() . '/inc/taxonomies.php' );
+require_once( get_template_directory() . '/inc/editor.php' );
+require_once( get_template_directory() . '/inc/post-meta.php' );
+require_once( get_template_directory() . '/inc/images.php' );
+require_once( get_template_directory() . '/inc/related-content.php' );
+require_once( get_template_directory() . '/inc/featured-content.php' );
+require_once( get_template_directory() . '/inc/special-functionality.php' );
+require_once( get_template_directory() . '/inc/largo-plugin-init.php' );
 
 /**
  * Tell WordPress to run largo_setup() when the 'after_setup_theme' hook is run.
@@ -209,7 +209,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
  * Template for comments and pingbacks.
  *
  * To override this walker in a child theme without modifying the comments template
- * simply create your own eleven_comment(), and that function will be used instead.
+ * simply create your own largo_comment(), and that function will be used instead.
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
  */
@@ -314,15 +314,16 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
  * Enqueue JS for the footer
  */
 	function largo_enqueue_js() {
-		wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
+		wp_enqueue_script( 'text_placeholder', get_template_directory_uri() . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
 		if ( is_single() && of_get_option( 'show_related_content' ) )
-			wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
-		wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
+			wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
+		wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
 		if ( is_home() && of_get_option('homepage_layout') == 'slider' )
-			wp_enqueue_script( 'bootstrap-carousel', get_bloginfo('template_url') . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
-		wp_enqueue_script( 'largoCore', get_bloginfo('template_url') . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
+			wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
+			wp_enqueue_style( 'carousel-styles', get_template_directory_uri() . '/css/carousel.css', false, false, 'screen' );
+		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
 		if ( is_single() )
-			wp_enqueue_script( 'sharethis', get_bloginfo('template_url') . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
+			wp_enqueue_script( 'sharethis', get_template_directory_uri() . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
 
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
@@ -346,11 +347,10 @@ if ( ! function_exists( 'largo_header_js' ) ) {
 				};
 				return header_img;
 			};
-			var banner_img_src = whichHeader();
 		</script>
 	<?php
 	}
-	add_action( 'wp_head', 'largo_header_js' );
+	add_action( 'wp_enqueue_scripts', 'largo_header_js' );
 } // ends check for largo_header_js()
 
 if ( ! function_exists( 'largo_footer_js' ) ) {

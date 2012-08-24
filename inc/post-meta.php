@@ -163,8 +163,8 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
 			'after' => '</div>',
 			'text_before' => '',
 			'text_after' => '',
-			'nextpagelink' => __( 'Next Page' ),
-			'previouspagelink' => __( 'Previous Page' ),
+			'nextpagelink' => 'Next Page',
+			'previouspagelink' => 'Previous Page',
 			'pagelink' => '%',
 			'echo' => 1
 		);

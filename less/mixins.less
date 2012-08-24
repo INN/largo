@@ -2,33 +2,6 @@
 // Snippets of reusable CSS to develop faster and keep code readable
 // -----------------------------------------------------------------
 
-
-// UTILITY MIXINS
-// --------------------------------------------------
-
-// Clearfix
-// --------
-// For clearing floats like a boss h5bp.com/q
-.clearfix {
-  *zoom: 1;
-  &:before,
-  &:after {
-    display: table;
-    content: "";
-  }
-  &:after {
-    clear: both;
-  }
-}
-
-.visuallyhidden {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px; width: 1px;
-  margin: -1px; padding: 0; border: 0;
-}
-
 // Webkit-style focus
 // ------------------
 .tab-focus() {
@@ -109,17 +82,6 @@
   white-space: nowrap;
 }
 
-// CSS image replacement
-// -------------------------
-// Source: https://github.com/h5bp/html5-boilerplate/commit/aa0396eae757
-.hide-text {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
-}
-
 
 // FONTS
 // --------------------------------------------------
@@ -158,15 +120,6 @@
 
 // FORMS
 // --------------------------------------------------
-
-// Block level inputs
-.input-block-level {
-  display: block;
-  width: 100%;
-  min-height: 28px;        // Make inputs at least the height of their button counterpart
-  .box-sizing(border-box); // Makes inputs behave like true block-level elements
-}
-
 
 // Mixin for form field states
 .formFieldState(@textColor: #555, @borderColor: #ccc, @backgroundColor: #f5f5f5) {
