@@ -113,3 +113,8 @@
 .carousel-caption p a {
   display: none;
 }
+@media (max-width: 768px) {
+  .carousel-caption {
+    position: static;
+  }
+}

@@ -2925,9 +2925,6 @@ span.search-term {
 .archive-dropdown {
   margin-bottom: 12px;
 }
-.CleanContact {
-  width: 100% !important;
-}
 #disqus_thread {
   background-color: #eeeeee;
   padding: 20px 10px;
@@ -3738,9 +3735,6 @@ img[class*="wp-image-"] {
   #menu-footer-navigation li {
     font-size: 18px;
     padding: 8px 0;
-  }
-  .carousel-caption {
-    position: static;
   }
 }
 @media (max-width: 480px) {
