@@ -16,7 +16,7 @@ class largo_twitter_widget extends WP_Widget {
 		extract( $args );
 
 		$widget_class = !empty($instance['widget_class']) ? $instance['widget_class'] : '';
-		/* Add the widget class to $before widget, used as a style hook */
+		/* Add the widget class to $before_widget, used as a style hook */
 		if( strpos($before_widget, 'class') === false ) {
 			$before_widget = str_replace('>', 'class="'. $widget_class . '"', $before_widget);
 		}
@@ -24,104 +24,85 @@ class largo_twitter_widget extends WP_Widget {
 			$before_widget = str_replace('class="', 'class="'. $widget_class . ' ', $before_widget);
 		}
 
-		echo $before_widget; ?>
+		echo $before_widget;
 
-			<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-			<script>
-			new TWTR.Widget({
-			  version: 2,
-			  type: '<?php echo $instance['widget_type']; ?>',
-			  rpp: 30,
-			  interval: 30000,
-			  <?php if ($instance['widget_type'] == 'list' || $instance['widget_type'] == 'search' )  { ?>
-			  title: '<?php echo $instance['title']; ?>',
-			  subject: '<?php echo $instance['subtitle']; ?>',
-			  <?php } ?>
-			  width: '100%',
-			  height: 300,
-			  theme: {
-			    shell: {
-			      background: '#<?php echo $instance['bg_color']; ?>',
-			      color: '#ffffff'
-			    },
-			    tweets: {
-			      background: '#ffffff',
-			      color: '#444444',
-			      links: '#2275bb'
-			    }
-			  },
-			  features: {
-			    scrollbar: true,
-			    loop: false,
-			    live: true,
-			    behavior: 'all'
+			 $widget_embed = '<a class="twitter-timeline" height="500" href="https://twitter.com/';
 
-			<?php if ($instance['widget_type'] == 'list') { ?>
-			  }
-			}).render().setList('<?php echo $instance['twitter_username']; ?>', '<?php echo $instance['twitter_list_slug']; ?>').start();
-			<?php } else if ($instance['widget_type'] == 'search') { ?>
-			  },
-			  search: '<?php echo $instance['twitter_search']; ?>',
-			}).render().start();
-			<?php } else if ($instance['widget_type'] == 'profile') { ?>
-			  }
-			}).render().setUser('<?php echo $instance['twitter_username']; ?>').start();
-			<?php } ?>
-			</script>
+			 if ($instance['widget_type'] == 'search') {
+			 	$widget_embed .= 'search?q=' . $instance['twitter_search'] . '" data-widget-id="' . $instance['widget_ID'] . '"data-theme="' . $instance['widget_theme'] . '">Tweets about "' . $instance['twitter_search'] . '"</a>';
+			 } else {
 
-		<?php echo $after_widget;
+				$widget_embed .= $instance['twitter_username'];
+
+				if ($instance['widget_type'] == 'timeline') {
+
+					$widget_embed .= '" data-widget-id="' . $instance['widget_ID'] . '"data-theme="' . $instance['widget_theme'] . '">Tweets by @' . $instance['twitter_username'] . '</a>';
+
+				} elseif ($instance['widget_type'] == 'favorites') {
+
+					$widget_embed .= '/favorites" data-widget-id="' . $instance['widget_ID'] . '"data-theme="' . $instance['widget_theme'] . '">Favorite Tweets by ' . $instance['twitter_username'] . '</a>';
+
+				} elseif ($instance['widget_type'] == 'list') {
+
+					$widget_embed .= '/' . $instance['twitter_list_slug'] . '" data-widget-id="' . $instance['widget_ID'] . '"data-theme="' . $instance['widget_theme'] . '">Tweets from ' . $instance['twitter_username'] . '/' . $instance['twitter_list_slug'] .'</a>';
+
+				}
+			 };
+
+		echo $widget_embed;
+
+		echo $after_widget;
 	}
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['subtitle'] = strip_tags( $new_instance['subtitle'] );
 		$instance['twitter_username'] = strip_tags( $new_instance['twitter_username'] );
 		$instance['twitter_list_slug'] = strip_tags( $new_instance['twitter_list_slug'] );
 		$instance['twitter_search'] = strip_tags( $new_instance['twitter_search'] );
+		$instance['widget_ID'] = strip_tags( $new_instance['widget_ID'] );
 		$instance['widget_type'] = $new_instance['widget_type'];
-		$instance['bg_color'] = $new_instance['bg_color'];
+		$instance['widget_theme'] = $new_instance['widget_theme'];
 		$instance['widget_class'] = $new_instance['widget_class'];
 		return $instance;
 	}
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' => 'Follow ' . get_bloginfo('name'),
-			'subtitle' => 'Follow us on Twitter',
+			'widget_ID' => '',
 			'twitter_username' => twitter_url_to_username( of_get_option( 'twitter_link' ) ),
 			'twitter_list_slug' => 'inn-staff-and-associates',
 			'twitter_search' => 'your search',
-			'widget_type' => 'profile',
-			'bg_color' => '333333',
+			'widget_type' => 'timeline',
+			'widget_theme' => 'light',
 			'widget_class' => 'default'
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
-		<label for="<?php echo $this->get_field_id( 'widget_type' ); ?>"><?php _e('Widget Type', 'largo-twitter'); ?></label>
-		<select id="<?php echo $this->get_field_id('widget_type'); ?>" name="<?php echo $this->get_field_name('widget_type'); ?>" class="widefat" style="width:90%;">
-		    <option <?php selected( $instance['widget_type'], 'profile'); ?> value="profile">Profile</option>
-		    <option <?php selected( $instance['widget_type'], 'list'); ?> value="list">List</option>
-		    <option <?php selected( $instance['widget_type'], 'search'); ?> value="search">Search</option>
-		</select>
-
 		<p>
-			<label for="<?php echo $this->get_field_id( 'bg_color' ); ?>"><?php _e('Background Color:', 'largo-twitter'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'bg_color' ); ?>" name="<?php echo $this->get_field_name( 'bg_color' ); ?>" value="<?php echo $instance['bg_color']; ?>" style="width:90%;" />
+			<label for="<?php echo $this->get_field_id( 'widget_type' ); ?>"><?php _e('Widget Type', 'largo-twitter'); ?></label>
+			<select id="<?php echo $this->get_field_id('widget_type'); ?>" name="<?php echo $this->get_field_name('widget_type'); ?>" class="widefat" style="width:90%;">
+			    <option <?php selected( $instance['widget_type'], 'timeline'); ?> value="timeline">Timeline</option>
+			    <option <?php selected( $instance['widget_type'], 'favorites'); ?> value="favorites">Favorites</option>
+			    <option <?php selected( $instance['widget_type'], 'list'); ?> value="list">List</option>
+			    <option <?php selected( $instance['widget_type'], 'search'); ?> value="search">Search</option>
+			</select>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo-twitter'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
+			<label for="<?php echo $this->get_field_id( 'widget_theme' ); ?>"><?php _e('Widget Type', 'largo-twitter'); ?></label>
+			<select id="<?php echo $this->get_field_id('widget_theme'); ?>" name="<?php echo $this->get_field_name('widget_theme'); ?>" class="widefat" style="width:90%;">
+			    <option <?php selected( $instance['widget_theme'], 'light'); ?> value="light">Light</option>
+			    <option <?php selected( $instance['widget_theme'], 'dark'); ?> value="dark">Dark</option>
+			</select>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'subtitle' ); ?>"><?php _e('Subtitle (for list and search widget):', 'largo-twitter'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'subtitle' ); ?>" name="<?php echo $this->get_field_name( 'subtitle' ); ?>" value="<?php echo $instance['subtitle']; ?>" style="width:90%;" />
+			<label for="<?php echo $this->get_field_id( 'widget_ID' ); ?>"><?php _e('Twitter Widget ID (from https://twitter.com/settings/widgets):', 'largo-twitter'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'widget_ID' ); ?>" name="<?php echo $this->get_field_name( 'widget_ID' ); ?>" value="<?php echo $instance['widget_ID']; ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'twitter_username' ); ?>"><?php _e('Twitter Username (for profile and list widget):', 'largo-twitter'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'twitter_username' ); ?>"><?php _e('Twitter Username (for timeline, favorites and list widgets):', 'largo-twitter'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_username' ); ?>" name="<?php echo $this->get_field_name( 'twitter_username' ); ?>" value="<?php echo $instance['twitter_username']; ?>" style="width:90%;" />
 		</p>
 

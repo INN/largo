@@ -38,7 +38,7 @@
 //A Few Alternate Styles
 #sidebar .widget.rev {
   color: @white;
-  #gradient > .vertical(@baseColor, darken(@baseColor, 10%);
+  #gradient > .vertical(@baseColor, darken(@baseColor, 10%));
   .widget-title {
 	  color:#333;
 	  text-shadow: 0 -1px 0 rgba(255,255,255,.3);
@@ -114,5 +114,8 @@
 #sidebar .widget_archive select,
 #sidebar .widget_categories select,
 #sidebar .widget_search form {
-	margin: @baseline/5 0;
+  margin: @baseline/5 0;
+}
+#sidebar iframe {
+  max-width: 100%;
 }

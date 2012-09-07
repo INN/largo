@@ -1993,7 +1993,7 @@ li.home-link:hover i {
 .open {
   *z-index: 1000;
 }
-.open  > .dropdown-menu {
+.open > .dropdown-menu {
   display: block;
 }
 .dropup .caret,
@@ -3380,6 +3380,9 @@ p.comment-form-comment {
 #sidebar .widget_categories select,
 #sidebar .widget_search form {
   margin: 4.8px 0;
+}
+#sidebar iframe {
+  max-width: 100%;
 }
 .footer-bg {
   background-color: #555555;
