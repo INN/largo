@@ -89,7 +89,7 @@ class largo_twitter_widget extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_theme' ); ?>"><?php _e('Widget Type', 'largo-twitter'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'widget_theme' ); ?>"><?php _e('Widget Theme', 'largo-twitter'); ?></label>
 			<select id="<?php echo $this->get_field_id('widget_theme'); ?>" name="<?php echo $this->get_field_name('widget_theme'); ?>" class="widefat" style="width:90%;">
 			    <option <?php selected( $instance['widget_theme'], 'light'); ?> value="light">Light</option>
 			    <option <?php selected( $instance['widget_theme'], 'dark'); ?> value="dark">Dark</option>
