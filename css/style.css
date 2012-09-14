@@ -1501,7 +1501,7 @@ table .span24 {
   padding-bottom: 24px;
 }
 #main {
-  margin-top: 12px;
+  margin-top: 24px;
 }
 /****************** LEFT NAV ******************/
 .row-fluid {
@@ -1631,7 +1631,7 @@ table .span24 {
 }
 .global-nav .nav-right .org-logo {
   float: left;
-  height: 50px;
+  height: 55px;
   -webkit-box-shadow: 0 3px 4px -2px #000000;
   -moz-box-shadow: 0 3px 4px -2px #000000;
   box-shadow: 0 3px 4px -2px #000000;
@@ -1684,12 +1684,12 @@ table .span24 {
 }
 #site-header img {
   clear: none;
-  margin: -13px 0 5px;
+  margin: -18px 0 5px;
 }
 .ie7 #site-header img,
 .ie8 #site-header img,
 .ie9 #site-header img {
-  margin-top: 4px;
+  margin-top: 9px;
 }
 #site-header h1.branding,
 #site-header h2.branding {
@@ -1716,7 +1716,7 @@ table .span24 {
 .ie7 #site-header h1.branding,
 .ie8 #site-header h1.branding,
 .ie9 #site-header h1.branding {
-  margin-top: 12px;
+  margin-top: 17px;
 }
 .print-header {
   display: none;
@@ -3272,6 +3272,10 @@ p.comment-form-comment {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
+#sidebar .widget-title a,
+#sidebar .widgettitle a {
+  color: #fff;
+}
 #sidebar .widget p,
 #sidebar .widget ul {
   padding: 0 3px;
@@ -3361,20 +3365,36 @@ p.comment-form-comment {
   margin-bottom: 8px;
 }
 #sidebar .largo-sidebar-featured img,
-#sidebar .largo-recent-posts img {
+#sidebar .largo-recent-posts img,
+#sidebar .widget_rss img {
   float: left;
   margin: 5px 10px 0 5px;
 }
 #sidebar .largo-sidebar-featured h5,
-#sidebar .largo-recent-posts h5 {
+#sidebar .largo-recent-posts h5,
+#sidebar .widget_rss h5 {
   margin-bottom: 2px;
   padding: 0 3px;
   font-size: 16px;
 }
 #sidebar .largo-sidebar-featured p,
-#sidebar .largo-recent-posts p {
+#sidebar .largo-recent-posts p,
+#sidebar .widget_rss p {
   font-size: 10.672px;
   margin-bottom: 12px;
+}
+#sidebar .widget_rss ul {
+  margin: 12px 0;
+  padding: 0;
+}
+#sidebar .widget_rss li {
+  list-style: none;
+  margin-bottom: 12px;
+}
+#sidebar .widget_rss li h5,
+#sidebar .widget_rss li h6,
+#sidebar .widget_rss li p {
+  margin-bottom: 4.8px;
 }
 #sidebar .widget_archive select,
 #sidebar .widget_categories select,

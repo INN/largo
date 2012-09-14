@@ -23,6 +23,10 @@
   #gradient > .vertical(#999, #666);
   .border-radius(4px);
 }
+#sidebar .widget-title a,
+#sidebar .widgettitle a {
+  color:#fff;
+}
 #sidebar .widget p,
 #sidebar .widget ul {
   padding:0 3px;
@@ -95,7 +99,8 @@
 }
 //Featured and Recent Posts Widget
 #sidebar .largo-sidebar-featured,
-#sidebar .largo-recent-posts {
+#sidebar .largo-recent-posts,
+#sidebar .widget_rss {
   img {
     float:left;
     margin: 5px 10px 0 5px;
@@ -108,6 +113,19 @@
   p {
   	font-size: @baseFontSize * 0.667;
   	margin-bottom: @baseline /2;
+  }
+}
+#sidebar .widget_rss {
+  ul {
+    margin:@baseline/2 0;
+    padding:0;
+  }
+  li {
+    list-style:none;
+    margin-bottom: @baseline/2;
+    h5, h6, p {
+	  margin-bottom:@baseline/5;
+    }
   }
 }
 //adjustments for default WP widgets

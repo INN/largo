@@ -24,6 +24,7 @@ require_once( get_template_directory() . '/inc/widgets/largo-about.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-donate.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-twitter.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-recent-posts.php' );
+require_once( get_template_directory() . '/inc/widgets/largo-inn-rss.php' );
 
 // ...and then register them
 function largo_load_widgets() {
@@ -34,6 +35,7 @@ function largo_load_widgets() {
     register_widget( 'largo_donate_widget' );
     register_widget( 'largo_twitter_widget' );
     register_widget( 'largo_recent_posts_widget' );
+    register_widget( 'largo_INN_RSS_widget' );
 }
 add_action( 'widgets_init', 'largo_load_widgets' );
 
