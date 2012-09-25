@@ -3366,35 +3366,38 @@ p.comment-form-comment {
 }
 #sidebar .largo-sidebar-featured img,
 #sidebar .largo-recent-posts img,
-#sidebar .widget_rss img {
+#sidebar .largo-INN-RSS img {
   float: left;
   margin: 5px 10px 0 5px;
 }
 #sidebar .largo-sidebar-featured h5,
 #sidebar .largo-recent-posts h5,
-#sidebar .widget_rss h5 {
+#sidebar .largo-INN-RSS h5 {
   margin-bottom: 2px;
   padding: 0 3px;
   font-size: 16px;
 }
 #sidebar .largo-sidebar-featured p,
 #sidebar .largo-recent-posts p,
-#sidebar .widget_rss p {
+#sidebar .largo-INN-RSS p {
   font-size: 10.672px;
   margin-bottom: 12px;
 }
-#sidebar .widget_rss ul {
+#sidebar .largo-INN-RSS ul {
   margin: 12px 0;
   padding: 0;
 }
-#sidebar .widget_rss li {
+#sidebar .largo-INN-RSS li {
   list-style: none;
   margin-bottom: 12px;
 }
-#sidebar .widget_rss li h5,
-#sidebar .widget_rss li h6,
-#sidebar .widget_rss li p {
+#sidebar .largo-INN-RSS li h5,
+#sidebar .largo-INN-RSS li h6,
+#sidebar .largo-INN-RSS li p {
   margin-bottom: 4.8px;
+}
+#sidebar .widget.largo-INN-RSS.rev .widget-title a {
+  color: #333;
 }
 #sidebar .widget_archive select,
 #sidebar .widget_categories select,

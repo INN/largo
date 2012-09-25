@@ -100,7 +100,7 @@
 //Featured and Recent Posts Widget
 #sidebar .largo-sidebar-featured,
 #sidebar .largo-recent-posts,
-#sidebar .widget_rss {
+#sidebar .largo-INN-RSS {
   img {
     float:left;
     margin: 5px 10px 0 5px;
@@ -115,7 +115,7 @@
   	margin-bottom: @baseline /2;
   }
 }
-#sidebar .widget_rss {
+#sidebar .largo-INN-RSS {
   ul {
     margin:@baseline/2 0;
     padding:0;
@@ -128,6 +128,10 @@
     }
   }
 }
+#sidebar .widget.largo-INN-RSS.rev .widget-title a {
+	color:#333;
+}
+
 //adjustments for default WP widgets
 #sidebar .widget_archive select,
 #sidebar .widget_categories select,

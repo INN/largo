@@ -7,36 +7,33 @@
 class largo_INN_RSS_widget extends WP_Widget {
 
 	function __construct() {
-		$widget_ops = array( 'description' => __('An RSS feed of recent stories from INN members') );
-		$control_ops = array( 'width' => 400, 'height' => 200 );
-		parent::__construct( 'rss', __('INN Member Stories'), $widget_ops, $control_ops );
+		$widget_ops = array(
+			'classname' => 'largo-INN-RSS',
+			'description' => 'An RSS feed of recent stories from INN members',
+		);
+		parent::__construct( 'largo_INN_RSS', __('INN Member Stories'), $widget_ops );
 	}
 
 	function widget($args, $instance) {
 
-		if ( isset($instance['error']) && $instance['error'] )
-			return;
+		extract($args);
 
-		extract($args, EXTR_SKIP);
-
-		$url = 'http://www.investigativenewsnetwork.org/member-feed-items.rss';
-		while ( stristr($url, 'http') != $url )
-			$url = substr($url, 1);
-
-		// self-url destruction sequence
-		if ( in_array( untrailingslashit( $url ), array( site_url(), home_url() ) ) )
-			return;
-
-		$rss = fetch_feed($url);
+		$rss = fetch_feed('http://www.investigativenewsnetwork.org/member-feed-items.rss');
 		$title = 'Recent stories from INN members';
 		$desc = '';
 		$link = 'http://www.investigativenewsnetwork.org/';
-
-		$title = apply_filters('widget_title', $title, $instance, $this->id_base);
 		$url = esc_url(strip_tags($url));
-		$icon = includes_url('images/rss.png');
-		if ( $title )
-			$title = "<a class='rsswidget' href='$link' title='$desc'>$title</a>";
+
+		$title = "<a class='rsswidget' href='$link' title='$desc'>$title</a>";
+
+		$widget_class = !empty($instance['widget_class']) ? $instance['widget_class'] : '';
+		/* Add the widget class to $before widget, used as a style hook */
+		if( strpos($before_widget, 'class') === false ) {
+			$before_widget = str_replace('>', 'class="'. $widget_class . '"', $before_widget);
+		}
+		else {
+			$before_widget = str_replace('class="', 'class="'. $widget_class . ' ', $before_widget);
+		}
 
 		echo $before_widget;
 		if ( $title )
@@ -44,40 +41,45 @@ class largo_INN_RSS_widget extends WP_Widget {
 		largo_widget_rss_output( $rss, $instance );
 		echo $after_widget;
 
-		if ( ! is_wp_error($rss) )
-			$rss->__destruct();
 		unset($rss);
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+
+		$instance['widget_class'] = $new_instance['widget_class'];
+
+		return $instance;
+	}
+
+	/**
+	 * Displays the widget settings controls on the widget panel.
+	 */
+	function form( $instance ) {
+
+		/* Set up some default widget settings. */
+		$defaults = array(
+			'widget_class' => 'default'
+		);
+		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
+		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-INN-RSS'); ?></label>
+		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
+		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default">Default</option>
+		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev">Reverse</option>
+		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg">No Background</option>
+		</select>
+	<?php
 	}
 
 }
 
 function largo_widget_rss_output( $rss, $args = array() ) {
-	if ( is_string( $rss ) ) {
-		$rss = fetch_feed($rss);
-	} elseif ( is_array($rss) && isset($rss['url']) ) {
-		$args = $rss;
-		$rss = fetch_feed($rss['url']);
-	} elseif ( !is_object($rss) ) {
-		return;
-	}
-
-	if ( is_wp_error($rss) ) {
-		if ( is_admin() || current_user_can('manage_options') )
-			echo '<p>' . sprintf( __('<strong>RSS Error</strong>: %s'), $rss->get_error_message() ) . '</p>';
-		return;
-	}
 
 	$items = 5;
 	$show_summary  = 1;
 	$show_author   = 1;
 	$show_date     = 1;
 
-	if ( !$rss->get_item_quantity() ) {
-		echo '<ul><li>' . __( 'An error has occurred; the feed is probably down. Try again later.' ) . '</li></ul>';
-		$rss->__destruct();
-		unset($rss);
-		return;
-	}
 
 	echo '<ul>';
 	foreach ( $rss->get_items(0, $items) as $item ) {
@@ -86,8 +88,6 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 			$link = substr($link, 1);
 		$link = esc_url(strip_tags($link));
 		$title = esc_attr(strip_tags($item->get_title()));
-		if ( empty($title) )
-			$title = __('Untitled');
 
 		$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
 
@@ -99,11 +99,10 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 		elseif ( '[&hellip;]' != substr( $desc, -10 ) )
 			$desc .= ' [&hellip;]';
 
-		$desc = esc_html( $desc );
+		//various cleanup unique to our particular feed
 		$desc = str_replace(array("read more", "Read More", "È"), "", $desc);
 		$desc = preg_replace('/[^a-zA-Z0-9;_ %\[\]\.\(\)%&-]/s', '', $desc);
-		$desc = str_replace('&039;', '\'', $desc);
-		$desc = trim($desc);
+		$desc = trim(str_replace('&039;', '\'', $desc));
 
 		$summary = "<p class='rssSummary'>$desc</p>";
 
@@ -129,33 +128,6 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 	echo '</ul>';
 	$rss->__destruct();
 	unset($rss);
-}
-
-function largo_widget_rss_process( $widget_rss, $check_feed = true ) {
-	$items = 5;
-	$url           = esc_url_raw(strip_tags( $widget_rss['url'] ));
-	$title         = trim(strip_tags( $widget_rss['title'] ));
-	$show_summary  = isset($widget_rss['show_summary']) ? (int) $widget_rss['show_summary'] : 0;
-	$show_author   = isset($widget_rss['show_author']) ? (int) $widget_rss['show_author'] : 0;
-	$show_date     = isset($widget_rss['show_date']) ? (int) $widget_rss['show_date'] : 0;
-
-	if ( $check_feed ) {
-		$rss = fetch_feed($url);
-		$error = false;
-		$link = '';
-		if ( is_wp_error($rss) ) {
-			$error = $rss->get_error_message();
-		} else {
-			$link = esc_url(strip_tags($rss->get_permalink()));
-			while ( stristr($link, 'http') != $link )
-				$link = substr($link, 1);
-
-			$rss->__destruct();
-			unset($rss);
-		}
-	}
-
-	return compact( 'title', 'url', 'link', 'items', 'error', 'show_summary', 'show_author', 'show_date' );
 }
 
 ?>
