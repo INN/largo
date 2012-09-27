@@ -1769,11 +1769,14 @@ table .span24 {
 .navbar .nav.pull-right {
   float: right;
 }
+.navbar ul {
+  font-size: 15px;
+}
 .navbar li {
   display: block;
   float: left;
   margin-bottom: 0;
-  padding-top: 5px;
+  padding-top: 6px;
 }
 li.home-link {
   margin-left: 4px;
@@ -1787,7 +1790,7 @@ li.home-link:hover i {
 }
 .navbar li > a {
   float: none;
-  padding: 7px 10px 8px;
+  padding: 8px 9px 9px;
   line-height: 24px;
   color: #ffffff;
   text-decoration: none;
@@ -1831,10 +1834,6 @@ li.home-link:hover i {
   overflow: hidden;
   background-color: #1a5a90;
   border-left: 1px solid #2275bb;
-}
-.navbar .nav.pull-right {
-  margin-left: 10px;
-  margin-right: 0;
 }
 .navbar .btn-navbar {
   display: none;
@@ -1939,7 +1938,7 @@ li.home-link:hover i {
   float: left;
   min-width: 160px;
   padding: 3px 0;
-  margin: 9px 0 0;
+  margin: 5px 0 0;
   list-style: none;
   background-color: #ffffff;
   border: 1px solid #ccc;
@@ -1980,12 +1979,19 @@ li.home-link:hover i {
   white-space: nowrap;
   text-shadow: none;
 }
+ul.nav li.dropdown:hover ul.dropdown-menu {
+  display: block;
+}
+.navbar .dropdown-menu .active > a,
+.navbar .dropdown-menu .active > a:hover {
+  color: #2275bb;
+  font-weight: bold;
+  background-color: #ffffff;
+}
 .dropdown-menu li a:hover {
   background: none;
 }
-.dropdown-menu li a:hover,
-.dropdown-menu .active a,
-.dropdown-menu .active a:hover {
+.dropdown-menu li a:hover {
   color: #ffffff;
   text-decoration: none;
   background-color: #2275bb;

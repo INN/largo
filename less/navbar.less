@@ -58,12 +58,14 @@
 .navbar .nav.pull-right {
   float: right; // redeclare due to specificity
 }
-
+.navbar ul {
+  font-size: 15px;
+}
 .navbar li {
   display: block;
   float: left;
   margin-bottom:0;
-  padding-top:5px;
+  padding-top:6px;
 }
 li.home-link {
   margin-left:4px;
@@ -74,11 +76,10 @@ li.home-link {
     .opacity(85);
   }
 }
-
 .navbar li > a {
   float: none;
   // Vertically center the text given @navbarHeight
-  padding: 7px 10px 8px;
+  padding: 8px 9px 9px;
   line-height: @baseLineHeight;
   color: @navbarLinkColor;
   text-decoration: none;
@@ -118,12 +119,6 @@ li.home-link {
   overflow: hidden;
   background-color: @navbarBackground;
   border-left: 1px solid @navbarBackgroundHighlight;
-}
-
-// Secondary (floated right) nav in topbar
-.navbar .nav.pull-right {
-  margin-left: 10px;
-  margin-right: 0;
 }
 
 // Navbar button for toggling navbar items in responsive layouts
@@ -208,11 +203,11 @@ li.home-link {
   top: 100%;
   left: 0;
   z-index: @zindexDropdown;
-  display: none; // none by default, but block on "open" of the menu
+  display: none;
   float: left;
   min-width: 160px;
   padding: 3px 0;
-  margin: 9px 0 0; // override default ul
+  margin: 5px 0 0; // override default ul
   list-style: none;
   background-color: @dropdownBackground;
   border: 1px solid #ccc;
@@ -245,6 +240,18 @@ li.home-link {
     text-shadow: none;
   }
 }
+ul.nav li.dropdown:hover ul.dropdown-menu {
+    display: block;
+}
+
+.navbar .dropdown-menu .active > a,
+.navbar .dropdown-menu .active > a:hover {
+  color: @linkColor;
+  font-weight:bold;
+  background-color: @dropdownBackground;
+}
+
+
 
 // Hover state
 // -----------
@@ -252,9 +259,7 @@ li.home-link {
 .dropdown-menu li a:hover {
 	background:none;
 }
-.dropdown-menu li a:hover,
-.dropdown-menu .active a,
-.dropdown-menu .active a:hover {
+.dropdown-menu li a:hover {
   color: @dropdownLinkColorHover;
   text-decoration: none;
   background-color: @dropdownLinkBackgroundHover;
