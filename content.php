@@ -16,12 +16,7 @@
 	</header><!-- / entry header -->
 
 	<div class="entry-content">
-		<?php if ( is_search() || is_archive() ) : // Only display Excerpts for Search ?>
-			<?php the_excerpt(); ?>
-		<?php else : ?>
-        	<?php the_content( 'Continue reading <span class="meta-nav">&rarr;</span>' ); ?>
-        <?php endif; ?>
-
+		<?php largo_excerpt(); ?>
         <?php if ( largo_has_categories_or_tags() ): ?>
             <div class="post-meta bottom-meta">
     			<h5><strong>Filed under:</strong> <?php echo largo_homepage_categories_and_tags(); ?></h5>

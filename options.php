@@ -204,7 +204,7 @@ function optionsframework_options() {
 		'type' => "images",
 		'options' => array(
 			'blog' => $imagepath . 'blog.png',
-			'newsy' => $imagepath . 'newsy.png',
+			'topstories' => $imagepath . 'newsy.png',
 			'slider' => $imagepath . 'slider.png')
 	);
 

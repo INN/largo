@@ -3479,24 +3479,24 @@ p.comment-form-comment {
 #site-footer ul#menu-footer-navigation li h4 {
   margin-bottom: 0;
 }
-#site-footer .largo-footer-featured {
+.largo-footer-featured {
   margin-bottom: 12px;
 }
-#site-footer .largo-footer-featured .post-lead {
+.largo-footer-featured .post-lead {
   min-height: 60px;
   margin-bottom: 8px;
 }
-#site-footer .largo-footer-featured img {
+.largo-footer-featured img {
   float: left;
   margin: 0 10px 10px 0;
   padding-top: 4px;
 }
-#site-footer .largo-footer-featured h5 {
+.largo-footer-featured h5 {
   font-size: 16px;
   line-height: 1;
   margin-bottom: 4px;
 }
-#site-footer .largo-footer-featured p {
+.largo-footer-featured p {
   font-size: 10.672px;
   margin-bottom: 0;
 }
@@ -3548,6 +3548,10 @@ ul#ft-social li:hover {
 }
 #boilerplate p.back-to-top {
   float: right;
+}
+#boilerplate p.footer-credit,
+#boilerplate p.footer-credit a {
+  color: #555555;
 }
 #boilerplate .menu {
   clear: both;

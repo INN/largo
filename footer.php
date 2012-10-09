@@ -19,6 +19,7 @@
 				<p><?php largo_copyright_message(); ?></p>
 				<p class="back-to-top"><a href="#top">Back to top &uarr;</a></p>
 				<?php wp_nav_menu( array( 'theme_location' => 'footer-bottom', 'container' => false, 'depth' => 1  ) ); ?>
+				<p class="footer-credit">This site built with <a href="http://largoproject.org">Project Largo</a> from the <a href="http://investigativenewsnetwork.org">Investigative News Network</a> and proudly powered by <a href="http://wordpress.org" rel="nofollow">WordPress</a>.
 			</div><!-- /#boilerplate -->
 	</footer>
 </div>

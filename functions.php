@@ -82,37 +82,31 @@ function largo_setup() {
 }
 endif; // largo_setup
 
+if ( ! function_exists( 'largo_excerpt' ) ) {
 /**
- * Sets the post excerpt length to 35 words.
- *
- * To override this length in a child theme, remove the filter and add your own
- * function tied to the excerpt_length filter hook.
- */
-function largo_excerpt_length( $length ) {
-	return 35;
-}
-add_filter( 'excerpt_length', 'largo_excerpt_length' );
-
-/**
- * Adds a pretty "Continue Reading" link to custom post excerpts.
- */
-function largo_continue_reading_link() {
-	return ' <a href="'. esc_url( get_permalink() ) . '">' . 'Continue reading <span class="meta-nav">&rarr;</span>' . '</a>';
-}
-
-function largo_auto_excerpt_more( $more ) {
-	return ' &hellip;' . largo_continue_reading_link();
-}
-add_filter( 'excerpt_more', 'largo_auto_excerpt_more' );
-
-
-function largo_custom_excerpt_more( $output ) {
-	if ( has_excerpt() && ! is_attachment() ) {
-		$output .= largo_continue_reading_link();
+* Make a nicer-looking excerpt regardless of how an author has been using excerpts in the past
+*/
+	function largo_excerpt( $post, $sentence_count = 5, $more_link = 'Continue reading <span class="meta-nav">&rarr;</span>', $use_more = 1 ) {
+		if ( is_home() && strpos($post->post_content, '<!--more-->') && ($use_more != 0) ) : // if we're on the homepage and the post has a more tag, use that
+			the_content( 'Continue reading <span class="meta-nav">&rarr;</span>' );
+		elseif ( $post->post_excerpt ) : // if it has the optional excerpt set, use THAT
+			the_excerpt();
+		else : // otherwise we'll just do our best and make the prettiest excerpt we can muster
+			$strings = preg_split('/(\.|!|\?)\s/', strip_tags(strip_shortcodes($post->post_content)));
+			if ($strings[$i] != '') :
+				$output = $strings[0] . '. ';
+			endif;
+			for ($i = 1; $i < $sentence_count+1; $i++) {
+				if ($strings[$i] != '') :
+					$output .= $strings[$i] . '. ';
+				endif;
+			}
+			$output .= '<a href="' . get_permalink() . '">' . $more_link . '</a>';
+			echo apply_filters('the_content', $output);
+		endif;
 	}
-	return $output;
-}
-add_filter( 'get_the_excerpt', 'largo_custom_excerpt_more' );
+} // ends check for largo_excerpt()
+
 
 if ( ! function_exists( 'largo_content_nav' ) ) {
 /**
