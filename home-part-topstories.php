@@ -1,6 +1,7 @@
 <div id="homepage-featured" class="row-fluid clearfix">
 	<div class="top-story span8">
 		<?php
+		global $ids;
 		$topstory = largo_get_featured_posts( array(
 			'tax_query' => array(
 				array(

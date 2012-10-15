@@ -246,7 +246,7 @@ if ( ! function_exists( 'largo_the_categories_and_tags' ) ) {
 }
 
 if ( ! function_exists( 'largo_homepage_categories_and_tags' ) ) {
-	function largo_homepage_categories_and_tags() {
+	function largo_homepage_categories_and_tags( $max = 5 ) {
 	    $cats = get_the_category();
 	    $tags = get_the_tags();
 
@@ -271,7 +271,7 @@ if ( ! function_exists( 'largo_homepage_categories_and_tags' ) ) {
 	            );
 	        }
 	    }
-	    echo implode( ', ', $links );
+	    echo implode( ', ', array_slice( $links, 0, $max ) );
 	}
 }
 

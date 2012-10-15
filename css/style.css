@@ -1501,7 +1501,7 @@ table .span24 {
   padding-bottom: 24px;
 }
 #main {
-  margin-top: 24px;
+  margin: 24px 0;
 }
 /****************** LEFT NAV ******************/
 .row-fluid {

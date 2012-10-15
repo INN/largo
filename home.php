@@ -77,7 +77,7 @@
 						</header><!-- / entry header -->
 
 						<div class="entry-content">
-							<?php largo_excerpt( $post, 5 ); ?>
+							<?php largo_excerpt( $post, 5, '', 0); ?>
 				        	<?php if ( largo_has_categories_or_tags() ): ?>
 				            	<div class="post-meta bottom-meta">
 				    				 <h5><strong>Filed under:</strong> <?php echo largo_homepage_categories_and_tags(); ?></h5>

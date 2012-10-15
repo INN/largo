@@ -1,7 +1,9 @@
 <div id="homepage-slider" class="carousel slide clearfix">
 	<div class="carousel-inner">
 		<div class="top-story item active">
-			<?php $topstory = largo_get_featured_posts( array(
+			<?php
+			global $ids;
+			$topstory = largo_get_featured_posts( array(
 				'tax_query' => array(
 					array(
 						'taxonomy' 	=> 'prominence',

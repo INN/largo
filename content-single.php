@@ -46,7 +46,7 @@
 ?>
 	<div id="related-posts" class="idTabs row-fluid clearfix">
 		<ul id="related-post-nav" class="span4">
-			<li><h4>More Posts About</h4></li>
+			<li><h4>More About</h4></li>
 			<?php foreach ( $rel_topics as $count => $topic ) : ?>
 			<li><a href="#rp<?php echo $count; ?>"><?php echo $topic->name; ?></a></li>
 			<?php endforeach; ?>
@@ -79,8 +79,8 @@
 endif; ?>
 
 <nav id="nav-below" class="pager post-nav clearfix">
-	<div class="previous"><?php previous_post_link( '<h5>Older Post</h5> %link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'largo' ) . '</span> %title' ); ?></div>
-	<div class="next"><?php next_post_link( '<h5>Newer Post</h5> %link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'largo' ) . '</span>' ); ?></div>
+	<div class="previous"><?php previous_post_link( '<h5>Previous Story</h5> %link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'largo' ) . '</span> %title' ); ?></div>
+	<div class="next"><?php next_post_link( '<h5>Next Story</h5> %link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'largo' ) . '</span>' ); ?></div>
 </nav><!-- #nav-below -->
 
 
