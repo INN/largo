@@ -3294,6 +3294,9 @@ p.comment-form-comment {
 #sidebar .widget ul ul {
   margin-bottom: 4.8px;
 }
+#sidebar .widget p.morelink {
+  margin: -6px 0 0;
+}
 #sidebar .widget.rev {
   color: #ffffff;
   background-color: #1f6aaa;

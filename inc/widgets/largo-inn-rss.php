@@ -99,22 +99,14 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 		$link = esc_url(strip_tags($link));
 		$title = esc_attr(strip_tags($item->get_title()));
 
-		//$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
-
-		//$desc = wp_html_excerpt( $desc, 240 );
-
-		// Append ellipsis. Change existing [...] to [&hellip;].
-		//if ( '[...]' == substr( $desc, -5 ) )
-			//$desc = substr( $desc, 0, -5 ) . '[&hellip;]';
-		//elseif ( '[&hellip;]' != substr( $desc, -10 ) )
-			//$desc .= ' [&hellip;]';
+		$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
 
 		//various cleanup unique to our particular feed
-		//$desc = str_replace(array("read more", "Read More", "È"), "", $desc);
-		//$desc = preg_replace('/[^a-zA-Z0-9;_ %\[\]\.\(\)%&-]/s', '', $desc);
-		//$desc = trim(str_replace('&039;', '\'', $desc));
+		$desc = str_replace(array("read more", "Read More", "È"), "", $desc);
+		$desc = preg_replace('/[^a-zA-Z0-9;_ %\[\]\.\(\)%&-]/s', '', $desc);
+		$desc = trim(str_replace('&039;', '\'', $desc));
 
-		//$summary = "<p class='rssSummary'>$desc</p>";
+		$summary = "<p class='rssSummary'>$desc</p>";
 
 		$date = '';
 		$date = $item->get_date( 'U' );

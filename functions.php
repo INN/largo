@@ -96,16 +96,23 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 				echo '<p>' . strip_tags(get_the_excerpt()) . ' <a href="' . get_permalink() . '">' . $more_link . '</a></p>';
 			endif;
 		else : // otherwise we'll just do our best and make the prettiest excerpt we can muster
-			$strings = preg_split('/(\.|!|\?)\s/', strip_tags(strip_shortcodes($post->post_content)));
-			for ($i = 1; $i < $sentence_count+1; $i++) {
-				if ($strings[$i] != '')
-					$output .= $strings[$i] . '. ';
-			}
+			$output = largo_trim_sentences(get_the_content(), $sentence_count);
 			$output .= '<a href="' . get_permalink() . '">' . $more_link . '</a>';
 			echo apply_filters('the_content', $output);
 		endif;
 	}
 } // ends check for largo_excerpt()
+
+if ( ! function_exists ('largo_trim_sentences') ) {
+	function largo_trim_sentences($input, $sentences) {
+		$strings = preg_split('/(\.|!|\?)\s/', strip_tags(strip_shortcodes($input)));
+		for ($i = 0; $i < $sentences; $i++) {
+			if ($strings[$i] != '')
+				$output .= $strings[$i] . '. ';
+		}
+		return $output;
+	}
+}
 
 if ( ! function_exists( 'largo_content_nav' ) ) {
 /**

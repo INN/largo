@@ -3,6 +3,7 @@
  * Largo Sidebar Featured Posts
  */
 class largo_sidebar_featured_widget extends WP_Widget {
+
 	function largo_sidebar_featured_widget() {
 		$widget_ops = array(
 			'classname' => 'largo-sidebar-featured',
@@ -50,7 +51,7 @@ class largo_sidebar_featured_widget extends WP_Widget {
                   	<div class="post-lead clearfix">
                       	<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
                       	<?php the_post_thumbnail( '60x60' ); ?>
-                     	<?php the_excerpt(); ?>
+                     	<?php echo '<p>' . largo_trim_sentences(get_the_content(), $instance['num_sentences']) . '</p>'; ?>
                   	</div> <!-- /.post-lead -->
 	            <?php endwhile; ?>
 	            <?php else: ?>
@@ -66,6 +67,7 @@ class largo_sidebar_featured_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
+		$instance['num_sentences'] = strip_tags( $new_instance['num_sentences'] );
 		$instance['widget_class'] = $new_instance['widget_class'];
 		$instance['hidden_tablet'] = $new_instance['hidden_tablet'] ? 1 : 0;
 		$instance['hidden_phone'] = $new_instance['hidden_phone'] ? 1 : 0;
@@ -76,6 +78,7 @@ class largo_sidebar_featured_widget extends WP_Widget {
 		$defaults = array(
 			'title' => 'We Recommend',
 			'num_posts' => 5,
+			'num_sentences' => 2,
 			'widget_class' => 'default',
 			'hidden_tablet' => '',
 			'hidden_phone'	=> ''
@@ -93,6 +96,11 @@ class largo_sidebar_featured_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of posts to show:', 'largo-sidebar-featured'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences):', 'largo-footer-featured'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo $instance['num_sentences']; ?>" style="width:90%;" />
 		</p>
 
 		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-sidebar-featured'); ?></label>
