@@ -20,6 +20,7 @@
 			the_widget( 'largo_recent_posts_widget', array(
 					'title' => 'Recent Stories',
 					'num_posts' => 5,
+					'num_sentences' => 2,
 					'widget_class' => 'default'
 				)
 			);

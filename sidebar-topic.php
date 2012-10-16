@@ -20,6 +20,7 @@
 			the_widget( 'largo_sidebar_featured_widget', array(
 					'title' => 'We Recommend',
 					'num_posts' => 5,
+					'num_sentences' => 2,
 					'widget_class' => 'default'
 				)
 			);

@@ -10,7 +10,7 @@
 
 <div class="span6 widget-area" role="complementary">
 	<?php if ( ! dynamic_sidebar( 'footer-featured-posts' ) )
-		the_widget( 'largo_footer_featured_widget', array( 'title' => "In Case You Missed It", 'num_posts' => 2 ) );
+		the_widget( 'largo_footer_featured_widget', array( 'title' => "In Case You Missed It", 'num_sentences' => 2, 'num_posts' => 2 ) );
 	?>
 </div> <!-- /.grid_6 -->
 
