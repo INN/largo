@@ -3482,24 +3482,24 @@ p.comment-form-comment {
 #site-footer ul#menu-footer-navigation li h4 {
   margin-bottom: 0;
 }
-.largo-footer-featured {
+#site-footer .largo-footer-featured {
   margin-bottom: 12px;
 }
-.largo-footer-featured .post-lead {
+#site-footer .largo-footer-featured .post-lead {
   min-height: 60px;
   margin-bottom: 8px;
 }
-.largo-footer-featured img {
+#site-footer .largo-footer-featured img {
   float: left;
   margin: 0 10px 10px 0;
   padding-top: 4px;
 }
-.largo-footer-featured h5 {
+#site-footer .largo-footer-featured h5 {
   font-size: 16px;
   line-height: 1;
   margin-bottom: 4px;
 }
-.largo-footer-featured p {
+#site-footer .largo-footer-featured p {
   font-size: 10.672px;
   margin-bottom: 0;
 }
