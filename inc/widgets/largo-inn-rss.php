@@ -42,8 +42,11 @@ class largo_INN_RSS_widget extends WP_Widget {
 		echo $before_widget;
 		if ( $title )
 			echo $before_title . $title . $after_title;
-		largo_widget_rss_output( $rss, $instance );
-		echo $after_widget;
+		largo_widget_rss_output( $rss, $instance ); ?>
+
+		<p class="morelink"><a href="<?php echo $link; ?>">More Stories From INN Members&nbsp;&raquo;</a></p>
+
+		<?php echo $after_widget;
 
 		unset($rss);
 	}
@@ -92,7 +95,7 @@ class largo_INN_RSS_widget extends WP_Widget {
 function largo_widget_rss_output( $rss, $args = array() ) {
 
 	echo '<ul>';
-	foreach ( $rss->get_items(0, 5) as $item ) {
+	foreach ( $rss->get_items(0, 3) as $item ) {
 		$link = $item->get_link();
 		while ( stristr($link, 'http') != $link )
 			$link = substr($link, 1);
@@ -101,8 +104,15 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 
 		$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
 
+		$strings = preg_split('/(\.|!|\?)\s/', $desc);
+		$output = '';
+		for ($i = 0; $i < 1; $i++) {
+			if ($strings[$i] != '')
+				$output .= $strings[$i] . '. ';
+		}
+
 		//various cleanup unique to our particular feed
-		$desc = str_replace(array("read more", "Read More", "È"), "", $desc);
+		$desc = str_replace(array("read more", "Read More", "È"), "", $output);
 		$desc = preg_replace('/[^a-zA-Z0-9;_ %\[\]\.\(\)%&-]/s', '', $desc);
 		$desc = trim(str_replace('&039;', '\'', $desc));
 
