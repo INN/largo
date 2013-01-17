@@ -24,7 +24,7 @@ function twitter_url_to_username ($url) {
 if ( ! function_exists( 'largo_opengraph' ) ) {
 	function largo_opengraph() {
 
-		global $current_url;
+		global $current_url, $post;
 
 		// set a default thumbnail, if a post has a featured image use that instead
 		$thumbnailURL = of_get_option( 'logo_thumbnail_sq' );

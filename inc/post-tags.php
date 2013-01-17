@@ -52,6 +52,7 @@ if ( ! function_exists( 'largo_author' ) ) {
  */
 if ( ! function_exists( 'largo_author_link' ) ) {
 	function largo_author_link( $echo = true ) {
+		global $post;
 		$values = get_post_custom( $post->ID );
 		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
 		$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
@@ -361,14 +362,16 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
 
 	$strings = preg_split( $re, strip_tags( strip_shortcodes( $input ) ), -1, PREG_SPLIT_NO_EMPTY);
 
-	for ( $i = 0; $i < $sentences; $i++ ) {
+	$output = '';
+
+	for ( $i = 0; $i < $sentences && $i < count($strings); $i++ ) {
 		if ( $strings[$i] != '' )
 			$output .= $strings[$i] . ' ';
 	}
 
 	if ( $echo )
 		echo $output;
-
+	
 	return $output;
 }
 
