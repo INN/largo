@@ -50,47 +50,28 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
  * Load up all of the other goodies from the /inc directory
  */
 
-// a list of recommended plugins
-require_once( get_template_directory() . '/inc/largo-plugin-init.php' );
+$includes = array(
+	'/inc/largo-plugin-init.php',		// a list of recommended plugins
+	'/inc/special-functionality.php',	// header cleanup and robots.txt
+	'/inc/users.php',			// add custom fields for user profiles
+	'/inc/sidebars.php',			// register sidebars
+	'/inc/widgets.php',			// register widgets
+	'/inc/nav-menus.php',			// register nav menus
+	'/inc/taxonomies.php',			// add our custom taxonomies
+	'/inc/images.php',			// setup custom image sizes
+	'/inc/editor.php',			// add tinymce customizations and shortcodes
+	'/inc/post-meta.php',			// add post meta boxes
+	'/inc/open-graph.php',			// add open graph, twittercard and google publisher markup to the header
+	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
+	'/inc/header-footer.php',		// some additional template tags used in the header and footer
+	'/inc/related-content.php',		// functions dealing with related content
+	'/inc/featured-content.php',		// functions dealing with featured content
+	'/inc/enqueue.php'			// enqueue our js and css files
+);
 
-// header cleanup and robots.txt
-require_once( get_template_directory() . '/inc/special-functionality.php' );
-
-// add custom fields for user profiles
-require_once( get_template_directory() . '/inc/users.php' );
-
-// register sidebars, widgets and nav menus
-require_once( get_template_directory() . '/inc/sidebars.php' );
-require_once( get_template_directory() . '/inc/widgets.php' );
-require_once( get_template_directory() . '/inc/nav-menus.php' );
-
-// add our custom taxonomies
-require_once( get_template_directory() . '/inc/taxonomies.php' );
-
-// setup custom image sizes
-require_once( get_template_directory() . '/inc/images.php' );
-
-// add tinymce customizations and shortcodes
-require_once( get_template_directory() . '/inc/editor.php' );
-
-// add post meta boxes
-require_once( get_template_directory() . '/inc/post-meta.php' );
-
-// add open graph, twittercard and google publisher markup to the header
-require_once( get_template_directory() . '/inc/open-graph.php' );
-
-// add some custom template tags (mostly used in single posts)
-require_once( get_template_directory() . '/inc/post-tags.php' );
-
-// some additional template tags used in the header and footer
-require_once( get_template_directory() . '/inc/header-footer.php' );
-
-// some functions dealing with related and featured content
-require_once( get_template_directory() . '/inc/related-content.php' );
-require_once( get_template_directory() . '/inc/featured-content.php' );
-
-// enqueue our js and css files
-require_once( get_template_directory() . '/inc/enqueue.php' );
+foreach ( $includes as $include ) {
+	require_once( get_template_directory() . $include );
+}
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
