@@ -74,6 +74,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				<meta property="og:url" content="<?php echo $current_url; ?>"/>
 				<?php
 					//let's try to get a better description when available
+					$description = '';
 					if ( is_category() && category_description() ) {
 						$description = category_description();
 					} elseif ( is_author() ) {
