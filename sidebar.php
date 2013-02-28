@@ -35,5 +35,10 @@
 						 )
 					);
 		}
+
+		if ( largo_is_job_page() && is_active_sidebar( 'jobboard-widgets' )) {
+			dynamic_sidebar( 'jobboard-widgets' );
+		}
+
 	?>
 </div><!-- .widget-area -->

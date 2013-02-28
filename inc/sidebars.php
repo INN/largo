@@ -103,5 +103,19 @@ function largo_register_sidebars() {
 			'after_title' 	=> '</h3>',
 		) );
 	endif;
+
+	//job board widget area, if we're running wpjobboard
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	if (is_plugin_active('wpjobboard/index.php')) :
+		register_sidebar( array(
+			'name' 			=> __( 'Job Board', 'largo' ),
+			'description' 	=> __( 'A widget area on job board pages', 'largo' ),
+			'id' 			=> 'jobboard-widgets',
+			'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+			'after_widget' 	=> '</aside>',
+			'before_title' 	=> '<h3 class="widgettitle">',
+			'after_title' 	=> '</h3>',
+		) );
+	endif;
 }
 add_action( 'widgets_init', 'largo_register_sidebars' );

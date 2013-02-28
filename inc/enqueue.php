@@ -8,6 +8,10 @@
 if ( ! function_exists( 'largo_enqueue_js' ) ) {
 	function largo_enqueue_js() {
 
+		//Modernizr and our primary stylesheet
+		wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
+		wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
+
 		//the jquery plugins and our main js file
 		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
@@ -28,6 +32,13 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 			if ( of_get_option( 'show_related_content' ) )
 				wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 		}
+
+		//only load job-board.css if the job-board plugin is active and we're on a jobs page
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		if ( is_plugin_active('wpjobboard/index.php') && largo_is_job_page() ) {
+			wp_enqueue_style( 'jobboard-styles', get_template_directory_uri() . '/css/job-board.css', false, false, 'screen' );
+		}
+
 	}
 }
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );

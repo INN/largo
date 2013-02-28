@@ -1,0 +1,25 @@
+@import "variables.less";
+@import "mixins.less";
+
+#content {
+	.wpjb-form div {
+		input[type=text],
+		input[type=password],
+		select {
+	    max-width: 100%;
+	    .box-sizing(border-box);
+	    height: 32px;
+	  }
+	  label.wpjb-label {
+			width: 34%;
+		}
+	}
+
+  .wpjb-form fieldset {
+		width: 100%;
+	}
+
+	table.wpjb-info tbody tr td:last-child {
+		border-right: 1px solid #E7E7E7;
+	}
+}

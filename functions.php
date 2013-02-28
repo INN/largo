@@ -99,3 +99,25 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );
+
+/**
+ * Tests is the current page is a part of the WPJobBoard plugin
+ */
+function largo_is_job_page() {
+
+		$jobboardOptions = get_option('wpjb_config', NULL);
+		if (is_array($jobboardOptions)) {
+			$wpjb_page_ids = array( $jobboardOptions['link_jobs'], $jobboardOptions['link_resumes'] );
+		} else {
+			//Options weren't present, meaning plugin isn't installed, meaning we can't be on a job page.
+			return false;
+		}
+
+		if (is_singular()) :
+			global $post;
+			if (in_array($post->ID, $wpjb_page_ids)) return true;
+		endif;
+
+		//failure
+		return false;
+}
