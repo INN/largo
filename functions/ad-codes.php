@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Ad Codes congifuration for use with Ad Code Manager plugin
  */
@@ -6,9 +6,9 @@
 
 // Any ad network URLs must be whitelisted here first.
 function largo_acm_whiltelisted_script_urls( $whitelisted_urls ) {
-	$whitelisted_urls = array( 
-		//'ad.doubleclick.net', 
-		'placehold.it', // Placeholder graphics 
+	$whitelisted_urls = array(
+		//'ad.doubleclick.net',
+		'placehold.it', // Placeholder graphics
 	);
 	return $whitelisted_urls;
 }
@@ -19,7 +19,7 @@ add_filter( 'acm_whitelisted_script_urls', 'largo_acm_whiltelisted_script_urls')
 function largo_acm_default_url( $url ) {
 	/*
 	 * This is being left as a placeholder for future use.
-	 * 
+	 *
 	 * Example in Gist: https://gist.github.com/1631131
 	 */
 }
@@ -28,7 +28,7 @@ function largo_acm_default_url( $url ) {
 
 // Add additional output tokens
 function largo_acm_output_tokens( $output_tokens, $tag_id, $code_to_display ) {
-	// This is a quick exampel to show how to assign an output token to any value. Things like the zone1 value can be used to compute.
+	// This is a quick example to show how to assign an output token to any value. Things like the zone1 value can be used to compute.
 	$output_tokens['%rand%'] = rand(1,100);
 	return $output_tokens;
 }
@@ -36,7 +36,7 @@ function largo_acm_output_tokens( $output_tokens, $tag_id, $code_to_display ) {
 add_filter('acm_output_tokens', 'largo_acm_output_tokens', 5, 3 );
 
 
-// Add actaul ad tags
+// Add actual ad tags
 function largo_ad_tags_ids( $ad_tag_ids ) {
 	return array(
 		array(
@@ -63,7 +63,7 @@ function largo_ad_tags_ids( $ad_tag_ids ) {
 				'fgcolor' => 'ffeedd',
 			),
 		),
-	);	
+	);
 }
 add_filter( 'acm_ad_tag_ids', 'largo_ad_tags_ids' );
 
