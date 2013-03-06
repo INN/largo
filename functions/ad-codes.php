@@ -1,6 +1,8 @@
 <?php
 /**
  * Ad Codes congifuration for use with Ad Code Manager plugin
+ *
+ * http://wordpress.org/extend/plugins/ad-code-manager/
  */
 
 
