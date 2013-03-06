@@ -35,8 +35,6 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
 <?php
-	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
-	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
 
 	if ( is_singular() && get_option( 'thread_comments' ) )
 		wp_enqueue_script( 'comment-reply' );
@@ -191,5 +189,7 @@
 		</div>
 	</nav>
 	<?php endif; ?>
+
+<?php if (function_exists('dynamic_sidebar')) { dynamic_sidebar("Header"); } ?>
 
 <div id="main" class="row-fluid clearfix">

@@ -46,31 +46,34 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/inc/options-framework/options-framework.php';
 }
 
+require_once('functions/ad-codes.php');
+
 /**
  * Load up all of the other goodies from the /inc directory
  */
 
 $includes = array(
-	'/inc/largo-plugin-init.php',		// a list of recommended plugins
+	'/inc/largo-plugin-init.php',			// a list of recommended plugins
 	'/inc/special-functionality.php',	// header cleanup and robots.txt
-	'/inc/users.php',			// add custom fields for user profiles
-	'/inc/sidebars.php',			// register sidebars
-	'/inc/widgets.php',			// register widgets
-	'/inc/nav-menus.php',			// register nav menus
-	'/inc/taxonomies.php',			// add our custom taxonomies
-	'/inc/images.php',			// setup custom image sizes
-	'/inc/editor.php',			// add tinymce customizations and shortcodes
-	'/inc/post-meta.php',			// add post meta boxes
-	'/inc/open-graph.php',			// add open graph, twittercard and google publisher markup to the header
-	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
-	'/inc/header-footer.php',		// some additional template tags used in the header and footer
-	'/inc/related-content.php',		// functions dealing with related content
-	'/inc/featured-content.php',		// functions dealing with featured content
-	'/inc/enqueue.php'			// enqueue our js and css files
+	'/inc/users.php',									// add custom fields for user profiles
+	'/inc/sidebars.php',							// register sidebars
+	'/inc/widgets.php',								// register widgets
+	'/inc/nav-menus.php',							// register nav menus
+	'/inc/taxonomies.php',						// add our custom taxonomies
+	'/inc/images.php',								// setup custom image sizes
+	'/inc/editor.php',								// add tinymce customizations and shortcodes
+	'/inc/post-meta.php',							// add post meta boxes
+	'/inc/open-graph.php',						// add opengraph, twittercard and google publisher markup to the header
+	'/inc/post-tags.php',							// add some custom template tags (mostly used in single posts)
+	'/inc/header-footer.php',					// some additional template tags used in the header and footer
+	'/inc/related-content.php',				// functions dealing with related content
+	'/inc/featured-content.php',			// functions dealing with featured content
+	'/inc/enqueue.php'								// enqueue our js and css files
 );
 
 $optional_includes = array(
 	'business-directory-plugin/wpbusdirman.php' => '/inc/business-directory.php',	//Business Directory plugin
+	'wpjobboard/index.php' => '/inc/job-board.php' //WP Job Board plugin
 );
 
 //loop thru optional includes and add if active

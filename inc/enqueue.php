@@ -8,6 +8,10 @@
 if ( ! function_exists( 'largo_enqueue_js' ) ) {
 	function largo_enqueue_js() {
 
+		//Modernizr and our primary stylesheet
+		wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
+		wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
+
 		//the jquery plugins and our main js file
 		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
@@ -19,6 +23,9 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		}
 		if ( is_home() && of_get_option( 'homepage_top') == 'topstories' )
 			wp_enqueue_style( 'topstory-styles', get_template_directory_uri() . '/css/top-stories.css', false, false, 'screen' );
+
+		// Ads styles
+		wp_enqueue_style( 'ads-styles', get_template_directory_uri() . '/css/ads.css', false, false, 'screen' );
 
 		//only load sharethis on single pages and load jquery tabs for the related content box if it's active
 		if ( is_single() ) {
