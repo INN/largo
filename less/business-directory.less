@@ -1,0 +1,40 @@
+@import "variables.less";
+@import "mixins.less";
+
+form#wpbdmsearchform {
+	text-align: right;
+
+	input {
+		display: inline-block;
+		.ie7-inline-block();
+		vertical-align: top;
+	}
+
+	#intextbox {
+		height: 20px;
+	}
+
+	#wpbdmsearchsubmit {
+		margin-left: 0.5em;
+		margin-top: 0;
+		margin-bottom: 9px
+	}
+
+	a.advanced-search-link {
+		line-height: 1.1em;
+	}
+}
+
+@media (max-width: 650px) {
+	.wpbdp-bar .wpbdp-main-links {
+		float: none;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	form#wpbdmsearchform {
+		text-align: center;
+		margin-left: 0;
+		margin-top: 1em;
+	}
+}

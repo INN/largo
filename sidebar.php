@@ -35,5 +35,8 @@
 						 )
 					);
 		}
+
+		//Custom hook for loading contextual widgets (e.g. Job Board, Business Directory)
+		do_action('largo_sidebar');
 	?>
 </div><!-- .widget-area -->

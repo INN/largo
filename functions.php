@@ -69,6 +69,18 @@ $includes = array(
 	'/inc/enqueue.php'			// enqueue our js and css files
 );
 
+$optional_includes = array(
+	'business-directory-plugin/wpbusdirman.php' => '/inc/business-directory.php',	//Business Directory plugin
+);
+
+//loop thru optional includes and add if active
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+foreach ( $optional_includes as $plugin => $include_file ) {
+	if ( is_plugin_active($plugin) )
+		array_push($includes, $include_file);
+}
+
+//Perform load
 foreach ( $includes as $include ) {
 	require_once( get_template_directory() . $include );
 }
