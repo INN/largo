@@ -242,6 +242,18 @@ function optionsframework_options() {
 		'options' 	=> $fb_verbs);
 
 	$options[] = array(
+		'desc' 		=> __('Location of <strong>"Clean Read"</strong> link', 'largo'),
+		'id' 		=> 'clean_read',
+		'std' 		=> 'none',
+		'type'		=> 'select',
+		'class'		=> 'mini',
+		'options' 	=> 	array(
+			'none' 		=> __('Nowhere (disabled)', 'largo'),
+			'byline' => __('In Byline', 'largo'),
+			'footer' => __('Below Tags', 'largo')
+		));
+
+	$options[] = array(
 		'desc' 	=> __('<strong>Show/Hide share count</strong> with Twitter buttons.', 'largo'),
 		'id' 	=> 'show_twitter_count',
 		'std' 	=> '1',

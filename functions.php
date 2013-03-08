@@ -63,7 +63,8 @@ $includes = array(
 	'/inc/header-footer.php',			// some additional template tags used in the header and footer
 	'/inc/related-content.php',			// functions dealing with related content
 	'/inc/featured-content.php',		// functions dealing with featured content
-	'/inc/enqueue.php'					// enqueue our js and css files
+	'/inc/enqueue.php',					// enqueue our js and css files
+	'/inc/post-templates.php'	//single post templates
 );
 
 // Load our plugin customizations (only if the plugins are installed and active)

@@ -276,7 +276,9 @@
 
 #optionsframework #section-article_utilities .explain,
 #optionsframework #section-fb_verb .explain,
-#optionsframework #section-social_icons_display .explain {
+#optionsframework #section-social_icons_display .explain,
+#optionsframework #section-clean_read .explain
+ {
 	float:left;
 	width:30%;
 }
@@ -285,7 +287,8 @@
 }
 #optionsframework #section-article_utilities .controls,
 #optionsframework #section-fb_verb .controls,
-#optionsframework #section-social_icons_display .controls  {
+#optionsframework #section-social_icons_display .controls,
+#optionsframework #section-clean_read .controls {
 	float:right;
 	width:65%;
 }

@@ -32,10 +32,30 @@ jQuery(document).ready(function($) {
 	});
 
 	//the homepage carousel, make sure we don't load this unless .carousel is defined
-	if(jQuery().carousel) {
+	if($().carousel) {
 		$('.carousel').carousel({
 			interval: 6000
 		});
 	}
+
+	//enable "clean read" functionality
+	$('a.clean-read').on('click', function() {
+		$('body').addClass('clean-read').append('<a id="clean-read-close" href="#">Exit "Clean Read" mode</a>');
+		$('a.clean-read').hide();
+		return false;
+	});
+
+	//close "clean read"
+	$(document).on('click', '#clean-read-close', function() {
+		$('body').removeClass('clean-read');
+		$('a.clean-read').show();
+		$(this).remove();
+		return false;
+	});
+
+	//ESC triggers "clean read" close
+	$(document).keyup(function(e) {
+    if (e.keyCode == 27 && $('body').hasClass('clean-read')) $('#clean-read-close').trigger('click');
+  });
 
 });
