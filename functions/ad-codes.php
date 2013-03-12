@@ -1,6 +1,6 @@
 <?php
 /**
- * Ad Codes congifuration for use with Ad Code Manager plugin
+ * Ad Codes configuration for use with Ad Code Manager plugin
  */
 
 
@@ -42,7 +42,7 @@ function largo_ad_tags_ids( $ad_tag_ids ) {
 		array(
 			'tag' => 'banner',
 			'url_vars' => array(
-				'sz' => '728x90',
+				'size' => '728x90',
 				'bgcolor' => '666666',
 				'fgcolor' => '00ff00',
 			),
@@ -50,7 +50,7 @@ function largo_ad_tags_ids( $ad_tag_ids ) {
 		array(
 			'tag' => 'mobile',
 			'url_vars' => array(
-				'sz' => '300x50',
+				'size' => '300x50',
 				'bgcolor' => '9999ff',
 				'fgcolor' => '333333',
 			),
@@ -58,7 +58,7 @@ function largo_ad_tags_ids( $ad_tag_ids ) {
 		array(
 			'tag' => 'widget',
 			'url_vars' => array(
-				'sz' => '300x250',
+				'size' => '300x250',
 				'bgcolor' => '443322',
 				'fgcolor' => 'ffeedd',
 			),

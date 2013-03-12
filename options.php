@@ -65,6 +65,9 @@ function optionsframework_options() {
 
 	$options = array();
 
+	/**
+	 * Basic Options
+	 */
 	$options[] = array(
 		'name' 	=> __('Basic Settings', 'largo'),
 		'type' 	=> 'heading');
@@ -257,6 +260,9 @@ function optionsframework_options() {
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
+	/**
+	 * Images Options
+	 */
 	$options[] = array(
 		'name' 	=> __('Theme Images', 'largo'),
 		'type' 	=> 'heading');
@@ -301,6 +307,9 @@ function optionsframework_options() {
 		'id' 	=> 'banner_image_lg',
 		'type' 	=> 'upload');
 
+	/**
+	 * Layout Options
+	 */
 	$options[] = array(
 		'name' 	=> __('Layout Options', 'largo'),
 		'type' 	=> 'heading');
@@ -387,6 +396,40 @@ function optionsframework_options() {
 			'3col-default'	=> $imagepath . 'footer-3col-lg-center.png',
 			'3col-equal' 	=> $imagepath . 'footer-3col-equal.png',
 			'4col' 			=> $imagepath . 'footer-4col.png')
+	);
+
+	/**
+	 * Ad Configuration
+	 */
+	$options[] = array(
+		'name' 	=> __('Ad Settings', 'largo'),
+		'type' 	=> 'heading');
+
+	$this_url = $_SERVER['HTTP_HOST'];
+
+	$options[] = array(
+		'name' 	=> __('Whitelisted URLs', 'largo'),
+		'desc'  => __('Select the domains that your ad-service generated ads will come from. If you\'re locally hosting images, check "this site"'),
+		'type' 	=> 'multicheck',
+		'id' => 'ad_urls',
+		'options' => array(
+			'ad.doubleclick.net' => __('ad.doubleclick.net', 'largo'),
+			'other' => __('some other option', 'largo'),
+			$this_url => __('this site (' . $this_url . ')', 'largo'),
+		)
+	);
+
+	$options[] = array(
+		'name' 	=> __('Ad Code Markup', 'largo'),
+		'desc'  => __('Enter the code from your ad network provider for generating the ad, or (if using self hosting) the IMG tag that points to the image. Magic placeholders available: %rand% %width% %height% %size% %tag%'),
+		'type' 	=> 'textarea',
+		'id' 		=> 'ad_html',
+		'std'		=> '<script language="JavaScript" type="text/javascript">
+if (typeof ord==\'undefined\') {ord=Math.random()*10000000000000000;}
+if (typeof(dfp_tile) == \'undefined\') dfp_tile=%tile%;
+document.write(\'<script language="JavaScript" src="%url%ord=\' + ord + \'?" type="text/javascript"><\/script>\');
+</script>
+<noscript><a href="%url%ord=%random%?" target="_blank"><img src="%url%ord=%random%?" width="%width%" height="%height%" border="0" alt=""></a></noscript>'
 	);
 
 
