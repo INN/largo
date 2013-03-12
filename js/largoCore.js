@@ -40,22 +40,23 @@ jQuery(document).ready(function($) {
 
 	//enable "clean read" functionality
 	$('a.clean-read').on('click', function() {
-		$('body').addClass('clean-read').append('<a id="clean-read-close" href="#">Exit "Clean Read" mode</a>');
+		$('body').addClass('clean-read').append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
+		$('.clean-read-container').append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
 		$('a.clean-read').hide();
 		return false;
 	});
 
 	//close "clean read"
-	$(document).on('click', '#clean-read-close', function() {
+	$(document).on('click', '.clean-read-close', function() {
 		$('body').removeClass('clean-read');
 		$('a.clean-read').show();
-		$(this).remove();
+		$('.clean-read-close').remove();
 		return false;
 	});
 
 	//ESC triggers "clean read" close
 	$(document).keyup(function(e) {
-    if (e.keyCode == 27 && $('body').hasClass('clean-read')) $('#clean-read-close').trigger('click');
+    if (e.keyCode == 27 && $('body').hasClass('clean-read')) $('.clean-read-close').trigger('click');
   });
 
 });
