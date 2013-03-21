@@ -55,20 +55,21 @@ require_once('functions/ad-codes.php');
 $includes = array(
 	'/inc/largo-plugin-init.php',		// a list of recommended plugins
 	'/inc/special-functionality.php',	// header cleanup and robots.txt
-	'/inc/users.php',			// add custom fields for user profiles
-	'/inc/sidebars.php',			// register sidebars
-	'/inc/widgets.php',			// register widgets
-	'/inc/nav-menus.php',			// register nav menus
-	'/inc/taxonomies.php',			// add our custom taxonomies
-	'/inc/images.php',			// setup custom image sizes
-	'/inc/editor.php',			// add tinymce customizations and shortcodes
-	'/inc/post-meta.php',			// add post meta boxes
-	'/inc/open-graph.php',			// add open graph, twittercard and google publisher markup to the header
-	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
-	'/inc/header-footer.php',		// some additional template tags used in the header and footer
-	'/inc/related-content.php',		// functions dealing with related content
+	'/inc/users.php',								// add custom fields for user profiles
+	'/inc/sidebars.php',						// register sidebars
+	'/inc/widgets.php',							// register widgets
+	'/inc/nav-menus.php',						// register nav menus
+	'/inc/taxonomies.php',					// add our custom taxonomies
+	'/inc/images.php',							// setup custom image sizes
+	'/inc/editor.php',							// add tinymce customizations and shortcodes
+	'/inc/post-meta.php',						// add post meta boxes
+	'/inc/open-graph.php',					// add open graph, twittercard and google publisher markup to the header
+	'/inc/post-tags.php',						// add some custom template tags (mostly used in single posts)
+	'/inc/header-footer.php',				// some additional template tags used in the header and footer
+	'/inc/related-content.php',			// functions dealing with related content
 	'/inc/featured-content.php',		// functions dealing with featured content
-	'/inc/enqueue.php'			// enqueue our js and css files
+	'/inc/enqueue.php',							// enqueue our js and css files
+	'/inc/ad-codes.php'							// load options for ad code manager
 );
 
 foreach ( $includes as $include ) {
