@@ -420,8 +420,16 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
+		'name' 	=> __('Placeholders', 'largo'),
+		'desc' 	=> __('Enter the name of your site or account for use in the %site_name% placeholder', 'largo'),
+		'id' 	=> 'ad_site_name',
+		'std' 	=> $_SERVER['HTTP_HOST'],
+		'type' 	=> 'text'
+	);
+
+	$options[] = array(
 		'name' 	=> __('Ad Code Markup', 'largo'),
-		'desc'  => __('Enter the code from your ad network provider for generating the ad, or (if using self hosting) the IMG tag that points to the image. Magic placeholders available: %rand% %width% %height% %size% %tag%'),
+		'desc'  => __('Enter the code from your ad network provider for generating the ad, or (if using self hosting) the IMG tag that points to the image.  Placeholders available: %rand% %width% %height% %size% %tag% %site_name% %type%'),
 		'type' 	=> 'textarea',
 		'id' 		=> 'ad_html',
 		'std'		=> '<script language="JavaScript" type="text/javascript">
@@ -431,7 +439,6 @@ document.write(\'<script language="JavaScript" src="%url%ord=\' + ord + \'?" typ
 </script>
 <noscript><a href="%url%ord=%random%?" target="_blank"><img src="%url%ord=%random%?" width="%width%" height="%height%" border="0" alt=""></a></noscript>'
 	);
-
 
 	return $options;
 }

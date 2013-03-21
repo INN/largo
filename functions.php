@@ -46,6 +46,7 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/inc/options-framework/options-framework.php';
 }
 
+//Maybe move this back to /inc?
 require_once('functions/ad-codes.php');
 
 /**
@@ -69,7 +70,6 @@ $includes = array(
 	'/inc/related-content.php',			// functions dealing with related content
 	'/inc/featured-content.php',		// functions dealing with featured content
 	'/inc/enqueue.php',							// enqueue our js and css files
-	'/inc/ad-codes.php'							// load options for ad code manager
 );
 
 foreach ( $includes as $include ) {
