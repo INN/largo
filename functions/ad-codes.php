@@ -1,6 +1,7 @@
 <?php
 /**
  * Ad Codes configuration for use with Ad Code Manager plugin
+ * http://wordpress.org/extend/plugins/ad-code-manager/
  */
 
 // Need to allow script tags in elements for the ad_html option
