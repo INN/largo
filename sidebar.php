@@ -40,6 +40,13 @@ do_action('largo_before_sidebar');
 							 )
 						);
 			}
+
+			//load custom sidebars if appropriate
+			if ( is_singular() ) {
+				$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
+				if ($custom_sidebar && $custom_sidebar != 'none') dynamic_sidebar($custom_sidebar);
+			}
+
 			do_action('largo_after_sidebar_widgets');
 		?>
 	</div><!-- .widget-area -->

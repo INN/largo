@@ -96,7 +96,7 @@ function largo_pt_save_postdata($post_id, $post) {
 
 	// verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times
-	if ( !wp_verify_nonce( $_POST['pt_noncename'], 'largo_post_template' )) {
+	if ( !isset($_POST['pt_noncename']) || !wp_verify_nonce( $_POST['pt_noncename'], 'largo_post_template' )) {
 		return $post->ID;
 	}
 

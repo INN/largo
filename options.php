@@ -402,6 +402,12 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
+		'desc' 	=> __('Enter names of <strong>additional sidebar regions</strong> (one per line) you\'d like post authors to be able to choose to display on their posts.', 'largo'),
+		'id' 	=> 'custom_sidebars',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
+
+	$options[] = array(
 		'name' 	=> __('Footer Layout', 'largo'),
 		'desc' 	=> __('<strong>Select the layout to use for the footer.</strong> The default is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the Appearance > Widgets menu.', 'largo'),
 		'id' 	=> 'footer_layout',

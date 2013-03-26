@@ -105,3 +105,104 @@ function largo_register_sidebars() {
 	endif;
 }
 add_action( 'widgets_init', 'largo_register_sidebars' );
+
+/**
+ * Also, register any custom-created sidebars from Theme Options
+ */
+function largo_custom_sidebars() {
+	$custom_sidebars = preg_split('/$\R?^/m', of_get_option('custom_sidebars'));
+	if (is_array($custom_sidebars)) {
+		foreach( $custom_sidebars as $sidebar ) {
+			$sidebar_slug = largo_make_slug($sidebar);
+			if ( $sidebar_slug ) {
+				register_sidebar( array(
+					'name' 			=> __( $sidebar, 'largo' ),
+					'id' 			=> $sidebar_slug,
+					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+					'after_widget' 	=> '</aside>',
+					'before_title' 	=> '<h3 class="widgettitle">',
+					'after_title' 	=> '</h3>',
+				) );
+			}
+		}
+	}
+}
+add_action( 'widgets_init', 'largo_custom_sidebars' );
+
+// Helper function to transform user-entered text into WP-compatible slugs
+function largo_make_slug($string, $maxLength = 63) {
+  $result = preg_replace("/[^a-z0-9\s-]/", "", strtolower($string));
+  $result = trim(preg_replace("/[\s-]+/", " ", $result));
+  $result = trim(substr($result, 0, $maxLength));
+  return preg_replace("/\s/", "-", $result);
+}
+
+/**
+ * Add metabox to posts allowing selection of custom sidebar(s)
+ */
+add_action( 'add_meta_boxes', 'largo_sidebar_metabox' );
+add_action( 'save_post', 'largo_save_sidebar_postdata' );
+
+function largo_sidebar_metabox() {
+  add_meta_box(
+    'custom_sidebar',
+    __( 'Custom Sidebar', 'largo' ),
+    'largo_sidebar_form',
+    'post',
+    'side'
+  );
+}
+
+function largo_sidebar_form() {
+  global $wp_registered_sidebars, $post;  //to check our theme_options list against, as a failsafe
+
+  $custom = get_post_meta($post->ID, 'custom_sidebar', true);
+
+  $val = ($custom) ? $custom : "none";
+
+  // Use nonce for verification
+  wp_nonce_field( plugin_basename( __FILE__ ), 'custom_sidebar_nonce' );
+
+  // The actual fields for data entry
+  $output = '<p><label for="custom_sidebar">'.__("Select a custom sidebar to display", 'largo' ).'</label></p>';
+  $output .= "<select name='custom_sidebar'>";
+
+  // Add a default option
+  $output .= "<option";
+  if($val == "default") $output .= " selected='selected'";
+  $output .= " value='none'>".__('None', 'largo')."</option>";
+
+  // Build an array of sidebars, making sure they're real
+	$custom_sidebars = preg_split('/$\R?^/m', of_get_option('custom_sidebars'));
+	$sidebar_slugs = array_map('largo_make_slug', $custom_sidebars);
+
+  // Fill the select element with all registered sidebars that are custom
+  foreach($wp_registered_sidebars as $sidebar_id => $sidebar) {
+		if (!in_array($sidebar_id, $sidebar_slugs)) continue;
+    $output .= "<option";
+    if($sidebar_id == $val) $output .= " selected='selected'";
+    $output .= " value='".$sidebar_id."'>".$sidebar['name']."</option>";
+  }
+
+  $output .= "</select>";
+  echo $output;
+}
+
+/* When the post is saved, saves our custom data */
+function largo_save_sidebar_postdata( $post_id ) {
+  // verify if this is an auto save routine.
+  // If it is our form has not been submitted, so we dont want to do anything
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+    return;
+
+  // verify this came from our screen and with proper authorization,
+  // because save_post can be triggered at other times
+  if ( !isset($_POST['custom_sidebar_nonce']) || !wp_verify_nonce( $_POST['custom_sidebar_nonce'], plugin_basename( __FILE__ ) ) )
+    return;
+
+  if ( !current_user_can( 'edit_page', $post_id ) )
+      return;
+
+  $data = $_POST['custom_sidebar'];
+  update_post_meta($post_id, "custom_sidebar", $data);
+}
