@@ -170,7 +170,7 @@ function largo_sidebar_form() {
   // Add a default option
   $output .= "<option";
   if($val == "default") $output .= " selected='selected'";
-  $output .= " value='none'>".__('None', 'largo')."</option>";
+  $output .= " value='default'>".__('Default', 'largo')."</option>";
 
   // Build an array of sidebars, making sure they're real
 	$custom_sidebars = preg_split('/$\R?^/m', of_get_option('custom_sidebars'));
