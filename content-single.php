@@ -5,9 +5,11 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews item' ); ?>>
+
 	<header>
  		<h1 class="entry-title"><?php the_title(); ?></h1>
- 		<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( __('Leave a Comment', 'largo'), __('<strong>1</strong> Comment ', 'largo'), __(' <strong>%</strong> Comments', 'largo') ); ?></span><?php edit_post_link( __('Edit This Post', 'largo'), ' | <span class="edit-link">', '</span>'); ?></h5>
+ 		<h5 class="byline"><?php largo_byline(); ?></h5>
+
  		<?php
  			if ( of_get_option( 'social_icons_display' ) === 'top' || of_get_option( 'social_icons_display' ) === 'both' )
  				largo_post_social_links();
@@ -42,6 +44,12 @@
     		</div>
     	<?php endif; ?>
 
+    	<?php if ( of_get_option( 'clean_read' ) === 'footer' ) : ?>
+    	<div class="clean-read-container clearfix">
+ 				<a href="#" class="clean-read"><?php _e("View as 'Clean Read'", 'largo') ?></a>
+    	</div>
+ 			<?php endif; ?>
+
 		<?php
 		// Author bio and social links
 		if ( largo_show_author_box() )
@@ -51,8 +59,6 @@
 		if ( of_get_option( 'show_related_content' ) )
 			get_template_part( 'largo-related-posts' );
 		?>
-
-
 	</footer><!-- /.post-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->
 

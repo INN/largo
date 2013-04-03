@@ -87,6 +87,13 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			esc_attr( get_the_date( 'c' ) ),
 			largo_time( false )
 		);
+
+		if ( current_user_can( 'edit_post', $post->ID ) )
+			$output .=  sprintf( ' | <span class="edit-link"><a href="%1$s">Edit This Post</a></span>', get_edit_post_link() );
+
+ 		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
+ 			$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
+
 		if ( $echo )
 			echo $output;
 		return $output;
@@ -169,7 +176,7 @@ function largo_show_author_box() {
  * @return bool true if a gravatar is available for this user
  * @since 1.0
  */
-function has_gravatar( $email ) {
+function largo_has_gravatar( $email ) {
 	// Craft a potential url and test its headers
 	$hash = md5(strtolower(trim($email)));
 	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
@@ -353,6 +360,10 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
 		    | Pres\.            # or "Pres.",
 		    | U\.S\.            # or "U.S.",
 		    | Rev\.            	# or "Rev.",
+		    | Gen\.        		# or "Gen.",
+		    | Capt\.            # or "Capt.",
+		    | Lt\.            	# or "Lt.",
+		    | Cpl\.            	# or "Cpl.",
 		    | Inc\.            	# or "Inc.",
 		    | \s[A-Z]\.         # or initials ex: "George W. Bush",
 		    | [A-Z]\.[A-Z]\.    # or random state abbreviations ex: "O.H.",
@@ -371,7 +382,7 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
 
 	if ( $echo )
 		echo $output;
-	
+
 	return $output;
 }
 
@@ -387,8 +398,20 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 		if ( $nav_id === 'single-post-nav-below' ) { ?>
 
 			<nav id="nav-below" class="pager post-nav clearfix">
-				<div class="previous"><?php previous_post_link( __('<h5>Previous Story</h5> %link', 'largo'), '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'largo' ) . '</span> %title' ); ?></div>
-				<div class="next"><?php next_post_link( __('<h5>Next Story</h5> %link', 'largo'), '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'largo' ) . '</span>' ); ?></div>
+				<?php
+					if ( $prev = get_previous_post() ) {
+						printf( '<div class="previous"><a href="%1$s"><h5>Previous Story</h5><span class="meta-nav">%2$s</span></a></div>',
+							get_permalink( $prev->ID ),
+							$prev->post_title
+						);
+					}
+					if ( $next = get_next_post() ) {
+						printf( '<div class="next"><a href="%1$s"><h5>Next Story</h5><span class="meta-nav">%2$s</span></a></div>',
+							get_permalink( $next->ID ),
+							$next->post_title
+						);
+					}
+				?>
 			</nav><!-- #nav-below -->
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) { ?>

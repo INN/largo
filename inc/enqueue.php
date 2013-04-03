@@ -8,6 +8,10 @@
 if ( ! function_exists( 'largo_enqueue_js' ) ) {
 	function largo_enqueue_js() {
 
+		//Modernizr and our primary stylesheet
+		wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
+		wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
+
 		//the jquery plugins and our main js file
 		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );

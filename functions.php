@@ -52,7 +52,6 @@ require_once('functions/ad-codes.php');
 /**
  * Load up all of the other goodies from the /inc directory
  */
-
 $includes = array(
 	'/inc/largo-plugin-init.php',		// a list of recommended plugins
 	'/inc/special-functionality.php',	// header cleanup and robots.txt
@@ -70,8 +69,10 @@ $includes = array(
 	'/inc/related-content.php',			// functions dealing with related content
 	'/inc/featured-content.php',		// functions dealing with featured content
 	'/inc/enqueue.php',							// enqueue our js and css files
+	'/inc/post-templates.php'				//single post templates
 );
 
+// Perform load
 foreach ( $includes as $include ) {
 	require_once( get_template_directory() . $include );
 }

@@ -245,6 +245,18 @@ function optionsframework_options() {
 		'options' 	=> $fb_verbs);
 
 	$options[] = array(
+		'desc' 		=> __('Location of <strong>"Clean Read"</strong> link', 'largo'),
+		'id' 		=> 'clean_read',
+		'std' 		=> 'none',
+		'type'		=> 'select',
+		'class'		=> 'mini',
+		'options' 	=> 	array(
+			'none' 		=> __('Nowhere (disabled)', 'largo'),
+			'byline' => __('In Byline', 'largo'),
+			'footer' => __('Below Tags', 'largo')
+		));
+
+	$options[] = array(
 		'desc' 	=> __('<strong>Show/Hide share count</strong> with Twitter buttons.', 'largo'),
 		'id' 	=> 'show_twitter_count',
 		'std' 	=> '1',
@@ -371,6 +383,18 @@ function optionsframework_options() {
 		'options' 	=> $tag_display_options);
 
 	$options[] = array(
+		'desc' 	=> __('<strong>Number of posts</strong> to display in the main loop on the homepage', 'largo'),
+		'id' 	=> 'num_posts_home',
+		'std' 	=> 10,
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Categories to include or exclude</strong> in the main loop on the homepage (comma-separated list of values, see: http://bit.ly/XmDGgd for correct format).', 'largo'),
+		'id' 	=> 'cats_home',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
 		'name' 	=> __('Sidebar Options', 'largo'),
 		'type' 	=> 'info');
 
@@ -387,6 +411,12 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
+		'desc' 	=> __('Enter names of <strong>additional sidebar regions</strong> (one per line) you\'d like post authors to be able to choose to display on their posts.', 'largo'),
+		'id' 	=> 'custom_sidebars',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
+
+	$options[] = array(
 		'name' 	=> __('Footer Layout', 'largo'),
 		'desc' 	=> __('<strong>Select the layout to use for the footer.</strong> The default is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the Appearance > Widgets menu.', 'largo'),
 		'id' 	=> 'footer_layout',
@@ -400,7 +430,7 @@ function optionsframework_options() {
 
 	/**
 	 * Ad Configuration
-	 */
+
 	$options[] = array(
 		'name' 	=> __('Ad Settings', 'largo'),
 		'type' 	=> 'heading');
@@ -428,8 +458,17 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
+		'name' 	=> __('Ad Code Header', 'largo'),
+		'desc'  => __('Enter the code from your ad network provider (if any) that needs to appear in the header of every page. This typcially includes an account number and/or definition of ad regions.'),
+		'type' 	=> 'textarea',
+		'id' 		=> 'ad_header',
+		'std'		=> '<script type="text/javascript"></script>'
+	);
+
+
+	$options[] = array(
 		'name' 	=> __('Ad Code Markup', 'largo'),
-		'desc'  => __('Enter the code from your ad network provider for generating the ad, or (if using self hosting) the IMG tag that points to the image.  Placeholders available: %rand% %width% %height% %size% %tag% %site_name% %type%'),
+		'desc'  => __('Enter the code from your ad network provider for generating the ad, or (if using self hosting) the IMG tag that points to the image.  Placeholders available: %rand% %width% %height% %size% %tag% %site_name% %type%, or %custom% if not using a predefined ad zone.'),
 		'type' 	=> 'textarea',
 		'id' 		=> 'ad_html',
 		'std'		=> '<script language="JavaScript" type="text/javascript">
@@ -439,6 +478,7 @@ document.write(\'<script language="JavaScript" src="%url%ord=\' + ord + \'?" typ
 </script>
 <noscript><a href="%url%ord=%random%?" target="_blank"><img src="%url%ord=%random%?" width="%width%" height="%height%" border="0" alt=""></a></noscript>'
 	);
+	*/
 
 	return $options;
 }

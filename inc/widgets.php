@@ -91,11 +91,11 @@ function largo_add_widget_classes( $params ) {
 		$class[] = $option_name[$number]['widget_class'];
 
 	// Bootstrap responsive classes to control display of content on various screen sizes
-	if ($option_name[$number]['hidden_desktop'] === 1)
+	if (array_key_exists('hidden_desktop', $option_name[$number]) && $option_name[$number]['hidden_desktop'] === 1)
 		$class[] = 'hidden-desktop';
-	if ($option_name[$number]['hidden_tablet'] === 1)
+	if (array_key_exists('hidden_tablet', $option_name[$number]) && $option_name[$number]['hidden_tablet'] === 1)
 		$class[] = 'hidden-tablet';
-	if ($option_name[$number]['hidden_phone'] === 1)
+	if (array_key_exists('hidden_phone', $option_name[$number]) && $option_name[$number]['hidden_phone'] === 1)
 		$class[] = 'hidden-phone';
 
 	// Join the classes in the array

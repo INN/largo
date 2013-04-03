@@ -2,14 +2,30 @@
 /**
  * The Sidebar
  */
+if ( is_active_sidebar( 'sidebar-main' ) ) :
+do_action('largo_before_sidebar');
 ?>
-<div class="widget-area<?php if ( is_single() && of_get_option( 'showey-hidey' ) ) echo ' showey-hidey'; ?>" role="complementary">
-	<?php
-		if ( is_singular() && is_active_sidebar( 'sidebar-single' ) ) {
-			dynamic_sidebar( 'sidebar-single' );
-		} elseif ( ( is_archive() || is_tax() ) && of_get_option( 'use_topic_sidebar' ) && is_active_sidebar( 'topic-sidebar' ) ) {
-			dynamic_sidebar( 'topic-sidebar' );
-		} elseif ( ! dynamic_sidebar( 'sidebar-main' ) ) {
+<aside id="sidebar" class="span4">
+	<?php do_action('largo_before_sidebar_content'); ?>
+	<div class="widget-area<?php if ( is_single() && of_get_option( 'showey-hidey' ) ) echo ' showey-hidey'; ?>" role="complementary">
+		<?php
+			do_action('largo_before_sidebar_widgets');
+			$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
+
+			//load custom sidebar if appropriate
+			if ( is_singular() && $custom_sidebar && $custom_sidebar !== 'default') {
+				dynamic_sidebar($custom_sidebar);
+
+			//load single-post sidebar if it has things
+			} elseif ( is_singular() && is_active_sidebar( 'sidebar-single' )) {
+				dynamic_sidebar( 'sidebar-single' );
+
+			//load archive/topic sidebar if activated
+			} elseif ( ( is_archive() || is_tax() ) && of_get_option( 'use_topic_sidebar' ) && is_active_sidebar( 'topic-sidebar' ) ) {
+				dynamic_sidebar( 'topic-sidebar' );
+
+			//load some widgets if the main sidebar is empty
+			} elseif ( ! dynamic_sidebar( 'sidebar-main' ) ) {
 				the_widget( 'largo_about_widget', array( 'title' => __('About This Site', 'largo') ) );
 				the_widget( 'largo_follow_widget', array( 'title' => __('Follow Us', 'largo') ) );
 				if ( of_get_option( 'donate_link' ) )
@@ -34,6 +50,13 @@
 						'num_posts'		=> 3
 						 )
 					);
-		}
-	?>
-</div><!-- .widget-area -->
+			}
+
+			do_action('largo_after_sidebar_widgets');
+		?>
+	</div><!-- .widget-area -->
+	<?php do_action('largo_after_sidebar_content'); ?>
+</aside>
+<?php
+do_action('largo_after_sidebar');
+endif;

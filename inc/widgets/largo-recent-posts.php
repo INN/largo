@@ -67,11 +67,11 @@ class largo_recent_posts_widget extends WP_Widget {
 
           				// the thumbnail image (if we're using one)
 	                    if ($thumb == 'small')
-	                    	$output .= get_the_post_thumbnail($post->ID, '60x60');
+	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail($post->ID, '60x60') . '</a>';
 	                    elseif ($thumb == 'medium')
-	                    	$output .= get_the_post_thumbnail();
+	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a>';
 	                    elseif ($thumb == 'large')
-	                    	$output .= get_the_post_thumbnail($post->ID, 'large');
+	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail($post->ID, 'large') . '</a>';
 
 	                    // the excerpt
 	                    if ($excerpt == 'num_sentences')

@@ -1,13 +1,17 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Template for various archive pages (category, tag, term, date, etc.
+ */
+get_header();
+?>
 
-		<div id="content" class="stories span8" role="main">
+<div id="content" class="stories span8" role="main">
 
 		<?php if ( have_posts() ) { ?>
 
 		<?php
 
-			// cue up the first post so we know what type of archive page we're dealing with
-
+			// queue up the first post so we know what type of archive page we're dealing with
 			the_post();
 
 			/*
@@ -75,13 +79,13 @@
 					 */
 
 					if ( is_author() ) {
-						printf(__('Recent posts<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_author_feed_link( get_the_author_meta('ID') ) );
+						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_author_feed_link( get_the_author_meta('ID') ) );
 					} elseif ( is_category() ) {
-						printf(__('Recent posts<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_category_feed_link( get_queried_object_id() ) );
+						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_category_feed_link( get_queried_object_id() ) );
 					} elseif ( is_tag() ) {
-						printf(__('Recent posts<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_tag_feed_link( get_queried_object_id() ) );
+						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_tag_feed_link( get_queried_object_id() ) );
 					} elseif ( is_tax() ) {
-						printf(__('Recent posts<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_term_feed_link( get_queried_object() ) );
+						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_term_feed_link( get_queried_object() ) );
 					} elseif ( is_month() ) {
 						printf(__('Monthly Archives: <span>%s</span>', 'largo'), get_the_date('F Y') );
 					} elseif ( is_year() ) {
@@ -107,10 +111,7 @@
 		}
 	?>
 
-		</div><!--/ #content .grid_8-->
+</div><!--#content-->
 
-<aside id="sidebar" class="span4">
 <?php get_sidebar(); ?>
-</aside>
-<!-- /.grid_4 -->
 <?php get_footer(); ?>

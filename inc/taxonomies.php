@@ -52,6 +52,8 @@ function largo_custom_taxonomies() {
 		    		'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
 		    		'slug' 			=> 'top-story' ) );
 		}
+		//fixes a WP bug where the child terms won't display in the admin even though they exist
+		delete_option("prominence_children");
     }
 
     // SERIES
