@@ -151,6 +151,13 @@ function largo_sidebar_metabox() {
     'post',
     'side'
   );
+  add_meta_box(
+    'custom_sidebar',
+    __( 'Custom Sidebar', 'largo' ),
+    'largo_sidebar_form',
+    'page',
+    'side'
+  );
 }
 
 function largo_sidebar_form() {
