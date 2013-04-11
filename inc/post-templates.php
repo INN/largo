@@ -7,9 +7,8 @@
 //	and returns an array of [Template Name => {file}.php]
 if(!function_exists('get_post_templates')) {
 function get_post_templates() {
-	$themes = get_themes();
-	$theme = get_current_theme();
-	$templates = $themes[$theme]['Template Files'];
+	$theme = wp_get_theme();
+	$templates = $theme->get_files( 'php', 1, true );
 	$post_templates = array();
 
 	$base = array(trailingslashit(get_template_directory()), trailingslashit(get_stylesheet_directory()));
