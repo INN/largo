@@ -17,11 +17,12 @@ class largo_facebook_widget extends WP_Widget {
 
 		echo $before_widget;
 
-			 $output = '<div class="fb-like-box" data-href="' . $instance['fb_page_url'] . '" data-height="' . $instance['widget-height'] . '"';
-			 $output .= $instance['show_faces'] === 1 ? ' data-show-faces="true"' : ' data-show-faces="false"';
-			 $output .= $instance['show_stream'] === 1 ? ' data-stream="true"' : ' data-stream="false"';
-			 $output .= $instance['show_header'] === 1 ? ' data-header="true"' : ' data-header="false"';
-			 $output .= '></div>';
+			$height = isset( $instance['widget-height'] ) ? $instance['widget-height'] : 350;
+			$output = '<div class="fb-like-box" data-href="' . $instance['fb_page_url'] . '" data-height="' . $height . '"';
+			$output .= $instance['show_faces'] === 1 ? ' data-show-faces="true"' : ' data-show-faces="false"';
+			$output .= $instance['show_stream'] === 1 ? ' data-stream="true"' : ' data-stream="false"';
+			$output .= $instance['show_header'] === 1 ? ' data-header="true"' : ' data-header="false"';
+			$output .= '></div>';
 
 		echo $output;
 

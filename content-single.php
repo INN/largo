@@ -5,7 +5,7 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews item' ); ?>>
-
+	<?php do_action('largo_before_post_header'); ?>
 	<header>
  		<h1 class="entry-title"><?php the_title(); ?></h1>
  		<h5 class="byline"><?php largo_byline(); ?></h5>
@@ -15,11 +15,11 @@
  				largo_post_social_links();
  		?>
 	</header><!-- / entry header -->
-
+	<?php do_action('largo_after_post_header'); ?>
 	<div class="entry-content clearfix">
 		<?php largo_entry_content( $post ); ?>
 	</div><!-- .entry-content -->
-
+	<?php do_action('largo_after_post_content'); ?>
 	<footer class="post-meta bottom-meta">
  		<?php
  			if ( of_get_option( 'social_icons_display' ) === 'btm' || of_get_option( 'social_icons_display' ) === 'both' )
@@ -60,6 +60,7 @@
 			get_template_part( 'largo-related-posts' );
 		?>
 	</footer><!-- /.post-meta -->
+	<?php do_action('largo_after_post_footer'); ?>
 </article><!-- #post-<?php the_ID(); ?> -->
 
 <?php if ( of_get_option( 'show_next_prev_nav_single' ) )

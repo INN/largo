@@ -176,6 +176,12 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
+		'desc' 	=> __('<strong>Link to Tumblr</strong> (http://yoursite.tumblr.com)', 'largo'),
+		'id' 	=> 'tumblr_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
 		'desc' 	=> __('<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/in/username/)', 'largo'),
 		'id' 	=> 'linkedin_link',
 		'std' 	=> '',

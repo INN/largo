@@ -8,7 +8,9 @@ function insertModuleCode(){
 		mod_width = $("input[name='mod_width']:checked").val(),
 		mod_align = $("input[name='mod_align']:checked").val(),
 		mod_type  = $("input[name='mod_type']:checked").val(),
-		embed_style = "";
+		embed_style = "",
+		start_tag = '<aside class="module align-' + mod_align + ' ' + mod_width + ' type-' + mod_type + '" ' + embed_style + '>',
+		end_tag = '</aside>';
 
 	if (mod_type == 'embed') {
 		if  (mod_width == 'extract') {
@@ -17,11 +19,13 @@ function insertModuleCode(){
 		} else {
 			mod_type  += " embed-container";
 		}
+		if (/^\s*(https?:\/\/[^\s"]+)\s*$/im.test(html)) {
+			start_tag += "[embed]";
+			end_tag = '[/embed]' + end_tag;
+		}
 	}
 
-	var start_tag = '<aside class="module align-' + mod_align + ' ' + mod_width + ' ' + mod_type + '" ' + embed_style + '>';
-
-	window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, start_tag+html+'</aside>');
+	window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, start_tag + html + end_tag);
 	tinyMCEPopup.editor.execCommand('mceRepaint');
 	tinyMCEPopup.close();
 	return;

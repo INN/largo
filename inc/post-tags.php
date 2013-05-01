@@ -82,6 +82,8 @@ if ( ! function_exists( 'largo_author_link' ) ) {
  */
 if ( ! function_exists( 'largo_byline' ) ) {
 	function largo_byline( $echo = true ) {
+		global $post;
+
 		$output = sprintf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard">%1$s</span></span> | <time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>',
 			largo_author_link( false ),
 			esc_attr( get_the_date( 'c' ) ),

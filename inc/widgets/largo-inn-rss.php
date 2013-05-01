@@ -99,7 +99,7 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 		if ( $link == '' ) {
 			echo "<li><h5>$title</h5><p class=\"byline\">{$author} | {$date}</p>{$summary}</li>";
 		} else {
-			echo "<li><h5><a class='rsswidget' href='$link' title='$desc'>$title</a></h5><p class=\"byline\">{$author} | {$date}</p>{$summary}</li>";
+			echo "<li><h5><a class='rsswidget' href='$link' title='$title'>$title</a></h5><p class=\"byline\">{$author} | {$date}</p>{$summary}</li>";
 		}
 	}
 	echo '</ul>';

@@ -17,8 +17,16 @@
 			'showposts' => 1
 		) );
 		if ( $topstory->have_posts() ) :
-			while ( $topstory->have_posts() ) : $topstory->the_post(); $ids[] = get_the_ID(); ?>
-				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
+			while ( $topstory->have_posts() ) : $topstory->the_post(); $ids[] = get_the_ID();
+
+				if( $has_video = get_post_meta( $post->ID, 'youtube_url', true ) ) { ?>
+					<div class="embed-container">
+						<iframe src="http://www.youtube.com/embed/<?php echo substr(strrchr( $has_video, "="), 1 ); ?>?modestbranding=1" frameborder="0" allowfullscreen></iframe>
+					</div>
+				<?php } else { ?>
+					<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
+				<?php } ?>
+
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 			    <h5 class="byline"><?php largo_byline(); ?></h5>
 			    <?php largo_excerpt( $post, 4, false ); ?>

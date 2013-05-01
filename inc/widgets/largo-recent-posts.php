@@ -23,15 +23,16 @@ class largo_recent_posts_widget extends WP_Widget {
 			echo $before_title . $title . $after_title;?>
 
 			<?php
-			$thumb = $instance['thumbnail_display'];
-	        $excerpt = $instance['excerpt_display'];
+
+			$thumb = isset( $instance['thumbnail_display'] ) ? $instance['thumbnail_display'] : 'small';
+	        $excerpt = isset( $instance['excerpt_display'] ) ? $instance['excerpt_display'] : 'num_sentences';
 
 			$query_args = array (
 				'post__not_in' 	=> get_option( 'sticky_posts' ),
 				'showposts' 	=> $instance['num_posts'],
 				'post_status'	=> 'publish'
 			);
-			if ($instance['avoid_duplicates'] === 1)
+			if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1)
 				$query_args['post__not_in'] = $ids;
 			if ($instance['cat'] != '')
 				$query_args['cat'] = $instance['cat'];
@@ -67,11 +68,11 @@ class largo_recent_posts_widget extends WP_Widget {
 
           				// the thumbnail image (if we're using one)
 	                    if ($thumb == 'small')
-	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail($post->ID, '60x60') . '</a>';
+	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), '60x60') . '</a>';
 	                    elseif ($thumb == 'medium')
 	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a>';
 	                    elseif ($thumb == 'large')
-	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail($post->ID, 'large') . '</a>';
+	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), 'large') . '</a>';
 
 	                    // the excerpt
 	                    if ($excerpt == 'num_sentences')

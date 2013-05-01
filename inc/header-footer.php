@@ -57,6 +57,7 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 			'twitter' 	=> __( 'Link to Twitter Page', 'largo' ),
 			'youtube' 	=> __( 'Link to YouTube Page', 'largo' ),
 			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
+			'tumblr' 	=> __( 'Link to Tumblr', 'largo' ),
 			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' ),
 			'linkedin' 	=> __( 'Link to LinkedIn Page', 'largo' )
 		);

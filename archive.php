@@ -85,7 +85,10 @@ get_header();
 					} elseif ( is_tag() ) {
 						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_tag_feed_link( get_queried_object_id() ) );
 					} elseif ( is_tax() ) {
-						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_term_feed_link( get_queried_object() ) );
+						$queried_object = get_queried_object();
+						$term_id = intval( $queried_object->term_id );
+						$tax = $queried_object->taxonomy;
+						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_term_feed_link( $term_id, $tax ) );
 					} elseif ( is_month() ) {
 						printf(__('Monthly Archives: <span>%s</span>', 'largo'), get_the_date('F Y') );
 					} elseif ( is_year() ) {

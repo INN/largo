@@ -74,7 +74,11 @@ add_action('admin_menu','remove_default_post_screen_metaboxes');
  * @since 1.0
  */
 function largo_tinymce_config( $init ) {
-	$init['extended_valid_elements'] .= "span[!class]";
+	if ( isset( $init['extended_valid_elements'] ) ) {
+		$init['extended_valid_elements'] .= "span[!class]";
+	} else {
+		$init['extended_valid_elements'] = "span[!class]";
+	}
 	return $init;
 }
 add_filter('tiny_mce_before_init', 'largo_tinymce_config');

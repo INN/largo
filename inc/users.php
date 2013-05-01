@@ -2,38 +2,32 @@
 
 /**
  * Modify the user profile screen
- * Remove old links and add some new ones
+ * Remove old contact methods (yahoo, aol and jabber)
+ * Add new ones (twitter, facebook, linkedin)
  *
  * @since 1.0
  */
 function largo_contactmethods( $contactmethods ) {
-	// Remove Yahoo IM
-	if ( isset( $contactmethods['yim'] ) )
-		unset( $contactmethods['yim'] );
 
-	// Remove AIM
-	if ( isset( $contactmethods['aim'] ) )
-	    unset( $contactmethods['aim'] );
+	$remove = array( 'yim', 'aim', 'jabber' );
+	foreach ( $remove as $service ) {
+		if ( isset( $contactmethods[$service] ) )
+			unset( $contactmethods[$service] );
+	}
 
-	// Remove Jabber
-	if ( isset( $contactmethods['jabber'] ) )
-	    unset( $contactmethods['jabber'] );
+	$add = array(
+		'twitter' 	=> 'Twitter<br><em>https://twitter.com/username<em>',
+		'fb' 		=> 'Facebook<br><em>https://www.facebook.com/username<em>',
+		'linkedin' 	=> 'LinkedIn<br><em>http://www.linkedin.com/in/username<em>'
+	);
+	foreach ( $add as $service => $format ) {
+		if ( !isset( $contactmethods[$service] ) )
+	    	$contactmethods[$service] = $format;
+	}
 
 	// Add a format hint for G+
 	$contactmethods['googleplus'] = 'Google+<br><em>https://plus.google.com/userID/<em>';
 
-	// Add Twitter
-	if ( !isset( $contactmethods['twitter'] ) )
-	    $contactmethods['twitter'] = 'Twitter<br><em>https://twitter.com/username<em>';
-
-	// Add Facebook
-	if ( !isset( $contactmethods['fb'] ) )
-		$contactmethods['fb'] = 'Facebook<br><em>https://www.facebook.com/username<em>';
-
-	// Add LinkedIn
-	if ( !isset( $contactmethods['linkedin'] ) )
-		$contactmethods['linkedin'] = 'LinkedIn<br><em>http://www.linkedin.com/in/username<em>';
-
 	return $contactmethods;
 }
-add_filter( 'user_contactmethods', 'largo_contactmethods', 10, 1 );
+add_filter( 'user_contactmethods', 'largo_contactmethods' );

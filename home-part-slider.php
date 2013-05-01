@@ -19,7 +19,7 @@
 					<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
 				    <div class="carousel-caption">
 				    	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-				        <h5 class="byline"><?php largo_byline(); ?><?php edit_post_link( __('Edit This Post', 'largo'), ' | <span class="edit-link">', '</span>'); ?></h5>
+				        <h5 class="byline"><?php largo_byline(); ?></h5>
 				        <?php largo_excerpt( $post, 4, false ); ?>
 				    </div>
 				<?php
