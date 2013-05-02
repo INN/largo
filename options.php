@@ -434,58 +434,6 @@ function optionsframework_options() {
 			'4col' 			=> $imagepath . 'footer-4col.png')
 	);
 
-	/**
-	 * Ad Configuration
-
-	$options[] = array(
-		'name' 	=> __('Ad Settings', 'largo'),
-		'type' 	=> 'heading');
-
-	$this_url = $_SERVER['HTTP_HOST'];
-
-	$options[] = array(
-		'name' 	=> __('Whitelisted URLs', 'largo'),
-		'desc'  => __('Select the domains that your ad-service generated ads will come from. If you\'re locally hosting images, check "this site"'),
-		'type' 	=> 'multicheck',
-		'id' => 'ad_urls',
-		'options' => array(
-			'ad.doubleclick.net' => __('ad.doubleclick.net', 'largo'),
-			'other' => __('some other option', 'largo'),
-			$this_url => __('this site (' . $this_url . ')', 'largo'),
-		)
-	);
-
-	$options[] = array(
-		'name' 	=> __('Placeholders', 'largo'),
-		'desc' 	=> __('Enter the name of your site or account for use in the %site_name% placeholder', 'largo'),
-		'id' 	=> 'ad_site_name',
-		'std' 	=> $_SERVER['HTTP_HOST'],
-		'type' 	=> 'text'
-	);
-
-	$options[] = array(
-		'name' 	=> __('Ad Code Header', 'largo'),
-		'desc'  => __('Enter the code from your ad network provider (if any) that needs to appear in the header of every page. This typcially includes an account number and/or definition of ad regions.'),
-		'type' 	=> 'textarea',
-		'id' 		=> 'ad_header',
-		'std'		=> '<script type="text/javascript"></script>'
-	);
-
-
-	$options[] = array(
-		'name' 	=> __('Ad Code Markup', 'largo'),
-		'desc'  => __('Enter the code from your ad network provider for generating the ad, or (if using self hosting) the IMG tag that points to the image.  Placeholders available: %rand% %width% %height% %size% %tag% %site_name% %type%, or %custom% if not using a predefined ad zone.'),
-		'type' 	=> 'textarea',
-		'id' 		=> 'ad_html',
-		'std'		=> '<script language="JavaScript" type="text/javascript">
-if (typeof ord==\'undefined\') {ord=Math.random()*10000000000000000;}
-if (typeof(dfp_tile) == \'undefined\') dfp_tile=%tile%;
-document.write(\'<script language="JavaScript" src="%url%ord=\' + ord + \'?" type="text/javascript"><\/script>\');
-</script>
-<noscript><a href="%url%ord=%random%?" target="_blank"><img src="%url%ord=%random%?" width="%width%" height="%height%" border="0" alt=""></a></noscript>'
-	);
-	*/
-
 	return $options;
 }
 
