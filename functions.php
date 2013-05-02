@@ -69,8 +69,9 @@ $includes = array(
 	'/inc/related-content.php',			// functions dealing with related content
 	'/inc/featured-content.php',		// functions dealing with featured content
 	'/inc/enqueue.php',							// enqueue our js and css files
-	'/inc/post-templates.php'				//single post templates
-	'/inc/post-meta.php'						// add post meta boxes
+	'/inc/post-templates.php',			// single post templates
+	'/inc/post-meta.php',						// add post meta boxes
+	'/inc/image-widget.php'					// image-widget plugin for self-hosted ads and more
 );
 
 // Perform load
