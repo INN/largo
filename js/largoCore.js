@@ -59,4 +59,9 @@ jQuery(document).ready(function($) {
     if (e.keyCode == 27 && $('body').hasClass('clean-read')) $('.clean-read-close').trigger('click');
   });
 
+  //GA event tracking for image-widget items
+  $('a.image-click-track').on('click', function() {
+	  if (typeof _gaq == 'object') _gaq.push(['_trackEvent', 'Click', 'Image Widget', this.getAttribute('title')]);
+  });
+
 });
