@@ -1,0 +1,26 @@
+#poststuff .custom-less-variables h3 {
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 20px;
+  clear: left;
+}
+#poststuff .custom-less-variables label {
+  font-weight: bold;
+  float: left;
+  width: 200px;
+}
+#poststuff .custom-less-variables .field + h3 {
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: solid 1px #ccc;
+}
+#poststuff .custom-less-variables .field {
+  padding: 10px 0;
+  clear: left;
+}
+#poststuff .custom-less-variables .field + .field {
+  border-top: solid 1px #eee;
+}
+#poststuff .custom-less-variables .iris-picker {
+  margin-left: 200px;
+}

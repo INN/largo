@@ -28,7 +28,19 @@
 
 // Links
 // -------------------------
+/**
+ * @group Links
+ * @label Color of links
+ * @type color
+ * @default_value #2275bb
+ */
 @linkColor:             @blue;
+/**
+ * @group Links
+ * @label Hover color of links
+ * @type color
+ * @default_value #2275bb
+ */
 @linkColorHover:        lighten(@linkColor, 10%);
 
 
@@ -53,12 +65,34 @@
 // TYPOGRAPHY
 // --------------------------------------------
 
+/**
+ * @group Typography
+ * @label Sans Font Family
+ * @type dropdown
+ * @options "Helvetica Neue", Helvetica, Arial, sans-serif|Arial, Arial Black, sans-serif|"Open Sans", Helvetica, sans-serif
+ * @default_value "Helvetica Neue", Helvetica, Arial, sans-serif
+ */
 @sansFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+/**
+ * @group Typography
+ * @label Serif Font Family
+ * @type text
+ */
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Menlo, Monaco, Consolas, "Courier New", monospace;
 
+/**
+ * @group Typography
+ * @label Base Font Size
+ * @type pixels
+ */
 @baseFontSize:          16px;
 @baseFontFamily:        @serifFontFamily;
+/**
+ * @group Typography
+ * @label Base Line Height
+ * @type pixels
+ */
 @baseLineHeight:        24px;
 @altFontFamily:         @sansFontFamily;
 @baseFontWeight:		normal;
@@ -104,10 +138,32 @@
 // Form states and alerts
 // -------------------------
 @warningText:             #c09853;
+/**
+ * @group Form
+ * @label Warning Background Color
+ * @type color
+ */
 @warningBackground:       #fcf8e3;
+
+/**
+ * @group Form
+ * @label Warning Border Color
+ * @type color
+ */
 @warningBorder:           darken(spin(@warningBackground, -10), 3%);
 
+/**
+ * @group Form
+ * @label Error Text Color
+ * @type color
+ */
 @errorText:               #b94a48;
+
+/**
+ * @group Form
+ * @label Error Background Color
+ * @type color
+ */
 @errorBackground:         #f2dede;
 @errorBorder:             darken(spin(@errorBackground, -10), 3%);
 
