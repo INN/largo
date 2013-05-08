@@ -1,0 +1,43 @@
+#feedinput_dashboard_widget .item-list {
+  overflow: scroll;
+  height: 300px;
+}
+
+#feedinput_dashboard_widget .item-list li {
+  padding: 10px 5px;
+  margin: 0;
+  border-bottom: solid 1px #dfdfdf;
+}
+
+#feedinput_dashboard_widget .item-list li.removed {
+  display: none;
+}
+
+#feedinput_dashboard_widget .item-list .feedinput-item-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 2px;
+}
+
+#feedinput_dashboard_widget .feedinput-item-meta {
+  margin-bottom: 2px;
+}
+
+#feedinput_dashboard_widget .feedinput-item-actions a {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#feedinput_dashboard_widget .item-list li.feedinput-paging-status-indicator {
+  position: relative;
+  height: 30px;
+  border-bottom: none 0;
+}
+
+#feedinput_dashboard_widget .item-list li.feedinput-paging-status-indicator .feedinput-spinner {
+  position: absolute !important;
+  left: 50%;
+  top: 50%;
+}
+

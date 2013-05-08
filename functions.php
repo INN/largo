@@ -69,6 +69,7 @@ $includes = array(
 	'/inc/post-templates.php',			// single post templates
 	'/inc/post-meta.php',						// add post meta boxes
 	'/inc/ad-codes.php',						// register ad codes
+	'/inc/feed-input/feed-input.php' // Pull in posts via RSS or Atom feeds
 );
 
 // Perform load
