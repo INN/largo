@@ -1,0 +1,119 @@
+#postbox-container-2 h4 {
+	float: left;
+	text-align: right;
+	min-width: 94px;
+	width: 10%;
+	margin: 0.8em 0;
+}
+
+#postbox-container-2 h4+div {
+	float: left;
+	margin-left: 8px;
+	width: 78%;
+	margin: 0.7em 0 0.8em 1%;
+}
+
+#postbox-container-2 .form-field-select h4+div {
+	float: left;
+	margin-left: 8px;
+	width: 78%;
+	margin: 0.5em 0 0.8em 1%;
+}
+
+#postbox-container-2 .inside > div {
+	clear: both;
+}
+
+#postbox-container-2 .inside {
+	overflow: hidden;
+}
+
+#postbox-container-2 .description {
+	font-style: italic;
+	margin-bottom: 0.5em;
+	margin-left: 1.1em;
+}
+
+#postbox-container-2 #header-html > div,
+#postbox-container-2 #footer-html > div {
+	clear: left;
+	width: 98%;
+}
+
+#postbox-container-2 label.cols {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	overflow: hidden;
+	text-indent: 105%;
+	white-space: nowrap;
+	width: 100px;
+	height: 70px;
+	background-image: url('landing-layouts.png');
+	background-repeat: no-repeat;
+	vertical-align: top;
+}
+
+#postbox-container-2 #two-col {
+	background-position: -100px 0;
+}
+
+#postbox-container-2 #three-col {
+	background-position: 0 0;
+}
+
+#postbox-container-2 #one-col {
+	background-position: -200px 0;
+}
+
+#postbox-container-2 .options > div {
+	float: left;
+	margin-right: 20px;
+}
+
+#explainer {
+	float: none !important;
+	clear: left;
+	font-style: italic;
+	padding: 10px 0 0 15px;
+	color: #666;
+}
+
+#explainer > span {
+	display: none;
+}
+
+#explainer.three-column .three-column,
+#explainer.two-column .two-column,
+#explainer.one-column .one-column {
+	display: block;
+}
+
+#postbox-container-2 .form-field-checkboxes label {
+	display: block;
+	margin-bottom: 0.2em
+}
+
+#custom-order,
+a.thickbox.custom {
+	display: none;
+}
+
+#post-list .publishing {
+	text-align: right;
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid #ddd;
+}
+
+#post-list li {
+	cursor: move;
+	padding: 6px 10px;
+	border: 1px solid #ddd;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: block;
+	margin: 3px;
+	background-color: #f2f2f2;
+	font-size: 112%;
+}

@@ -12,7 +12,9 @@ global $tags;
 	 		<h5 class="top-tag"><?php largo_categories_and_tags( 1 ); ?></h5>
 	 	<?php } ?>
 
- 		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+ 		<h2 class="entry-title">
+ 			<a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
+ 		</h2>
 
  		<h5 class="byline"><?php largo_byline(); ?></h5>
 
