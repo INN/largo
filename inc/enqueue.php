@@ -16,6 +16,11 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
 
+		//Add picturefill and matchmedia -- https://github.com/scottjehl/picturefill
+		wp_enqueue_script( 'matchmedia', get_template_directory_uri() . '/js/matchmedia.js', array( ), '1.0', true );
+		wp_enqueue_script( 'picturefill', get_template_directory_uri() . '/js/picturefill.js', array( ), '1.0', true );
+
+
 		//only load the carousel and top stories js and css if those homepage options are selected
 		if ( is_home() && of_get_option( 'homepage_top') == 'slider' ) {
 			wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );

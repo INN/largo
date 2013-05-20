@@ -106,19 +106,15 @@ class Largo_Custom_Less_Variables {
 		if ( is_admin() && isset( $_POST['customlessvariables'] ) && false != strstr( $_SERVER[ 'REQUEST_URI' ], 'themes.php' ) ) {
 			check_admin_referer( 'customlessvariables', 'customlessvariables' );
 
-			if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) && isset( $_POST['submit-action'] ) && $_POST['submit-action'] == __( 'Reset All', 'largo' )) {
-			// Reset all values
-				self::reset_all();
-				add_action( 'admin_notices', array( __CLASS__, 'reset_admin_notices' ) );
-			// Update fields
-			} else if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) ) {
+			if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) ) {
 				self::update_custom_values( $_POST['field'] );
-				add_action( 'admin_notices', array( __CLASS__, 'success_admin_notices' ) );
 			} else {
 				self::update_custom_values( array() );
-				add_action( 'admin_notices', array( __CLASS__, 'success_admin_notices' ) );	//we updated even without getting anything
 			}
+
+			add_action( 'admin_notices', array( __CLASS__, 'success_admin_notices' ) );
 		}
+
 	}
 
 	/**
@@ -200,7 +196,7 @@ class Largo_Custom_Less_Variables {
 
 		// Load LESS compiler if loaded
 		if ( !class_exists('lessc') ) {
-			require( dirname( __FILE__ ) . '/../lib/lessc.inc.php' );
+			require( dirname( __FILE__ ) . '/lib/lessc.inc.php' );
 		}
 
 		$compiler = new lessc();
@@ -351,13 +347,6 @@ class Largo_Custom_Less_Variables {
 	}
 
 	/**
-	 * Display a success message
-	 */
-	static function reset_admin_notices() {
-		echo '<div id="message" class="error fade"><p><strong>' . __( 'Values reset to defaults.', 'largo' ) . '</strong></p></div>';
-	}
-
-	/**
 	 * Register the admin page
 	 */
 	static function admin_menu() {
@@ -375,7 +364,7 @@ class Largo_Custom_Less_Variables {
 	 */
 	static function admin() {
 
-		add_meta_box( 'submitdiv', __( 'Publishing Options', 'largo' ), array( __CLASS__, 'publish_box' ), 'customlessvariables', 'side' );
+		add_meta_box( 'submitdiv', __( 'Publish', 'largo' ), array( __CLASS__, 'publish_box' ), 'customlessvariables', 'side' );
 
 		//if ( ! empty( $safecss_post ) && 0 < $safecss_post['ID'] && wp_get_post_revisions( $safecss_post['ID'] ) )
 		//	add_meta_box( 'revisionsdiv', __( 'CSS Variables Revisions', 'largo' ), array( __CLASS__, 'revisions_meta_box' ), 'customlessvariables', 'side' );
@@ -389,7 +378,7 @@ class Largo_Custom_Less_Variables {
 				<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
 				<input type="hidden" name="action" value="save" />
 				<div id="poststuff" class="metabox-holder has-right-sidebar">
-					<p class="css-support"><?php echo apply_filters( 'largo_custom_less_variables_intro', __( 'Customize the appearance of this theme by changing key LESS used for generating CSS.', 'largo' ) ); ?></p>
+					<p class="css-support"><?php echo apply_filters( 'largo_custom_less_variables_intro', __( 'Customize the variables within the LESS variables.', 'largo' ) ); ?></p>
 					<div id="postbox-container-1" class="inner-sidebar">
 						<?php do_meta_boxes( 'customlessvariables', 'side', array() ); ?>
 					</div>
@@ -424,7 +413,7 @@ class Largo_Custom_Less_Variables {
 										echo '<label id="',$form_id,'">', $field['label'], '</label> ';
 
 										if ( isset( $field_type_callbacks[$field['type']] ) ) {
-											call_user_func_array( $field_type_callbacks[$field['type']], array( $field, $value, $field['default_value'], $form_name, $form_id ) );
+											call_user_func_array( $field_type_callbacks[$field['type']], array( $field, $value, $form_name, $form_id ) );
 										} else {
 											echo '<input type="text" name="', $form_name, '" id="', $form_id, '" size="40" value="', esc_attr($value),'" />';
 										}
@@ -467,23 +456,21 @@ class Largo_Custom_Less_Variables {
 	static function publish_box() {
 		?>
 		<div id="minor-publishing">
-			<!-- div id="misc-publishing-actions">
-				<?php /* // $safecss_post = Jetpack_Custom_CSS::get_current_revision();
-				<?php do_action( 'largo_custom_less_variables_submitbox_misc_actions' ); ?> */ ?>
-				<p><a data-action="reset" class="button">Reset to defaults</a> <br/></p>
-			</div -->
+			<?php /*
+			<div id="misc-publishing-actions">
+				// $safecss_post = Jetpack_Custom_CSS::get_current_revision();
+				<?php do_action( 'largo_custom_less_variables_submitbox_misc_actions' ); ?>
+			</div>
+			*/ ?>
 		</div>
 		<div id="major-publishing-actions">
 			<?php // <input type="button" class="button" id="preview" name="preview" value="<?php esc_attr_e( 'Preview', 'jetpack' ) " />
 			?>
 			<div id="publishing-action">
-				<input type="submit" name="submit-action" value="<?php esc_attr_e( 'Reset All', 'largo' ); ?>" class="button" />
-				<input type="submit" class="button-primary" id="save" name="save" value="<?php esc_attr_e( 'Save Variables', 'largo' ); ?>" />
+				<input type="submit" class="button-primary" id="save" name="save" value="<?php esc_attr_e( 'Save CSS Variables', 'largo' ); ?>" />
 			</div>
 			<div class="clear"></div>
 		</div>
-
-
 		<?php
 	}
 
@@ -554,38 +541,19 @@ class Largo_Custom_Less_Variables {
 	}
 
 	/**
-	 * Delete all custom variables saved
-	 */
-	static function reset_all() {
-
-		//delete from posts
-		$clv_posts = get_posts('numberposts=-1&post_type=largo_less_variables&post_status=any');
-		foreach ($clv_posts as $clv_post) {
-			wp_delete_post( $clv_post->ID, true );
-		}
-
-		//delete anything transient just in case
-		$theme_data = wp_get_theme();
-		$theme = $theme_data->get_stylesheet();
-		$cache_key = 'customlessvars_'.$theme;
-		print delete_transient( $cache_key );
-	}
-
-	/**
 	 * Save or update custom values
 	 *
 	 * @param array $values - an associative array of values
 	 * @param string $theme optional - the theme name, defaults to the active the theme
 	 */
 	static function update_custom_values( $values, $theme = null ) {
-		global $post;
 		if ( empty( $theme ) ) {
 			$theme_data = wp_get_theme();
 			$theme = $theme_data->get_stylesheet();
 		}
 
 		// Need the current version of the settings
-		$_ = get_posts( array(
+		$post = get_posts( array(
 			'post_type'      => 'largo_less_variables',
 			'post_name'      => $theme,
 			'posts_per_page' => 1,
@@ -697,24 +665,24 @@ class Largo_Custom_Less_Variables {
 	/**
 	 * Render the color field in the admin
 	 */
-	static function color_type_field( $field, $value, $default_value, $name, $id ) {
-		echo '<input name="', $name, '" id="', $id, '" data-widget="colorpicker" value="', esc_attr($value), '" data-default-value="', $default_value,'" />';
+	static function color_type_field( $field, $value, $name, $id ) {
+		echo '<input name="', $name, '" id="', $id, '" data-widget="colorpicker" value="', esc_attr($value), '" />';
 	}
 
 	/**
 	 * Render a pixels field in the admin
 	 */
-	static function pixels_field( $field, $value, $default_value, $name, $id ) {
+	static function pixels_field( $field, $value, $name, $id ) {
 		$display_value = esc_attr(rtrim($value, 'px'));	//strip out "px", will be added back in before save
-		echo '<input name="', str_replace("]","-pixels]", $name), '" id="', $id, '" type="number" step="1" value="', $display_value, '" data-default-value="', $default_value,'" /> pixels';
+		echo '<input name="', str_replace("]","-pixels]", $name), '" id="', $id, '" type="number" step="1" value="', $display_value, '" /> pixels';
 	}
 
 	/**
 	 * Render a dropdown in the admin
 	 */
-	static function dropdown_field( $field, $value, $default_value, $name, $id ) {
+	static function dropdown_field( $field, $value, $name, $id ) {
 		$options = explode('|', $field['properties']['options']);
-		echo '<select name="', $name, '" id="', $id, '" data-default-value="', $default_value,'">';
+		echo '<select name="', $name, '" id="', $id, '">';
 		foreach ($options as $opt) {
 			echo '<option value="', esc_attr($opt), '"', selected($opt, $value, 0), '>', $opt, "</option>\n";
 		}
