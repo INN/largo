@@ -107,3 +107,84 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );
+
+
+
+/**
+ * Bypass WordPress's native editor image insert
+ */
+function largo_send_image_to_editor($html, $post_id, $caption, $title, $align, $url, $size, $alt) {
+
+	// NOTE: This functionality also bypasses the Navis-Media-Credit plugin's [caption][/caption]
+	// wrapper.
+
+	$shortcode = '';
+
+	$shortcode .= '[picturefill id="' . $post_id . '"';
+	if ($title){
+		$shortcode .= ' title="' . esc_attr($title) . '"';
+	}
+	if ($alt){
+		$shortcode .= ' alttext="' . esc_html($alt) . '"';
+	}
+	$shortcode .= ' ]';
+
+	return $shortcode;
+}
+add_filter('image_send_to_editor', 'largo_send_image_to_editor', 1, 8);
+
+
+function largo_picturefill_shortcode($attributes, $content = null) {
+
+	$output = '';
+
+	extract(shortcode_atts(array(
+		'id' => null,
+		'alttext' => null,
+		'title' => null,
+		'align' => null,
+	), $attributes ) );
+
+	if ($attributes['id']) {
+
+		$image_large = wp_get_attachment_image_src( $attributes['id'], 'large');
+		$image_medlarge = wp_get_attachment_image_src( $attributes['id'], 'medlarge');
+		$image_mediasmall = wp_get_attachment_image_src( $attributes['id'], 'mediasmall');
+		$image_medium = wp_get_attachment_image_src( $attributes['id'], 'medium');
+
+		// Open tag & output for modern browsers
+		$output .= '<div data-picture';
+		if ($attributes['alttext'] != null) {
+			$output .= ' data-alt="' . esc_attr($attributes['alttext']) . '"';
+		}
+		$output .= '>' . PHP_EOL;
+
+		// Various image sizes
+		if (isset($image_medium[0])) {
+			$output .= '<div data-src="' . $image_medium[0] . '"></div>' . PHP_EOL;
+		}
+		if (isset($image_mediasmall[0])) {
+			$output .= '<div data-src="' . $image_mediasmall[0] . '" data-media="(min-width: 360px)"></div>' . PHP_EOL;
+		}
+		if (isset($image_medlarge[0])) {
+			$output .= '<div data-src="' . $image_medlarge[0] . '" data-media="(min-width: 480px)"></div>' . PHP_EOL;
+		}
+		if (isset($image_large[0])) {
+			$output .= '<div data-src="' . $image_large[0] . '" data-media="(min-width: 980px)"></div>' . PHP_EOL;
+		}
+
+		// Set output for older IE and browsers with no JS
+		$output .= '<!--[if (lt IE 9) & (!IEMobile)]><div data-src="' . $image_large[0] . '"></div><![endif]-->';
+		$output .= '<noscript><img src="' . $image_large[0] . '"';
+		if ($attributes['alttext'] != null) {
+			$output .= ' alt="' . esc_attr($attributes['alttext']) . '"';
+		}
+		$output .= '></noscript>' . PHP_EOL;
+
+		// Close tag
+		$output .= '</div>' . PHP_EOL;
+	}
+	return $output;
+}
+add_shortcode( 'picturefill', 'largo_picturefill_shortcode' );
+
