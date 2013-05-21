@@ -27,10 +27,12 @@
 .icon-comment:before { content: '\56'; } /* 'V' */
 .icon-chat:before { content: '\57'; } /* 'W' */
 .icon-play:before { content: '\60'; } /* '`' */
+.icon-menu:before { content: '\4c'; } /* 'L' */
 .icon-mail:before { content: '\75'; } /* 'u' */
 .icon-spinner:before { content: '\61'; } /* 'a' */
 .icon-instagram:before { content: '\74'; } /* 't' */
 .icon-headphones:before { content: '\59'; } /* 'Y' */
 .icon-phone:before { content: '\58'; } /* 'X' */
 .icon-download:before { content: '\54'; } /* 'T' */
+.icon-search:before { content: '\4d'; } /* 'M' */
 .icon-link:before { content: '\51'; } /* 'Q' */

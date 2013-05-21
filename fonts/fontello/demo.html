@@ -2,7 +2,16 @@
 <html>
   <head><!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <meta charset="UTF-8"><style type="text/css">.clearfix {
+    <meta charset="UTF-8"><style type="text/css">/*
+ * Bootstrap v2.2.1
+ *
+ * Copyright 2012 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+.clearfix {
   *zoom: 1;
 }
 .clearfix:before,
@@ -13,43 +22,6 @@
 }
 .clearfix:after {
   clear: both;
-}
-.hide-text {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
-}
-.input-block-level {
-  display: block;
-  width: 100%;
-  min-height: 30px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-nav,
-section {
-  display: block;
-}
-audio,
-canvas,
-video {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-}
-audio:not([controls]) {
-  display: none;
 }
 html {
   font-size: 100%;
@@ -64,35 +36,6 @@ a:focus {
 a:hover,
 a:active {
   outline: 0;
-}
-sub,
-sup {
-  position: relative;
-  font-size: 75%;
-  line-height: 0;
-  vertical-align: baseline;
-}
-sup {
-  top: -0.5em;
-}
-sub {
-  bottom: -0.25em;
-}
-img {
-/* Responsive images (ensure images don't scale beyond their parents) */
-  max-width: 100%;
-/* Part 1: Set a maxium relative to the parent */
-  width: auto 9;
-/* IE7-8 need help adjusting responsive images */
-  height: auto;
-/* Part 2: Scale the height according to the width, otherwise you get stretching */
-  vertical-align: middle;
-  border: 0;
-  -ms-interpolation-mode: bicubic;
-}
-#map_canvas img,
-.google-maps img {
-  max-width: none;
 }
 button,
 input,
@@ -112,27 +55,6 @@ input::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer;
-}
-input[type="search"] {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  -webkit-appearance: textfield;
-}
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-}
-textarea {
-  overflow: auto;
-  vertical-align: top;
-}
 body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -148,25 +70,6 @@ a {
 a:hover {
   color: #005580;
   text-decoration: underline;
-}
-.img-rounded {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-}
-.img-polaroid {
-  padding: 4px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0,0,0,0.2);
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-.img-circle {
-  -webkit-border-radius: 500px;
-  -moz-border-radius: 500px;
-  border-radius: 500px;
 }
 .row {
   margin-left: -20px;
@@ -228,220 +131,6 @@ a:hover {
 .span1 {
   width: 60px;
 }
-.offset12 {
-  margin-left: 980px;
-}
-.offset11 {
-  margin-left: 900px;
-}
-.offset10 {
-  margin-left: 820px;
-}
-.offset9 {
-  margin-left: 740px;
-}
-.offset8 {
-  margin-left: 660px;
-}
-.offset7 {
-  margin-left: 580px;
-}
-.offset6 {
-  margin-left: 500px;
-}
-.offset5 {
-  margin-left: 420px;
-}
-.offset4 {
-  margin-left: 340px;
-}
-.offset3 {
-  margin-left: 260px;
-}
-.offset2 {
-  margin-left: 180px;
-}
-.offset1 {
-  margin-left: 100px;
-}
-.row-fluid {
-  width: 100%;
-  *zoom: 1;
-}
-.row-fluid:before,
-.row-fluid:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-.row-fluid:after {
-  clear: both;
-}
-.row-fluid [class*="span"] {
-  display: block;
-  width: 100%;
-  min-height: 30px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  float: left;
-  margin-left: 2.127659574468085%;
-  *margin-left: 2.074468085106383%;
-}
-.row-fluid [class*="span"]:first-child {
-  margin-left: 0;
-}
-.row-fluid .controls-row [class*="span"] + [class*="span"] {
-  margin-left: 2.127659574468085%;
-}
-.row-fluid .span12 {
-  width: 100%;
-  *width: 99.94680851063829%;
-}
-.row-fluid .span11 {
-  width: 91.48936170212765%;
-  *width: 91.43617021276594%;
-}
-.row-fluid .span10 {
-  width: 82.97872340425532%;
-  *width: 82.92553191489361%;
-}
-.row-fluid .span9 {
-  width: 74.46808510638297%;
-  *width: 74.41489361702126%;
-}
-.row-fluid .span8 {
-  width: 65.95744680851064%;
-  *width: 65.90425531914893%;
-}
-.row-fluid .span7 {
-  width: 57.44680851063829%;
-  *width: 57.39361702127659%;
-}
-.row-fluid .span6 {
-  width: 48.93617021276595%;
-  *width: 48.88297872340425%;
-}
-.row-fluid .span5 {
-  width: 40.42553191489362%;
-  *width: 40.37234042553192%;
-}
-.row-fluid .span4 {
-  width: 31.914893617021278%;
-  *width: 31.861702127659576%;
-}
-.row-fluid .span3 {
-  width: 23.404255319148934%;
-  *width: 23.351063829787233%;
-}
-.row-fluid .span2 {
-  width: 14.893617021276595%;
-  *width: 14.840425531914894%;
-}
-.row-fluid .span1 {
-  width: 6.382978723404255%;
-  *width: 6.329787234042553%;
-}
-.row-fluid .offset12 {
-  margin-left: 104.25531914893617%;
-  *margin-left: 104.14893617021275%;
-}
-.row-fluid .offset12:first-child {
-  margin-left: 102.12765957446808%;
-  *margin-left: 102.02127659574467%;
-}
-.row-fluid .offset11 {
-  margin-left: 95.74468085106382%;
-  *margin-left: 95.6382978723404%;
-}
-.row-fluid .offset11:first-child {
-  margin-left: 93.61702127659574%;
-  *margin-left: 93.51063829787232%;
-}
-.row-fluid .offset10 {
-  margin-left: 87.23404255319149%;
-  *margin-left: 87.12765957446807%;
-}
-.row-fluid .offset10:first-child {
-  margin-left: 85.1063829787234%;
-  *margin-left: 84.99999999999999%;
-}
-.row-fluid .offset9 {
-  margin-left: 78.72340425531914%;
-  *margin-left: 78.61702127659572%;
-}
-.row-fluid .offset9:first-child {
-  margin-left: 76.59574468085106%;
-  *margin-left: 76.48936170212764%;
-}
-.row-fluid .offset8 {
-  margin-left: 70.2127659574468%;
-  *margin-left: 70.10638297872339%;
-}
-.row-fluid .offset8:first-child {
-  margin-left: 68.08510638297872%;
-  *margin-left: 67.9787234042553%;
-}
-.row-fluid .offset7 {
-  margin-left: 61.70212765957446%;
-  *margin-left: 61.59574468085106%;
-}
-.row-fluid .offset7:first-child {
-  margin-left: 59.574468085106375%;
-  *margin-left: 59.46808510638297%;
-}
-.row-fluid .offset6 {
-  margin-left: 53.191489361702125%;
-  *margin-left: 53.085106382978715%;
-}
-.row-fluid .offset6:first-child {
-  margin-left: 51.063829787234035%;
-  *margin-left: 50.95744680851063%;
-}
-.row-fluid .offset5 {
-  margin-left: 44.68085106382979%;
-  *margin-left: 44.57446808510638%;
-}
-.row-fluid .offset5:first-child {
-  margin-left: 42.5531914893617%;
-  *margin-left: 42.4468085106383%;
-}
-.row-fluid .offset4 {
-  margin-left: 36.170212765957444%;
-  *margin-left: 36.06382978723405%;
-}
-.row-fluid .offset4:first-child {
-  margin-left: 34.04255319148936%;
-  *margin-left: 33.93617021276596%;
-}
-.row-fluid .offset3 {
-  margin-left: 27.659574468085104%;
-  *margin-left: 27.5531914893617%;
-}
-.row-fluid .offset3:first-child {
-  margin-left: 25.53191489361702%;
-  *margin-left: 25.425531914893618%;
-}
-.row-fluid .offset2 {
-  margin-left: 19.148936170212764%;
-  *margin-left: 19.04255319148936%;
-}
-.row-fluid .offset2:first-child {
-  margin-left: 17.02127659574468%;
-  *margin-left: 16.914893617021278%;
-}
-.row-fluid .offset1 {
-  margin-left: 10.638297872340425%;
-  *margin-left: 10.53191489361702%;
-}
-.row-fluid .offset1:first-child {
-  margin-left: 8.51063829787234%;
-  *margin-left: 8.404255319148938%;
-}
-[class*="span"].hide,
-.row-fluid [class*="span"].hide {
-  display: none;
-}
 [class*="span"].pull-right,
 .row-fluid [class*="span"].pull-right {
   float: right;
@@ -460,20 +149,6 @@ a:hover {
 .container:after {
   clear: both;
 }
-.container-fluid {
-  padding-right: 20px;
-  padding-left: 20px;
-  *zoom: 1;
-}
-.container-fluid:before,
-.container-fluid:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-.container-fluid:after {
-  clear: both;
-}
 p {
   margin: 0 0 10px;
 }
@@ -486,48 +161,7 @@ p {
 small {
   font-size: 85%;
 }
-strong {
-  font-weight: bold;
-}
-em {
-  font-style: italic;
-}
-cite {
-  font-style: normal;
-}
-.muted {
-  color: #999;
-}
-.text-warning {
-  color: #c09853;
-}
-a.text-warning:hover {
-  color: #a47e3c;
-}
-.text-error {
-  color: #b94a48;
-}
-a.text-error:hover {
-  color: #953b39;
-}
-.text-info {
-  color: #3a87ad;
-}
-a.text-info:hover {
-  color: #2d6987;
-}
-.text-success {
-  color: #468847;
-}
-a.text-success:hover {
-  color: #356635;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1 {
   margin: 10px 0;
   font-family: inherit;
   font-weight: bold;
@@ -535,174 +169,19 @@ h6 {
   color: inherit;
   text-rendering: optimizelegibility;
 }
-h1 small,
-h2 small,
-h3 small,
-h4 small,
-h5 small,
-h6 small {
+h1 small {
   font-weight: normal;
   line-height: 1;
   color: #999;
 }
-h1,
-h2,
-h3 {
+h1 {
   line-height: 40px;
 }
 h1 {
   font-size: 38.5px;
 }
-h2 {
-  font-size: 31.5px;
-}
-h3 {
-  font-size: 24.5px;
-}
-h4 {
-  font-size: 17.5px;
-}
-h5 {
-  font-size: 14px;
-}
-h6 {
-  font-size: 11.9px;
-}
 h1 small {
   font-size: 24.5px;
-}
-h2 small {
-  font-size: 17.5px;
-}
-h3 small {
-  font-size: 14px;
-}
-h4 small {
-  font-size: 14px;
-}
-.page-header {
-  padding-bottom: 9px;
-  margin: 20px 0 30px;
-  border-bottom: 1px solid #eee;
-}
-ul,
-ol {
-  padding: 0;
-  margin: 0 0 10px 25px;
-}
-ul ul,
-ul ol,
-ol ol,
-ol ul {
-  margin-bottom: 0;
-}
-li {
-  line-height: 20px;
-}
-ul.unstyled,
-ol.unstyled {
-  margin-left: 0;
-  list-style: none;
-}
-dl {
-  margin-bottom: 20px;
-}
-dt,
-dd {
-  line-height: 20px;
-}
-dt {
-  font-weight: bold;
-}
-dd {
-  margin-left: 10px;
-}
-.dl-horizontal {
-  *zoom: 1;
-}
-.dl-horizontal:before,
-.dl-horizontal:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-.dl-horizontal:after {
-  clear: both;
-}
-.dl-horizontal dt {
-  float: left;
-  width: 160px;
-  clear: left;
-  text-align: right;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.dl-horizontal dd {
-  margin-left: 180px;
-}
-hr {
-  margin: 20px 0;
-  border: 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #fff;
-}
-abbr[title],
-abbr[data-original-title] {
-  cursor: help;
-  border-bottom: 1px dotted #999;
-}
-abbr.initialism {
-  font-size: 90%;
-  text-transform: uppercase;
-}
-blockquote {
-  padding: 0 0 0 15px;
-  margin: 0 0 20px;
-  border-left: 5px solid #eee;
-}
-blockquote p {
-  margin-bottom: 0;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 25px;
-}
-blockquote small {
-  display: block;
-  line-height: 20px;
-  color: #999;
-}
-blockquote small:before {
-  content: '4  A0';
-}
-blockquote.pull-right {
-  float: right;
-  padding-right: 15px;
-  padding-left: 0;
-  border-right: 5px solid #eee;
-  border-left: 0;
-}
-blockquote.pull-right p,
-blockquote.pull-right small {
-  text-align: right;
-}
-blockquote.pull-right small:before {
-  content: '';
-}
-blockquote.pull-right small:after {
-  content: ' A0 4';
-}
-q:before,
-q:after,
-blockquote:before,
-blockquote:after {
-  content: "";
-}
-address {
-  display: block;
-  margin-bottom: 20px;
-  font-style: normal;
-  line-height: 20px;
 }
 body {
   margin-top: 90px;
@@ -717,10 +196,19 @@ body {
   padding-top: 10px;
   z-index: 10;
 }
-.the-icons li {
+.footer {
+  color: #ddd;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 20px;
+}
+.footer a {
+  color: #ccc;
+  text-decoration: underline;
+}
+.the-icons {
   font-size: 14px;
   line-height: 24px;
-  height: 24px;
 }
 .switch {
   position: absolute;
@@ -769,58 +257,63 @@ body {
     </div>
     <div id="icons" class="container">
       <div class="row">
-        <div class="span3">
-          <ul class="the-icons unstyled">
-            <li title="Code: 0x62"><i class="icon-gplus"></i> <span class="i-name">icon-gplus</span><span class="i-code">0x62</span></li>
-            <li title="Code: 0x63"><i class="icon-pinterest"></i> <span class="i-name">icon-pinterest</span><span class="i-code">0x63</span></li>
-            <li title="Code: 0x64"><i class="icon-cc"></i> <span class="i-name">icon-cc</span><span class="i-code">0x64</span></li>
-            <li title="Code: 0x65"><i class="icon-flickr"></i> <span class="i-name">icon-flickr</span><span class="i-code">0x65</span></li>
-            <li title="Code: 0x66"><i class="icon-linkedin"></i> <span class="i-name">icon-linkedin</span><span class="i-code">0x66</span></li>
-            <li title="Code: 0x67"><i class="icon-rss"></i> <span class="i-name">icon-rss</span><span class="i-code">0x67</span></li>
-            <li title="Code: 0x68"><i class="icon-twitter"></i> <span class="i-name">icon-twitter</span><span class="i-code">0x68</span></li>
-            <li title="Code: 0x69"><i class="icon-youtube"></i> <span class="i-name">icon-youtube</span><span class="i-code">0x69</span></li>
-            <li title="Code: 0x70"><i class="icon-facebook"></i> <span class="i-name">icon-facebook</span><span class="i-code">0x70</span></li>
-          </ul>
-        </div>
-        <div class="span3">
-          <ul class="the-icons unstyled">
-            <li title="Code: 0x71"><i class="icon-github"></i> <span class="i-name">icon-github</span><span class="i-code">0x71</span></li>
-            <li title="Code: 0x72"><i class="icon-itunes"></i> <span class="i-name">icon-itunes</span><span class="i-code">0x72</span></li>
-            <li title="Code: 0x73"><i class="icon-tumblr"></i> <span class="i-name">icon-tumblr</span><span class="i-code">0x73</span></li>
-            <li title="Code: 0x50"><i class="icon-home"></i> <span class="i-name">icon-home</span><span class="i-code">0x50</span></li>
-            <li title="Code: 0x43"><i class="icon-star"></i> <span class="i-name">icon-star</span><span class="i-code">0x43</span></li>
-            <li title="Code: 0x44"><i class="icon-star-empty"></i> <span class="i-name">icon-star-empty</span><span class="i-code">0x44</span></li>
-            <li title="Code: 0x42"><i class="icon-heart-empty"></i> <span class="i-name">icon-heart-empty</span><span class="i-code">0x42</span></li>
-            <li title="Code: 0x41"><i class="icon-heart"></i> <span class="i-name">icon-heart</span><span class="i-code">0x41</span></li>
-            <li title="Code: 0x45"><i class="icon-ok"></i> <span class="i-name">icon-ok</span><span class="i-code">0x45</span></li>
-          </ul>
-        </div>
-        <div class="span3">
-          <ul class="the-icons unstyled">
-            <li title="Code: 0x46"><i class="icon-cancel"></i> <span class="i-name">icon-cancel</span><span class="i-code">0x46</span></li>
-            <li title="Code: 0x47"><i class="icon-plus"></i> <span class="i-name">icon-plus</span><span class="i-code">0x47</span></li>
-            <li title="Code: 0x48"><i class="icon-minus"></i> <span class="i-name">icon-minus</span><span class="i-code">0x48</span></li>
-            <li title="Code: 0x49"><i class="icon-help"></i> <span class="i-name">icon-help</span><span class="i-code">0x49</span></li>
-            <li title="Code: 0x52"><i class="icon-tag"></i> <span class="i-name">icon-tag</span><span class="i-code">0x52</span></li>
-            <li title="Code: 0x53"><i class="icon-tags"></i> <span class="i-name">icon-tags</span><span class="i-code">0x53</span></li>
-            <li title="Code: 0x55"><i class="icon-print"></i> <span class="i-name">icon-print</span><span class="i-code">0x55</span></li>
-            <li title="Code: 0x56"><i class="icon-comment"></i> <span class="i-name">icon-comment</span><span class="i-code">0x56</span></li>
-            <li title="Code: 0x57"><i class="icon-chat"></i> <span class="i-name">icon-chat</span><span class="i-code">0x57</span></li>
-          </ul>
-        </div>
-        <div class="span3">
-          <ul class="the-icons unstyled">
-            <li title="Code: 0x60"><i class="icon-play"></i> <span class="i-name">icon-play</span><span class="i-code">0x60</span></li>
-            <li title="Code: 0x75"><i class="icon-mail"></i> <span class="i-name">icon-mail</span><span class="i-code">0x75</span></li>
-            <li title="Code: 0x61"><i class="icon-spinner"></i> <span class="i-name">icon-spinner</span><span class="i-code">0x61</span></li>
-            <li title="Code: 0x74"><i class="icon-instagram"></i> <span class="i-name">icon-instagram</span><span class="i-code">0x74</span></li>
-            <li title="Code: 0x59"><i class="icon-headphones"></i> <span class="i-name">icon-headphones</span><span class="i-code">0x59</span></li>
-            <li title="Code: 0x58"><i class="icon-phone"></i> <span class="i-name">icon-phone</span><span class="i-code">0x58</span></li>
-            <li title="Code: 0x54"><i class="icon-download"></i> <span class="i-name">icon-download</span><span class="i-code">0x54</span></li>
-            <li title="Code: 0x51"><i class="icon-link"></i> <span class="i-name">icon-link</span><span class="i-code">0x51</span></li>
-          </ul>
-        </div>
+        <div title="Code: 0x62" class="the-icons span3"><i class="icon-gplus"></i> <span class="i-name">icon-gplus</span><span class="i-code">0x62</span></div>
+        <div title="Code: 0x63" class="the-icons span3"><i class="icon-pinterest"></i> <span class="i-name">icon-pinterest</span><span class="i-code">0x63</span></div>
+        <div title="Code: 0x64" class="the-icons span3"><i class="icon-cc"></i> <span class="i-name">icon-cc</span><span class="i-code">0x64</span></div>
+        <div title="Code: 0x65" class="the-icons span3"><i class="icon-flickr"></i> <span class="i-name">icon-flickr</span><span class="i-code">0x65</span></div>
+      </div>
+      <div class="row">
+        <div title="Code: 0x66" class="the-icons span3"><i class="icon-linkedin"></i> <span class="i-name">icon-linkedin</span><span class="i-code">0x66</span></div>
+        <div title="Code: 0x67" class="the-icons span3"><i class="icon-rss"></i> <span class="i-name">icon-rss</span><span class="i-code">0x67</span></div>
+        <div title="Code: 0x68" class="the-icons span3"><i class="icon-twitter"></i> <span class="i-name">icon-twitter</span><span class="i-code">0x68</span></div>
+        <div title="Code: 0x69" class="the-icons span3"><i class="icon-youtube"></i> <span class="i-name">icon-youtube</span><span class="i-code">0x69</span></div>
+      </div>
+      <div class="row">
+        <div title="Code: 0x70" class="the-icons span3"><i class="icon-facebook"></i> <span class="i-name">icon-facebook</span><span class="i-code">0x70</span></div>
+        <div title="Code: 0x71" class="the-icons span3"><i class="icon-github"></i> <span class="i-name">icon-github</span><span class="i-code">0x71</span></div>
+        <div title="Code: 0x72" class="the-icons span3"><i class="icon-itunes"></i> <span class="i-name">icon-itunes</span><span class="i-code">0x72</span></div>
+        <div title="Code: 0x73" class="the-icons span3"><i class="icon-tumblr"></i> <span class="i-name">icon-tumblr</span><span class="i-code">0x73</span></div>
+      </div>
+      <div class="row">
+        <div title="Code: 0x50" class="the-icons span3"><i class="icon-home"></i> <span class="i-name">icon-home</span><span class="i-code">0x50</span></div>
+        <div title="Code: 0x43" class="the-icons span3"><i class="icon-star"></i> <span class="i-name">icon-star</span><span class="i-code">0x43</span></div>
+        <div title="Code: 0x44" class="the-icons span3"><i class="icon-star-empty"></i> <span class="i-name">icon-star-empty</span><span class="i-code">0x44</span></div>
+        <div title="Code: 0x42" class="the-icons span3"><i class="icon-heart-empty"></i> <span class="i-name">icon-heart-empty</span><span class="i-code">0x42</span></div>
+      </div>
+      <div class="row">
+        <div title="Code: 0x41" class="the-icons span3"><i class="icon-heart"></i> <span class="i-name">icon-heart</span><span class="i-code">0x41</span></div>
+        <div title="Code: 0x45" class="the-icons span3"><i class="icon-ok"></i> <span class="i-name">icon-ok</span><span class="i-code">0x45</span></div>
+        <div title="Code: 0x46" class="the-icons span3"><i class="icon-cancel"></i> <span class="i-name">icon-cancel</span><span class="i-code">0x46</span></div>
+        <div title="Code: 0x47" class="the-icons span3"><i class="icon-plus"></i> <span class="i-name">icon-plus</span><span class="i-code">0x47</span></div>
+      </div>
+      <div class="row">
+        <div title="Code: 0x48" class="the-icons span3"><i class="icon-minus"></i> <span class="i-name">icon-minus</span><span class="i-code">0x48</span></div>
+        <div title="Code: 0x49" class="the-icons span3"><i class="icon-help"></i> <span class="i-name">icon-help</span><span class="i-code">0x49</span></div>
+        <div title="Code: 0x52" class="the-icons span3"><i class="icon-tag"></i> <span class="i-name">icon-tag</span><span class="i-code">0x52</span></div>
+        <div title="Code: 0x53" class="the-icons span3"><i class="icon-tags"></i> <span class="i-name">icon-tags</span><span class="i-code">0x53</span></div>
+      </div>
+      <div class="row">
+        <div title="Code: 0x55" class="the-icons span3"><i class="icon-print"></i> <span class="i-name">icon-print</span><span class="i-code">0x55</span></div>
+        <div title="Code: 0x56" class="the-icons span3"><i class="icon-comment"></i> <span class="i-name">icon-comment</span><span class="i-code">0x56</span></div>
+        <div title="Code: 0x57" class="the-icons span3"><i class="icon-chat"></i> <span class="i-name">icon-chat</span><span class="i-code">0x57</span></div>
+        <div title="Code: 0x60" class="the-icons span3"><i class="icon-play"></i> <span class="i-name">icon-play</span><span class="i-code">0x60</span></div>
+      </div>
+      <div class="row">
+        <div title="Code: 0x4c" class="the-icons span3"><i class="icon-menu"></i> <span class="i-name">icon-menu</span><span class="i-code">0x4c</span></div>
+        <div title="Code: 0x75" class="the-icons span3"><i class="icon-mail"></i> <span class="i-name">icon-mail</span><span class="i-code">0x75</span></div>
+        <div title="Code: 0x61" class="the-icons span3"><i class="icon-spinner"></i> <span class="i-name">icon-spinner</span><span class="i-code">0x61</span></div>
+        <div title="Code: 0x74" class="the-icons span3"><i class="icon-instagram"></i> <span class="i-name">icon-instagram</span><span class="i-code">0x74</span></div>
+      </div>
+      <div class="row">
+        <div title="Code: 0x59" class="the-icons span3"><i class="icon-headphones"></i> <span class="i-name">icon-headphones</span><span class="i-code">0x59</span></div>
+        <div title="Code: 0x58" class="the-icons span3"><i class="icon-phone"></i> <span class="i-name">icon-phone</span><span class="i-code">0x58</span></div>
+        <div title="Code: 0x54" class="the-icons span3"><i class="icon-download"></i> <span class="i-name">icon-download</span><span class="i-code">0x54</span></div>
+        <div title="Code: 0x4d" class="the-icons span3"><i class="icon-search"></i> <span class="i-name">icon-search</span><span class="i-code">0x4d</span></div>
+      </div>
+      <div class="row">
+        <div title="Code: 0x51" class="the-icons span3"><i class="icon-link"></i> <span class="i-name">icon-link</span><span class="i-code">0x51</span></div>
       </div>
     </div>
+    <div class="container footer">Generated by <a href="http://fontello.com">fontello.com</a></div>
   </body>
 </html>
