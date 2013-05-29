@@ -18,8 +18,7 @@ class FeedInput_AdminPage {
 		add_action( 'wp_ajax_feedinput_dashboard_convert_item', array(&$this, 'dashboard_widget_ajax_convert_item') );
 		add_action( 'wp_ajax_feedinput_dashboard_remove_item', array(&$this, 'dashboard_widget_ajax_remove_item') );
 		add_action( 'wp_ajax_feedinput_dashboard_page', array(&$this, 'dashboard_widget_ajax_page') );
-
-
+		add_action( 'admin_notices', array(&$this, 'display_link_on_feed_items_page' ) );
 	}
 
 
@@ -148,7 +147,9 @@ class FeedInput_AdminPage {
 			$options = array(
 				'convert_to_post' => false,
 				'convert' => array(
-					'post' => array(),
+					'post' => array(
+						'post_content' => array( 'type' => 'callback', 'value' => array( $this, 'append_source') )
+					),
 					'meta' => array(
 						'largo_byline_text' => array( 'type' => 'field', 'value' => array('authors', 0, 'name') ),
 						'largo_byline_link' => array( 'type' => 'field', 'value' => array('authors', 0, 'link') ),
@@ -159,6 +160,13 @@ class FeedInput_AdminPage {
 		}
 	}
 
+	function append_source( $data ) {
+		$content = $data['content'];
+
+		$content .= "\n\n Via <a href=\"{$data['permalink']}\">{$data['feed_title']}</a>";
+
+		return $content;
+	}
 
 	function get_feed_urls() {
 		if ( !is_array( $this->feed_urls ) ) {
@@ -341,6 +349,23 @@ class FeedInput_AdminPage {
 		echo '</ul>';
 
 		exit;
+	}
+
+
+	/**
+	 * Display admin notices
+	 */
+	function display_link_on_feed_items_page() {
+		$screen = get_current_screen();
+
+		if ( $screen->id != 'edit-feedinput_item' ) {
+			return;
+		}
+		?>
+		<div class="updated">
+        <p><a href="options-general.php?page=syndicated_sources"><?php _e( 'Change the settings for the feeds to pull items from', 'feedinput' ); ?></a></p>
+    </div>
+    <?php
 	}
 
 

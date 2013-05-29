@@ -4,7 +4,7 @@
  * Represents an item from a feed set
  */
 class FeedInput_FeedItem {
-	
+
 	// Static methods
 
 	/**
@@ -12,6 +12,15 @@ class FeedInput_FeedItem {
 	 */
 	static function init() {
 		add_action( 'init', array( 'FeedInput_FeedItem', 'register_post_type' ) );
+
+		if ( is_admin() ) {
+			add_filter( 'edit_form_after_title', array( 'FeedInput_FeedItem', 'post_edit_page') );
+		}
+
+		add_action( 'add_meta_boxes_feedinput_item', array( 'FeedInput_FeedItem', 'add_meta_boxes' ) );
+		add_action( 'feedinput_clean_up_old_items', array( 'FeedInput_FeedItem', 'cron_trash_old_items' ) );
+		self::register_cron_job();
+
 	}
 
 
@@ -21,7 +30,25 @@ class FeedInput_FeedItem {
 	static function register_post_type() {
 		// The post type for a feed item
 		register_post_type( 'feedinput_item', array(
+			'labels' => array(
+				'name' => __('Syndicated Items', 'feedinput' ),
+				'singular_name' => __('Syndicated Item', 'feedinput' ),
+			),
 			'public' => false,
+			'pubpublicly_queryable' => false,
+			'exclude_from_search' => true,
+			'show_in_nav_menus' => false,
+			'show_ui' => true,
+			'show_in_admin_bar' => false,
+			'show_in_menu' => true,
+			'capability_type' => 'post',
+			'map_meta_cap' => true,
+			'capabilities' => array(
+				'create_posts' =>  false,
+				'publish_posts' => false,
+				'read_posts' => true
+			),
+			'supports' => false,
 		));
 
 		// Taxonomy for the feeds
@@ -85,7 +112,7 @@ class FeedInput_FeedItem {
 				// New item
 				$data = self::parse_item( $item, $feedset );
 				$feedinput_items[] = new FeedInput_FeedItem( $data );
-			}			 
+			}
 		}
 
 		return $feedinput_items;
@@ -146,7 +173,7 @@ class FeedInput_FeedItem {
 				)
 			)
 		));
-		
+
 		if ( count( $posts ) > 0 ) {
 			$data = self::get_data_from_post( $posts[0] );
 			return new FeedInput_FeedItem( $data, $posts[0] );
@@ -164,7 +191,7 @@ class FeedInput_FeedItem {
 	}
 
 
-	/** 
+	/**
 	 * Parse a feed item into data object
 	 */
 	protected function parse_item( $item, $feedset ) {
@@ -229,7 +256,7 @@ class FeedInput_FeedItem {
 			}
 		}
 
-		
+
 		// Enclosure
 		$enclosure_objs = $item->get_enclosures();
 		$enclosure = array();
@@ -237,7 +264,7 @@ class FeedInput_FeedItem {
 		foreach ( $enclosure_objs as $enclosure_obj ) {
 			$enclosures[] = self::parse_enclosure( $enclosure_obj, $feedset );
 		}
-		
+
 		// All the raw data
 		$data['data'] = $item->data['child'];
 
@@ -295,7 +322,7 @@ class FeedInput_FeedItem {
 		foreach ( $enclosure_fields as $field ) {
 			$data[$field] = $simplepie_enclosure->{"get_$field"}();
 		}
-		
+
 		// Captions
 		$caption_objs = $simplepie_enclosure->get_captions();
 		$data['captions'] = array();
@@ -407,7 +434,7 @@ class FeedInput_FeedItem {
 
 		return $data;
 	}
-	
+
 	/**
 	 * Parse author object
 	 */
@@ -447,7 +474,7 @@ class FeedInput_FeedItem {
 		if ( empty( $this->post ) ) {
 			$id = wp_insert_post( array(
 				'post_type' => 'feedinput_item',
-				'post_title' => $this->data['uid'],
+				'post_title' => $this->data['title'],
 			) );
 
 			if ( $id != 0 ) {
@@ -461,7 +488,7 @@ class FeedInput_FeedItem {
 			wp_update_post( array(
 				'ID' => $this->post->ID,
 				'post_type' => 'feedinput_item',
-				'post_title' => $this->data['uid'],
+				'post_title' => $this->data['title'],
 			) );
 
 			update_post_meta( $this->post->ID, 'uid', $this->data['uid'] );
@@ -511,7 +538,7 @@ class FeedInput_FeedItem {
 		if ( empty( $converted_posts ) ) {
 			$converted_posts = array();
 		}
-		
+
 		if ( isset( $converted_posts[$feedset->name] ) ) {
 			return get_post( $converted_posts[$feedset->name] );
 		}
@@ -537,7 +564,7 @@ class FeedInput_FeedItem {
 		$post = apply_filters( 'feedinput_convert_post_data', $post, $this->data );
 
 		$post_id = wp_insert_post( $post );
-		
+
 		// Abort if unable to save
 		if ( empty( $post_id ) ) {
 			return;
@@ -609,6 +636,185 @@ class FeedInput_FeedItem {
 		return $data;
 	}
 
+
+	/**
+	 *
+	 */
+	static function post_edit_page() {
+		$post = get_post();
+
+		if ( $post->post_type != 'feedinput_item' ) {
+			return;
+		}
+
+		$data = json_decode( get_post_meta( $post->ID, 'data', true ), true );
+
+		if ( isset($_GET['feedinput_action']) && $_GET['feedinput_action'] == 'convert' && wp_verify_nonce( $_REQUEST['_wpnonce'], "feedinput-convert-post-{$post->ID}" ) ) {
+			$feed_set = feedinput_get_feed( 'feedinput_admin' );
+			$post = $feed_set->convert_item_to_post( $data['uid'] );
+		}
+
+
+		echo '<h2>', esc_html( $data['title'] ), '</h2>';
+
+		?>
+		<p><label>Feed:</label> <a href="<?php echo esc_url( $data['feed_url'] ); ?>"><?php echo $data['feed_title']; ?></a></p>
+
+		<p><label>Original URL:</label> <a href="<?php echo esc_url( $data['permalink'] ); ?>"><?php echo esc_url( self::shorten_url( $data['permalink'] ) ); ?></a></p>
+
+		<p><label>Date:</label> <?php echo esc_html( $data['date'] ); ?> <?php
+
+		if ( !empty( $data['update'] ) ) {
+			echo ', <label>Update:</label> ', esc_html( $data['update'] );
+		}
+
+		?></p>
+
+		<?php
+		if ( !empty( $data['copyright'] ) ) {
+			echo '<p>', esc_html( $data['copyright'] ), '</p>';
+		}
+		?>
+
+		<?php
+		if ( !empty( $data['authors'] ) ) {
+			$authors = array();
+			foreach ( $data['authors'] as $author ) {
+				$text = !empty( $author['name'] ) ? $author['name'] : ( !empty($author['email']) ? $author['email'] : $author['link'] );
+				$url = !empty( $author['link'] ) ? $author['link'] : ( !empty( $author['email'] ) ? 'mailto:'.$author['email'] : '' );
+
+				$display = '';
+				if ( !empty( $text ) ) {
+					if ( !empty( $url ) ) {
+						$display .= '<a href="' . esc_url($url) . '">';
+					}
+					$display .= $text;
+					if ( !empty( $url ) ) {
+						$display .= '</a>';
+					}
+					$authors[] = $display;
+				}
+			}
+
+			echo '<p><label>Authors:</label> ';
+			echo implode( ', ', $authors );
+			echo '</p>';
+		}
+		?>
+
+		<?php
+		if ( !empty( $data['categories'] ) ) {
+			$categories = array();
+
+			foreach ( $data['categories'] as $category ) {
+				if ( !empty( $category['term'] ) || !empty( $category['label'] ) ) {
+					$categories[] = !empty( $category['label'] ) ? $category['label'] : $category['term'];
+				}
+			}
+
+			echo '<p><label>Categories: </label> ';
+			echo implode( ', ', $categories );
+			echo '</p>';
+		} ?>
+
+		<?php
+		if ( !empty( $data['links'] ) ) {
+			$links = array();
+
+			foreach ( $data['links'] as $link ) {
+				$links[] = '<a href="' . $link . '">' . self::shorten_url( $link ) . '</a>';
+			}
+
+			echo '<p><label>Links: </label> ';
+			echo implode( ', ', $links);
+			echo '</p>';
+		} ?>
+
+		<div class="prose">
+			<?php echo $data['content']; ?>
+		</div>
+
+		<?php
+	}
+
+	/**
+	 *
+	 */
+	static function add_meta_boxes() {
+		add_meta_box( 'feedinput_feeditem_action', __('Actions', 'feedinput'), array( 'FeedInput_FeedItem', 'action_meta_box'), 'feedinput_item', 'side', 'core' );
+		remove_meta_box( 'submitdiv', 'feedinput_item', 'side');
+	}
+
+	/**
+	 * Render the action meta box
+	 */
+	static function action_meta_box( $post ) {
+		echo '<div id="major-publishing-actions">';
+		echo "<a class='delete submitdelete deletion' href='" . get_delete_post_link( $post->ID ) . "'>" . __( 'Trash' ) . "</a>";
+
+		if ( $post->post_type == 'feedinput_item' ) {
+			$converted = get_post_meta( $post->ID, 'converted_posts', true );
+			if ( empty( $converted ) ) {
+				$post_type_object = get_post_type_object( $post->post_type );
+				$convert_url = sprintf($post_type_object->_edit_link . '&action=edit', $post->ID);
+				$convert_url .= '&feedinput_action=convert';
+				$convert_url = wp_nonce_url( $convert_url, "feedinput-convert-post-{$post->ID}" );
+				echo ' <a class="button button-primary submitconvert" href="', $convert_url, '">Convert to Post</a>';
+			} else {
+				foreach ( $converted as $post_type => $pid ) {
+					$converted_post = get_post( $pid );
+					echo ' <a href="', get_edit_post_link( $pid ), '">View Post</a>';
+				}
+			}
+		}
+		echo '</div>';
+	}
+
+	/**
+	 * Utility to shorten the length of URLs for display
+	 */
+	static function shorten_url( $url, $length=100, $extra='…' ) {
+		if ( strlen($url) > $length ) {
+			return substr( $url, 0, $length ) . $extra;
+		}
+		return $url;
+	}
+
+	/**
+	 * Register cron jobs
+	 */
+	static function register_cron_job() {
+		if ( !wp_next_scheduled( 'feedinput_clean_up_old_items' ) ) {
+			wp_schedule_event( time(), 'daily', 'feedinput_clean_up_old_items' );
+		}
+	}
+
+	/**
+	 * Clean up old items
+	 */
+	static function cron_trash_old_items() {
+
+		add_filter( 'posts_where', array( 'FeedInput_FeedItem', 'filter_old_saved_items') );
+
+		$q = new WP_Query( array(
+			'post_type' => 'feedinput_item',
+			'post_status' => array('published', 'draft' ),
+		) );
+
+		foreach ( $q->posts as $post ) {
+			$id = get_post_meta( $post->ID, 'uid', true );
+			$feed_set = feedinput_get_feed( 'feedinput_admin' );
+			$feed_set->remove_item( $id );
+		}
+	}
+
+	/**
+	 * Used for cleaning up the old items
+	 */
+	static function filter_old_saved_items( $where ) {
+		$where .= " AND post_date < '" . date('Y-m-d', strtotime('-30 days')) . "'";
+		return $where;
+	}
 }
 
 
