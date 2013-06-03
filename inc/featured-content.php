@@ -25,6 +25,7 @@ function largo_get_featured_posts( $args = array() ) {
     );
     $args = wp_parse_args( $args, $defaults );
     $featured_query = new WP_Query( $args );
+    wp_reset_postdata();
     return $featured_query;
 }
 

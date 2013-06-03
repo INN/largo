@@ -100,6 +100,7 @@ class largo_recent_posts_widget extends WP_Widget {
 				<p class="morelink"><a href="<?php echo $instance['linkurl']; ?>"><?php echo $instance['linktext']; ?></a></p>
 			<?php }
 		echo $after_widget;
+		wp_reset_postdata();
 	}
 
 	function update( $new_instance, $old_instance ) {
