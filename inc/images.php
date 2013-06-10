@@ -68,15 +68,18 @@ add_action( 'after_setup_theme', 'largo_set_media_options' );
  */
 function largo_send_image_to_editor($html, $post_id, $caption, $title, $align, $url, $size, $alt) {
 
-	// Check for [caption ...] in the HTML. This is put in for compatability with 
+	// Only use picturefill for large images
+	if ( 'large' != $size && 'full' != $size ) {
+		return $html;
+	}
+
+	// Check for [caption ...] in the HTML. This is put in for compatability with
 	// Navis-Media-Credit plugin's [caption][/caption] wrapper.
 	$matched = preg_match('#\[caption[^\]]*\]#', $html, $matches);
 
 	$shortcode = '';
 
 	if ($matched > 0 && $matches[0] != '') {
-	
-		//mixed preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit = -1 [, int &$count ]] )
 		$matches[0] = preg_replace( '/width="([0-9]+)"/', 'width="x"', $matches[0]);
 		$shortcode .= $matches[0];
 	}
@@ -88,7 +91,7 @@ function largo_send_image_to_editor($html, $post_id, $caption, $title, $align, $
 	if ($alt){
 		$shortcode .= ' alttext="' . esc_html($alt) . '"';
 	}
-	$shortcode .= ' ]';
+	$shortcode .= $size . ' ]';
 
 	if ($matched > 0 && $matches[0] != '') {
 		$shortcode .= '[/caption]';
