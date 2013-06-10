@@ -65,13 +65,18 @@ function cftl_intercept_get_posts(&$query_obj) {
 			$landing = cftl_find_override_page($query_obj);
 		}
 
+		$cftl_previous['pageholder'] = $qv['paged'];
+		/*
 		if (!isset($qv['paged']) || (int) $qv['paged'] >= 1) {
 			// Only handle the landing page, not an explicit call to page 1
 			if ($landing) {
+				unset($query_obj->query_vars['paged']);
 				add_filter('redirect_canonical', 'cftl_maintain_paged');
 			}
 			return;
 		}
+		*/
+
 
 		if (!$landing) {
 			$landing = cftl_find_override_page($query_obj);
