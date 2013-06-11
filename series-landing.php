@@ -124,6 +124,7 @@ if ( isset( $wp_query->query_vars['term'] )
 
 	$wp_query = $old_query;
 	wp_reset_postdata();
+	unset( $opt );
 } ?>
 
 </div><!-- /.grid_8 #content -->
