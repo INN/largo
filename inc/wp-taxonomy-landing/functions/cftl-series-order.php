@@ -34,20 +34,20 @@ function largo_series_custom_order ( $sql ) {
 		//custom sort order
 		if ( $opt['post_order'] == 'custom' ) {
 
-			$meta_key = 'series_' . $term->term_id . '_order';
+			$meta_key = 'series_' . $term->term_taxonomy_id . '_order';
 
 			//retool the query
 			$sql['join'] = "
 				INNER JOIN $wpdb->term_relationships tr ON ($wpdb->posts.ID = tr.object_id)
 				LEFT JOIN $wpdb->postmeta AS meta ON ($wpdb->posts.ID = meta.post_id AND meta.meta_key = '{$meta_key}')";
 			$sql['where'] = "
-				 AND ( tr.term_taxonomy_id IN (".$term->term_id.") )
+				 AND ( tr.term_taxonomy_id IN (".$term->term_taxonomy_id.") )
 				 AND $wpdb->posts.post_type = 'post'
 				 AND ($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'private') ";
 			$sql['orderby'] = "ISNULL(meta.meta_value+0) ASC, meta.meta_value+0 ASC, $wpdb->posts.post_date DESC";
 
 		//featured stories first
-		}	elseif ( strpos( $opt['post_order'], 'featured,' ) === 0 ) {
+		}  elseif ( strpos( $opt['post_order'], 'featured,' ) === 0 ) {
 
 			list( $top, $sort ) = explode( " ", $opt['post_order'] );
 			$top_term = get_term_by( 'slug', 'series-featured', 'prominence' );
@@ -56,11 +56,11 @@ function largo_series_custom_order ( $sql ) {
 			$sql['join'] = "
 				INNER JOIN $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id)
 				LEFT JOIN $wpdb->term_relationships t2 ON ($wpdb->posts.ID = t2.object_id)
-				AND (t2.term_taxonomy_id = " . $top_term->term_id . ")";
+				AND (t2.term_taxonomy_id = " . $top_term->term_taxonomy_id . ")";
 			$sql['where'] = "
-				 AND ( $wpdb->term_relationships.term_taxonomy_id IN (".$term->term_id.") )
-				 AND $wpdb->posts.post_type = 'post'
-				 AND ($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'private') ";
+				AND ( $wpdb->term_relationships.term_taxonomy_id IN (".$term->term_taxonomy_id.") )
+				AND $wpdb->posts.post_type = 'post'
+				AND ($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'private') ";
 			$sql['orderby'] = "ISNULL(t2.term_taxonomy_id) ASC, $wpdb->posts.post_date $sort";
 
 		}

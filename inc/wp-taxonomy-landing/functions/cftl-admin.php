@@ -410,7 +410,7 @@ function cftl_tax_landing_main($post) {
 		<?php
 			//allow 'custom' if we have a single term
 			$terms = get_the_terms( $post->ID, 'series');
-			if (count($terms) == 1) $series_id = $terms[0]->term_id;
+			if (count($terms) == 1) $series_id = $terms[0]->term_taxonomy_id;
 		?>
 		<select name="post_order">
 			<?php
@@ -475,16 +475,16 @@ function cftl_tax_landing_footer ( $post ) {
 	<h4>Layout Style</h4>
 	<div>
 		<input type="radio" name="footer_style" id="footer_style_none" value="none" <?php checked( $fields['footer_style'][0], 'none') ?> />
-		<label for="footer_style_none">None</label>
-		<div class="description">Do not display a footer</div>
+	    <label for="footer_style_none">None</label>
+	    <div class="description">Do not display a footer</div>
 
-		<input type="radio" name="footer_style" id="footer_style_widget" value="widget" <?php checked( $fields['footer_style'][0], 'widget') ?> />
-		<label for="footer_style_widget">Use Widget</label>
-		<div class="description">Implements a "Series <?php echo cftl_title($post); ?>: Bottom" widget</div>
+	    <input type="radio" name="footer_style" id="footer_style_widget" value="widget" <?php checked( $fields['footer_style'][0], 'widget') ?> />
+	    <label for="footer_style_widget">Use Widget</label>
+	    <div class="description">Implements a "Series <?php echo cftl_title($post); ?>: Bottom" widget</div>
 
-		<input type="radio" name="footer_style" id="footer_style_custom" value="custom" <?php checked( $fields['footer_style'][0], 'custom') ?> />
-		<label for="footer_style_custom">Custom HTML</label>
-		<div class="description">Implements custom HTML entered below</div>
+	    <input type="radio" name="footer_style" id="footer_style_custom" value="custom" <?php checked( $fields['footer_style'][0], 'custom') ?> />
+	    <label for="footer_style_custom">Custom HTML</label>
+	    <div class="description">Implements custom HTML entered below</div>
 	</div>
 </div>
 <div class="form-field-wysiwyg" id="footer-html" <?php if ($fields['footer_style'][0] != 'custom') echo 'style="display:none;"'; ?>>
@@ -511,7 +511,7 @@ function cftl_field_defaults( ) {
 		'per_page' => array('10'),
 		'post_order' => array('DESC'),
 		'show' => array('image' => 1, 'excerpt' => 1, 'byline' => 1, 'tags' => 0),
-		'footer_style' => array('none'),
+		'footer_enabled' => array(1),
 	);
 }
 
@@ -601,7 +601,7 @@ function cftl_custom_sidebars() {
 		$sidebar_slug = largo_make_slug( $widget->post_title );
 		if ( $sidebar_slug ) {
 			register_sidebar( array(
-				'name' 			=> __( 'Series ' . $widget->post_title . ": Bottom", 'largo' ),
+				'name'       	=> __( 'Series ' . $widget->post_title . ": Footer", 'largo' ),
 				'id' 			=> $sidebar_slug . "_footer",
 				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
 				'after_widget' 	=> '</aside>',
@@ -662,6 +662,7 @@ ORDER BY ISNULL(mt2.meta_value+0) ASC, mt2.meta_value+0 ASC, p.post_date DESC");
 	foreach($post_list as $p) {
 		echo '<li id="pid_', $p->ID, '">', $p->post_title, "</li>";
 	}
+
 }
 
 
