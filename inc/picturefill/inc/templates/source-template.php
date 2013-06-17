@@ -1,0 +1,1 @@
+<span data-src="<?php echo $view_picturefill_wp->get_image_src($image_size); ?>" data-width="<?php echo $view_picturefill_wp->get_image_width($image_size); ?>" data-height="<?php echo $view_picturefill_wp->get_image_height($image_size); ?>" data-media="<?php echo $view_picturefill_wp->get_media_query($image_size); ?>"></span>
