@@ -57,7 +57,7 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 		if ( 'standard' == $opt['header_style'] ) {
 			//need to set a size, make this responsive, etc
 			?>
-			<div class="full series-banner"><?php the_post_thumbnail( 'full' ); ?></div>
+			<div class="full series-banner full-image"><?php the_post_thumbnail( 'full' ); ?></div>
 		<?php
 		} else {
 			the_content();

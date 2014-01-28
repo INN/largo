@@ -68,9 +68,11 @@
 }
 .navbar li > a {
   float: none;
+  display: block;
   padding: @navbarHeight/4;
   color: @navbarLinkColor;
   text-decoration: none;
+  line-height: @navbarFontSize + 5;
 }
 .navbar li.dropdown > a {
   padding-right: 0;
@@ -86,11 +88,28 @@ html.no-touch .navbar li > a:hover {
 li.home-link:hover i {
   .opacity(85);
 }
+.navbar li.home-link {
+  .border-radius(4px 0 0 4px);
+  overflow: hidden;
+}
+
 .navbar li.home-link > a {
   font-size: @navbarFontSize + 5;
-  padding: @navbarHeight/4 5px @navbarHeight/4 10px;
+  padding: 0;
+  display: block;
   &:hover {
     background:none;
+  }
+
+  i {
+    display: block;
+    padding: @navbarHeight/4 5px @navbarHeight/4 10px;
+  }
+
+  img {
+    display: block;
+    height: @navbarHeight;
+    width: @navbarHeight;
   }
 }
 
@@ -109,7 +128,11 @@ li.home-link:hover i {
   margin: 0 0 0 2px;
   overflow: hidden;
   background-color: @navbarBackground;
-  border-left: 1px solid @navbarBackgroundHighlight;
+  // border-left: 1px solid @navbarBackgroundHighlight;
+}
+
+.navbar .home-link + .divider-vertical {
+  margin: 0;
 }
 
 // Navbar button for toggling navbar items in responsive layouts
@@ -180,7 +203,7 @@ li.home-link:hover i {
 
 // Place the caret
 .dropdown .caret {
-  margin: @navbarHeight/2 - 3 8px 0 3px;
+  margin: @navbarHeight/2 - 13px 8px 0 3px;
 }
 .dropdown:hover .caret,
 .open .caret {
@@ -521,6 +544,9 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 }
 
 // Sticky nav
+.sticky-nav-wrapper {
+  height: @navbarHeight + 13px;
+}
 .sticky-nav-holder {
   position: fixed;
   top: 0;
@@ -541,7 +567,7 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
   border-bottom: solid @baseColor 1px;
 
   body.admin-bar & {
-    top: 28px;
+    top: 32px;
   }
 
   .sticky-nav-container {
@@ -563,8 +589,56 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 		  }
 	  }
 
+    .nav > li > a {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
 	  .divider-vertical {
 		  display: none;
 	  }
+
+  }
+
+  .nav-right {
+    float: right;
+    padding-top: 5px;
+
+    .donate-btn {
+      float: left;
+      margin: 5px;
+    }
+  }
+
+  .navbar .active > a {
+    color: @white;
+  }
+
+  .navbar .nav li.dropdown.open > .dropdown-toggle,
+  .navbar .nav li.dropdown.active > .dropdown-toggle,
+  .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    color: mix( @linkColor, @white );
+    background: @linkColor;
+
+    .caret {
+      border-top-color: @white !important;
+    }
+
+    &:hover {
+      color: @white;
+    }
+  }
+
+  .navbar .nav > li.home-link {
+    .border-radius(0);
+    a {
+      padding: 0;
+
+      img {
+        width: @navbarHeight + 10px;
+        height: @navbarHeight + 10px;
+
+      }
+    }
   }
 }

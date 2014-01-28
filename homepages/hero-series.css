@@ -1,5 +1,9 @@
 @charset "UTF-8";
 /* line 8, hero-series.sass */
+.home .full-hero {
+  background-color: #666666;
+}
+/* line 10, hero-series.sass */
 .home .full-hero img {
   max-width: 1170px;
   width: 100%;
@@ -7,12 +11,12 @@
   display: block;
 }
 
-/* line 14, hero-series.sass */
+/* line 16, hero-series.sass */
 #main {
   position: relative;
 }
 
-/* line 17, hero-series.sass */
+/* line 19, hero-series.sass */
 #view-format {
   position: absolute;
   top: 10px;
@@ -21,11 +25,11 @@
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
-/* line 24, hero-series.sass */
+/* line 26, hero-series.sass */
 #view-format * {
   margin-bottom: 0;
 }
-/* line 26, hero-series.sass */
+/* line 28, hero-series.sass */
 #view-format h1 {
   display: -moz-inline-stack;
   display: inline-block;
@@ -36,11 +40,11 @@
   font-size: 12px;
   text-transform: uppercase;
 }
-/* line 30, hero-series.sass */
+/* line 32, hero-series.sass */
 #view-format h1:after {
   content: ":";
 }
-/* line 32, hero-series.sass */
+/* line 34, hero-series.sass */
 #view-format ul {
   display: -moz-inline-stack;
   display: inline-block;
@@ -52,7 +56,7 @@
   padding: 0 0 0 0;
   font-size: 12px;
 }
-/* line 37, hero-series.sass */
+/* line 39, hero-series.sass */
 #view-format li {
   display: -moz-inline-stack;
   display: inline-block;
@@ -63,49 +67,43 @@
   border-right: 1px solid white;
   padding: 0 6px;
 }
-/* line 41, hero-series.sass */
+/* line 43, hero-series.sass */
 #view-format li:last-child {
   border-right: 0;
 }
-/* line 43, hero-series.sass */
+/* line 45, hero-series.sass */
 #view-format a {
   color: white;
   font-family: sans-serif;
 }
-/* line 46, hero-series.sass */
+/* line 48, hero-series.sass */
 #view-format .active {
   font-weight: bold;
 }
-/* line 48, hero-series.sass */
+/* line 50, hero-series.sass */
 .view-list #view-format {
   color: #666666;
   text-shadow: none;
 }
-/* line 51, hero-series.sass */
+/* line 53, hero-series.sass */
 .view-list #view-format a {
   color: inherit;
 }
 
-/* line 54, hero-series.sass */
+/* line 56, hero-series.sass */
 .home-top {
   position: relative;
 }
 
-/* line 57, hero-series.sass */
+/* line 59, hero-series.sass */
 #dark-top {
-  position: absolute;
-  bottom: 50px;
+  margin-top: -28px;
   color: white;
+  background-color: black;
   font-family: sans-serif;
 }
-@media only screen and (max-width: 980px) {
-  /* line 57, hero-series.sass */
-  #dark-top {
-    bottom: 15px;
-  }
-}
 @media only screen and (max-width: 768px) {
-  /* line 57, hero-series.sass */
+  /* line 59, hero-series.sass */
   #dark-top {
     position: relative;
     margin-top: -140px;
@@ -127,7 +125,7 @@
   }
 }
 @media only screen and (max-width: 480px) {
-  /* line 57, hero-series.sass */
+  /* line 59, hero-series.sass */
   #dark-top {
     margin-top: -40px;
   }
@@ -223,19 +221,32 @@
 #dark-top .more a:after {
   content: " »";
 }
+/* line 136, hero-series.sass */
+#dark-top.overlay {
+  background-color: transparent;
+  margin-top: 0;
+  position: absolute;
+  bottom: 50px;
+}
+@media only screen and (max-width: 980px) {
+  /* line 136, hero-series.sass */
+  #dark-top.overlay {
+    bottom: 15px;
+  }
+}
 
-/* line 137, hero-series.sass */
+/* line 144, hero-series.sass */
 #home-secondary {
   position: relative;
 }
-/* line 139, hero-series.sass */
+/* line 146, hero-series.sass */
 #home-secondary > div {
   background-color: white;
   padding: 20px;
   padding-bottom: 0;
   margin-top: -15px;
 }
-/* line 145, hero-series.sass */
+/* line 152, hero-series.sass */
 #home-secondary .row-fluid > [class*='span'] .widget {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -244,12 +255,12 @@
   border-radius: 0;
   border: none;
 }
-/* line 148, hero-series.sass */
+/* line 155, hero-series.sass */
 #home-secondary .row-fluid > [class*='span']:last-child .widget {
   border-right: none;
 }
 @media only screen and (max-width: 768px) {
-  /* line 144, hero-series.sass */
+  /* line 151, hero-series.sass */
   #home-secondary .row-fluid > [class*='span'] {
     float: none;
     width: 100%;
@@ -257,11 +268,11 @@
   }
 }
 
-/* line 156, hero-series.sass */
+/* line 163, hero-series.sass */
 #home-river {
   display: none;
 }
-/* line 158, hero-series.sass */
+/* line 165, hero-series.sass */
 #home-river .span10 {
   margin: 0 auto;
   float: none;

@@ -24,6 +24,7 @@ if ( ! function_exists( 'largo_create_image_sizes' ) ) {
 	function largo_create_image_sizes() {
 		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 140, 140, true ); // thumbnail
+		add_image_size( 'home-logo', 50, 50, true ); // small thumbnail
 		add_image_size( '60x60', 60, 60, true ); // small thumbnail
 		add_image_size( 'medium', MEDIUM_WIDTH, 9999 ); // medium width scaling
 		add_image_size( 'large', LARGE_WIDTH, 9999 ); // large width scaling
@@ -76,3 +77,19 @@ add_filter( 'the_content', 'attachment_image_link_remove_filter' );
  * Load the picturefill.wp plugin
  */
 //require_once(get_template_directory() . '/inc/picturefill/picturefill-wp.php');
+
+if ( ! function_exists( 'largo_home_icon' ) ) {
+	function largo_home_icon( $class='' ) {
+		global $wpdb;
+
+		$logo = of_get_option( 'logo_thumbnail_sq' );
+
+		if ( empty( $logo ) ) {
+			echo '<i class="icon-home ', esc_attr($class),'"></i>';
+		} else {
+			$logo = preg_replace( '#-\d+x\d+(\.[^.]+)$#', '\1', $logo );
+			$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
+			echo wp_get_attachment_image( $attachment_id, 'home-logo' );
+		}
+	}
+}

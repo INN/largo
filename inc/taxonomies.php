@@ -171,8 +171,13 @@ function largo_get_series_posts( $series_id, $number = -1 ) {
 
 	$series_args = array(
 		'post_type' 		=> 'post',
-		'taxonomy' => 'series',
-		'term' 				=> $series_id,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'series',
+				'field' => 'id',
+				'terms' => $series_id
+			)
+		),
 		'order' 			=> 'DESC',
 		'orderby' 		=> 'date',
 		'posts_per_page' 	=> $number

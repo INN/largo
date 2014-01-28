@@ -76,6 +76,16 @@ largo_add_meta_box(
 	'low'
 );
 
+// Disclaimer
+largo_add_meta_box(
+	'largo_custom_disclaimer',
+	'Disclaimer',
+	'largo_custom_disclaimer_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
+	'post',
+	'normal',
+	'core'
+);
+
 
 /**
  * Contents for the 'byline' metabox
@@ -157,6 +167,34 @@ function largo_custom_related_meta_box_display() {
 	echo __('To override the default related posts functionality enter specific related post IDs separated by commas.') . '</p>';
 	echo '<input type="text" name="largo_custom_related_posts" value="', esc_attr($value),'" />';
 	largo_register_meta_input('largo_custom_related_posts');
+}
+
+/**
+ * Content for the Additional Options metabox
+ */
+function largo_custom_disclaimer_meta_box_display() {
+	global $post;
+
+	$value = get_post_meta( $post->ID, 'disclaimer', true );
+
+	if ( empty( $value ) ) {
+		$value = of_get_option( 'default_disclaimer' );
+	}
+
+	echo '<p><strong>' . __('Disclaimer', 'largo') . '</strong><br />';
+	echo '<textarea name="disclaimer" style="width: 98%;">' . esc_html($value) . '</textarea>';
+
+	largo_register_meta_input('disclaimer', '_largo_custom_disclaimer_value' );
+}
+
+function _largo_custom_disclaimer_value( $value ) {
+	$value = trim( $value );
+
+	if ( of_get_option( 'default_disclaimer' ) == $value ) {
+		return null;
+	}
+
+	return $value;
 }
 
 

@@ -45,52 +45,53 @@
 
 <body <?php body_class(); ?>>
 <div id="top"></div>
-<div class="global-nav-bg">
-	<div class="global-nav">
-		<nav id="top-nav" class="span12">
-        	<span class="visuallyhidden">
-        		<a href="#main" title="Skip to content"><?php _e('Skip to content', 'largo'); ?></a>
-        	</span>
-        	<?php
-				$args = array(
-					'theme_location' => 'global-nav',
-					'depth'		 => 1,
-					'container'	 => false,
-				);
-				wp_nav_menu($args);
-			?>
-        	<div class="nav-right">
+<?php if ( is_front_page() || is_home() ): ?>
+	<div class="global-nav-bg">
+		<div class="global-nav">
+			<nav id="top-nav" class="span12">
+	        	<span class="visuallyhidden">
+	        		<a href="#main" title="Skip to content"><?php _e('Skip to content', 'largo'); ?></a>
+	        	</span>
+	        	<?php
+					$args = array(
+						'theme_location' => 'global-nav',
+						'depth'		 => 1,
+						'container'	 => false,
+					);
+					wp_nav_menu($args);
+				?>
+	        	<div class="nav-right">
 
-        		<?php if ( of_get_option( 'show_header_social') ) { ?>
-	        		<ul id="header-social" class="social-icons visible-desktop">
-						<?php largo_social_links(); ?>
-					</ul>
-				<?php } ?>
+	        		<?php if ( of_get_option( 'show_header_social') ) { ?>
+		        		<ul id="header-social" class="social-icons visible-desktop">
+							<?php largo_social_links(); ?>
+						</ul>
+					<?php } ?>
 
-        		<?php if ( of_get_option( 'show_donate_button') )
-        			largo_donate_button();
-        		?>
+	        		<?php if ( of_get_option( 'show_donate_button') )
+	        			largo_donate_button();
+	        		?>
 
-				<div id="header-search">
-					<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-						<div class="input-append">
-							<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
-						</div>
-					</form>
-				</div>
+					<div id="header-search">
+						<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+							<div class="input-append">
+								<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
+							</div>
+						</form>
+					</div>
 
 
-				<?php if ( INN_MEMBER === TRUE ) { ?>
-				<div class="org-logo">
-        			<a href="http://investigativenewsnetwork.org/" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/inn-logo-80-55.jpg" height="55" alt="INN logo" /></a>
-				</div>
-				<?php } ?>
+					<?php if ( INN_MEMBER === TRUE ) { ?>
+					<div class="org-logo">
+	        			<a href="http://investigativenewsnetwork.org/" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/inn-logo-80-55.jpg" height="55" alt="INN logo" /></a>
+					</div>
+					<?php } ?>
 
-        	</div>
-        </nav>
-    </div> <!-- /.global-nav -->
-</div> <!-- /.global-nav-bg -->
-
+	        	</div>
+	        </nav>
+	    </div> <!-- /.global-nav -->
+	</div> <!-- /.global-nav-bg -->
+<?php endif; ?>
 <div id="page" class="hfeed clearfix">
 
 	<?php // if (function_exists('dynamic_sidebar')) { dynamic_sidebar("Header"); } ?>
@@ -103,6 +104,7 @@
 		<p><strong><?php echo esc_attr( get_bloginfo( 'name' ) ); ?></strong> (<?php echo $current_url ?>)</p>
 	</header>
 
+	<?php if ( is_front_page() || is_home() ): ?>
 	<nav id="main-nav" class="navbar clearfix">
 	  <div class="navbar-inner">
 	    <div class="container">
@@ -118,7 +120,7 @@
 	      </a>
 
 	      <ul class="nav">
-	        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
+	        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
 	        <li class="divider-vertical"></li>
 	      </ul>
 	      <ul class="nav hidden-phone">
@@ -184,8 +186,10 @@
 	    </div>
 	  </div>
 	</nav>
+	<?php endif; ?>
 
-	<div class="sticky-nav-holder"><div class="sticky-nav-container">
+	<?php echo (is_front_page() || is_home()) ? '' : '<div class="sticky-nav-wrapper">'; ?>
+	<div class="sticky-nav-holder <?php echo (is_front_page() || is_home()) ? 'hide' : 'show'; ?>" data-hide-at-top="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>"><div class="sticky-nav-container">
 		<nav id="sticky-nav" class="sticky-navbar navbar clearfix">
 		    <div class="container">
 
@@ -200,7 +204,7 @@
 		      </a>
 
 		      <ul class="nav">
-		        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
+		        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
 		        <li class="divider-vertical"></li>
 		      </ul>
 		      <ul class="nav hidden-phone">
@@ -286,9 +290,23 @@
 					</ul>
 		      </div>
 
+		      <div class="nav-right">
+			      <?php if ( of_get_option( 'show_donate_button') )
+	      			largo_donate_button();
+	      		?>
+
+						<div id="header-search">
+							<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<div class="input-append">
+									<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
+								</div>
+							</form>
+						</div>
+					</div>
 		    </div>
 		</nav>
 	</div></div>
+	<?php echo (is_front_page() || is_home()) ? '' : '</div>'; ?>
 	<?php if ( of_get_option( 'show_dont_miss_menu') ) : ?>
 	<nav id="secondary-nav" class="clearfix">
     	<div id="topics-bar" class="span12 hidden-phone">

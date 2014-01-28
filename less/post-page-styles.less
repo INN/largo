@@ -108,7 +108,7 @@ article.story {
   margin: 0 0 @baseline;
   width: 100%;
   h5 {
-    font-size: @baseFontSize;
+    font-size: @baseFontSize * 1.2;
     margin-bottom: @baseline / 4;
   }
 }
@@ -121,16 +121,10 @@ article.story {
 .single-post .author-box,
 .single-argolinkroundups .author-box,
 .labels {
-  background-color: @postBoxBackgroundColor;
-  border: 1px solid @grayLighter;
-  border-top: 3px solid @grayLight;
-  .border-radius(5px);
   h5 {
-    font-size: @baseFontSize;
+    font-size: @baseFontSize * 1.2;
     line-height: 1;
-    background-color: darken(@postBoxBackgroundColor, 10%);
     margin-bottom: 0;
-	padding: 8px;
   }
 }
 h3.recent-posts,
@@ -150,8 +144,6 @@ h3.recent-posts,
 .labels .series-label {
   margin: 5px;
   padding: 8px;
-  background-color: darken(@postBoxBackgroundColor, 10%);
-  .border-radius(5px);
   h5 {
     background: none;
     padding: 0;
@@ -231,10 +223,6 @@ h3.recent-posts,
 
 // RELATED POSTS
 #related-posts {
-  background-color: @postBoxBackgroundColor;
-  border: 1px solid @grayLighter;
-  border-top: 3px solid @grayLight;
-  .border-radius(5px);
 }
 #related-post-nav {
   padding: 8px 0;
@@ -248,7 +236,7 @@ h3.recent-posts,
     }
   }
   h5 {
-    margin: 0 0 5px 5px;
+    margin: 0 0 5px 0;
   }
   a {
     display: block;
@@ -456,6 +444,10 @@ p.wp-caption-text {
 }
 .full {
   width: 100%;
+}
+.full-image {
+  text-align: center;
+  background-color: @grayLighter;
 }
 .pull-quote,
 .type-pull-quote {

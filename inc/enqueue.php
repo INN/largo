@@ -35,6 +35,15 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 
 /**
+ * Enqueue our admin javascript and css files
+ */
+function largo_enqueue_admin_scripts() {
+	wp_enqueue_style( 'largo-admin-widgets', get_template_directory_uri().'/css/widgets-php.css' );
+	wp_enqueue_script( 'largo-admin-widgets', get_template_directory_uri() . '/js/widgets-php.js', array( 'jquery' ), '1.0', true );
+}
+add_action( 'admin_enqueue_scripts', 'largo_enqueue_admin_scripts' );
+
+/**
  * Determine which size of the banner image to load based on the window width
  *
  * @since 1.0

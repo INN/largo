@@ -1,8 +1,6 @@
 .widget {
-  margin-bottom: @baseline;
-  padding: 12px;
-  border: 1px solid @grayLighter;
-  .border-radius(8px);
+  padding: 15px;
+
   p, ul {
     padding: 0 3px;
     font-size: @baseFontSize * 0.815;
@@ -17,20 +15,21 @@
   p.morelink {
     margin: -@baseline/4 0 0;
   }
+
+  + .widget {
+    border-top: 1px solid @grayLighter;
+  }
 }
 .widgettitle,
 .stories h3.widgettitle {
   margin-bottom: @baseline/3;
-  padding: 5px 8px;
-  border: 1px solid @grayLighter;
-  .border-radius(4px);
-  background-color: @baseColor;
-  font-size: @baseFontSize * 0.815;
+
+  font-size: @baseFontSize;
   text-transform: uppercase;
   font-weight: bold;
-  color: @white;
+  color: @black;
   a {
-    color: @white;
+    color: @black;
   }
 }
 

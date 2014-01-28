@@ -5,11 +5,13 @@ $fog: #ddd
 $grey: #666
 
 
-.home .full-hero img
-	max-width: 1170px
-	width: 100%
-	margin: 0 auto
-	display: block
+.home .full-hero
+	background-color: $grey
+	img
+		max-width: 1170px
+		width: 100%
+		margin: 0 auto
+		display: block
 
 #main
 	position: relative
@@ -55,12 +57,10 @@ $grey: #666
 	position: relative
 
 #dark-top
-	position: absolute
-	bottom: 50px
+	margin-top: -28px
 	color: white
+	background-color: #000
 	font-family: sans-serif
-	@media only screen and (max-width: 980px)
-		bottom: 15px
 	@media only screen and (max-width: 768px)
 		position: relative
 		margin-top: -140px
@@ -133,6 +133,13 @@ $grey: #666
 			color: $sky
 			&:after
 				content: " »"
+	&.overlay
+		background-color: transparent
+		margin-top: 0
+		position: absolute
+		bottom: 50px
+		@media only screen and (max-width: 980px)
+			bottom: 15px
 
 #home-secondary
 	position: relative

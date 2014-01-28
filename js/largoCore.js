@@ -127,9 +127,13 @@ jQuery(document).ready(function($) {
 		var stickyNavEl = $( '.sticky-nav-holder' );
 		var mainEl = $('#main');
 
-		mainEl.waypoint( function( direction ) {
+		if ( stickyNavEl.data( 'hideAtTop') === false ) {
+			stickyNavEl.addClass( 'show' );
+		} else {
+			mainEl.waypoint( function( direction ) {
 			stickyNavEl.toggleClass( 'show', direction == 'down' );
 		}, { offset: $('#wpadminbar').height() + parseInt( mainEl.css('marginTop') ) 	});
+		}
 
 		// Check if there is a sticky footer
 		var stickyFooterEl = $( '.sticky-footer-holder' );

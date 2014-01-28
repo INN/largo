@@ -140,6 +140,13 @@ function optionsframework_options() {
 		'class' => 'hidden',
 		'type' 	=> 'text');
 
+		$options[] = array(
+		'name' 	=> __('Disclaimer', 'largo'),
+		'desc' 	=> __('Enter a default disclaimer', 'largo'),
+		'id' 	=> 'default_disclaimer',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
+
 	$options[] = array(
 		'name' 	=> __('Footer Nav Menu', 'largo'),
 		'desc' 	=> __('Enter the <strong>label that appears before the menu links</strong>. You can delete this default and no label will appear.', 'largo'),

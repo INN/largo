@@ -33,7 +33,7 @@ do_action('largo_before_sidebar');
 				dynamic_sidebar( 'topic-sidebar' );
 
 			//load some widgets if the main sidebar is empty
-			} elseif ( ! dynamic_sidebar( 'sidebar-main' ) ) {
+			} elseif ( ! is_active_sidebar( 'sidebar-main' ) ) {
 				the_widget( 'largo_about_widget', array( 'title' => __('About This Site', 'largo') ) );
 				the_widget( 'largo_follow_widget', array( 'title' => __('Follow Us', 'largo') ) );
 				if ( of_get_option( 'donate_link' ) )
