@@ -21,7 +21,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 			wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
 			wp_enqueue_style( 'carousel-styles', get_template_directory_uri() . '/css/carousel.css', false, false, 'screen' );
 		}
-		if ( is_home() && of_get_option( 'homepage_top') == 'topstories' )
+		if ( (is_home() && of_get_option( 'homepage_top') == 'topstories') || (is_tax() || is_category() || is_tag()) )
 			wp_enqueue_style( 'topstory-styles', get_template_directory_uri() . '/css/top-stories.css', false, false, 'screen' );
 
 		//only load sharethis on single pages and load jquery tabs for the related content box if it's active

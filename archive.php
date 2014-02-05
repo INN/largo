@@ -5,9 +5,9 @@
 get_header();
 ?>
 
-<div id="content" class="stories span8" role="main">
+<div class="clearfix">
 
-		<?php if ( have_posts() ) { ?>
+		<?php if ( have_posts() || largo_have_featured_posts() ) { ?>
 
 		<?php
 
@@ -38,8 +38,34 @@ get_header();
 		?>
 			<header class="archive-background clearfix">
 				<?php
-					if ( $title) echo '<h1 class="page-title">' . $title . '</h1>';
-					if ( $description ) echo '<div class="archive-description">' . $description . '</div>';
+
+					/*
+					 * Show a label for the list of recent posts
+					 * again, tailored to the type of page we're looking at
+					 */
+					$posts_term = of_get_option( 'posts_term_plural', 'Stories' );
+
+					if ( is_author() ) {
+						$rss_link =  get_author_feed_link( get_the_author_meta('ID') );
+					} elseif ( is_category() ) {
+						$rss_link =  get_category_feed_link( get_queried_object_id() );
+					} elseif ( is_tag() ) {
+						$rss_link =  get_tag_feed_link( get_queried_object_id() );
+					} elseif ( is_tax() ) {
+						$queried_object = get_queried_object();
+						$term_id = intval( $queried_object->term_id );
+						$tax = $queried_object->taxonomy;
+						$rss_link = get_term_feed_link( $term_id, $tax );
+					}
+
+					if ( $rss_link ) {
+						printf(__('<a class="rss-link rss-subscribe-link" href="%1$s">Subscribe <i class="icon-rss"></i></a>', 'largo'), $rss_link );
+					}
+
+					if ( $title)
+						echo '<h1 class="page-title">' . $title . '</h1>';
+					if ( $description )
+						echo '<div class="archive-description">' . $description . '</div>';
 
 					// category pages show a list of related terms
 					if ( is_category() && largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) { ?>
@@ -66,57 +92,33 @@ get_header();
 		?>
 			</header>
 
-			<h3 class="recent-posts clearfix">
-				<?php
 
-					/*
-					 * Show a label for the list of recent posts
-					 * again, tailored to the type of page we're looking at
-					 */
-					$posts_term = of_get_option( 'posts_term_plural', 'Stories' );
+		<?php
+			if ( $paged < 2 && ( is_category() || is_tag() || is_tax() ) ) {
+				get_template_part( 'index-primary-featured-posts' );
+				get_template_part( 'index-secondary-featured-posts' );
+			}
+		?>
+	<div class="row-fluid clearfix">
+		<div class="stories span8" role="main" id="content">
+		<?php
+				// and finally wind the posts back so we can go through the loop as usual
+				rewind_posts();
 
-					if ( is_author() ) {
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_author_feed_link( get_the_author_meta('ID') ) );
-					} elseif ( is_category() ) {
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_category_feed_link( get_queried_object_id() ) );
-					} elseif ( is_tag() ) {
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_tag_feed_link( get_queried_object_id() ) );
-					} elseif ( is_tax() ) {
-						$queried_object = get_queried_object();
-						$term_id = intval( $queried_object->term_id );
-						$tax = $queried_object->taxonomy;
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_term_feed_link( $term_id, $tax ) );
-					} elseif ( is_post_type_archive( 'argolinks' ) ) {
-						_e('Recent Links<a class="rss-link" href="/argolinks/feed"><i class="icon-rss"></i></a>', 'largo');
-					} elseif ( is_month() ) {
-						printf(__('Monthly Archives: <span>%s</span>', 'largo'), get_the_date('F Y') );
-					} elseif ( is_year() ) {
-						printf(__('Yearly Archives: <span>%s</span>', 'largo'), get_the_date('Y') );
-					} else {
-						_e('Archives', 'largo');
-					}
-					?>
-			</h3>
-
-	<?php
-			// and finally wind the posts back so we can go through the loop as usual
-
-			rewind_posts();
-
-			while ( have_posts() ) : the_post();
-				if ( get_post_type( $post ) == 'argolinks' ) {
-					get_template_part( 'content', 'argolinks' );
-				} else {
+				while ( have_posts() ) : the_post();
 					get_template_part( 'content', 'archive' );
-				}
-			endwhile;
-			largo_content_nav( 'nav-below' );
-		} else {
-			get_template_part( 'content', 'not-found' );
-		}
-	?>
+				endwhile;
 
-</div><!--#content-->
+				largo_content_nav( 'nav-below' );
+			} else {
+				get_template_part( 'content', 'not-found' );
+			}
+		?>
+		</div><!--#content-->
 
-<?php get_sidebar(); ?>
+		<?php get_sidebar(); ?>
+	</div>
+
+</div>
+
 <?php get_footer(); ?>

@@ -38,9 +38,14 @@ function largo_custom_taxonomies() {
 				'slug' 			=> 'series-featured'
 			),
 			array(
-				'name' 			=> __('Featured in Category', 'largo'),
-				'description' 	=> __('Not yet implemented, in the future this will allow you to designate a story (or stories) to appear more prominently on category archive pages.', 'largo'),
-				'slug' 			=> 'category-featured'
+				'name' 			=> __('Featured in Taxonomy', 'largo'),
+				'description' 	=> __('This will allow you to designate a story to appear more prominently on a taxonomy archive pages.', 'largo'),
+				'slug' 			=> 'taxonomy-featured'
+			),
+			array(
+				'name' 			=> __('Secondary Featured in Taxonomy', 'largo'),
+				'description' 	=> __('This will allow you to designate a story to appear more prominently in the secondary spot on a taxonomy archive pages.', 'largo'),
+				'slug' 			=> 'taxonomy-secondary-featured'
 			)
 		);
 		foreach ( $prominence_terms as $term ) {
