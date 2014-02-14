@@ -293,4 +293,14 @@ jQuery(document).ready(function($) {
 
 		sharer.init();
 	})();
+
+	// Search slide out for mobile
+	(function() {
+		var searchForm = $('.sticky-nav-holder .form-search');
+		var toggle = searchForm.find( '.toggle' );
+    toggle.on( 'click', function() {
+    	searchForm.toggleClass( 'show' );
+    });
+
+	})();
 });

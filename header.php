@@ -110,8 +110,7 @@
 	    <div class="container">
 
 	      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	        <div class="label"><?php _e('More', 'largo'); ?></div>
+	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" title="<?php esc_attr_e('More', 'largo'); ?>">
 	        <div class="bars">
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
@@ -192,10 +191,23 @@
 	<div class="sticky-nav-holder <?php echo (is_front_page() || is_home()) ? 'hide' : 'show'; ?>" data-hide-at-top="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>"><div class="sticky-nav-container">
 		<nav id="sticky-nav" class="sticky-navbar navbar clearfix">
 		    <div class="container">
+		    	<div class="nav-right">
+			      <?php if ( of_get_option( 'show_donate_button') )
+	      			largo_donate_button();
+	      		?>
+
+						<div id="header-search">
+							<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<i class="icon-search toggle" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
+								<div class="input-append">
+									<span class="text-input-wrapper"><input type="text" placeholder="<?php esc_attr_e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /></span><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
+								</div>
+							</form>
+						</div>
+					</div>
 
 		      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-		      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-		        <div class="label"><?php _e('More', 'largo'); ?></div>
+		      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" title="<?php esc_attr_e('More', 'largo'); ?>">
 		        <div class="bars">
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
@@ -220,6 +232,7 @@
 						wp_nav_menu($args);
 					?>
 		      </ul>
+		      <?php /*
 		      <ul class="nav">
 		        <li class="dropdown visible-phone" id="category-list">
 				  <a class="dropdown-toggle" data-toggle="dropdown" href="#category-list">
@@ -239,6 +252,7 @@
 				  </ul>
 				</li>
 		      </ul>
+		      */ ?>
 
 		      <!-- Everything you want hidden at 940px or less, place within here -->
 		      <div class="nav-collapse">
@@ -289,20 +303,6 @@
 						</li>
 					</ul>
 		      </div>
-
-		      <div class="nav-right">
-			      <?php if ( of_get_option( 'show_donate_button') )
-	      			largo_donate_button();
-	      		?>
-
-						<div id="header-search">
-							<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-								<div class="input-append">
-									<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
-								</div>
-							</form>
-						</div>
-					</div>
 		    </div>
 		</nav>
 	</div></div>

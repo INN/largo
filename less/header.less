@@ -142,3 +142,80 @@ h2.branding {
 		padding-left: 0;
 	}
 }
+
+.sticky-nav-holder {
+	.nav-right {
+    position: absolute;
+    right: 0;
+    padding-top: 5px;
+
+    .donate-btn {
+      float: left;
+      margin: 5px;
+
+      i {
+		    display: none;
+		  }
+    }
+  }
+
+  .nav-right .form-search {
+    .toggle {
+      display: inline-block;
+      color: @baseColor;
+      display: inline-block;
+      width: 40px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      z-index: 91;
+
+      .transition( 0.3s );
+    }
+
+    .input-append {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      opacity: 0;
+      visibility: hidden;
+      .transition( 0.3s );
+      padding: 8px 50px 8px 10px;
+      z-index: 90;
+
+      .text-input-wrapper {
+      	position: absolute;
+        left: 10px;
+        right: 125px;
+        display: block;
+      }
+      input {
+        width: 100%;
+        .box-sizing( border-box );
+        height: 28px !important;
+      }
+
+      button {
+        width: 50px !important;
+        position: absolute;
+        right: 75px;
+        .box-sizing( border-box );
+      }
+    }
+
+    &.show {
+      .input-append {
+        position: absolute;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .input-append,
+      .toggle {
+        background-color: rgba( red(@bodyBackground), green(@bodyBackground), blue(@bodyBackground), 0.9);
+      }
+    }
+  }
+}

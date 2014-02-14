@@ -63,3 +63,34 @@ function largo_scrub_sticky_posts( $after, $before ) {
 }
 add_filter( 'pre_update_option_sticky_posts', 'largo_scrub_sticky_posts', 10, 2 );
 
+
+/**
+ * Determine if we have any 'featured' posts on archive pages
+ */
+function largo_have_featured_posts() {
+
+	if ( is_category() || is_tax() || is_tag() ) {
+		$obj = get_queried_object();
+
+		$featured_query = array(
+			'tax_query' => array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => $obj->taxonomy,
+					'field' => 'slug',
+					'terms' => $obj->slug,
+				),
+				array(
+					'taxonomy' => 'prominence',
+					'field' => 'slug',
+					'terms' => array( 'taxonomy-featured', 'taxonomy-secondary-featured' ),
+				)
+			)
+		);
+		$featured_query = new WP_Query( $featured_query );
+		return $featured_query->have_posts();
+	}
+
+	return false;
+
+}

@@ -22,7 +22,8 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 	<?php if ( is_active_sidebar('homepage-left-rail') ) { ?>
 	<div id="content-main" class="<?php echo $span_class; ?>">
 	<?php }
-
+	
+	largo_load_custom_template_functions();
 	get_template_part( $home_template );
 
 

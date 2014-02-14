@@ -1,7 +1,7 @@
 <?php
 /**
  * Home Template: Slider
- * Description: An animated carousel of featured stories with large images.
+ * Description: An animated carousel of featured stories with large images. Not recommended but available for backward compatibility.
  * Sidebars: Homepage Left Rail (An optional widget area that, when enabled, appears to the left of the main content area on the homepage)
  */
 ?><div id="homepage-slider" class="carousel slide clearfix">

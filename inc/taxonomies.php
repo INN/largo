@@ -39,7 +39,7 @@ function largo_custom_taxonomies() {
 			),
 			array(
 				'name' 			=> __('Featured in Category', 'largo'),
-				'description' 	=> __('Not yet implemented, in the future this will allow you to designate a story (or stories) to appear more prominently on category archive pages.', 'largo'),
+				'description' 	=> __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
 				'slug' 			=> 'category-featured'
 			)
 		);
@@ -94,24 +94,6 @@ function largo_post_in_series() {
     global $post;
     $features = get_the_terms( $post->ID, 'series' );
     return ( $features ) ? true : false;
-}
-
-/**
- * Outputs a list of series a post is in
- * Called in content-single.php
- *
- * @since 1.0
- */
-if ( ! function_exists( 'largo_the_series_list' ) ) {
-	function largo_the_series_list() {
-		global $post;
-		$post_terms = largo_custom_taxonomy_terms( $post->ID );
-		foreach ( $post_terms as $term ) {
-			if ( strtolower( $term->name ) == 'series' )
-				continue;
-			echo largo_term_to_label( $term );
-		}
-	}
 }
 
 /**
@@ -207,3 +189,51 @@ function largo_get_series_posts( $series_id, $number = -1 ) {
 	return false;
 
 }
+
+/**
+ * Helper for getting posts in a category archive, sorted by featured first
+ */
+function largo_category_archive_posts( $query ) {
+
+	//don't muck with admin, non-categories, etc
+	if ( !$query->is_category() || !$query->is_main_query() || is_admin() ) return;
+
+	$category_post_ids = array();
+
+	// get the featured posts
+	$featured_posts = get_posts( array(
+		'category_name' => $query->get('category_name'),
+		'numberposts' => 5,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'prominence',
+				'field' => 'slug',
+				'terms' => 'category-featured',
+			)
+		)
+	));
+
+	// get the IDs from the featured posts
+	foreach ( $featured_posts as $fpost )
+		$category_post_ids[] = $fpost->ID;
+
+	// get the rest of the posts
+	$plain_posts = get_posts( array(
+		'category_name' => $query->get('category_name'),
+		'nopaging' => true,
+		'post__not_in' => $category_post_ids,
+		)
+	);
+
+	// get the IDs from the plain posts
+	foreach( $plain_posts as $ppost )
+		$category_post_ids[] = $ppost->ID;
+
+	//rewrite our main query to fetch these IDs
+	$query->set( 'category_name', NULL );
+	$query->set( 'post__in', $category_post_ids );
+	$query->set( 'orderby', 'post__in');
+	$query->set( 'tax_query', NULL );
+	$query->tax_query = NULL;	//unsetting it twice because WP is weird like that
+}
+add_action( 'pre_get_posts', 'largo_category_archive_posts' );

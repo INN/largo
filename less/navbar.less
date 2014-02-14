@@ -139,7 +139,7 @@ li.home-link:hover i {
 // These definitions need to come after '.navbar .btn'
 .navbar .btn-navbar {
   display: none;
-  float: right;
+  float: left;
   margin: @navbarHeight/4 - @navbarFontSize/5 0 0;
   margin-right: 10px;
   padding: @navbarHeight/5 10px;
@@ -572,6 +572,7 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 
   .sticky-nav-container {
     margin: 0 auto;
+    position: relative;
   }
 
   .navbar {
@@ -598,16 +599,6 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 		  display: none;
 	  }
 
-  }
-
-  .nav-right {
-    float: right;
-    padding-top: 5px;
-
-    .donate-btn {
-      float: left;
-      margin: 5px;
-    }
   }
 
   .navbar .active > a {
@@ -641,4 +632,8 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
       }
     }
   }
+}
+
+html.no-touch .sticky-nav-holder .navbar .collapse li > a:hover {
+  color: @linkColor;
 }

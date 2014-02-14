@@ -33,7 +33,7 @@ class largo_series_posts_widget extends WP_Widget {
 
 	 	//first post
 	 	$series_posts->the_post();
-	 	get_template_part( 'content', 'tiny' );
+	 	get_template_part( 'content', 'tiny-widget' );
 
  		//divider
  		echo '<h5 class="series-split top-tag">', $instance['heading'], '</h5><ul>';

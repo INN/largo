@@ -81,6 +81,7 @@ $includes = array(
 	'/inc/enqueue.php',				// enqueue our js and css files
 	'/inc/post-templates.php',		// single post templates
 	'/inc/home-templates.php',		// homepage templates
+	'/inc/update.php',		// handling updates from old to new Largo. Should always be last
 );
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off

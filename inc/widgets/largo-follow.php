@@ -25,7 +25,7 @@ class largo_follow_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Follow ' . get_bloginfo('name'), 'largo') : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title',  $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
 
@@ -33,7 +33,13 @@ class largo_follow_widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title;
 
-			$feed = get_feed_link();
+		$feed = get_feed_link();
+
+		if ( is_single() && $id == 'article-bottom' ) :
+			// display the post social bar
+			largo_post_social_links();
+		else :
+			// display the usual buttons and whatnot
 			if ( of_get_option( 'rss_link' ) )
 				$feed = esc_url (of_get_option( 'rss_link' ) );
 
@@ -50,6 +56,35 @@ class largo_follow_widget extends WP_Widget {
 			if ( of_get_option( 'linkedin_link' ) ) : ?>
 				<a class="subscribe" href="<?php echo esc_url( of_get_option( 'linkedin_link' ) ); ?>"><i class="icon-linkedin"></i>Find Us on LinkedIn</a>
 			<?php endif;
+
+			if ( of_get_option( 'gplus_link' ) ) : ?>
+				<div class="g-follow" data-annotation="bubble" data-height="24" data-href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>" data-rel="publisher"></div>
+
+			<?php endif;
+
+			if ( of_get_option( 'flickr_link' ) ) : ?>
+				<div class="flickr-follow"><a href="<?php echo esc_url( of_get_option( 'flickr_link' ) ); ?>" title="See our photos on Flickr!"><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a></div>
+			<?php endif;
+
+			if ( of_get_option( 'youtube_link' ) ) :
+				$path = parse_url( of_get_option( 'youtube_link' ), PHP_URL_PATH);
+				$pathFragments = explode('/', $path);
+				$yt_user = end($pathFragments);
+				?>
+				<div class="g-ytsubscribe" data-channel="<?php echo $yt_user; ?>" data-layout="default" data-count="default"></div>
+			<?php endif;
+
+			//the below is for G+ and YouTube subscribe buttons
+			?>
+			<script type="text/javascript">
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/platform.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+		<?php
+		endif;
 
 		echo $after_widget;
 	}

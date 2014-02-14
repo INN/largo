@@ -155,3 +155,11 @@ function largo_home_transition() {
 	}
 }
 add_action('init', 'largo_home_transition');
+
+
+/**
+ * Load custom template functions for the home templates
+ */
+function largo_load_custom_template_functions() {
+	include_once __DIR__ . '/home-template-functions.php';
+}

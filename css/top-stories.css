@@ -12,6 +12,12 @@
  */
 /**
  * @group Color
+ * @label Pre-Footer Color
+ * @type color
+ * @default_value #ddd
+ */
+/**
+ * @group Color
  * @label Color of links
  * @type color
  * @default_value #2275bb
@@ -168,8 +174,8 @@
 }
 .secondary-featured-post {
   padding: 20px 20px;
-  background-color: #dddddd;
-  margin-bottom: 20px;
+  background-color: #eeeeee;
+  margin-bottom: 40px;
 }
 .secondary-featured-post h2 {
   font-size: 24px;

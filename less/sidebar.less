@@ -123,6 +123,9 @@
   background: white !important;
   background-color: white !important;
 }
+.flickr-follow {
+	margin-bottom: 8px;
+}
 //About Widget
 .largo-about p {
   margin-bottom: 0;
@@ -201,14 +204,16 @@
 	font-family: @sansFontFamily;
 
 	h4 {
-		margin-bottom: 0;
+		margin-bottom: 0.4em;
+	  line-height: 1.2em;
+		font-size: @baseFontSize * 1.3;
 	}
   ul {
     margin-left: 0;
     list-style: none;
   }
-  h4 {
-	  line-height: 1.2em;
+  img {
+	  max-width: 100px;
   }
 	i {
 		display: block;
@@ -241,4 +246,26 @@
 }
 #sidebar iframe {
   max-width: 100%;
+}
+
+.largo-related-posts {
+  ul.related {
+    margin: 0;
+
+    li {
+      list-style: none;
+      display: block;
+      .clearfix();
+    }
+  }
+
+  h4 {
+    font-size: @baseFontSize;
+    margin: 2px;
+  }
+
+  .wp-post-image {
+    float: left;
+    margin: 5px 10px 0 5px;
+  }
 }

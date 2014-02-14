@@ -6,22 +6,37 @@ $grey: #666
 
 
 .home .full-hero
-	background-color: $grey
-	img
-		max-width: 1170px
-		width: 100%
-		margin: 0 auto
+	background-color: #eee
+	a
 		display: block
+		margin: 0 auto
+		width: 100%
+		max-width: 1170px
+	img
+		margin: 0
+		display: block
+
+	&.one-third-width img
+		max-width: (1170/3)px
+		width: 34.1%
+		@media screen and (max-width: 768px)
+			width: 50%
+		@media screen and (max-width: 480px)
+			width: 100%
+
+	&.two-third-width img
+		max-width: (1170/3*2)px
+		width: (34.1% * 2)
+
 
 #main
 	position: relative
 
 #view-format
 	position: absolute
-	top: 10px
+	top: 0
 	right: 10px
-	color: white
-	+text-shadow(0 0 5px rgba(black,0.6))
+	color: black
 	z-index: 1
 	*
 		margin-bottom: 0
@@ -43,7 +58,7 @@ $grey: #666
 		&:last-child
 			border-right: 0
 	a
-		color: white
+		color: $grey
 		font-family: sans-serif
 	.active
 		font-weight: bold
@@ -121,11 +136,20 @@ $grey: #666
 		.span10
 			padding: 15px 18px !important
 
-	.span10
-		background-color: rgba(black, 0.85)
-		margin: 0 auto 0
-		padding: 25px 30px
-		float: none
+	.overlay-pane
+		background-color: #333
+		@media only screen and (max-width: 768px)
+			width: 50%
+
+		&.span8
+			+background-image(linear-gradient(90deg, #333 0%, #333 50%, #fff 50%, #fff 100%))
+			@media only screen and (max-width: 768px)
+				background-image: none
+
+		padding: 20px 0
+
+		[class*="span"]
+			padding: 0 20px
 	article
 		margin-bottom: 0
 		border-bottom: none
@@ -134,7 +158,7 @@ $grey: #666
 		line-height: 1.4em
 		margin-bottom: 0
 	h2
-		font-size: 38px
+		font-size: 30px
 		line-height: 1.1em
 		margin-bottom: 0.3em
 
@@ -180,9 +204,79 @@ $grey: #666
 		background-color: transparent
 		margin-top: 0
 		position: absolute
-		bottom: 50px
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		@media only screen and (max-width: 480px)
+			position: relative
+			.overlay-pane
+
+		.overlay-pane
+			position: absolute
+			right: 0
+			top: 0
+			bottom: 0
+			@media only screen and (max-width: 480px)
+				position: relative
+				width: 100%
+
+		section a
+			color: $sky
+
+		.series-stories
+			margin-top: 20px
+
+			h3
+				color: $sky
+				text-transform: uppercase
+				font-size: 100%
+				margin: 0
+				a
+					color: $sky
+
+			ul, li
+				margin: 0
+				padding: 0
+				display: block
+				font-size: 90%
+				line-height: 1.1
+			ul li
+				margin-top: 0.5em
+				padding-left: 1.5em
+			ul a
+				color: white
+			i
+				color: black
+				display: block
+				position: absolute
+				margin-left: -1.5em
+
+		.featured-stories
+			background-color: white
+			color: black
+			@media only screen and (max-width: 768px)
+				display: none
+
+			h5.byline, h5.top-tag, h4
+				margin: 0
+			h4
+				font-size: 18px
+			h4 a, section
+				color: black
+			h5
+				font-size: 80%
+			h5.byline, h5.byline a
+				color: #444
+
+			article
+				border-top: solid 3px rgba( $sky, 0.5 )
+				padding: 10px 0
+
+				&:first-child
+					border-top: 0 none
 		@media only screen and (max-width: 980px)
-			bottom: 15px
+
 
 #home-secondary
 	position: relative
@@ -190,7 +284,6 @@ $grey: #666
 		background-color: white
 		padding: 20px
 		padding-bottom: 0
-		margin-top: -15px
 	.row-fluid>[class*='span']
 		.widget
 			+border-radius(0)
@@ -204,21 +297,7 @@ $grey: #666
 			margin-left: 0
 
 #home-river
-	header
-		+clearfix
-	.hero
-		text-align: center
-		background-color: #eee
 	display: none	//defaults to hidden
 	.span10
 		margin: 0 auto
 		float: none
-		position: relative
-		&:before
-			height: 25px
-			background-color: white
-			position: absolute
-			top: -25px
-			left: -4%
-			right: -4%
-			content: " "

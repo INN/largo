@@ -1,7 +1,7 @@
 <?php
 /**
  * Home Template: Top Stories
- * Description: A newspaper-like layout highlighting featured stories
+ * Description: A newspaper-like layout highlighting one Top Story on the left and others to the right. A popular layout choice!
  * Sidebars: Homepage Left Rail (An optional widget area that, when enabled, appears to the left of the main content area on the homepage)
  */
 
