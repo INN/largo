@@ -124,7 +124,6 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$output .=  sprintf( __('<span class="sep"> | </span><span class="edit-link"><a href="%s">Edit This Post</a></span>', 'largo'),
 				get_edit_post_link()
 			);
-
 		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
 		 	$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
 

@@ -5,7 +5,7 @@
 @grey: #666666;
 
 .home .full-hero {
-  background-color: @grey;
+  min-height: 400px;
   img {
     max-width: 1170px;
     width: 100%;
@@ -75,8 +75,33 @@
   color: white;
   background-color: black;
   font-family: sans-serif;
+  .side-articles {
+    h5.byline, h5.top-tag, h4 {
+      margin: 0;
+    }
+    h4 {
+      font-size: 18px;
+    }
+    h4 a {
+      color: white;
+    }
+    h5 {
+      font-size: 80%;
+    }
+    h5.byline {
+      color: @fog;
+    }
+    article {
+      border-top: solid 3px rgba(red(@sky), green(@sky), blue(@sky), 0.5);
+      padding: 10px 0;
+      &:first-child {
+        border-top: 0 none;
+      }
+    }
+  }
+
   .span10 {
-    background-color: rgba(0,0,0, 0.85);
+    background-color: rgba(0, 0, 0, 0.85);
     margin: 0 auto 0;
     padding: 25px 30px;
     float: none;
@@ -132,7 +157,7 @@
     text-align: right;
     margin-bottom: 0;
     font-weight: bold;
-    font-size: 16px;
+		font-size: 16px;
     a {
       color: @sky;
       &:after {
@@ -168,10 +193,35 @@
 }
 
 #home-river {
+  header {
+	  *zoom: 1;
+	  &:before,
+	  &:after {
+	    display: table;
+	    content: "";
+	  }
+	  &:after {
+	    clear: both;
+	  }
+  }
+  .hero {
+    text-align: center;
+    background-color: #eeeeee;
+  }
   display: none;
   .span10 {
     margin: 0 auto;
     float: none;
+    position: relative;
+    &:before {
+      height: 25px;
+      background-color: white;
+      position: absolute;
+      top: -25px;
+      left: -4%;
+      right: -4%;
+      content: " ";
+    }
   }
 }
 
@@ -183,9 +233,9 @@
 
 @media screen and (max-width: 768px) {
 	#dark-top {
-		position: relative;
-    margin-top: -140px;
-    bottom: auto;
+		position: relative !important;
+    margin-top: -140px !important;
+    bottom: auto !important;
     .span10 {
       width: 100%;
     }
@@ -198,20 +248,26 @@
       margin-top: 30px !important;
     }
     .related-story {
-      margin-left: 0;
+	    margin-left: 0;
     }
 	}
 
-	#home-secondary .row-fluid>[class*='span'] {
-    float: none;
-    width: 100%;
-    margin-left: 0;
-  }
+	#home-secondary {
+		.row-fluid>[class*='span'] {
+      float: none;
+      width: 100%;
+      margin-left: 0;
+		}
+	}
 }
 
 @media screen and (max-width: 480px) {
+	.home .full-hero {
+    min-height: 50px;
+	}
+
 	#dark-top {
-    margin-top: -40px;
+    margin-top: -40px !important;
     .span10 {
       padding: 15px 18px !important;
     }

@@ -47,12 +47,10 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 		$args = array(
 			'paged'			=> $paged,
 			'post_status'	=> 'publish',
-			'posts_per_page'=> 10,
-			'post__not_in' 	=> $shown_ids,
-			'ignore_sticky_posts' 	=> true
-		);
-		if ( of_get_option('num_posts_home') )
-			$args['posts_per_page'] = of_get_option('num_posts_home');
+			'posts_per_page'=> of_get_option('num_posts_home', 10),
+			'post__not_in' 	=> $ids,
+			'ignore_sticky_posts' => true
+			);
 		if ( of_get_option('cats_home') )
 			$args['cat'] = of_get_option('cats_home');
 		$query = new WP_Query( $args );
