@@ -40,6 +40,10 @@ if ( ! defined( 'INN_MEMBER' ) )
 if ( ! isset( $content_width ) )
 	$content_width = 771;
 
+// Set the global $largo var
+if ( ! isset( $largo ) )
+	$largo = array();
+
 // load the options framework (used for our theme options pages)
 if ( ! function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
@@ -51,41 +55,128 @@ if ( ! class_exists( 'Navis_Media_Credit' ) ) {
 	require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
 }
 
-// need to include this explicitly to allow us to check if certain plugins are active.
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+/**
+ * A class to represent the one true Largo theme instance
+ */
+class Largo {
+
+	private static $instance;
+
+	public static function get_instance() {
+
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new Largo;
+			self::$instance->load();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Load the theme
+	 */
+	private function load() {
+
+		$this->require_files();
+
+		$this->customizer = Largo_Customizer::get_instance();
+
+	}
+
+	/**
+	 * Load required files
+	 */
+	private function require_files() {
+
+		$includes = array(
+			'/largo-apis.php',
+			'/inc/largo-plugin-init.php',
+			'/inc/dashboard.php',
+			'/inc/robots.php',
+			'/inc/custom-feeds.php',
+			'/inc/users.php',
+			'/inc/term-meta.php',
+			'/inc/sidebars.php',
+			'/inc/cached-core-functions.php',
+			'/inc/customizer/customizer.php',
+			'/inc/widgets.php',
+			'/inc/nav-menus.php',
+			'/inc/taxonomies.php',
+			'/inc/term-icons.php',
+			'/inc/term-sidebars.php',
+			'/inc/images.php',
+			'/inc/editor.php',
+			'/inc/post-meta.php',
+			'/inc/open-graph.php',
+			'/inc/post-tags.php',
+			'/inc/header-footer.php',
+			'/inc/related-content.php',
+			'/inc/featured-content.php',
+			'/inc/enqueue.php',
+			'/inc/post-templates.php',
+			'/inc/home-templates.php',
+			'/inc/update.php',
+		);
+
+		if ( $this->is_less_enabled() ) {
+			$includes[] = '/inc/custom-less-variables.php';
+		}
+
+		if ( $this->is_plugin_active( 'ad-code-manager' ) ) {
+			$includes[] = '/inc/ad-codes.php';
+		}
+
+		foreach ( $includes as $include ) {
+			require_once( get_template_directory() . $include );
+		}
+
+	}
+
+	/**
+	 * Is the LESS feature enabled?
+	 */
+	public function is_less_enabled() {
+		return (bool) of_get_option( 'less_enabled' );
+	}
+
+	/**
+	 * Is a given plugin active?
+	 *
+	 * @param string $plugin_slug
+	 * @return bool
+	 */
+	public function is_plugin_active( $plugin_slug ) {
+
+		switch ( $plugin_slug ) {
+			case 'ad-code-manager':
+				return (bool) class_exists( 'Ad_Code_Manager' );
+
+			case 'co-authors-plus':
+				return (bool) class_exists( 'coauthors_plus' );
+
+			default:
+				return false;
+		}
+
+	}
+
+}
+
+/**
+ * Load the theme
+ */
+function Largo() {
+	return Largo::get_instance();
+}
+add_action( 'after_setup_theme', 'Largo' );
+
 
 /**
  * Load up all of the other goodies from the /inc directory
  */
-$includes = array(
-	'/largo-apis.php',				// APIs for inclusion in child themes
-	'/inc/largo-plugin-init.php',	// a list of recommended plugins
-	'/inc/dashboard.php',			// custom dashboard widgets
-	'/inc/robots.php',				// default robots.txt config
-	'/inc/custom-feeds.php',		// create custom RSS feeds
-	'/inc/users.php',				// add custom fields for user profiles
-	'/inc/sidebars.php',			// register sidebars
-	'/inc/widgets.php',				// register widgets
-	'/inc/nav-menus.php',			// register nav menus
-	'/inc/taxonomies.php',			// add our custom taxonomies
-	'/inc/images.php',				// setup custom image sizes
-	'/inc/editor.php',				// add tinymce customizations and shortcodes
-	'/inc/post-meta.php',			// add post meta boxes
-	'/inc/open-graph.php',			// add open graph, twittercard and google publisher markup to the header
-	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
-	'/inc/header-footer.php',		// some additional template tags used in the header and footer
-	'/inc/related-content.php',		// functions dealing with related content
-	'/inc/featured-content.php',	// functions dealing with featured content
-	'/inc/enqueue.php',				// enqueue our js and css files
-	'/inc/post-templates.php',		// single post templates
-	'/inc/post-meta.php'			// add post meta boxes
-);
+$includes = array();
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
-if ( is_plugin_active('ad-code-manager/ad-code-manager.php') )
-	$includes[] = '/inc/ad-codes.php'; // register ad codes
-if ( of_get_option( 'less_enabled' ) )
-	$includes[] = '/inc/custom-less-variables.php';	// add UI to alter variables.less
 if ( of_get_option( 'custom_landing_enabled' ) )
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 
@@ -120,3 +211,28 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );
+
+
+/**
+ * Helper for setting specific theme options (optionsframework)
+ * Would be nice if optionsframework included this natively
+ * See https://github.com/devinsays/options-framework-plugin/issues/167
+ */
+if ( ! function_exists( 'of_set_option' ) ) {
+	function of_set_option( $option_name, $option_value ) {
+		$config = get_option( 'optionsframework' );
+
+		if ( ! isset( $config['id'] ) ) {
+			return false;
+		}
+
+		$options = get_option( $config['id'] );
+
+		if ( $options ) {
+			$options[$option_name] = $option_value;
+			return update_option( $config['id'], $options );
+		}
+
+		return false;
+	}
+}

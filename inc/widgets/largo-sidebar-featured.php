@@ -7,7 +7,7 @@ class largo_sidebar_featured_widget extends WP_Widget {
 	function largo_sidebar_featured_widget() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-sidebar-featured',
-			'description' 	=> __('Show recent featured posts with thumbnails and excerpts', 'largo')
+			'description' 	=> __('*DEPRECATED* Show recent featured posts with thumbnails and excerpts', 'largo')
 		);
 		$this->WP_Widget( 'largo-sidebar-featured-widget', __('Largo Sidebar Featured Posts', 'largo'), $widget_ops);
 	}

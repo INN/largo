@@ -7,7 +7,7 @@ class largo_footer_featured_widget extends WP_Widget {
 	function largo_footer_featured_widget() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-footer-featured',
-			'description' 	=> 'Show recent featured posts with thumbnails and excerpts', 'largo-footer-featured'
+			'description' 	=> '*DEPRECATED* Show recent featured posts with thumbnails and excerpts', 'largo-footer-featured'
 		);
 		$this->WP_Widget( 'largo-footer-featured-widget', __('Largo Footer Featured Posts', 'largo'), $widget_ops);
 	}
@@ -52,9 +52,9 @@ class largo_footer_featured_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
-		$instance['num_sentences'] = strip_tags( $new_instance['num_sentences'] );
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['num_posts'] = intval( $new_instance['num_posts'] );
+		$instance['num_sentences'] = intval( $new_instance['num_sentences'] );
 		return $instance;
 	}
 
@@ -67,18 +67,18 @@ class largo_footer_featured_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title', 'largo'); ?>:</label>
+			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of posts to show:', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
+			<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of posts to show', 'largo'); ?>:</label>
+			<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo (int) $instance['num_posts']; ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences):', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo $instance['num_sentences']; ?>" style="width:90%;" />
+			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences)', 'largo'); ?>:</label>
+			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo (int) $instance['num_sentences']; ?>" style="width:90%;" />
 		</p>
 
 	<?php

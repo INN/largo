@@ -7,7 +7,7 @@
  * @return 	string	the twitter username extracted from the input string
  * @since 1.0
  */
-function twitter_url_to_username ($url) {
+function largo_twitter_url_to_username ($url) {
 	$urlParts = explode("/", $url);
 	$username = $urlParts[3];
 	return $username;
@@ -17,7 +17,7 @@ function twitter_url_to_username ($url) {
  * Adds appropriate open graph, twittercards, and google publisher tags
  * to the header based on the page type displayed
  *
- * @uses twitter_url_to_username()
+ * @uses largo_twitter_url_to_username()
  * @uses global $current_url
  * @since 1.0
  */
@@ -42,7 +42,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 		<?php
 			if ( of_get_option( 'twitter_link' ) )
-				echo '<meta name="twitter:site" content="@' . twitter_url_to_username( of_get_option( 'twitter_link' ) ) . '">';
+				echo '<meta name="twitter:site" content="@' . largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ) . '">';
 		?>
 
 		<?php // output appropriate OG tags by page type
@@ -50,7 +50,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				if ( have_posts() ) {
 					the_post(); // we need to queue up the post to get the post specific info
 					if ( get_the_author_meta( 'twitter' ) )
-						echo '<meta name="twitter:creator" content="@' . twitter_url_to_username( get_the_author_meta( 'twitter' ) ) . '">';
+						echo '<meta name="twitter:creator" content="@' . largo_twitter_url_to_username( get_the_author_meta( 'twitter' ) ) . '">';
 					?>
 					<meta property="og:title" content="<?php the_title(); ?>" />
 					<meta property="og:type" content="article" />

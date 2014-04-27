@@ -75,7 +75,7 @@
 	float: none !important;
 	clear: left;
 	font-style: italic;
-	padding: 10px 0 0 15px;
+	padding: 5px 0 0 15px;
 	color: #666;
 }
 
@@ -87,6 +87,20 @@
 #explainer.two-column .two-column,
 #explainer.one-column .one-column {
 	display: block;
+}
+
+#postbox-container-2 #cftl_tax_landing_main .regioner {
+	float: none;
+	margin-top: 0.8em;
+	margin-left: 15px;
+}
+
+#postbox-container-2 .regioner strong {
+	margin-left: 0.3em
+}
+
+#postbox-container-2 #left-region {
+	display: none
 }
 
 #postbox-container-2 .form-field-checkboxes label {

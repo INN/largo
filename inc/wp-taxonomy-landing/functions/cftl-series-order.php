@@ -22,17 +22,18 @@ if (__FILE__ == $_SERVER['SCRIPT_FILENAME']) { die(); }
  * Reorders posts according to custom order
  * Uses postmeta series_[termID]_order values
  */
-function largo_series_custom_order ( $sql ) {
-	global $wp_query, $opt, $wpdb;
+function largo_series_custom_order ( $sql, $my_query ) {
+	global $wpdb;
 
 	//only do this if we're a series page
-	if ( is_array($opt) && $wp_query->query_vars['taxonomy'] == 'series' ) :
+	if ( array_key_exists('taxonomy', $my_query->query_vars) && $my_query->query_vars['taxonomy'] == 'series' && array_key_exists('term',$my_query->query_vars)) :
 
 		//get the term object to set the proper meta stuff and whatnot
-		$term = get_term_by( 'slug', $wp_query->query_vars['term'], 'series' );
+		$term = get_term_by( 'slug', $my_query->query_vars['term'], 'series' );
+		if ( ! $term ) $term = get_term_by( 'id', $my_query->query_vars['term'], 'series' );
 
 		//custom sort order
-		if ( $opt['post_order'] == 'custom' ) {
+		if ( isset($my_query->query_vars['orderby']) && $my_query->query_vars['orderby'] == 'series_custom' ) {
 
 			$meta_key = 'series_' . $term->term_taxonomy_id . '_order';
 
@@ -47,9 +48,9 @@ function largo_series_custom_order ( $sql ) {
 			$sql['orderby'] = "ISNULL(meta.meta_value+0) ASC, meta.meta_value+0 ASC, $wpdb->posts.post_date DESC";
 
 		//featured stories first
-		}  elseif ( strpos( $opt['post_order'], 'featured,' ) === 0 ) {
+		}  elseif ( isset($my_query->query_vars['orderby']) && strpos( $my_query->query_vars['orderby'], 'featured,' ) === 0 ) {
 
-			list( $top, $sort ) = explode( " ", $opt['post_order'] );
+			list( $top, $sort ) = explode( " ", $my_query->query_vars['orderby'] );
 			$top_term = get_term_by( 'slug', 'series-featured', 'prominence' );
 
 			//retool the query
@@ -64,8 +65,10 @@ function largo_series_custom_order ( $sql ) {
 			$sql['orderby'] = "ISNULL(t2.term_taxonomy_id) ASC, $wpdb->posts.post_date $sort";
 
 		}
+
 	endif;
+
 	return $sql;
 
 }
-add_filter( 'posts_clauses', 'largo_series_custom_order');
+add_filter( 'posts_clauses', 'largo_series_custom_order', 10, 2);

@@ -69,7 +69,7 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 			$field_link =  $field . '_link';
 
 			if ( of_get_option( $field_link ) ) {
-				echo '<li><a href="' . esc_url( of_get_option( $field_link ) ) . '" title="' . $title . '"><i class="icon-' . $field . '"></i></a></li>';
+				echo '<li><a href="' . esc_url( of_get_option( $field_link ) ) . '" title="' . esc_attr( $title ) . '"><i class="icon-' . esc_attr( $field ) . '"></i></a></li>';
 			}
 		}
 	}
@@ -121,20 +121,20 @@ if ( ! function_exists ( 'largo_seo' ) ) {
 
 				// set the original-source meta tag
 				// see: http://googlenewsblog.blogspot.com/2010/11/credit-where-credit-is-due.html
-				echo '<meta name="original-source" content="'. $permalink .'" />';
+				echo '<meta name="original-source" content="'. esc_url( $permalink ) .'" />';
 
 				// check for the existence of a custom field 'permalink'
 				// if it doesn't exist we'll just use the current url as the syndication source
 				if ( get_post_meta( get_the_ID(), 'permalink', true ) ) {
 				 	echo '<meta name="syndication-source" content="' . get_post_meta( get_the_ID(), 'permalink', true ) . '" />';
 				} else {
-					echo '<meta name="syndication-source" content="' . $permalink . '" />';
+					echo '<meta name="syndication-source" content="' . esc_url( $permalink ) . '" />';
 				}
 
 				// add the standout metatag if this post is flagged with any of the terms in the prominence taxonomy
 				// see: https://support.google.com/news/publisher/answer/191283
 				if ( has_term( get_terms( 'prominence', array( 'fields' => 'names' ) ), 'prominence' ) ) {
-					echo '<meta name="standout" content="' . $permalink . '"/>';
+					echo '<meta name="standout" content="' . esc_url( $permalink ) . '"/>';
 				}
 
 			endif;

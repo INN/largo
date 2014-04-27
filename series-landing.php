@@ -57,7 +57,7 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 		if ( 'standard' == $opt['header_style'] ) {
 			//need to set a size, make this responsive, etc
 			?>
-			<div class="full series-banner"><?php the_post_thumbnail( 'full' ); ?></div>
+			<div class="full series-banner full-image"><?php the_post_thumbnail( 'full' ); ?></div>
 		<?php
 		} else {
 			the_content();
@@ -70,7 +70,14 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 
 
 <?php // display left rail
-if ( 'three-column' == $opt['cftl_layout'] ) get_sidebar( 'series-left' );
+if ( 'three-column' == $opt['cftl_layout'] ) : ?>
+	<aside id="sidebar-left" class="span3">
+		<div class="widget-area" role="complementary">
+			<?php dynamic_sidebar( $opt['left_region'] ); ?>
+		</div>
+	</aside>
+<?php
+endif;
 ?>
 
 <div id="content" class="span<?php echo $content_span[ $opt['cftl_layout'] ]; ?> stories" role="main">
@@ -105,18 +112,26 @@ if ( isset( $wp_query->query_vars['term'] )
 	}
 
 	//change args as needed
-	if ('ASC' == $opt['post_order'] ) $args['order'] = 'ASC';
-
-	//other changes handled by filters from cftl-series-order.php
+	//these unusual WP_Query args are handled by filters defined in cftl-series-order.php
+	switch ( $opt['post_order'] ) {
+		case 'ASC':
+			$args['order'] = 'ASC';
+			break;
+		case 'custom':
+			$args['orderby'] = 'series_custom';
+			break;
+		case 'featured, DESC':
+		case 'featured, ASC':
+			$args['orderby'] = $opt['post_order'];
+			break;
+	}
 
 	//build the query, using the original as a guide for pagination and whatnot
 	$all_args = array_merge( $old_query->query_vars, $args );
-
 	$wp_query = new WP_Query($all_args);
 
-
 	// and finally wind the posts back so we can go through the loop as usual
-	while ( have_posts() ) : the_post();
+	while ( $wp_query->have_posts() ) : $wp_query->the_post();
 		get_template_part( 'content', 'series' );
 	endwhile;
 
@@ -124,18 +139,28 @@ if ( isset( $wp_query->query_vars['term'] )
 
 	$wp_query = $old_query;
 	wp_reset_postdata();
-	unset( $opt );
 } ?>
 
 </div><!-- /.grid_8 #content -->
 
 <?php // display left rail
 if ($opt['cftl_layout'] != 'one-column') : ?>
-	<?php get_sidebar('series-right'); ?>
-<?php endif; ?>
+<aside id="sidebar" class="span4">
+	<?php do_action('largo_before_sidebar_content'); ?>
+	<div class="widget-area" role="complementary">
+		<?php
+			do_action('largo_before_sidebar_widgets');
+			dynamic_sidebar( $opt['right_region'] );
+			do_action('largo_after_sidebar_widgets');
+		?>
+	</div><!-- .widget-area -->
+	<?php do_action('largo_after_sidebar_content'); ?>
+</aside>
 
+<?php
+endif;
 
-<?php //display series footer
+//display series footer
 if ( 'none' != $opt['footer_style'] ) : ?>
 	<section id="series-footer">
 		<?php

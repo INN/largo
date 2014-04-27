@@ -47,19 +47,19 @@ class largo_twitter_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['twitter_username'] = strip_tags( $new_instance['twitter_username'] );
-		$instance['twitter_list_slug'] = strip_tags( $new_instance['twitter_list_slug'] );
-		$instance['twitter_search'] = strip_tags( $new_instance['twitter_search'] );
-		$instance['widget_ID'] = strip_tags( $new_instance['widget_ID'] );
-		$instance['widget_type'] = $new_instance['widget_type'];
-		$instance['widget_theme'] = $new_instance['widget_theme'];
+		$instance['twitter_username'] = sanitize_text_field( $new_instance['twitter_username'] );
+		$instance['twitter_list_slug'] = sanitize_text_field( $new_instance['twitter_list_slug'] );
+		$instance['twitter_search'] = sanitize_text_field( $new_instance['twitter_search'] );
+		$instance['widget_ID'] = sanitize_text_field( $new_instance['widget_ID'] );
+		$instance['widget_type'] = sanitize_text_field( $new_instance['widget_type'] );
+		$instance['widget_theme'] = sanitize_text_field( $new_instance['widget_theme'] );
 		return $instance;
 	}
 
 	function form( $instance ) {
 		$defaults = array(
 			'widget_ID' 		=> '',
-			'twitter_username' 	=> twitter_url_to_username( of_get_option( 'twitter_link' ) ),
+			'twitter_username' 	=> largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ),
 			'twitter_list_slug' => 'inn-staff-and-associates',
 			'twitter_search' 	=> __('your search', 'largo'),
 			'widget_type' 		=> 'timeline',
@@ -88,22 +88,22 @@ class largo_twitter_widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'widget_ID' ); ?>"><?php _e('Twitter Widget ID (from https://twitter.com/settings/widgets):', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'widget_ID' ); ?>" name="<?php echo $this->get_field_name( 'widget_ID' ); ?>" value="<?php echo $instance['widget_ID']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'widget_ID' ); ?>" name="<?php echo $this->get_field_name( 'widget_ID' ); ?>" value="<?php echo esc_attr( $instance['widget_ID'] ); ?>" style="width:90%;" />
 		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'twitter_username' ); ?>"><?php _e('Twitter Username (for timeline, favorites and list widgets):', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'twitter_username' ); ?>" name="<?php echo $this->get_field_name( 'twitter_username' ); ?>" value="<?php echo $instance['twitter_username']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'twitter_username' ); ?>" name="<?php echo $this->get_field_name( 'twitter_username' ); ?>" value="<?php echo esc_attr( $instance['twitter_username'] ); ?>" style="width:90%;" />
 		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>"><?php _e('Twitter List Slug (for list widget):', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>" name="<?php echo $this->get_field_name( 'twitter_list_slug' ); ?>" value="<?php echo $instance['twitter_list_slug']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>" name="<?php echo $this->get_field_name( 'twitter_list_slug' ); ?>" value="<?php echo esc_attr( $instance['twitter_list_slug'] ); ?>" style="width:90%;" />
 		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'twitter_search' ); ?>"><?php _e('Twitter Search Query (for search widget):', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'twitter_search' ); ?>" name="<?php echo $this->get_field_name( 'twitter_search' ); ?>" value="<?php echo $instance['twitter_search']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'twitter_search' ); ?>" name="<?php echo $this->get_field_name( 'twitter_search' ); ?>" value="<?php echo esc_attr( $instance['twitter_search'] ); ?>" style="width:90%;" />
 		</p>
 
 	<?php

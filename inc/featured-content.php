@@ -38,11 +38,11 @@ function largo_get_featured_posts( $args = array() ) {
  * @since 1.0
  */
 function largo_get_the_main_feature() {
-    global $post;
-    $features = get_the_terms( $post->ID, 'series' );
-    if ( ! $features )
-        return false;
-    return array_shift( $features );
+  global $post;
+  $features = get_the_terms( $post->ID, 'series' );
+  if ( ! $features )
+      return false;
+  return array_shift( $features );
 }
 
 /**
@@ -63,3 +63,53 @@ function largo_scrub_sticky_posts( $after, $before ) {
 }
 add_filter( 'pre_update_option_sticky_posts', 'largo_scrub_sticky_posts', 10, 2 );
 
+
+/**
+ * Determine if we have any 'featured' posts on archive pages
+ */
+function largo_have_featured_posts() {
+
+	if ( is_category() || is_tax() || is_tag() ) {
+		$obj = get_queried_object();
+
+		$featured_query = array(
+			'tax_query' => array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => $obj->taxonomy,
+					'field' => 'slug',
+					'terms' => $obj->slug,
+				),
+				array(
+					'taxonomy' => 'prominence',
+					'field' => 'slug',
+					'terms' => array( 'taxonomy-featured', 'taxonomy-secondary-featured' ),
+				)
+			)
+		);
+		$featured_query = new WP_Query( $featured_query );
+		return $featured_query->have_posts();
+	}
+
+	return false;
+
+}
+
+/**
+ * Determine if we have any 'featured' posts on homepage
+ */
+function largo_have_homepage_featured_posts() {
+
+	$featured_query = array(
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'prominence',
+				'field' => 'slug',
+				'terms' => array( 'taxonomy-featured', 'homepage-featured' ),
+			)
+		)
+	);
+	$featured_query = new WP_Query( $featured_query );
+	return $featured_query->have_posts();
+
+}

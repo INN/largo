@@ -32,6 +32,50 @@ function largo_contactmethods( $contactmethods ) {
 }
 add_filter( 'user_contactmethods', 'largo_contactmethods' );
 
+
+/**
+ * Same deal, but for guest authors in the Co-Authors Plus plugin
+ * @TODO: figure out if there's a way to remove fields as we do for regular users above
+ *
+ * @since 1.0
+ */
+function largo_filter_guest_author_fields( $fields_to_return, $groups ) {
+
+	if ( in_array( 'all', $groups ) || in_array( 'contact-info', $groups ) ) {
+		$fields_to_return[] = array(
+			'key'      => 'twitter',
+			'label'    => 'Twitter<br><em>https://twitter.com/username<em>',
+			'group'    => 'contact-info',
+		);
+		$fields_to_return[] = array(
+			'key'      => 'fb',
+			'label'    => 'Facebook<br><em>https://www.facebook.com/username<em>',
+			'group'    => 'contact-info',
+		);
+		$fields_to_return[] = array(
+			'key'      => 'linkedin',
+			'label'    => 'LinkedIn<br><em>http://www.linkedin.com/in/username<em>',
+			'group'    => 'contact-info',
+		);
+		$fields_to_return[] = array(
+			'key'      => 'googleplus',
+			'label'    => 'Google+<br><em>https://plus.google.com/userID/<em>',
+			'group'    => 'contact-info',
+		);
+	}
+	if ( in_array( 'all', $groups ) || in_array( 'name', $groups ) ) {
+		$fields_to_return[] = array(
+			'key'      => 'organization',
+			'label'    => 'Organization',
+			'group'    => 'name',
+		);
+	}
+
+	return $fields_to_return;
+}
+add_filter( 'coauthors_guest_author_fields', 'largo_filter_guest_author_fields', 10, 2 );
+
+
 /**
  * In a multisite network, allow site admins to edit user profiles
  * props: http://thereforei.am/2011/03/15/how-to-allow-administrators-to-edit-users-in-a-wordpress-network/

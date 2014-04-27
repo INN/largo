@@ -20,11 +20,22 @@
 		}
 	});
 
-	//toggle help text display
+	//toggle help text display and dropdowns for columns
 	$('input[name="cftl_layout"]').on('click', function() {
 		var $val = $(this).val();
+		console.log( $val );
 		$('#explainer').removeClass().addClass($val);
+		if ( $val == 'three-column' ) {
+			$('.regioner:hidden').show('fast');
+		} else if ( $val == 'two-column' ) {
+			$('#left-region:visible').hide('fast');
+			$('#right-region:hidden').show('fast');
+		} else {
+			$('.regioner:visible').hide('fast');
+		}
 	});
+
+	$('input[name="cftl_layout"]:checked').trigger('click');
 
 	//enabled header fade stuff
 	$('#cftl_header_enabled').on('change', function() {
@@ -54,6 +65,7 @@
 		$('#save-order').on('click', function() {
 			tb_remove();
 			var orderdata = 'action=series_sort&series_id=' + $sort.data('series-id') + '&' + $sort.sortable('serialize');
+			orderdata += '&nonce=' + $('#_wpnonce').val() + '&post_id=' + $('#post_ID').val();
 			$.post( ajaxurl, orderdata, function(resp) {
 				console.log(resp);
 			});

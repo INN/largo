@@ -1,0 +1,273 @@
+@import "../../less/mixins.less";
+
+@sky: #6cb9e1;
+@fog: #ddd;
+@grey: #666;
+
+.home .full-hero {
+  min-height: 400px;
+  img {
+    max-width: 1170px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+#main {
+  position: relative;
+}
+
+#view-format {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  text-shadow: 0 0 5px rgba(0,0,0, 0.6);
+  z-index: 1;
+  * {
+    margin-bottom: 0;
+  }
+  h1 {
+    display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+    &:after {
+      content: ":";
+    }
+  }
+  ul {
+    display: inline-block;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    font-size: 12px;
+  }
+  li {
+    display: inline-block;
+    border-right: 1px solid white;
+    padding: 0 6px;
+    &:last-child {
+      border-right: 0;
+    }
+  }
+  a {
+    color: white;
+    font-family: sans-serif;
+  }
+  .active {
+    font-weight: bold;
+  }
+  .view-list & {
+    color: @grey;
+    text-shadow: none;
+    a {
+      color: inherit;
+    }
+  }
+}
+
+.home-top {
+  position: relative;
+}
+
+#dark-top {
+  margin-top: -28px;
+  color: white;
+  background-color: black;
+  font-family: sans-serif;
+  .side-articles {
+    h5.byline, h5.top-tag, h4 {
+      margin: 0;
+    }
+    h4 {
+      font-size: 18px;
+    }
+    h4 a {
+      color: white;
+    }
+    h5 {
+      font-size: 80%;
+    }
+    h5.byline {
+      color: @fog;
+    }
+    article {
+      border-top: solid 3px rgba(red(@sky), green(@sky), blue(@sky), 0.5);
+      padding: 10px 0;
+      &:first-child {
+        border-top: 0 none;
+      }
+    }
+  }
+
+  .span10 {
+    background-color: rgba(0, 0, 0, 0.85);
+    margin: 0 auto 0;
+    padding: 25px 30px;
+    float: none;
+  }
+  article {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+  p {
+    font-size: 93%;
+    line-height: 1.4em;
+    margin-bottom: 0;
+  }
+  h2 {
+    font-size: 38px;
+    line-height: 1.1em;
+    margin-bottom: 0.3em;
+  }
+  h5 {
+    font-size: 100%;
+    a {
+      color: @sky;
+    }
+  }
+  h2 a {
+    color: white;
+  }
+  .byline,
+  .byline a,
+  section {
+    color: @fog;
+  }
+  .byline {
+    font-weight: bold;
+    font-size: 110%;
+  }
+  .byline a {
+    text-transform: uppercase;
+  }
+  .span4 .top-tag {
+    margin-bottom: 0.7em;
+  }
+  .related-story {
+    font-size: 18px;
+    line-height: 1.2em;
+    margin-left: 0.2em;
+    margin-bottom: 1em;
+    a {
+      color: white;
+    }
+  }
+  .more {
+    text-align: right;
+    margin-bottom: 0;
+    font-weight: bold;
+		font-size: 16px;
+    a {
+      color: @sky;
+      &:after {
+        content: " »";
+      }
+    }
+  }
+  &.overlay {
+    background-color: transparent;
+    margin-top: 0;
+    position: absolute;
+    bottom: 50px;
+  }
+}
+
+#home-secondary {
+  position: relative;
+  > div {
+    background-color: white;
+    padding: 20px;
+    padding-bottom: 0;
+    margin-top: -15px;
+  }
+  .row-fluid>[class*='span'] {
+    .widget {
+      .border-radius(0);
+      border: none;
+    }
+    &:last-child .widget {
+      border-right: none;
+    }
+  }
+}
+
+#home-river {
+  header {
+    *zoom: 1;
+    &:before,
+    &:after {
+      display: table;
+      content: "";
+    }
+    &:after {
+      clear: both;
+    }
+  }
+  .hero {
+    text-align: center;
+    background-color: #eee;
+  }
+  display: none;
+  .span10 {
+    margin: 0 auto;
+    float: none;
+    position: relative;
+    &:before {
+      height: 25px;
+      background-color: white;
+      position: absolute;
+      top: -25px;
+      left: -4%;
+      right: -4%;
+      content: " ";
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  #dark-top.overlay {
+    bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #dark-top {
+    position: relative !important;
+    margin-top: -140px !important;
+    bottom: auto !important;
+    .span10 {
+      width: 100%;
+    }
+    .row-fluid [class*='span'] {
+      float: none;
+      width: 100%;
+      margin: 0;
+    }
+    .span4 {
+      margin-top: 30px !important;
+    }
+    .related-story {
+      margin-left: 0;
+    }
+  }
+  #home-secondary {
+    .row-fluid>[class*='span'] {
+      float: none;
+      width: 100%;
+      margin-left: 0;
+	}
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home .full-hero {
+    min-height: 50px;
+  }
+  #dark-top {
+    margin-top: -40px !important;
+    .span10 {
+      padding: 15px 18px !important;
+    }
+  }
+}

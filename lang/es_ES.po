@@ -1,9 +1,16 @@
 msgid ""
 msgstr ""
+<<<<<<< HEAD
+"Project-Id-Version: Project Largo - Base Theme v0.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-18 23:44+0530\n"
+"PO-Revision-Date: 2013-12-18 17:50:42+0000\n"
+=======
 "Project-Id-Version: Project Largo - Base Theme v0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-18 23:44+0530\n"
 "PO-Revision-Date: 2014-03-03 17:58:21+0000\n"
+>>>>>>> master
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
 "Language-Team: Investigative News Network <largo@investigativenewsnetwork.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +27,14 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:15
+#@ largo
+msgid " ago"
+msgstr " atrás"
+
+=======
+>>>>>>> master
 #: comments.php:36
 #@ largo
 msgid "&larr; Older Comments"
@@ -51,7 +66,11 @@ msgstr "Una fuente RSS de las historias más recientes de miembros del INN."
 msgid "Apologies, but no results were found. Perhaps searching will help."
 msgstr "Disculpe, pero no se encontraron resultados. Quizás la búsqueda le pueda ayudar."
 
+<<<<<<< HEAD
+#: archive.php:94
+=======
 #: archive.php:102
+>>>>>>> master
 #: inc/wp-taxonomy-landing/functions/cftl-admin.php:121
 #@ largo
 #@ cf-tax-landing
@@ -119,8 +138,13 @@ msgstr "Mensaje de Copyright"
 msgid "Dark"
 msgstr "Oscuro"
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:704
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:174
 #@ tgmpa
+>>>>>>> master
 msgid "Dismiss this notice"
 msgstr "Remover este aviso"
 
@@ -179,8 +203,13 @@ msgstr "Mostrar resumen"
 msgid "Excerpt Length (# of Sentences):"
 msgstr "Largo del resumen (# de oraciones)"
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:1091
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:1085
 #@ tgmpa
+>>>>>>> master
 msgid "External Link"
 msgstr "Enlace Externo"
 
@@ -207,7 +236,11 @@ msgid "Filed under:"
 msgstr "Archivado como:"
 
 #: inc/widgets/largo-follow.php:43
+<<<<<<< HEAD
+#: largo-author-box.php:40
+=======
 #: largo-author-box.php:47
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "Follow @%1$s"
@@ -218,8 +251,13 @@ msgstr "Seguir @%1$s"
 msgid "Follow Us"
 msgstr "Síganos"
 
+<<<<<<< HEAD
+#: header.php:77
+#: searchform.php:9
+=======
 #: header.php:99
 #: searchform.php:30
+>>>>>>> master
 #@ largo
 msgid "GO"
 msgstr "IR"
@@ -234,9 +272,15 @@ msgstr "Galería"
 msgid "Global Navigation"
 msgstr "Navegación Global"
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:1956
+#: lib/class-tgm-plugin-activation.php:1965
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:1950
 #: lib/class-tgm-plugin-activation.php:1959
 #@ tgmpa
+>>>>>>> master
 msgid "Hide Details"
 msgstr "Esconder detalles"
 
@@ -323,7 +367,11 @@ msgid "Limit to author: "
 msgstr "Limitar a autor: "
 
 #: inc/widgets/largo-recent-posts.php:190
+<<<<<<< HEAD
+#@ largo-recent-posts
+=======
 #@ largo
+>>>>>>> master
 msgid "Limit to category: "
 msgstr "Limitar a categoria"
 
@@ -367,13 +415,21 @@ msgstr "Barra lateral Principal"
 msgid "Medium (150x150)"
 msgstr "Mediano (150x150)"
 
+<<<<<<< HEAD
+#: archive.php:90
+=======
 #: archive.php:98
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "Monthly Archives: <span>%s</span>"
 msgstr "Archivos Mensuales: <span>%s</span>"
 
+<<<<<<< HEAD
+#: header.php:112
+=======
 #: header.php:136
+>>>>>>> master
 #@ largo
 msgid "More"
 msgstr "Más"
@@ -398,7 +454,11 @@ msgstr "Más en esta Serie"
 msgid "More from"
 msgstr "Más de"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:61
+=======
 #: inc/post-tags.php:63
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "More from %s"
@@ -409,7 +469,11 @@ msgstr "Más de %s"
 msgid "Newer Comments &rarr;"
 msgstr "Comentarios más recientes &rarr;"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:236
+=======
 #: inc/post-tags.php:238
+>>>>>>> master
 #@ largo
 msgid "Next Page"
 msgstr "Próxima Página"
@@ -451,12 +515,20 @@ msgstr "Numero de entradas a mostrar"
 
 #: footer-part-widget-area.php:42
 #: home-part-bottom-widget-area.php:4
+<<<<<<< HEAD
+#: home.php:69
+=======
 #: home.php:70
+>>>>>>> master
 #@ largo
 msgid "Please add widgets to this content area in the WordPress admin area under appearance > widgets."
 msgstr "Favor de añadir widgets a esta area de contenido en el area de administración de WordPress bajo apariencia > widgets."
 
+<<<<<<< HEAD
+#: inc/post-tags.php:237
+=======
 #: inc/post-tags.php:239
+>>>>>>> master
 #@ largo
 msgid "Previous Page"
 msgstr "Página Anterior"
@@ -481,12 +553,21 @@ msgstr "RELACIONADO:"
 msgid "Recommend"
 msgstr "Recomendar"
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:1106
+#@ largo
+msgid "Recommended"
+msgstr "Recomendado"
+
+#: archive.php:47
+=======
 #: lib/class-tgm-plugin-activation.php:1100
 #@ tgmpa
 msgid "Recommended"
 msgstr "Recomendado"
 
 #: archive.php:52
+>>>>>>> master
 #@ largo
 msgid "Related Topics:"
 msgstr "Temas Relacionados:"
@@ -506,8 +587,13 @@ msgstr "Repetir Horizontalmente"
 msgid "Repeat Vertically"
 msgstr "Repetir Verticalmente"
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:1106
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:1100
 #@ tgmpa
+>>>>>>> master
 msgid "Required"
 msgstr "Requerido"
 
@@ -516,9 +602,15 @@ msgstr "Requerido"
 msgid "Reverse"
 msgstr "Reverso"
 
+<<<<<<< HEAD
+#: header.php:77
+#: inc/widgets/largo-twitter.php:77
+#: searchform.php:8
+=======
 #: header.php:99
 #: inc/widgets/largo-twitter.php:77
 #: searchform.php:29
+>>>>>>> master
 #@ largo
 msgid "Search"
 msgstr "Búsqueda"
@@ -534,7 +626,11 @@ msgstr "Busque este Lugar"
 msgid "Select %s"
 msgstr "Seleccione %s"
 
+<<<<<<< HEAD
+#: archive.php:60
+=======
 #: archive.php:66
+>>>>>>> master
 #@ largo
 msgid "Select Month"
 msgstr "Seleccione Més"
@@ -549,9 +645,15 @@ msgstr "Seleccione un autor o categoria de el menú o entre las etiquetas separa
 msgid "Series"
 msgstr "Series"
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:1956
+#: lib/class-tgm-plugin-activation.php:1965
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:1950
 #: lib/class-tgm-plugin-activation.php:1959
 #@ tgmpa
+>>>>>>> master
 msgid "Show Details"
 msgstr "Mostrar detalles"
 
@@ -590,6 +692,15 @@ msgstr "Saltar al contenido"
 msgid "Small (60x60)"
 msgstr "Pequeño (60x60)"
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:167
+#@ largo
+msgid "Something went wrong."
+msgstr "Algo salió mal"
+
+#: lib/class-tgm-plugin-activation.php:1300
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:158
 #@ tgmpa
 msgid "Something went wrong."
@@ -597,6 +708,7 @@ msgstr "Algo salió mal"
 
 #: lib/class-tgm-plugin-activation.php:1294
 #@ tgmpa
+>>>>>>> master
 msgid "Status"
 msgstr "Estatus"
 
@@ -663,8 +775,13 @@ msgstr "Historia principal"
 msgid "Twitter Search Query (for search widget):"
 msgstr "Twitter Search Query (para widget de búsqueda):"
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:1299
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:1293
 #@ tgmpa
+>>>>>>> master
 msgid "Type"
 msgstr "Tipo"
 
@@ -696,6 +813,10 @@ msgstr "Ver mas historias recientes de miembros del Investigative News Network."
 #: inc/widgets/largo-sidebar-featured.php:18
 #: inc/widgets/largo-sidebar-featured.php:63
 #: sidebar.php:41
+<<<<<<< HEAD
+#@ default
+=======
+>>>>>>> master
 #@ largo
 msgid "We Recommend"
 msgstr "Recomendamos"
@@ -706,7 +827,11 @@ msgstr "Recomendamos"
 msgid "We depend on your support. A generous gift in any amount helps us continue to bring you this service."
 msgstr "Dependemos de su apoyo. Su generosa colaboración de cualquier cantidad nos ayuda a continuar ofreciendo este servicio."
 
+<<<<<<< HEAD
+#: archive.php:92
+=======
 #: archive.php:100
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "Yearly Archives: <span>%s</span>"
@@ -738,10 +863,17 @@ msgstr "su búsqueda"
 msgid "Source: "
 msgstr ""
 
+<<<<<<< HEAD
+#: archive.php:79
+#: archive.php:81
+#: archive.php:83
+#: archive.php:88
+=======
 #: archive.php:86
 #: archive.php:89
 #: archive.php:91
 #: archive.php:96
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "Recent %1$s<a class=\"rss-link\" href=\"%2$s\"><i class=\"icon-rss\"></i></a>"
@@ -829,24 +961,40 @@ msgid "Link to LinkedIn Page"
 msgstr ""
 
 #: inc/largo-plugin-init.php:172
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:164
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:155
 #@ largo
 #@ tgmpa
+>>>>>>> master
 msgid "Install Required Plugins"
 msgstr ""
 
 #: inc/largo-plugin-init.php:173
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:165
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:156
 #@ largo
 #@ tgmpa
+>>>>>>> master
 msgid "Install Plugins"
 msgstr ""
 
 #: inc/largo-plugin-init.php:174
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:166
+#, php-format
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:157
 #, php-format
 #@ largo
 #@ tgmpa
+>>>>>>> master
 msgid "Installing Plugin: %s"
 msgstr ""
 
@@ -856,7 +1004,11 @@ msgid "Something went wrong with the plugin API."
 msgstr ""
 
 #: inc/largo-plugin-init.php:176
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:168
+=======
 #: lib/class-tgm-plugin-activation.php:159
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "This theme requires the following plugin: %1$s."
@@ -865,7 +1017,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:177
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:169
+=======
 #: lib/class-tgm-plugin-activation.php:160
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "This theme recommends the following plugin: %1$s."
@@ -874,7 +1030,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:178
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:170
+=======
 #: lib/class-tgm-plugin-activation.php:161
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed."
@@ -883,7 +1043,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:179
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:171
+=======
 #: lib/class-tgm-plugin-activation.php:162
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "The following required plugin is currently inactive: %1$s."
@@ -892,7 +1056,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:180
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:172
+=======
 #: lib/class-tgm-plugin-activation.php:163
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "The following recommended plugin is currently inactive: %1$s."
@@ -901,7 +1069,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:181
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:173
+=======
 #: lib/class-tgm-plugin-activation.php:164
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated."
@@ -910,7 +1082,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:182
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:174
+=======
 #: lib/class-tgm-plugin-activation.php:165
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
@@ -919,7 +1095,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:183
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:175
+=======
 #: lib/class-tgm-plugin-activation.php:166
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated."
@@ -928,7 +1108,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:184
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:176
+=======
 #: lib/class-tgm-plugin-activation.php:167
+>>>>>>> master
 #@ largo
 msgid "Begin installing plugin"
 msgid_plural "Begin installing plugins"
@@ -936,7 +1120,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:185
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:177
+=======
 #: lib/class-tgm-plugin-activation.php:168
+>>>>>>> master
 #@ largo
 msgid "Activate installed plugin"
 msgid_plural "Activate installed plugins"
@@ -944,17 +1132,29 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: inc/largo-plugin-init.php:186
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:178
+#: lib/class-tgm-plugin-activation.php:490
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:169
 #@ largo
 #@ tgmpa
+>>>>>>> master
 msgid "Return to Required Plugins Installer"
 msgstr ""
 
 #: inc/largo-plugin-init.php:187
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:179
+#: lib/class-tgm-plugin-activation.php:1846
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:171
 #: lib/class-tgm-plugin-activation.php:1840
 #@ largo
 #@ tgmpa
+>>>>>>> master
 msgid "Plugin activated successfully."
 msgstr ""
 
@@ -996,7 +1196,11 @@ msgid "Layout Options"
 msgstr ""
 
 #: inc/post-meta.php:70
+<<<<<<< HEAD
+#@ default
+=======
 #@ largo
+>>>>>>> master
 msgid "Featured Video"
 msgstr ""
 
@@ -1046,18 +1250,30 @@ msgstr ""
 msgid "<p class=\"small\">Note that at the moment this is only used for the top story on the homepage but future versions of Largo might enable this functionality elsewhere in the theme.</p>"
 msgstr ""
 
+<<<<<<< HEAD
+#: inc/post-tags.php:94
+=======
 #: inc/post-tags.php:96
+>>>>>>> master
 #@ largo
 msgid "<a href=\"#\" class=\"clean-read\">View as \"Clean Read\"</a>"
 msgstr "<a href=\"#\" class=\"clean-read\">Ver como \"Clean Read\"</a>"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:427
+=======
 #: inc/post-tags.php:429
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "<div class=\"previous\"><a href=\"%1$s\"><h5>Previous %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 msgstr "<div class=\"previous\"><a href=\"%1$s\"><h5>Historias anteriores</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:434
+=======
 #: inc/post-tags.php:436
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "<div class=\"next\"><a href=\"%1$s\"><h5>Next %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
@@ -1157,12 +1373,20 @@ msgid "An optional widget area at the bottom of the homepage"
 msgstr ""
 
 #: inc/sidebars.php:73
+<<<<<<< HEAD
+#@ default
+=======
 #@ largo
+>>>>>>> master
 msgid "Header Ad Zone"
 msgstr ""
 
 #: inc/sidebars.php:74
+<<<<<<< HEAD
+#@ default
+=======
 #@ largo
+>>>>>>> master
 msgid "An optional leaderboard ad zone above the main site header"
 msgstr ""
 
@@ -1231,7 +1455,11 @@ msgstr ""
 
 #: inc/users.php:82
 #: inc/users.php:84
+<<<<<<< HEAD
+#@ default
+=======
 #@ largo
+>>>>>>> master
 msgid "You do not have permission to edit this user."
 msgstr ""
 
@@ -1786,12 +2014,94 @@ msgstr ""
 msgid "Save & Close"
 msgstr ""
 
+<<<<<<< HEAD
+#: largo-author-box.php:14
+#, php-format
+#@ largo
+msgid "<h5>About <span class=\"fn n\">%1$s</span><span class=\"author-posts-link\"><a class=\"url\" href=\"%2$s\" rel=\"author\" title=\"See all posts by %1$s\">More by this author</a></span></h5>"
+msgstr ""
+
+=======
+>>>>>>> master
 #: largo-related-posts.php:45
 #, php-format
 #@ largo
 msgid "View all %1$s %2$s &rarr;"
 msgstr "Ver todas las %1$s %2$s &rarr;"
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:180
+#, php-format
+#@ largo
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:517
+#: lib/class-tgm-plugin-activation.php:2058
+#@ largo
+msgid "Return to the Dashboard"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:545
+#, php-format
+#@ largo
+msgid "The following plugin was activated successfully: %s."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1096
+#@ largo
+msgid "Private Repository"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1099
+#@ largo
+msgid "Pre-Packaged"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1103
+#@ largo
+msgid "WordPress Repository"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1109
+#@ largo
+msgid "Not Installed"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1111
+#@ largo
+msgid "Installed But Not Activated"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1281
+#, php-format
+#@ largo
+msgid "No plugins to install or activate. <a href=\"%1$s\" title=\"Return to the Dashboard\">Return to the Dashboard</a>"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1297
+#@ largo
+msgid "Plugin"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1298
+#@ largo
+msgid "Source"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1318
+#@ largo
+msgid "Install"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1319
+#@ largo
+msgid "Activate"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1544
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:173
 #, php-format
 #@ tgmpa
@@ -1858,11 +2168,103 @@ msgstr ""
 #: lib/class-tgm-plugin-activation.php:1538
 #: lib/class-tgm-plugin-activation.php:172
 #@ tgmpa
+>>>>>>> master
 msgid "The following plugin was activated successfully:"
 msgid_plural "The following plugins were activated successfully:"
 msgstr[0] ""
 msgstr[1] ""
 
+<<<<<<< HEAD
+#: lib/class-tgm-plugin-activation.php:1829
+#@ largo
+msgid "Install package not available."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1830
+#, php-format
+#@ largo
+msgid "Downloading install package from <span class=\"code\">%s</span>&#8230;"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1831
+#@ largo
+msgid "Unpacking the package&#8230;"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1832
+#@ largo
+msgid "Installing the plugin&#8230;"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1833
+#@ largo
+msgid "Plugin install failed."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1834
+#@ largo
+msgid "Plugin installed successfully."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1845
+#@ largo
+msgid "Plugin activation failed."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1955
+#@ largo
+msgid "The installation and activation process is starting. This process may take a while on some hosts, so please be patient."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1956
+#, php-format
+#@ largo
+msgid "%1$s installed and activated successfully."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1957
+#@ largo
+msgid "All installations and activations have been completed."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1958
+#, php-format
+#@ largo
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1962
+#@ largo
+msgid "The installation process is starting. This process may take a while on some hosts, so please be patient."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1963
+#, php-format
+#@ largo
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1964
+#, php-format
+#@ largo
+msgid "The installation of %1$s failed."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1965
+#, php-format
+#@ largo
+msgid "%1$s installed successfully."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1966
+#@ largo
+msgid "All installations have been completed."
+msgstr ""
+
+#: lib/class-tgm-plugin-activation.php:1967
+#, php-format
+#@ largo
+=======
 #: lib/class-tgm-plugin-activation.php:1823
 #@ tgmpa
 msgid "Install package not available."
@@ -1952,6 +2354,7 @@ msgstr ""
 #: lib/class-tgm-plugin-activation.php:1961
 #, php-format
 #@ tgmpa
+>>>>>>> master
 msgid "Installing Plugin %1$s (%2$d/%3$d)"
 msgstr ""
 
@@ -2445,50 +2848,95 @@ msgid_plural "%s results"
 msgstr[0] ""
 msgstr[1] ""
 
+<<<<<<< HEAD
+#: search.php:16
+#, php-format
+#@ largo
+msgid "<a class=\"rss-link\" href=\"%1$s\"><i class=\"icon-rss\"></i></a>"
+msgstr ""
+
+=======
+>>>>>>> master
 #: sidebar-series-left.php:14
 #@ largo
 msgid "<p>Please add widgets to this content area in the WordPress admin area under appearance > widgets.</p>"
 msgstr ""
 
+<<<<<<< HEAD
+#: inc/post-tags.php:84
+=======
 #: inc/post-tags.php:86
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "<span class=\"by-author\"><span class=\"by\">By:</span> <span class=\"author vcard\" itemprop=\"author\">%1$s</span></span><span class=\"sep\"> | </span><time class=\"entry-date updated dtstamp pubdate\" datetime=\"%2$s\">%3$s</time>"
 msgstr "<span class=\"by-author\"><span class=\"by\">por</span> <span class=\"author vcard\" itemprop=\"author\">%1$s</span></span><span class=\"sep\"> | </span><time class=\"entry-date updated dtstamp pubdate\" datetime=\"%2$s\">%3$s</time>"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:91
+#, php-format
+#@ largo
+msgid " | <span class=\"edit-link\"><a href=\"%1$s\">Edit This Post</a></span>"
+msgstr ""
+
+#: inc/post-tags.php:446
+=======
 #: inc/post-tags.php:448
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "Newer %s &rarr;"
 msgstr "%s Más Recientes &rarr;"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:447
+=======
 #: inc/post-tags.php:449
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "&larr; Older %s"
 msgstr "&larr;  %s Anteriores"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:121
+=======
 #: inc/post-tags.php:123
+>>>>>>> master
 #, php-format
 #@ largo
 msgid "<span class=\"twitter\"><a href=\"http://twitter.com/share\" class=\"twitter-share-button\" data-url=\"%1$s\" data-text=\"%2$s\" %3$s %4$s %5$s>Tweet</a></span>"
 msgstr "<span class=\"twitter\"><a href=\"http://twitter.com/share\" class=\"twitter-share-button\" data-url=\"%1$s\" data-text=\"%2$s\" %3$s %4$s %5$s>Twittear</a></span>"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:139
+=======
 #: inc/post-tags.php:141
+>>>>>>> master
 #@ largo
 msgid "<span class=\"st_sharethis\" displayText=\"Share\"></span>"
 msgstr "<span class=\"st_sharethis\" displayText=\"Compartir\"></span>"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:142
+=======
 #: inc/post-tags.php:144
+>>>>>>> master
 #@ largo
 msgid "<span class=\"st_email\" displayText=\"Email\"></span>"
 msgstr "<span class=\"st_email\" displayText=\"Correo electrónico\"></span>"
 
+<<<<<<< HEAD
+#: inc/post-tags.php:145
+=======
 #: inc/post-tags.php:147
+>>>>>>> master
 #@ largo
 msgid "<span class=\"print\"><a href=\"#\" onclick=\"window.print()\" title=\"print this article\" rel=\"nofollow\"><i class=\"icon-print\"></i> Print</a></span>"
 msgstr "<span class=\"print\"><a href=\"#\" onclick=\"window.print()\" title=\"print this article\" rel=\"nofollow\"><i class=\"icon-print\"></i> Imprimir</a></span>"
 
+<<<<<<< HEAD
+=======
 #: archive.php:84
 #, php-format
 #@ largo
@@ -2538,3 +2986,4 @@ msgstr ""
 msgid "<span class=\"time-ago\">%s ago</span>"
 msgstr "<span class=\"time-ago\">hace %s</span>"
 
+>>>>>>> master

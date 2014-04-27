@@ -20,8 +20,8 @@ class largo_donate_widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title; ?>
 
-            <p><?php echo $instance['cta_text']; ?></p>
-            <a class="btn btn-primary" href="<?php echo $instance['button_url']; ?>"><?php echo $instance['button_text']; ?></a>
+            <p><?php echo esc_html( $instance['cta_text'] ); ?></p>
+            <a class="btn btn-primary" href="<?php echo esc_url( $instance['button_url'] ); ?>"><?php echo esc_html( $instance['button_text'] ); ?></a>
 
 		<?php
 		echo $after_widget;
@@ -29,10 +29,10 @@ class largo_donate_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['cta_text'] = strip_tags( $new_instance['cta_text'] );
-		$instance['button_text'] = strip_tags( $new_instance['button_text'] );
-		$instance['button_url'] = strip_tags( $new_instance['button_url'] );
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['cta_text'] = sanitize_text_field( $new_instance['cta_text'] );
+		$instance['button_text'] = sanitize_text_field( $new_instance['button_text'] );
+		$instance['button_url'] = esc_url_raw( $new_instance['button_url'] );
 		return $instance;
 	}
 	function form( $instance ) {
@@ -53,19 +53,19 @@ class largo_donate_widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" style="width:90%;" />
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'cta_text' ); ?>"><?php _e('Call-to-Action Text:', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'cta_text' ); ?>" name="<?php echo $this->get_field_name( 'cta_text' ); ?>" value="<?php echo $instance['cta_text']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'cta_text' ); ?>" name="<?php echo $this->get_field_name( 'cta_text' ); ?>" value="<?php echo esc_attr( $instance['cta_text'] ); ?>" style="width:90%;" />
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'button_text' ); ?>"><?php _e('Button Text:', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'button_text' ); ?>" name="<?php echo $this->get_field_name( 'button_text' ); ?>" value="<?php echo $instance['button_text']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'button_text' ); ?>" name="<?php echo $this->get_field_name( 'button_text' ); ?>" value="<?php echo esc_attr( $instance['button_text'] ); ?>" style="width:90%;" />
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'button_url' ); ?>"><?php _e('Button URL (for custom campaigns):', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'button_url' ); ?>" name="<?php echo $this->get_field_name( 'button_url' ); ?>" value="<?php echo $instance['button_url']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'button_url' ); ?>" name="<?php echo $this->get_field_name( 'button_url' ); ?>" value="<?php echo esc_attr( $instance['button_url'] ); ?>" style="width:90%;" />
 		</p>
 
 		<?php

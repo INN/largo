@@ -66,7 +66,7 @@ article.story {
     margin-right: 8px;
   }
   span.facebook {
-    top: -7px;
+	  top: -7px;
   }
   span.print {
     font-family: Verdana, Helvetica, sans-serif;
@@ -106,13 +106,16 @@ article.story {
 .labels,
 .tags,
 .pager,
-#related-posts {
+#related-posts,
+.largo-post-series-links {
   clear: both;
   margin: 0 0 @baseline;
   width: 100%;
   h5 {
     font-size: @baseFontSize;
     margin-bottom: @baseline / 4;
+    text-transform: uppercase;
+    font-weight: bold;
   }
 }
 .tags,
@@ -124,16 +127,10 @@ article.story {
 .single-post .author-box,
 .single-argolinkroundups .author-box,
 .labels {
-  background-color: @postBoxBackgroundColor;
-  border: 1px solid @grayLighter;
-  border-top: 3px solid @grayLight;
-  .border-radius(5px);
   h5 {
-    font-size: @baseFontSize;
+    font-size: @baseFontSize * 1.2;
     line-height: 1;
-    background-color: darken(@postBoxBackgroundColor, 10%);
     margin-bottom: 0;
-	padding: 8px;
   }
 }
 h3.recent-posts,
@@ -149,12 +146,26 @@ h3.recent-posts,
   }
 }
 
+
+// ARTICLE-BOTTOM REGION
+.article-bottom {
+	.widget {
+		padding: 15px 0;
+		p {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	.post-social {
+		border-top: none;
+		border-bottom: none;
+	}
+}
+
 // LABELS
 .labels .series-label {
   margin: 5px;
   padding: 8px;
-  background-color: darken(@postBoxBackgroundColor, 10%);
-  .border-radius(5px);
   h5 {
     background: none;
     padding: 0;
@@ -167,7 +178,7 @@ h3.recent-posts,
 }
 
 // TAGS
-.tags {
+#main .tags {
   height: 100%;
   overflow: auto;
   margin-bottom: @baseline / 2;
@@ -175,6 +186,7 @@ h3.recent-posts,
     padding: 0;
     margin: 0;
     font-size: @baseFontSize - 3;
+    line-height: 1.5;
 	li {
 	  display: inline;
 	  letter-spacing: 1px;
@@ -205,15 +217,11 @@ h3.recent-posts,
 // NEXT - PREV NAVIGATION
 .pager {
   line-height: 1.2;
-  h5 {
-    margin-bottom: 0;
-  }
   a {
     display: inline-block;
     padding: 10px 15px;
     color: @textColor;
     background-color: darken(@postBoxBackgroundColor, 10%);
-    .border-radius(5px);
     &:hover {
   	  background-color: darken(@postBoxBackgroundColor, 35%);
   	  color: @white;
@@ -225,20 +233,22 @@ h3.recent-posts,
   width: 48%;
   float: right;
   text-align: right;
+  img {
+    float: right;
+    padding-left: 12px;
+  }
 }
 .previous {
   width: 48%;
   float: left;
   text-align: left;
+  img {
+    float: left;
+    padding-right: 12px;
+  }
 }
 
 // RELATED POSTS
-#related-posts {
-  background-color: @postBoxBackgroundColor;
-  border: 1px solid @grayLighter;
-  border-top: 3px solid @grayLight;
-  .border-radius(5px);
-}
 #related-post-nav {
   padding: 8px 0;
   font-family: @sansFontFamily;
@@ -251,7 +261,7 @@ h3.recent-posts,
     }
   }
   h5 {
-    margin: 0 0 5px 5px;
+    margin: 0 0 5px 0;
   }
   a {
     display: block;
@@ -396,7 +406,7 @@ h3.recent-posts,
 	margin: 10px 20px 10px 10px;
   }
   p, ul {
-    margin: 10px;
+    margin: 10px 0;
   }
   .gplus img {
     margin: 0;
@@ -460,6 +470,10 @@ p.wp-caption-text {
 .full {
   width: 100%;
 }
+.full-image {
+  text-align: center;
+  background-color: @grayLighter;
+}
 .pull-quote,
 .type-pull-quote {
   border-left: 4px solid @grayDark;
@@ -508,6 +522,11 @@ p.wp-caption-text {
   font-weight:normal;
   line-height: 1.5;
   margin-bottom: 0;
+}
+
+.rss-subscribe-link {
+  float: right;
+  text-transform: uppercase;
 }
 
 // --------------------------------------------
@@ -644,6 +663,10 @@ h5.top-tag {
     color: @grayDark;
     border: none;
     border-bottom: 1px solid @grayLighter;
+    a,
+    a:hover {
+	  color: @grayDark;
+    }
   }
   h5 {
     font-size: @baseFontSize + 2;
@@ -667,22 +690,22 @@ h5.top-tag {
       list-style: none;
     }
   }
-}
-#homepage-bottom .widget {
-  width: 42.5%;
-  padding: 2.5%;
-}
-#homepage-bottom .rev .widgettitle {
-  color: @white;
-}
-#homepage-bottom .widget.odd {
-  float: left;
-  clear: both;
-  margin-left: 0;
-}
-#homepage-bottom .widget.even {
-  float: right;
-  clear: none;
+	.widget {
+	  width: 42.5%;
+	  padding: 2.5%;
+	}
+	.rev .widgettitle {
+	  color: @white;
+	}
+	.widget.odd {
+	  float: left;
+	  clear: both;
+	  margin-left: 0;
+	}
+	.widget.even {
+	  float: right;
+	  clear: none;
+	}
 }
 
 // --------------------------------------------

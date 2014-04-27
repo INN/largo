@@ -1,11 +1,18 @@
-<?php global $layout, $tags; ?>
+<?php
+/**
+ * Home Template: Top Stories
+ * Description: A newspaper-like layout highlighting one Top Story on the left and others to the right. A popular layout choice!
+ * Sidebars: Homepage Left Rail (An optional widget area that, when enabled, appears to the left of the main content area on the homepage)
+ */
+
+global $largo, $shown_ids, $tags;
+?>
 <div id="homepage-featured" class="row-fluid clearfix">
-	<?php if ( $layout === '3col' ) { ?>
+	<?php if ( is_active_sidebar('homepage-left-rail') ) { ?>
 	<div class="top-story span12">
 	<?php } else { ?>
 	<div class="top-story span8">
 	<?php }
-		global $ids;
 		$topstory = largo_get_featured_posts( array(
 			'tax_query' => array(
 				array(
@@ -17,7 +24,7 @@
 			'showposts' => 1
 		) );
 		if ( $topstory->have_posts() ) :
-			while ( $topstory->have_posts() ) : $topstory->the_post(); $ids[] = get_the_ID();
+			while ( $topstory->have_posts() ) : $topstory->the_post(); $shown_ids[] = get_the_ID();
 
 				if( $has_video = get_post_meta( $post->ID, 'youtube_url', true ) ) { ?>
 					<div class="embed-container">
@@ -44,7 +51,7 @@
 		endif; // end top story ?>
 	</div>
 
-	<?php if ( $layout === '2col' ) { ?>
+	<?php if ( !is_active_sidebar('homepage-left-rail') ) { ?>
 	<div class="sub-stories span4">
 		<?php $substories = largo_get_featured_posts( array(
 			'tax_query' => array(
@@ -55,15 +62,15 @@
 				)
 			),
 			'showposts'		=> 6,
-			'post__not_in' 	=> $ids
+			'post__not_in' 	=> $shown_ids
 		) );
 		if ( $substories->have_posts() ) :
 			$count = 1;
-			while ( $substories->have_posts() ) : $substories->the_post(); $ids[] = get_the_ID();
+			while ( $substories->have_posts() ) : $substories->the_post(); $shown_ids[] = get_the_ID();
 				if ($count <= 3) : ?>
 					<div class="story">
 			        	<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>
-			        		<h5 class="top-tag"><?php largo_categories_and_tags(1); ?></h5>
+			        		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 			        	<?php endif; ?>
 			        	<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 			        	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>

@@ -30,7 +30,7 @@ class largo_INN_RSS_widget extends WP_Widget {
 			echo $before_title . $title . $after_title;
 		largo_widget_rss_output( $rss, $instance ); ?>
 
-		<p class="morelink"><a href="<?php echo $link; ?>">More Stories From INN Members&nbsp;&raquo;</a></p>
+		<p class="morelink"><a href="<?php echo esc_url( $link ); ?>"><?php _e( 'More Stories From INN Members', 'largo' ); ?>&nbsp;&raquo;</a></p>
 
 		<?php echo $after_widget;
 
@@ -39,8 +39,8 @@ class largo_INN_RSS_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
-		$instance['show_excerpt'] = $new_instance['show_excerpt'] ? 1 : 0;
+		$instance['num_posts'] = intval( $new_instance['num_posts'] );
+		$instance['show_excerpt'] = ! empty( $new_instance['show_excerpt'] ) ? 1 : 0;
 		return $instance;
 	}
 
@@ -57,8 +57,8 @@ class largo_INN_RSS_widget extends WP_Widget {
 			</p>
 
 			<p>
-				<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of stories to show:', 'largo'); ?></label>
-				<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
+				<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of stories to show', 'largo'); ?>:</label>
+				<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo (int) $instance['num_posts']; ?>" style="width:90%;" />
 			</p>
 		<?php
 	}

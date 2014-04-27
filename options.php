@@ -28,6 +28,13 @@ function optionsframework_option_name() {
 function optionsframework_options() {
 
 	$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';
+	$home_templates = array();
+	$home_templates_data = largo_get_home_templates();
+	if ( count($home_templates_data) ) {
+		foreach ($home_templates_data as $name => $data) {
+			$home_templates[ $data['path'] ] = '<img src="'.$data['thumb'].'" style="float: left; margin-right: 8px; max-width: 120px; height: auto; border: 1px solid #ddd;"><strong>'.$name.'</strong> '.$data['desc'];
+		}
+	}
 
 	$display_options = array(
 		'top' 	=> __('Top', 'largo'),
@@ -63,7 +70,21 @@ function optionsframework_options() {
 		'recommend' => __('Recommend', 'largo')
 	);
 
+	$region_options = array();
+	global $wp_registered_sidebars;
+	$excluded = array(
+		'Footer 1', 'Footer 2', 'Footer 3', 'Article Bottom', 'Header Ad Zone'
+	);
+	// Let others change the list
+	$excluded = apply_filters( 'largo_excluded_sidebars', $excluded );
+	foreach( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
+		//check if excluded
+		if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) ) continue;
+		$region_options[$sidebar_id] = $sidebar['name'];
+	}
+
 	$options = array();
+	$widget_options = array();
 
 	/**
 	 * Basic Options
@@ -88,7 +109,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Donate Button', 'largo'),
-		'desc' 	=> __('<strong>Show/Hide</strong> a button in the top header to link to your donation page or form.', 'largo'),
+		'desc' 	=> __('<strong>Show</strong> a button in the top header to link to your donation page or form.', 'largo'),
 		'id' 	=> 'show_donate_button',
 		'type' 	=> 'checkbox');
 
@@ -108,7 +129,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Don\'t Miss Menu', 'largo'),
-		'desc' 	=> __('<strong>Show/Hide</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
+		'desc' 	=> __('<strong>Show</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
 		'id' 	=> 'show_dont_miss_menu',
 		'type' 	=> 'checkbox');
 
@@ -118,6 +139,13 @@ function optionsframework_options() {
 		'std' 	=> __('Don\'t Miss', 'largo'),
 		'class' => 'hidden',
 		'type' 	=> 'text');
+
+		$options[] = array(
+		'name' 	=> __('Disclaimer', 'largo'),
+		'desc' 	=> __('Enter a default disclaimer', 'largo'),
+		'id' 	=> 'default_disclaimer',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
 
 	$options[] = array(
 		'name' 	=> __('Footer Nav Menu', 'largo'),
@@ -214,37 +242,6 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide list of tags</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_tags',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('Enter the <strong>maximum number of tags to show</strong>.', 'largo'),
-		'id' 	=> 'tag_limit',
-		'std' 	=> 20,
-		'class' => 'hidden',
-		'type' 	=> 'text');
-
-	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide the author bio</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_author_box',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide related posts</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_related_content',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide next/prev post navigation</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_next_prev_nav_single',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
 		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at both the top and the bottom of single posts but you can choose to show them in only one or the other or to not show them at all.', 'largo'),
 		'id' 		=> 'social_icons_display',
 		'std' 		=> 'both',
@@ -280,7 +277,7 @@ function optionsframework_options() {
 		));
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide share count</strong> with Twitter buttons.', 'largo'),
+		'desc' 	=> __('<strong>Show share count</strong> with Twitter buttons.', 'largo'),
 		'id' 	=> 'show_twitter_count',
 		'std' 	=> '1',
 		'type' 	=> 'checkbox');
@@ -349,28 +346,16 @@ function optionsframework_options() {
 		'name' 	=> __('Layout Options', 'largo'),
 		'type' 	=> 'heading');
 
-	$options[] = array(
-		'name' 	=> __('Overall Homepage Layout', 'largo'),
-		'desc' 	=> __('<strong>Select the overall layout you would like to use for your site\'s homepage.</strong> By default, Largo has a two column layout with a main content area on the left and a configurable sidebar on the right, but you can add a skinny side rail (configurable under the appearance > widgets tab) to left of the main content area by selecting the three-column option.', 'largo'),
-		'id' 	=> 'homepage_layout',
-		'std' 	=> '2col',
-		'type' 	=> 'images',
-		'options' 	=> array(
-			'2col' => $imagepath . '2col.png',
-			'3col' => $imagepath . '3col.png')
-	);
-
-	$options[] = array(
-		'name' 	=> __('Homepage Top', 'largo'),
-		'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> Largo currently supports three homepage options: a blog-like list of posts with the ability to stick a post to the op of the homepage, a newspaper-like layout highlighting featured stories and an animated carousel of featured stories with large images.', 'largo'),
-		'id' 	=> 'homepage_top',
-		'std' 	=> 'blog',
-		'type' 	=> 'images',
-		'options' 	=> array(
-			'blog' 			=> $imagepath . 'blog.png',
-			'topstories' 	=> $imagepath . 'newsy.png',
-			'slider' 		=> $imagepath . 'slider.png')
-	);
+	if ( count($home_templates) ) {
+		$options[] = array(
+			'name' 	=> __('Home Template', 'largo'),
+			'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> These are Home Templates, defined much like post/page templates.', 'largo'),
+			'id' 	=> 'home_template',
+			'std' 	=> 'homepages/blog.php',
+			'type' 	=> 'radio',
+			'options' 	=> $home_templates
+		);
+	}
 
 	$options[] = array(
 		'name' 	=> __('Sticky Posts', 'largo'),
@@ -384,13 +369,14 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Homepage Bottom', 'largo'),
-		'desc' 	=> __('<strong>Select the layout to use for the bottom of the homepage.</strong> Largo currently supports two options: a single column list of recent posts with photos and excerpts or a two column widget area', 'largo'),
-		'id' 	=> 'homepage_bottom',
+		'desc' 	=> __('<strong>Select the layout to use for the bottom of the homepage.</strong> Largo supports three options: a single column list of recent posts with photos and excerpts, a two column widget area, or nothing whatsoever', 'largo'),
+		'id' 		=> 'homepage_bottom',
 		'std' 	=> 'list',
 		'type' 	=> 'images',
-		'options' 	=> array(
+		'options' => array(
 			'list' 		=> $imagepath . 'list.png',
-			'widgets' 	=> $imagepath . 'widgets.png')
+			'widgets' => $imagepath . 'widgets.png',
+			'none'		=> $imagepath . 'none.png')
 	);
 
 	$options[] = array(
@@ -417,29 +403,35 @@ function optionsframework_options() {
 		'std' 	=> '',
 		'type' 	=> 'text');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'name' 	=> __('Sidebar Options', 'largo'),
 		'type' 	=> 'info');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('By default Largo has two sidebars. One is used for single pages and posts and the other is used for everything else (including the homepage). Check this box if you would like to have a third sidebar to be used in place of the main sidebar on archive pages (category, tag, author and series pages).', 'largo'),
 		'id' 	=> 'use_topic_sidebar',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
+		'desc' 	=> __('Include an additional widget region ("sidebar") just above the site footer region', 'largo'),
+		'id' 	=> 'use_before_footer_sidebar',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('Check this box if you want to fade the sidebar out on single story pages as a reader scrolls.', 'largo'),
 		'id' 	=> 'showey_hidey',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('Enter names of <strong>additional sidebar regions</strong> (one per line) you\'d like post authors to be able to choose to display on their posts.', 'largo'),
 		'id' 	=> 'custom_sidebars',
 		'std' 	=> '',
 		'type' 	=> 'textarea');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'name' 	=> __('Footer Layout', 'largo'),
 		'desc' 	=> __('<strong>Select the layout to use for the footer.</strong> The default is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the Appearance > Widgets menu.', 'largo'),
 		'id' 	=> 'footer_layout',
@@ -466,6 +458,34 @@ function optionsframework_options() {
 		'id' 	=> 'custom_landing_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Default region in lefthand column of Landing Pages', 'largo'),
+		'id' 	=> 'landing_left_region_default',
+		'std' 	=> 'sidebar-main',
+		'type' 	=> 'select',
+		'options' => $region_options);
+
+	$options[] = array(
+		'desc' 	=> __('Default region in righthand column of Landing Pages', 'largo'),
+		'id' 	=> 'landing_right_region_default',
+		'std' 	=> 'sidebar-main',
+		'type' 	=> 'select',
+		'options' => $region_options);
+
+	// hidden field logs largo version to facilitate tracking which set of options are stored
+	$largo = wp_get_theme('largo');
+	$options[] = array(
+		'id' 	=> 'largo_version',
+		'std' 	=> $largo->get('Version'),
+		'type' 	=> 'text',
+		'class' => 'hidden');
+
+
+	$screen = get_current_screen();
+	if ( $screen->base == 'widgets' ) {
+		return $widget_options;
+	}
 
 	$options[] = array(
 		'name' => __('Search options', 'largo'),

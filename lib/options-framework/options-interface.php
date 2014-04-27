@@ -152,7 +152,7 @@ function optionsframework_fields() {
 			$name = $option_name .'['. $value['id'] .']';
 			foreach ($value['options'] as $key => $option) {
 				$id = $option_name . '-' . $value['id'] .'-'. $key;
-				$output .= '<input class="of-input of-radio" type="radio" name="' . esc_attr( $name ) . '" id="' . esc_attr( $id ) . '" value="'. esc_attr( $key ) . '" '. checked( $val, $key, false) .' /><label for="' . esc_attr( $id ) . '">' . esc_html( $option ) . '</label>';
+				$output .= '<input class="of-input of-radio" type="radio" name="' . esc_attr( $name ) . '" id="' . esc_attr( $id ) . '" value="'. esc_attr( $key ) . '" '. checked( $val, $key, false) .' /><label for="' . esc_attr( $id ) . '">' . $option . '</label>';
 			}
 			break;
 
@@ -206,7 +206,7 @@ function optionsframework_fields() {
 					$default_color = ' data-default-color="' .$value['std'] . '" ';
 			}
 			$output .= '<input name="' . esc_attr( $option_name . '[' . $value['id'] . ']' ) . '" id="' . esc_attr( $value['id'] ) . '" class="of-color"  type="text" value="' . esc_attr( $val ) . '"' . $default_color .' />';
- 	
+
 			break;
 
 		// Uploader
@@ -216,25 +216,25 @@ function optionsframework_fields() {
 
 		// Typography
 		case 'typography':
-		
+
 			unset( $font_size, $font_style, $font_face, $font_color );
-		
+
 			$typography_defaults = array(
 				'size' => '',
 				'face' => '',
 				'style' => '',
 				'color' => ''
 			);
-			
+
 			$typography_stored = wp_parse_args( $val, $typography_defaults );
-			
+
 			$typography_options = array(
 				'sizes' => of_recognized_font_sizes(),
 				'faces' => of_recognized_font_faces(),
 				'styles' => of_recognized_font_styles(),
 				'color' => true
 			);
-			
+
 			if ( isset( $value['options'] ) ) {
 				$typography_options = wp_parse_args( $value['options'], $typography_options );
 			}
@@ -279,12 +279,12 @@ function optionsframework_fields() {
 				}
 				$font_color = '<input name="' . esc_attr( $option_name . '[' . $value['id'] . '][color]' ) . '" id="' . esc_attr( $value['id'] . '_color' ) . '" class="of-color of-typography-color  type="text" value="' . esc_attr( $typography_stored['color'] ) . '"' . $default_color .' />';
 			}
-	
+
 			// Allow modification/injection of typography fields
 			$typography_fields = compact( 'font_size', 'font_face', 'font_style', 'font_color' );
 			$typography_fields = apply_filters( 'of_typography_fields', $typography_fields, $typography_stored, $option_name, $value );
 			$output .= implode( '', $typography_fields );
-			
+
 			break;
 
 		// Background
@@ -341,7 +341,7 @@ function optionsframework_fields() {
 			$output .= '</div>';
 
 			break;
-			
+
 		// Editor
 		case 'editor':
 			$output .= '<div class="explain">' . wp_kses( $explain_value, $allowedtags) . '</div>'."\n";

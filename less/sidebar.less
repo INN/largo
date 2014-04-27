@@ -1,8 +1,6 @@
 .widget {
-  margin-bottom: @baseline;
-  padding: 12px;
-  border: 1px solid @grayLighter;
-  .border-radius(8px);
+  padding: 15px;
+
   p, ul {
     padding: 0 3px;
     font-size: @baseFontSize * 0.815;
@@ -17,20 +15,21 @@
   p.morelink {
     margin: -@baseline/4 0 0;
   }
+
+  + .widget {
+    border-top: 1px solid @grayLighter;
+  }
 }
 .widgettitle,
 .stories h3.widgettitle {
   margin-bottom: @baseline/3;
-  padding: 5px 8px;
-  border: 1px solid @grayLighter;
-  .border-radius(4px);
-  background-color: @baseColor;
-  font-size: @baseFontSize * 0.815;
+
+  font-size: @baseFontSize;
   text-transform: uppercase;
   font-weight: bold;
-  color: @white;
+  color: @black;
   a {
-    color: @white;
+    color: @black;
   }
 }
 
@@ -109,6 +108,9 @@
     }
   }
 }
+.article-bottom .largo-follow {
+	padding: 0 0 0 0;
+}
 .twitter-follow-button {
   display: block;
   margin: 0 0 10px;
@@ -124,6 +126,9 @@
   background: white !important;
   background-color: white !important;
 }
+.flickr-follow {
+	margin-bottom: 8px;
+}
 //About Widget
 .largo-about p {
   margin-bottom: 0;
@@ -134,6 +139,7 @@
 }
 //Featured and Recent Posts Widget
 .largo-sidebar-featured,
+.largo-featured,
 .largo-recent-posts,
 .largo-INN-RSS {
   .post-lead {
@@ -196,6 +202,45 @@
     }
   }
 }
+//series posts
+.widget.largo-series-posts {
+
+	font-family: @sansFontFamily;
+
+	h4 {
+		margin-bottom: 0.4em;
+	  line-height: 1.2em;
+		font-size: @baseFontSize * 1.3;
+	}
+  ul {
+    margin-left: 0;
+    list-style: none;
+  }
+  img {
+	  max-width: 100px;
+  }
+	i {
+		display: block;
+		float: left;
+		font-size: 110%;
+		margin-right: -100%
+	}
+	li a {
+		margin-left: 1.7em;
+		display: inline-block;
+	}
+	p {
+		font-family: @sansFontFamily;
+	}
+	a.more {
+		text-align: right;
+		font-weight: bold;
+		float: right;
+		&:after {
+			content: " »";
+		}
+	}
+}
 //adjustments for default WP widgets
 .widget_archive select,
 .widget_categories select,
@@ -205,4 +250,31 @@
 }
 #sidebar iframe {
   max-width: 100%;
+}
+
+.largo-related-posts {
+  ul.related {
+    margin: 0;
+
+    li {
+      list-style: none;
+      display: block;
+      .clearfix();
+    }
+
+    p {
+	    margin-bottom: 1em;
+    }
+
+  }
+
+  h4 {
+    font-size: @baseFontSize * 1.2;
+    margin: 2px 0 5px;
+  }
+
+  .wp-post-image {
+    float: left;
+    margin: 5px 10px 0 5px;
+  }
 }

@@ -56,10 +56,12 @@ function cftl_intercept_get_posts(&$query_obj) {
 	 * is_tax is not set on tag or category queries. (as of WP 3.4)
 	 */
 	if (!$query_obj->is_feed && ($query_obj->is_tax || $query_obj->is_tag || $query_obj->is_category)) {
+		//double-checking due to other intercepts
+		if (!isset($query_obj->tax_query->queries)) return;
+
 		$landing = false;
 		$qv = $query_obj->query_vars;
-		$a = is_object($wp_rewrite);
-		$b = $wp_rewrite->using_permalinks();
+
 		if (is_object($wp_rewrite) && $wp_rewrite->using_permalinks()) {
 			// Permalink rewrites kill paged=1
 			$landing = cftl_find_override_page($query_obj);
@@ -78,7 +80,7 @@ function cftl_intercept_get_posts(&$query_obj) {
 		*/
 
 
-		if (!$landing) {
+		if (!$landing && isset($query_obj->tax_query->queries) ) {
 			$landing = cftl_find_override_page($query_obj);
 		}
 

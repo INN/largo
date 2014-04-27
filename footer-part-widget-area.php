@@ -14,7 +14,7 @@
 
 <div class="<?php echo $layout_spans[0]; ?> widget-area" role="complementary">
 	<?php if ( ! dynamic_sidebar( 'footer-1' ) )
-		wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) );
+		largo_cached_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) );
 	?>
 </div>
 

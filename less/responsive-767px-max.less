@@ -152,6 +152,54 @@
   #series-main #content {
     margin-left: 0;
   }
+
+  .sticky-footer-holder .follow-author {
+    display: none;
+  }
+
+	.home .sticky-nav-holder.show {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.home #main-nav,
+	.global-nav-bg {
+		display: none;
+	}
+
+  .sticky-nav-container {
+    padding: 0 10px;
+  }
+
+  // Navbar button
+  .navbar .btn-navbar {
+    display: block;
+  }
+
+  //nav menu
+  .sticky-navbar .nav-middle {
+	  overflow: hidden;
+	  height: 0;
+  }
+
+  //category landing page featured stuff
+  .category {
+	  .row-fluid > * {
+		  width: 100%;
+		  margin-left: 0;
+	  }
+		.span4 img {
+			display: block;
+			margin: 0 auto 1em;
+		}
+	  .secondary-featured-post img {
+		  float: left;
+		  max-width: 23%;
+		  margin-right: 3%;
+		  margin-top: 1em;
+		  margin-bottom: 0.5em;
+	  }
+	}
 }
 
 // UP TO LANDSCAPE PHONE
@@ -159,7 +207,7 @@
 @media (max-width: 480px) {
   .global-nav .org-logo,
   .post-social .print {
-    display:none;
+    display: none;
   }
   #header-search {
     float:right;
@@ -194,6 +242,19 @@
   	clear: both;
   	float: none;
   	text-align: left;
+  }
+
+  .sticky-footer-holder {
+    .share {
+      margin-right: 0;
+    }
+    .comments {
+      margin-right: 0;
+      float: right;
+    }
+    .follow {
+      display: none;
+    }
   }
 }
 

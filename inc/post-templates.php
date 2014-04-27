@@ -68,3 +68,32 @@ if( !function_exists( 'get_post_template' ) ) {
 		return $template;
 	}
 }
+
+/**
+ * Modelled on is_page_template, determine if we are in a single post template.
+ * You can optionally provide a template name and then the check will be
+ * specific to that template.
+ *
+ * @since 1.0
+ * @uses $wp_query
+ *
+ * @param string $template The specific template name if specific matching is required.
+ * @return bool True on success, false on failure.
+ */
+function is_post_template( $template = '' ) {
+	if ( ! is_single() )
+		return false;
+
+	$post_template = get_post_meta( get_queried_object_id(), '_wp_post_template', true );
+
+	if ( empty( $template ) )
+		return (bool) $post_template;
+
+	if ( $template == $post_template )
+		return true;
+
+	if ( 'default' == $template && ! $post_template )
+		return true;
+
+	return false;
+}

@@ -1,0 +1,46 @@
+.advance-widget-settings {
+	color: #222;
+	margin: 25px 0;
+	max-width: 780px;
+}
+
+.advance-widget-settings.closed .metabox-holder {
+	display: none;
+}
+
+.advance-widget-settings .advance-widget-settings-title {
+	font-size: 1.3em;
+	font-weight: 600;
+	cursor: pointer;
+	position: relative;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+
+.advance-widget-settings .advance-widget-settings-title:after {
+	position: absolute;
+	right: 0;
+	top: 0;
+	content: '\f142';
+	font: 400 20px/1 dashicons!important;
+	speak: none;
+	color: #aaa;
+	display: inline-block;
+	vertical-align: bottom;
+	margin-right: 0.2em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-moz-transition: all .1s ease-in-out;
+	-webkit-transition: all .1s ease-in-out;
+	transition: all .1s ease-in-out;
+}
+
+.advance-widget-settings.closed .advance-widget-settings-title:after {
+	content: '\f140';
+}
+
+.advance-widget-settings .advance-widget-settings-title:hover:after {
+	color: #777;
+}

@@ -98,7 +98,7 @@ class largo_recent_posts_widget extends WP_Widget {
 	        	echo '</ul>';
 
     		if($instance['linkurl'] !='') {?>
-				<p class="morelink"><a href="<?php echo $instance['linkurl']; ?>"><?php echo $instance['linktext']; ?></a></p>
+				<p class="morelink"><a href="<?php echo esc_url( $instance['linkurl'] ); ?>"><?php echo esc_html( $instance['linktext'] ); ?></a></p>
 			<?php }
 		echo $after_widget;
 		wp_reset_postdata();
@@ -106,19 +106,19 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
-		$instance['avoid_duplicates'] = $new_instance['avoid_duplicates'] ? 1 : 0;
-		$instance['thumbnail_display'] = $new_instance['thumbnail_display'];
-		$instance['excerpt_display'] = $new_instance['excerpt_display'];
-		$instance['num_sentences'] = strip_tags( $new_instance['num_sentences'] );
-		$instance['cat'] = $new_instance['cat'];
-		$instance['tag'] = $new_instance['tag'];
-		$instance['taxonomy'] = $new_instance['taxonomy'];
-		$instance['term'] = $new_instance['term'];
-		$instance['author'] = $new_instance['author'];
-		$instance['linktext'] = $new_instance['linktext'];
-		$instance['linkurl'] = $new_instance['linkurl'];
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['num_posts'] = intval( $new_instance['num_posts'] );
+		$instance['avoid_duplicates'] = ! empty( $new_instance['avoid_duplicates'] ) ? 1 : 0;
+		$instance['thumbnail_display'] = sanitize_key( $new_instance['thumbnail_display'] );
+		$instance['excerpt_display'] = sanitize_key( $new_instance['excerpt_display'] );
+		$instance['num_sentences'] = intval( $new_instance['num_sentences'] );
+		$instance['cat'] = intval( $new_instance['cat'] );
+		$instance['tag'] = sanitize_text_field( $new_instance['tag'] );
+		$instance['taxonomy'] = sanitize_text_field( $new_instance['taxonomy'] );
+		$instance['term'] = sanitize_text_field( $new_instance['term'] );
+		$instance['author'] = intval( $new_instance['author'] );
+		$instance['linktext'] = sanitize_text_field( $new_instance['linktext'] );
+		$instance['linkurl'] = esc_url_raw( $new_instance['linkurl'] );
 		return $instance;
 	}
 
@@ -177,7 +177,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences):', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo $instance['num_sentences']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo (int) $instance['num_sentences']; ?>" style="width:90%;" />
 		</p>
 
 		<p><strong><?php _e('Limit by Author, Categories or Tags', 'largo'); ?></strong><br /><small><?php _e('Select an author or category from the dropdown menus or enter post tags separated by commas (\'cat,dog\')', 'largo'); ?></small></p>
@@ -208,12 +208,12 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p><strong><?php _e('More Link', 'largo'); ?></strong><br /><small><?php _e('If you would like to add a more link at the bottom of the widget, add the link text and url here.', 'largo'); ?></small></p>
 		<p>
 			<label for="<?php echo $this->get_field_id('linktext'); ?>"><?php _e('Link text:', 'largo'); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id('linktext'); ?>" name="<?php echo $this->get_field_name('linktext'); ?>" type="text" value="<?php echo $instance['linktext']; ?>" />
+			<input class="widefat" id="<?php echo $this->get_field_id('linktext'); ?>" name="<?php echo $this->get_field_name('linktext'); ?>" type="text" value="<?php echo esc_attr( $instance['linktext'] ); ?>" />
 		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id('linkurl'); ?>"><?php _e('URL:', 'largo'); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id('linkurl'); ?>" name="<?php echo $this->get_field_name('linkurl'); ?>" type="text" value="<?php echo $instance['linkurl']; ?>" />
+			<input class="widefat" id="<?php echo $this->get_field_id('linkurl'); ?>" name="<?php echo $this->get_field_name('linkurl'); ?>" type="text" value="<?php echo esc_attr( $instance['linkurl'] ); ?>" />
 		</p>
 
 	<?php

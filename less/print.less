@@ -1,23 +1,100 @@
 @media print {
-  // the basics (based on http://html5boilerplate.com/)
-  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; }
-  a, a:visited { text-decoration: underline; }
-  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; }
-  tr, img { page-break-inside: avoid; }
-  img { max-width: 100% !important; }
-  @page { margin: 0.5cm 0.5cm 1cm; }
-  p, h2, h3 { orphans: 3; widows: 3; }
-  h2, h3 { page-break-after: avoid; }
+	// the basics (based on http://html5boilerplate.com/)
+	* {
+		background:transparent !important;
+		color:#000 !important;
+		box-shadow:none !important;
+		text-shadow:none !important;
+		filter:none !important;
+		-ms-filter:none !important
+	}
 
-  nav, iframe, object, audio, video, .global-nav, #site-header, .post-social, .bottom-meta, .author-box, #related-posts, #comments, .post-nav, #sidebar, #site-footer { display:none; }
+	a,a:visited {
+		text-decoration:underline
+	}
 
-  .print-header {display:block;}
+	pre,blockquote {
+		border:1px solid #999;
+		page-break-inside:avoid
+	}
 
-  p, ul, ol, .byline { font-size:12px !important; margin-bottom: 10px; }
-  h1, h2, h2, h4, h5, h6, .entry-content h3 { font-size: 16px !important; }
-  h1.entry-title { font-size:28px !important;}
+	thead {
+		display:table-header-group
+	}
 
-  .entry-content a:link:after,.entry-content a:visited:after { content: " (" attr(href) ") "; font-size: 90%; }
+	tr,img {
+		page-break-inside:avoid
+	}
 
+	img {
+		max-width:100% !important
+	}
+
+	@page {
+		margin:.5cm .5cm 1cm
+	}
+
+	p,h2,h3 {
+		orphans:3;
+		widows:3
+	}
+
+	h2,h3 {
+		page-break-after:avoid
+	}
+
+	nav,
+	iframe,
+	object,
+	audio,
+	video,
+	.global-nav,
+	#site-header,
+	.post-social,
+	.bottom-meta,
+	.author-box,
+	#related-posts,
+	#comments,
+	.post-nav,
+	#sidebar,
+	#site-footer,
+	.sticky-nav-wrapper,
+	.sticky-footer-holder,
+	.article-bottom .widget:not(.largo-disclaimer) {
+		display:none
+	}
+
+	.article-bottom {
+		border-top: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+	}
+
+	.module.image,
+	.largo-disclaimer {
+		font-size: 10px !important;
+		font-style: italic
+	}
+
+	.print-header {
+		display:block
+	}
+
+	p,ul,ol,.byline {
+		font-size:12px !important;
+		margin-bottom:10px
+	}
+
+	h1,h2,h2,h4,h5,h6,.entry-content h3 {
+		font-size:16px !important
+	}
+
+	h1.entry-title {
+		font-size:28px !important
+	}
+
+	.entry-content a:link:after,
+	.entry-content a:visited:after {
+		content:" (" attr(href) ") ";
+		font-size:90%
+	}
 }

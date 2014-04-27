@@ -15,7 +15,7 @@ class largo_about_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('About ' . get_bloginfo('name'), 'largo') : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? sprintf( __( 'About %s', 'largo' ), get_bloginfo('name') ) : $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
 		if ( $title )
@@ -33,17 +33,17 @@ class largo_about_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		return $instance;
 	}
 
 	function form( $instance ) {
-		$defaults = array( 'title' => __('About ' . get_bloginfo('name'), 'largo') );
+		$defaults = array( 'title' => sprintf( __( 'About %s', 'largo' ), get_bloginfo('name') ) );
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'largo' ); ?>:</label>
+			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" style="width:90%;" />
 		</p>
 	<?php
 	}

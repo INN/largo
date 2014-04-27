@@ -18,10 +18,10 @@ class largo_facebook_widget extends WP_Widget {
 		echo $before_widget;
 
 			$height = isset( $instance['widget-height'] ) ? $instance['widget-height'] : 350;
-			$output = '<div class="fb-like-box" data-href="' . $instance['fb_page_url'] . '" data-height="' . $height . '"';
-			$output .= $instance['show_faces'] === 1 ? ' data-show-faces="true"' : ' data-show-faces="false"';
-			$output .= $instance['show_stream'] === 1 ? ' data-stream="true"' : ' data-stream="false"';
-			$output .= $instance['show_header'] === 1 ? ' data-header="true"' : ' data-header="false"';
+			$output = '<div class="fb-like-box" data-href="' . esc_url( $instance['fb_page_url'] ) . '" data-height="' . (int) $height . '"';
+			$output .= ! empty( $instance['show_faces'] ) ? ' data-show-faces="true"' : ' data-show-faces="false"';
+			$output .= ! empty( $instance['show_stream'] ) ? ' data-stream="true"' : ' data-stream="false"';
+			$output .= ! empty( $instance['show_header'] ) ? ' data-header="true"' : ' data-header="false"';
 			$output .= '></div>';
 
 		echo $output;
@@ -31,11 +31,11 @@ class largo_facebook_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['fb_page_url'] = strip_tags( $new_instance['fb_page_url'] );
-		$instance['widget_height'] = strip_tags( $new_instance['widget_height'] );
-		$instance['show_faces'] = $new_instance['show_faces'] ? 1 : 0;
-		$instance['show_stream'] = $new_instance['show_stream'] ? 1 : 0;
-		$instance['show_header'] = $new_instance['show_header'] ? 1 : 0;
+		$instance['fb_page_url'] = esc_url_raw( $new_instance['fb_page_url'] );
+		$instance['widget_height'] = (int) $new_instance['widget_height'];
+		$instance['show_faces'] = ! empty( $new_instance['show_faces'] ) ? 1 : 0;
+		$instance['show_stream'] = ! empty( $new_instance['show_stream'] ) ? 1 : 0;
+		$instance['show_header'] = ! empty( $new_instance['show_header'] ) ? 1 : 0;
 		return $instance;
 	}
 
@@ -48,19 +48,19 @@ class largo_facebook_widget extends WP_Widget {
 			'show_header' 		=> 0
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
-		$show_faces = $instance['show_faces'] ? 'checked="checked"' : '';
-		$show_stream = $instance['show_stream'] ? 'checked="checked"' : '';
-		$show_header = $instance['show_header'] ? 'checked="checked"' : '';
+		$show_faces = ! empty( $instance['show_faces'] ) ? 'checked="checked"' : '';
+		$show_stream = ! empty( $instance['show_stream'] ) ? 'checked="checked"' : '';
+		$show_header = ! empty( $instance['show_header'] ) ? 'checked="checked"' : '';
 		?>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'fb_page_url' ); ?>"><?php _e('Facebook Page URL:', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'fb_page_url' ); ?>" name="<?php echo $this->get_field_name( 'fb_page_url' ); ?>" value="<?php echo $instance['fb_page_url']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'fb_page_url' ); ?>" name="<?php echo $this->get_field_name( 'fb_page_url' ); ?>" value="<?php echo esc_attr( $instance['fb_page_url'] ); ?>" style="width:90%;" />
 		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'widget_height' ); ?>"><?php _e('Widget Height:', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'widget_height' ); ?>" name="<?php echo $this->get_field_name( 'widget_height' ); ?>" value="<?php echo $instance['widget_height']; ?>" style="width:90%;" />
+			<input id="<?php echo $this->get_field_id( 'widget_height' ); ?>" name="<?php echo $this->get_field_name( 'widget_height' ); ?>" value="<?php echo (int) $instance['widget_height']; ?>" style="width:90%;" />
 		</p>
 
 		<p style="margin:15px 0 10px 5px">
