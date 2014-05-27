@@ -23,9 +23,9 @@ do_action('largo_before_sidebar');
 
 			//load custom sidebar if appropriate
 			if ( $custom_sidebar ) {
-				if ($custom_sidebar !== 'default') {
+				if ($custom_sidebar !== 'none' && $custom_sidebar !== 'default' ) {
 					dynamic_sidebar($custom_sidebar);
-				} else if ( is_archive() ) {
+				} else if ( is_archive() || $custom_sidebar == 'default' ) {
 					dynamic_sidebar( 'sidebar-main' );
 				}
 			//else load single sidebar if it has things

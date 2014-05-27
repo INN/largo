@@ -144,7 +144,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		global $wp_registered_sidebars, $post;
 		$the_id = ( $post_id ) ? $post_id : $post->ID ;
 		$custom = ( $selected ) ? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
-		$val = ( $custom ) ? $custom : 'default';
+		$val = ( $custom ) ? $custom : 'none';
 
 		// Add a default option
 		$output = '';
@@ -188,10 +188,10 @@ function largo_widget_settings() {
 			    <div id="optionsframework" class="postbox">
 					<form action="options.php" method="post">
 						<div> <?php // Extra open <div> because optinosframework_fields() adds an extra closing </div> ?>
-					<?php 
+					<?php
 					// Prints hidden tags for WP's options.php to save the value
 					settings_fields('optionsframework');
-					
+
 					// Print all the currently saved values for those fields that aren't outputted
 					$options_to_show = optionsframework_options();
 					$config = get_option( 'optionsframework', array() );
