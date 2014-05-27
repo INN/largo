@@ -29,7 +29,7 @@ class largo_series_posts_widget extends WP_Widget {
 
 		//term link
 		$term = get_term( $instance['series'], 'series' );
-		echo '<h5 class="top-tag"><a href="' . get_term_link( (int) $instance['series'], 'series' ) . '">' . $term->name . '</a></h5>';
+		echo '<h3 class="widgettitle"><a href="' . get_term_link( (int) $instance['series'], 'series' ) . '">' . $term->name . '</a></h3>';
 
 	 	//first post
 	 	$series_posts->the_post();
@@ -38,7 +38,7 @@ class largo_series_posts_widget extends WP_Widget {
 	 	include(locate_template('content-tiny.php'));
 
  		//divider
- 		echo '<h5 class="series-split top-tag">' . esc_html( $instance['heading'] ) .'</h5><ul>';
+ 		echo '<h3 class="series-split widgettitle">' . esc_html( $instance['heading'] ) .'</h3><ul>';
 
  		while ( $series_posts->have_posts() ) {
 	 		$series_posts->the_post();
