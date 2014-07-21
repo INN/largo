@@ -43,7 +43,7 @@ global $largo, $shown_ids, $tags;
 					if ( $feature_posts ):
 						foreach ( $feature_posts as $feature_post ): ?>
 
-							<h4 class="related-story"><?php _e('RELATED:', 'largo'); ?> <a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></h4>
+							<h4 class="related-story"><?php _e('Related:', 'largo'); ?> <a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></h4>
 						<?php endforeach;
 					endif;
 				endif;

@@ -42,13 +42,13 @@ if ( $query->have_posts() ) {
 			if ( has_post_thumbnail() ) {
 ?>
 						<div class="image-wrap">
-							<h4><?php _e('FEATURED', 'largo'); ?></h4>
+							<h4><?php _e('Featured', 'largo'); ?></h4>
 							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 						</div>
 <?php
 			} else {
 ?>
-						<h4 class="no-image"><?php _e('FEATURED', 'largo'); ?></h4>
+						<h4 class="no-image"><?php _e('Featured', 'largo'); ?></h4>
 <?php
 			} // end thumbnail
 ?>
