@@ -269,13 +269,48 @@ function largo_category_archive_posts( $query ) {
 add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
 
 /**
- * If the option in Advanced Options is checked, do not remove the "Post Types" menu item from the admin menu.
+ * If the option in Advanced Options is unchecked, remove the "Post Types" menu item from the admin menu.
  *
- * @uses of_get_option
+ * @uses   of_get_option
+ * @since  0.4
  */
-function hide_post_type_taxonomy() {
+function hide_post_type_taxonomy_menu() {
+	if (! is_admin() ) return;
 	if ( of_get_option('post_types_enabled') == 0 ) {
 		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post-type');
 	}
 }
-add_action( 'admin_menu', 'hide_post_type_taxonomy', 999 );
+add_action( 'admin_menu', 'hide_post_type_taxonomy_menu', 999 );
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Post Types" metabox from the editor
+ *
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_post_type_taxonomy_metabox() {
+	if (! is_admin() ) return;
+	if ( of_get_option('post_types_enabled') == 0 ) {
+		remove_meta_box('post-typediv', 'post', 'normal');
+		remove_meta_box('post-typediv', 'page', 'normal');
+		remove_meta_box('post-typediv', 'post', 'side');
+		remove_meta_box('post-typediv', 'page', 'side');
+		remove_meta_box('post-typediv', 'post', 'advanced');
+		remove_meta_box('post-typediv', 'page', 'advanced');
+	}
+}
+add_action( 'admin_menu' , 'hide_post_type_taxonomy_metabox', 999 );
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Post Types" column from the post table.
+ *
+ * @TODO this is broken. Attaching anything to this filter results in errors in wp-admin/class-wp-list-table.php
+ * @param  array  $columns http://codex.wordpress.org/Plugin_API/Filter_Reference/manage_posts_columns
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_post_type_taxonomy_table($columns) {
+	if (! is_admin() ) return;
+	unset($columns['taxonomy-post-type']);
+}
+add_filter('manage_posts_columns' , 'hide_post_type_taxonomy_table', 999);
