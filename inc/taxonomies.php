@@ -267,3 +267,15 @@ function largo_category_archive_posts( $query ) {
 	$query->tax_query = NULL;	//unsetting it twice because WP is weird like that
 }
 add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
+
+/**
+ * If the option in Advanced Options is checked, do not remove the "Post Types" menu item from the admin menu.
+ *
+ * @uses of_get_option
+ */
+function hide_post_type_taxonomy() {
+	if ( of_get_option('post_types_enabled') == 0 ) {
+		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post-type');
+	}
+}
+add_action( 'admin_menu', 'hide_post_type_taxonomy', 999 );
