@@ -310,7 +310,8 @@ add_action( 'admin_menu' , 'hide_post_type_taxonomy_metabox', 999 );
  * @since  0.4
  */
 function hide_post_type_taxonomy_table($columns) {
-	if (! is_admin() ) return;
+	if (! is_admin() ) return $columns;
 	unset($columns['taxonomy-post-type']);
+	return $columns;
 }
-add_filter('manage_posts_columns' , 'hide_post_type_taxonomy_table', 999);
+add_action('manage_posts_columns' , 'hide_post_type_taxonomy_table');
