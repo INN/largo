@@ -304,7 +304,6 @@ add_action( 'admin_menu' , 'hide_post_type_taxonomy_metabox', 999 );
 /**
  * If the option in Advanced Options is unchecked, remove the "Post Types" column from the post table.
  *
- * @TODO this is broken. Attaching anything to this filter results in errors in wp-admin/class-wp-list-table.php
  * @param  array  $columns http://codex.wordpress.org/Plugin_API/Filter_Reference/manage_posts_columns
  * @uses   of_get_option
  * @since  0.4
