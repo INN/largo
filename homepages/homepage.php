@@ -14,13 +14,24 @@ function largo_register_default_homepage_layouts() {
 	foreach ($zones as $zone)
 		include_once $zone;
 
-	$default_layouts = array(
-		'HomepageBlog',
-		'HomepageSingle',
-		'HomepageSingleWithFeatured',
-		'HomepageSingleWithSeriesStories',
-		'TopStories'
-	);
+	if ( of_get_option('series_enabled') !== 0 ) {
+		$default_layouts = array(
+			'HomepageBlog',
+			'HomepageSingle',
+			'HomepageSingleWithFeatured',
+			'HomepageSingleWithSeriesStories',
+			'TopStories'
+		);
+	} else {
+		$default_layouts = array(
+			'HomepageBlog',
+			'HomepageSingle',
+			'HomepageSingleWithFeatured',
+			'TopStories'
+		);
+	}
+
+
 
 	foreach ($default_layouts as $layout)
 		register_homepage_layout($layout);
