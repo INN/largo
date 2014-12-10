@@ -19,7 +19,7 @@ class largo_series_posts_widget extends WP_Widget {
 		//get the posts
  		$series_posts = largo_get_series_posts( $instance['series'], $instance['num'] );
 
- 		if ( ! $series_posts ) return; //output nothing if no posts found
+ 		if ( ! $series_posts || !largo_post_in_series() ) return; //output nothing if no posts found or if series are disabled
 
 		//$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
 
