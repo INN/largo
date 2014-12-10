@@ -120,7 +120,7 @@ add_action( 'init', 'largo_custom_taxonomies' );
  * @since 1.0
  */
 function largo_post_in_series( $post_id = NULL ) {
-	if ( of_get_option('series_enabled') == 0 ) return false;
+	if ( of_get_option('series_enabled') == false ) return false;
 	global $post;
 	$the_id = ($post_id) ? $post_id : $post->ID ;
 	$features = get_the_terms( $the_id, 'series' );
@@ -277,7 +277,7 @@ add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
  */
 function hide_post_type_taxonomy_menu() {
 	if (! is_admin() ) return;
-	if ( of_get_option('post_types_enabled') == 0 ) {
+	if ( of_get_option('post_types_enabled') == false ) {
 		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post-type');
 	}
 }
@@ -291,7 +291,7 @@ add_action( 'admin_menu', 'hide_post_type_taxonomy_menu', 999 );
  */
 function hide_post_type_taxonomy_metabox() {
 	if (! is_admin() ) return;
-	if ( of_get_option('post_types_enabled') == 0 ) {
+	if ( of_get_option('post_types_enabled') == false ) {
 		remove_meta_box('post-typediv', 'post', 'normal');
 		remove_meta_box('post-typediv', 'page', 'normal');
 		remove_meta_box('post-typediv', 'post', 'side');
@@ -324,7 +324,7 @@ add_action('manage_posts_columns' , 'hide_post_type_taxonomy_table');
  */
 function hide_series_taxonomy_menu() {
 	if (! is_admin() ) return;
-	if ( of_get_option('series_enabled') == 0 ) {
+	if ( of_get_option('series_enabled') == false ) {
 		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=series');
 	}
 }
@@ -338,7 +338,7 @@ add_action( 'admin_menu', 'hide_series_taxonomy_menu', 999 );
  */
 function hide_series_taxonomy_metabox() {
 	if (! is_admin() ) return;
-	if ( of_get_option('series_enabled') == 0 ) {
+	if ( of_get_option('series_enabled') == false ) {
 		remove_meta_box('seriesdiv', 'post', 'normal');
 		remove_meta_box('seriesdiv', 'page', 'normal');
 		remove_meta_box('seriesdiv', 'post', 'side');
