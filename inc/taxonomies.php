@@ -82,30 +82,32 @@ function largo_custom_taxonomies() {
 
 	do_action('largo_after_create_prominence_taxonomy', $largoProminenceTerms);
 
-	if ( ! taxonomy_exists( 'series' ) ) {
-		register_taxonomy( 
-        	'series', 
-        	'post', 
-        	array(
-		        'hierarchical' 	=> true,
-		        'labels'        => array(
-		        	'name'              => _x( 'Series', 'taxonomy general name' ),
-					'singular_name'     => _x( 'Series', 'taxonomy singular name' ),
-					'search_items'      => __( 'Search Series' ),
-					'all_items'         => __( 'All Series' ),
-					'parent_item'       => __( 'Parent Series' ),
-					'parent_item_colon' => __( 'Parent Series:' ),
-					'edit_item'         => __( 'Edit Series' ),
-					'view_item'         => __( 'View Series' ),
-					'update_item'       => __( 'Update Series' ),
-					'add_new_item'      => __( 'Add New Series' ),
-					'new_item_name'     => __( 'New Series Name' ),
-					'menu_name'         => __( 'Series' ),
-	        	),
-            'query_var' 	=> true,
-            'rewrite' 		=> true,
-        	) 
-        );
+	if ( of_get_option('series_enabled') !== false ) {
+		if ( ! taxonomy_exists( 'series' ) ) {
+			register_taxonomy( 
+		    	'series', 
+		    	'post', 
+		    	array(
+				    'hierarchical' 	=> true,
+				    'labels'        => array(
+				    	'name'              => _x( 'Series', 'taxonomy general name' ),
+						'singular_name'     => _x( 'Series', 'taxonomy singular name' ),
+						'search_items'      => __( 'Search Series' ),
+						'all_items'         => __( 'All Series' ),
+						'parent_item'       => __( 'Parent Series' ),
+						'parent_item_colon' => __( 'Parent Series:' ),
+						'edit_item'         => __( 'Edit Series' ),
+						'view_item'         => __( 'View Series' ),
+						'update_item'       => __( 'Update Series' ),
+						'add_new_item'      => __( 'Add New Series' ),
+						'new_item_name'     => __( 'New Series Name' ),
+						'menu_name'         => __( 'Series' ),
+			    	),
+		        'query_var' 	=> true,
+		        'rewrite' 		=> true,
+		    	) 
+		    );
+		}
 	}
 }
 add_action( 'init', 'largo_custom_taxonomies' );
