@@ -47,6 +47,9 @@ add_action('init', 'largo_register_default_homepage_layouts', 0);
 function largo_get_home_layouts() {
 	global $largo_homepage_factory;
 
+	if ( of_get_option('series_enabled') == false ) {
+		unregister_homepage_layout('HomepageSingleWithSeriesStories');
+	}
 	$layouts = array();
 	foreach ($largo_homepage_factory->layouts as $className => $layout) {
 		$layouts[trim($layout->name)] = array(
