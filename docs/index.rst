@@ -1,11 +1,11 @@
 Welcome to the Largo Project
 ============================
 
-`The Largo Project`_ is a responsive WordPress starter/parent theme designed with the needs of news publisers in mind.
+`The Largo Project`_ is a responsive WordPress starter/parent theme designed with the needs of news publishers in mind.
 
 .. _The Largo Project: https://github.com/inn/largo
 
-This documentation contains to ols for users, administrators and developers
+This documentation contains tools for users, administrators and developers
 
 * :ref:`user-docs`
 * :ref:`admin-docs`

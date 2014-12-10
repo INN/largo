@@ -1,7 +1,7 @@
 <ul class="social-links">
 	<?php if ( $fb = $author_obj->fb ) { ?>
 		<li class="facebook">
-			<div class="fb-subscribe" data-href="<?php echo esc_url( $fb ); ?>" data-layout="button_count" data-show-faces="false" data-width="225"></div>
+			<div class="fb-follow" data-href="https://facebook.com/<?php echo largo_fb_url_to_username(esc_url( $fb )); ?>" data-layout="button_count" data-show-faces="false" data-width="225"></div>
 		</li>
 	<?php } ?>
 

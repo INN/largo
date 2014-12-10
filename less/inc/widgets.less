@@ -79,8 +79,8 @@
   margin-bottom: 5px;
   color: @gray;
   &:hover {
-	text-decoration: none;
-	color: @grayDarker;
+  text-decoration: none;
+  color: @grayDarker;
   }
   i {
     color: @white;
@@ -89,21 +89,21 @@
     font-size: @baseFontSize - 3;
     margin-right: 5px;
     &.icon-rss {
-	  background-color: darken(@orange, 5%);
-	  &:hover {
-	    background-color: @orange;
-	  }
+    background-color: darken(@orange, 5%);
+    &:hover {
+      background-color: @orange;
+    }
     }
     &.icon-linkedin {
-	  background-color: darken(#238cc3, 5%);
-	  &:hover {
-	  	background-color: #238cc3;
-	  }
+    background-color: darken(#238cc3, 5%);
+    &:hover {
+      background-color: #238cc3;
+    }
     }
   }
 }
 .article-bottom .largo-follow {
-	padding: 0;
+  padding: 0;
 }
 .twitter-follow-button {
   display: block;
@@ -144,7 +144,7 @@
     float: left;
     margin: 5px 10px 0 5px;
     &.attachment-large {
-	  margin: 5px 0 10px;
+    margin: 5px 0 10px;
     }
   }
   h5 {
@@ -153,8 +153,8 @@
     font-size: @baseFontSize;
   }
   p {
-  	font-size: @baseFontSize;
-  	margin-bottom: 0;
+    font-size: @baseFontSize;
+    margin-bottom: 0;
   }
 }
 #sidebar .largo-INN-RSS {
@@ -168,7 +168,7 @@
     h5,
     h6,
     p {
-	  margin-bottom: @baseline/5;
+    margin-bottom: @baseline/5;
     }
   }
 }
@@ -184,11 +184,11 @@
     margin-bottom: 3px;
     &.comment-excerpt {
       &:before {
-	    content: open-quote;
-	  }
-	  &:after {
-	    content: close-quote;
-	  }
+      content: open-quote;
+    }
+    &:after {
+      content: close-quote;
+    }
     }
     &.comment-meta {
       font-style: italic;
@@ -286,5 +286,40 @@
   .wp-post-image {
     float: left;
     margin: 5px 20px 0 0;
+  }
+}
+
+/* Roster Widget */
+ul.staff-roster {
+  float: left;
+  clear: both;
+  margin: 12px 0 0;
+  list-style-type: none;
+  width: 100%;
+
+  li {
+    display: block;
+    float: left;
+    clear: both;
+    margin: 0 0 16px 0;
+    width: 100%;
+    img {
+      float: left;
+      width: 65px;
+      height: auto;
+      margin: 0 14px 7px 0;
+      box-shadow: 0 1px 8px #bbbbbb;
+      padding: 4px;
+    }
+  }
+  .staff-name {
+    font-family: "museo-sans", helvetica, arial, sans-serif;
+    font-size: 18px;
+  }
+  p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    line-height: 17px;
+    color: #bbbbbb;
   }
 }

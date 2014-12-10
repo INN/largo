@@ -1,5 +1,59 @@
 <?php
 /**
+ * Returns a Facebook username or ID from the URL
+ * 
+ * @param   string  $url a Facebook url
+ * @return  string  the Facebook username or id extracted from the input string
+ * @since   0.4
+ */
+function largo_fb_url_to_username( $url )  {
+	$urlParts = explode("/", $url);
+	if ( end($urlParts) == '' ) {
+		// URL has a trailing slash
+		$urlParts = array_slice($urlParts, 0 , -1);
+	}
+	$username = end($urlParts);
+	if ( preg_match( "/profile.php/", $username ) ) {
+		// a profile id
+		preg_match( "/id=([0-9]+)/", $username, $matches );
+		$username = $matches[1];
+	} else {
+		// hopefully there's a username
+		preg_match( "/[^\?&#]+/", $username, $matches);
+		if (isset($matches[0])){
+			$username = $matches[0];
+		}
+	}
+	
+	return $username;
+}
+/**
+ * Checks to see if a given Facebook username or ID has following enabled by 
+ * checking the iframe of that user's "Follow" button for <table>.
+ * Usernames that can be followed have <tables>.
+ * Users that can't be followed don't.
+ * Users that don't exist don't.
+ * 
+ * @param   string  $username a valid Facebook username or page name. They're generally indistinguishable, except pages get to use '-'
+ * @uses    wp_remote_get
+ * @return  bool    The user specified by the username or ID can be followed
+ */
+function largo_fb_user_is_followable( $username ) {
+	// syntax for this iframe taken from https://developers.facebook.com/docs/plugins/follow-button/
+	$get = wp_remote_get( "https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F" . $username . "&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true");
+	if (! is_wp_error( $get ) ) {
+		$response = $get['body'];
+		if ( strpos($response, 'table') !== false ) {
+			// can follow
+			return true;
+		} else {
+			// cannot follow
+			return false;
+		}
+	}
+}
+
+/**
  * Returns a Twitter username (without the @ symbol)
  *
  * @param 	string 	$url a twitter url

@@ -35,6 +35,14 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		$this->markTestSkipped("Not implemented");
 	}
 
+	function test_clean_user_fb_username() {
+		$this->markTestSkipped("Not implemented");
+	}
+
+	function test_validate_fb_username() {
+		$this->markTestSkipped("Not implemented");
+	}
+
 	function test_largo_get_user_list() {
 		/**
 		 * With no arguments, `largo_get_user_list` should get a list of all authors for the current blog;
@@ -104,4 +112,62 @@ class UsersTestFunctions extends WP_UnitTestCase {
 	function test_largo_render_staff_list_shortcode() {
 		$this->markTestSkipped("Not implemented");
 	}
+
+	function test_more_profile_info() {
+		$vars = $this->_more_profile_info_setup();
+
+		extract($vars);
+
+		save_more_profile_info($user_id);
+
+		ob_start();
+		more_profile_info(get_user_by('id', $user_id));
+		$output = ob_get_contents();
+		ob_end_clean();
+
+		// Three inputs should be present and they should be checked or "on" after running
+		// `save_more_profile_info`.
+		$this->assertEquals(substr_count($output, 'checked'), 3);
+
+		// There should be one job_title input and it should be populated with the value set by
+		// `save_more_profile_info`.
+		$this->assertEquals(substr_count($output, 'value="' . $job_title), 1);
+	}
+
+	function test_save_more_profile_info() {
+		$vars = $this->_more_profile_info_setup();
+
+		extract($vars);
+
+		save_more_profile_info($user_id);
+
+		$this->assertEquals($hide, get_user_meta($user_id, "hide", true));
+		$this->assertEquals($emeritus, get_user_meta($user_id, "emeritus", true));
+		$this->assertEquals($honorary, get_user_meta($user_id, "honorary", true));
+		$this->assertEquals($job_title, get_user_meta($user_id, "job_title", true));
+	}
+
+	// Utilities
+	function _more_profile_info_setup() {
+		$user_id = $this->author_user_ids[0];
+
+		$args = array(
+			'job_title' => 'Test Job Title',
+			'hide' => 'on',
+			'emeritus' => 'on',
+			'honorary' => 'on'
+		);
+
+		extract($args);
+
+		$_POST = array_merge($_POST, array(
+			'hide' => $hide,
+			'emeritus' => $emeritus,
+			'honorary' => $honorary,
+			'job_title' => $job_title
+		));
+
+		return array_merge(array('user_id' => $user_id), $args);
+	}
+
 }
