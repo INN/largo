@@ -120,10 +120,11 @@ add_action( 'init', 'largo_custom_taxonomies' );
  * @since 1.0
  */
 function largo_post_in_series( $post_id = NULL ) {
-  global $post;
-  $the_id = ($post_id) ? $post_id : $post->ID ;
-  $features = get_the_terms( $the_id, 'series' );
-  return ( $features ) ? true : false;
+	if ( of_get_option('series_enabled') == 0 ) return false;
+	global $post;
+	$the_id = ($post_id) ? $post_id : $post->ID ;
+	$features = get_the_terms( $the_id, 'series' );
+	return ( $features ) ? true : false;
 }
 
 /**
@@ -314,3 +315,36 @@ function hide_post_type_taxonomy_table($columns) {
 	return $columns;
 }
 add_action('manage_posts_columns' , 'hide_post_type_taxonomy_table');
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Series" menu item from the admin menu.
+ *
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_series_taxonomy_menu() {
+	if (! is_admin() ) return;
+	if ( of_get_option('series_enabled') == 0 ) {
+		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=series');
+	}
+}
+add_action( 'admin_menu', 'hide_series_taxonomy_menu', 999 );
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Series" metabox from the editor
+ *
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_series_taxonomy_metabox() {
+	if (! is_admin() ) return;
+	if ( of_get_option('series_enabled') == 0 ) {
+		remove_meta_box('seriesdiv', 'post', 'normal');
+		remove_meta_box('seriesdiv', 'page', 'normal');
+		remove_meta_box('seriesdiv', 'post', 'side');
+		remove_meta_box('seriesdiv', 'page', 'side');
+		remove_meta_box('seriesdiv', 'post', 'advanced');
+		remove_meta_box('seriesdiv', 'page', 'advanced');
+	}
+}
+add_action( 'admin_menu' , 'hide_series_taxonomy_metabox', 999 );
