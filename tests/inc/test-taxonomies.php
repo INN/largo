@@ -43,6 +43,7 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 			array(),
 			$columns
 			);
+		unmock_in_admin();
 	}
 }
 
