@@ -72,23 +72,23 @@ class AvatarsTestFunctions extends WP_UnitTestCase {
 
 	// TODO: Figure out how to test these last few functions
 	function test_largo_add_avatar_field() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_save_avatar_field() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_print_avatar_admin_css() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_get_avatar_filter() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_get_avatar_src() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 }
