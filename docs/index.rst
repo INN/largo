@@ -42,4 +42,6 @@ Developers
     :maxdepth: 2
 
     developers/guide
+    functions
+    api/api
 

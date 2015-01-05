@@ -9,14 +9,14 @@
   // Fix for IE7's bad z-indexing so dropdowns don't appear below content that follows the navbar
   *position: relative;
   *z-index: 2;
-
   overflow: visible;
   margin-bottom: @baseline/5;
 }
 
 // Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present
 .navbar-inner {
-  min-height: @navbarHeight;
+  float: left;
+  width: 100%;
   background-color: @baseColor;
   padding-left: 5px;
 }
@@ -40,12 +40,16 @@
   // Plain text in topbar
   .navbar-text {
     margin-bottom: 0;
-    line-height: @navbarHeight;
   }
 }
 
 .navbar .toggle-nav-bar {
   display: none;
+}
+
+.navbar li i {
+  height: 1em;
+  font-size: 0.9em;
 }
 
 // NAVIGATION
@@ -61,22 +65,16 @@
 .navbar .nav.pull-right {
   float: right; // redeclare due to specificity
 }
-.navbar ul {
-  font-size: @navbarFontSize;
-}
 .navbar li {
   display: block;
   float: left;
   margin-bottom: 0;
-  line-height: @navbarHeight;
 }
 .navbar li > a {
-  float: none;
   display: block;
   padding: @navbarHeight/4;
   color: @navbarLinkColor;
   text-decoration: none;
-  line-height: @navbarFontSize + 5;
 }
 .navbar li.dropdown > a {
   padding-right: 0;
@@ -86,6 +84,7 @@
 }
 .navbar .open > a,
 html.no-touch .navbar li > a:hover {
+  .transition(background-color 300ms ease-out);
   background-color: @navbarLinkBackgroundActive;
   color: #eee;
 }
@@ -93,21 +92,13 @@ li.home-link:hover i {
   .opacity(85);
 }
 .navbar li.home-link {
-  .border-radius(4px 0 0 4px);
   overflow: hidden;
 }
 
 .navbar li.home-link > a {
-  font-size: @navbarFontSize + 5;
-  padding: 0;
   display: block;
   &:hover {
-    background:none;
-  }
-
-  i {
-    display: block;
-    padding: @navbarHeight/4 5px @navbarHeight/4 10px;
+    background: none;
   }
 
   img {
@@ -132,7 +123,6 @@ li.home-link:hover i {
   margin: 0 0 0 2px;
   overflow: hidden;
   background-color: @navbarBackground;
-  // border-left: 1px solid @navbarBackgroundHighlight;
 }
 
 .navbar .home-link + .divider-vertical {
@@ -144,7 +134,7 @@ li.home-link:hover i {
 .navbar .btn-navbar {
   display: none;
   float: left;
-  margin: 4px 0 0;
+  margin: 4px 0;
   margin-right: 10px;
   padding: @navbarHeight/5 10px;
   background-color: @navbarBackgroundHighlight;
@@ -198,6 +188,7 @@ li.home-link:hover i {
   position: relative;
   width: 10px;
   padding: 0 5px;
+  font-size: 0.99em;
 
   &:before {
     display: block;
@@ -223,9 +214,6 @@ li.home-link:hover i {
 }
 
 // Place the caret
-.dropdown .caret {
-  //margin: @navbarHeight/2 - 13px 8px 0 3px;
-}
 .dropdown:hover .caret,
 .open .caret {
   .opacity(100);
@@ -269,7 +257,6 @@ li.home-link:hover i {
     padding: 3px 15px;
     clear: both;
     font-weight: normal;
-    line-height: @baseline;
     color: @dropdownLinkColor;
     white-space: nowrap;
     text-shadow: none;
@@ -281,7 +268,7 @@ li.home-link:hover i {
       display: block;
   }
   .home .sticky-nav-wrapper {
-	  height: 0;
+    height: 0;
   }
 }
 
@@ -296,7 +283,7 @@ li.home-link:hover i {
 // -----------
 
 .dropdown-menu li a:hover {
-	background: none;
+  background: none;
 }
 .dropdown-menu li a:hover {
   color: @dropdownLinkColorHover;
@@ -435,10 +422,10 @@ li.home-link:hover i {
 // TABLETS AND BELOW
 // -----------------
 @media (max-width: 979px) {
-	.supplemental {
+  .supplemental {
     overflow: hidden;
     height: 0;
-	}
+  }
 }
 
 @media (max-width: 768px) {
@@ -451,7 +438,7 @@ li.home-link:hover i {
     padding: 0;
   }
   .navbar .toggle-nav-bar {
-    display: static;
+    display: block;
   }
   .navbar .nav-shelf {
     position: absolute;
@@ -482,6 +469,7 @@ li.home-link:hover i {
     ul, li {
       float: none;
     }
+    li.home-link { display: none; }
     li .caret {
       float: right;
       .border-radius(4px);
@@ -528,88 +516,87 @@ li.home-link:hover i {
     height: 0;
     background-color: @navbarBackground;
     color: @navbarLinkColor;
-		.nav {
-	    float: none;
-	    margin: 0 0 (@baseline / 2);
-	    > li,
-	    > span > li {
-		    float: none;
-		    display: block;
-		    line-height: 2;
-		    > a {
-			    color: @navbarLinkColor;
-			    display: block;
-			    padding: 10px !important;
-			    &:hover {
-				  	background:none !important;
-						color: @navbarLinkColorHover;
-					}
-					.caret {
-						float: right;
-						border-top-color: @navbarLinkColor !important;
-					}
-		    }
-		    &:hover > a {
-					background:none;
-		    }
-		  }
-		  > .divider-vertical {
-			  display: none;
-		  }
-			.nav-header {
-		    color: @navbarText;
-		    text-shadow: none;
-			}
-			.dropdown-menu a {
-		    color: @navbarLinkColor;
-		    &:hover {
-			  	background:none !important;
-					color: @grayLighter;
-				}
-			}
-	  }
-	  .divider {
-	    height: 1px;
-	    width: 94%;
-	    margin: 10px 10px 5px;
-	    padding:0;
-	    overflow: hidden;
-	    background-color: @white;
-	    border-bottom: 1px solid @navbarBackground;
-	  }
-	  .btn {
-	    padding: 4px 10px 4px;
-	    font-weight: normal;
-	    .border-radius(4px);
-	  }
+    .nav {
+      float: none;
+      margin: 0 0 (@baseline / 2);
+      > li,
+      > span > li {
+        float: none;
+        display: block;
+        > a {
+          color: @navbarLinkColor;
+          display: block;
+          padding: 10px !important;
+          &:hover {
+            background:none !important;
+            color: @navbarLinkColorHover;
+          }
+          .caret {
+            float: right;
+            border-top-color: @navbarLinkColor !important;
+          }
+        }
+        &:hover > a {
+          background:none;
+        }
+      }
+      > .divider-vertical {
+        display: none;
+      }
+      .nav-header {
+        color: @navbarText;
+        text-shadow: none;
+      }
+      .dropdown-menu a {
+        color: @navbarLinkColor;
+        &:hover {
+          background:none !important;
+          color: @grayLighter;
+        }
+      }
+    }
+    .divider {
+      height: 1px;
+      width: 94%;
+      margin: 10px 10px 5px;
+      padding:0;
+      overflow: hidden;
+      background-color: @white;
+      border-bottom: 1px solid @navbarBackground;
+    }
+    .btn {
+      padding: 4px 10px 4px;
+      font-weight: normal;
+      .border-radius(4px);
+    }
       .dropdown-menu li + li a {
-    	margin-bottom: 2px;
-	  }
-	  .nav-collapse .nav > li > a:hover,
-	  .nav-collapse .dropdown-menu a:hover {
-	    background-color: @navbarBackground;
-	  }
-	  // Dropdowns in the navbar
-	  .dropdown-menu {
-	    position: static;
-	    top: auto;
-	    left: auto;
-	    float: none;
-	    display: block;
-	    max-width: none;
-	    margin: 0 15px;
-	    padding: 0;
-	    background-color: transparent;
-	    border: none;
-	    .border-radius(0);
-	    .box-shadow(none);
-		&:before,
-		&:after,
-		.divider {
-	      display: none;
-		}
-	  }
-	}
+      margin-bottom: 2px;
+    }
+    .nav-collapse .nav > li > a:hover,
+    .nav-collapse .dropdown-menu a:hover {
+      background-color: @navbarBackground;
+    }
+    // Dropdowns in the navbar
+    .dropdown-menu {
+      position: static;
+      top: auto;
+      left: auto;
+      float: none;
+      display: block;
+      max-width: none;
+      margin: 0 15px;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      .border-radius(0);
+      .box-shadow(none);
+   &:before,
+    &:after,
+    .divider {
+        display: none;
+    }
+    }
+  }
 }
 
 // DEFAULT DESKTOP
@@ -638,7 +625,7 @@ li.home-link:hover i {
       white-space: nowrap;
       font-size: 14px;
       &.menu-label {
-      	font-size: 15px;
+        font-size: 15px;
         font-weight: bold;
       }
     }
@@ -646,9 +633,6 @@ li.home-link:hover i {
 }
 
 // Sticky nav
-.sticky-nav-wrapper {
-  height: 25px;
-}
 .sticky-nav-holder {
   position: fixed;
   top: 0;
@@ -659,7 +643,7 @@ li.home-link:hover i {
   opacity: 0;
   .transition( opacity 0.3s );
   background-color: @white;
-  border-bottom: solid @baseColor 1px;
+  .box-shadow(0 0 16px @gray);
   &.show {
     visibility: visible;
     opacity: 1;
@@ -680,81 +664,70 @@ li.home-link:hover i {
     position: relative;
   }
   .navbar {
-  	margin-bottom: 0;
-	li {
-	  > a {
-		color: @linkColor;
-	  }
-	  .caret:before {
-	    border-top-color: @linkColor;
-		border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8);
-	  }
-	  > a:hover .caret:before {
-	    border-top-color: @bodyBackground !important;
-	  }
-	}
-	.social-icons {
-	  float: left;
-	  margin: 0;
-	  li > a {
-	    color: #fff;
-		padding: 10px 3px;
-		&:hover {
-		  background-color: transparent;
-		}
-	  }
-	}
-    .btn-navbar {
-      margin-top: 9px;
+    margin-bottom: 0;
+    li {
+      > a {
+        color: @linkColor;
+      }
+      .caret:before {
+        border-top-color: @linkColor;
+        border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8);
+      }
+      > a:hover .caret:before {
+        border-top-color: @bodyBackground;
+      }
+    }
+    .social-icons {
+      margin: 0;
+      float: left;
+      li > a {
+        color: #fff;
+        &:hover {
+          background-color: transparent;
+        }
+      }
     }
     .nav > li {
-      > a {
-        padding-top: 15px;
-        padding-bottom: 15px;
-      }
       &.active > a,
       &.active > a:hover {
-	    color: #fff;
+        color: #fff;
       }
-      &.home-link {
-	    margin-right: 10px;
+    &.home-link {
+      .border-radius(0);
+      min-width: 40px;
+      text-align: center;
+        a {
+          img {
+            width: 1.49em;
+            height: 1.49em;
+          }
+        }
+        .icon-home:before {
+          position: relative;
+          top: 0px;
+        }
       }
     }
   }
   .navbar .nav li.dropdown.open > .dropdown-toggle,
   .navbar .nav li.dropdown.active > .dropdown-toggle,
   .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-	color: @grayLighter;
+    color: @grayLighter;
     background: @linkColor;
     .caret:before {
-      border-top-color: @white !important;
+      border-top-color: @white;
     }
     &:hover {
       color: @white;
     }
   }
-  .navbar .nav > li.home-link {
-    .border-radius(0);
-    a {
-      padding: 0;
-      img {
-        width: 50px;
-        height: 50px;
-      }
-    }
-  }
   .site-name {
     display: block;
-    float: left;
     color: #343434;
-    line-height: 50px;
-    font-size: 18px;
-    margin-right: 8px;
-    font-weight: 900;
     a {
       color: #343434;
       &:hover {
-	    background-color: #fff;
+        background-color: #fff;
         color: #666;
         text-decoration: none;
       }
@@ -765,35 +738,44 @@ li.home-link:hover i {
   }
   .nav-right {
     float: right;
-    padding-top: 5px;
-    .donate-btn {
+    #header-extras {
       float: left;
-      margin: 5px;
-      i {
-        display: none;
-	  }
+      margin: 0;
+      a.donate-link:hover {
+        background: transparent;
+      }
+      a span {
+        padding: 4px 8px;
+        color: @white;
+        background-color: @red;
+        .border-radius(4px);
+        &:hover {
+          background-color: lighten(@red, 5%);
+        }
+        i {
+          display: none;
+        }
+
+      }
     }
   }
   .nav-right .form-search {
+    position: relative;
     .toggle {
       display: inline-block;
       color: @baseColor;
       display: inline-block;
-      width: 40px;
       text-align: center;
       cursor: pointer;
       position: relative;
       z-index: 91;
-	  font-size: 18px;
-	  height: 42px;
       .transition( 0.3s );
-      margin-top: -9px;
-      padding-top: 9px;
     }
     .input-append {
       position: absolute;
       right: 44px;
-      top: 51px;
+      top: 0;
+      right: 0;
       opacity: 0;
       visibility: hidden;
       .transition( 0.3s );
@@ -813,21 +795,21 @@ li.home-link:hover i {
       button {
         width: 50px !important;
         height: 36px !important;
-		float: left;
+        float: left;
         .box-sizing( border-box );
       }
     }
-    &.show {
-      .input-append {
-        position: absolute;
-        opacity: 1;
-        visibility: visible;
-      }
-      .input-append,
-      .toggle {
-        background-color: #343434;
-        color: @bodyBackground;
-      }
+  }
+  #header-search.show {
+    .input-append {
+      position: absolute;
+      opacity: 1;
+      visibility: visible;
+    }
+    .input-append,
+    .toggle {
+      background-color: #343434;
+      color: @bodyBackground;
     }
   }
 }

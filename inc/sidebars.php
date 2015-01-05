@@ -83,13 +83,13 @@ function largo_register_sidebars() {
 		);
 	}
 
-	// @todo - probably add an option to enable this because not everyone is going to have ads here
-	// @todo - add additional widget area in the footer for a leaderboard ad unit there too
-	$sidebars[] = array(
-		'name' 	=> __( 'Header Ad Zone', 'largo'),
-		'desc' 	=> __( 'An optional leaderboard ad zone above the main site header', 'largo' ),
-		'id' 	=> 'header-ads'
-	);
+	if ( of_get_option( 'leaderboard_enabled' ) ) {
+		$sidebars[] = array(
+	 		'name' 	=> __( 'Header Ad Zone', 'largo'),
+	 		'desc' 	=> __( 'An optional leaderboard (728x90) ad zone above the main site header', 'largo' ),
+	 		'id' 	=> 'header-ads'
+	 	);
+	 }
 
 	// user-defined custom widget areas
 	$custom_sidebars = preg_split( '/$\R?^/m', of_get_option( 'custom_sidebars' ) );
@@ -259,4 +259,26 @@ function largo_is_sidebar_required() {
 	);
 
 	return ( $two_column_layout_test || $two_column_layout_test_forced || $one_column_layout_test );
+}
+
+function largo_sidebar_span_class() {
+	global $post;
+
+	if (is_single() || is_singular()) {
+		$default_template = of_get_option( 'single_template' );
+		$custom_template = get_post_meta( $post->ID, '_wp_post_template', true );
+
+		if (!empty($custom_template)) {
+			if ($custom_template == 'single-one-column.php')
+				return 'span2';
+			else if ($custom_template !== 'single-one-column.php')
+				return 'span4';
+		}
+
+		if ($default_template == 'normal')
+			return 'span2';
+		else
+			return 'span4';
+	} else
+		return 'span4';
 }

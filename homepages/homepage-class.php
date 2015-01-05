@@ -7,19 +7,22 @@ if (empty($wp_filesystem)) {
 
 class Homepage {
 
-	var $name = 'Homepage';
-	var $type = 'homepage';
-	var $id;
-	var $description;
-	var $template;
-	var $zones;
-	var $assets = array();
-	var $sidebars = array();
-	var $rightRail = false;
-	var $prominenceTerms = array();
+	/* These may require non-trivial expressions (e.g. internationalization function) */
+	public $name;
+	public $description;
+
+	/* Initialize other member variables */
+	public $type = 'homepage';
+	public $assets = array();
+	public $sidebars = array();
+	public $rightRail = false;
+	public $prominenceTerms = array();
+	public $id;
+	public $template;
+	public $zones;
 
 	function __construct($options=array()) {
-		$this->init($options);
+		$this->name = __('Homepage', 'largo');
 		$this->load($options);
 	}
 

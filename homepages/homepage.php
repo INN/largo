@@ -68,9 +68,21 @@ function largo_get_home_layouts() {
  * @return string The public url of the image file to use for the given template's screenshot
  */
 function largo_get_home_thumb($className) {
-	if (file_exists(get_template_directory() . '/homepages/assets/img/' . $className . '.png'))
-		return get_template_directory_uri() . '/homepages/assets/img/' . $className . '.png';
-	return get_template_directory_uri() . '/homepages/assets/img/no-thumb.png';
+	$home_thumb_url = '';
+	// Check the child theme for a homepage layout thumbnail
+	if (file_exists(get_stylesheet_directory() . '/homepages/assets/img/' . $className . '.png')) {
+		$home_thumb_url = get_stylesheet_directory_uri() . '/homepages/assets/img/' . $className . '.png';
+	}
+	// Check the Largo theme for a homepage layout thumbnail
+	elseif (file_exists(get_template_directory() . '/homepages/assets/img/' . $className . '.png')) {
+		$home_thumb_url = get_template_directory_uri() . '/homepages/assets/img/' . $className . '.png';
+	}
+	// Use the Largo theme default homepage layout thumbnail
+	else {
+		$home_thumb_url = get_template_directory_uri() . '/homepages/assets/img/no-thumb.png';
+	}
+
+	return $home_thumb_url;
 }
 
 /**

@@ -8,26 +8,39 @@
 			<nav id="sticky-nav" class="sticky-navbar navbar clearfix">
 				<div class="container">
 					<div class="nav-right">
+					<?php /* TODO: Remove social icons from sticky nav */ ?>
 					<?php if ( of_get_option( 'show_header_social') ) { ?>
 						<ul id="header-social" class="social-icons visible-desktop">
 							<?php largo_social_links(); ?>
 						</ul>
 					<?php } ?>
 
-					<?php if ( of_get_option( 'show_donate_button') ) largo_donate_button(); ?>
+						<ul id="header-extras"><?php
+							if ( of_get_option( 'show_donate_button') ) {
+								if ($donate_link = of_get_option('donate_link')) { ?>
+								<li>
+									<a class="donate-link" href="<?php echo esc_url($donate_link); ?>">
+										<span><i class="icon-heart"></i><?php echo esc_html(of_get_option('donate_button_text')); ?></span>
+									</a>
+								</li><?php
+								}
+							} ?>
+							<li id="header-search">
+								<a href="#" class="toggle">
+									<i class="icon-search" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
+								</a>
+								<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+									<div class="input-append">
+										<span class="text-input-wrapper">
+											<input type="text" placeholder="<?php esc_attr_e('Search', 'largo'); ?>"
+												class="input-medium appendedInputButton search-query" value="" name="s" />
+										</span>
+										<button type="submit" class="search-submit btn"><?php _e('Go', 'largo'); ?></button>
+									</div>
+								</form>
+							</li>
+						</ul>
 
-						<div id="header-search">
-							<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-								<i class="icon-search toggle" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
-								<div class="input-append">
-									<span class="text-input-wrapper">
-										<input type="text" placeholder="<?php esc_attr_e('Search', 'largo'); ?>"
-											class="input-medium appendedInputButton search-query" value="" name="s" />
-									</span>
-									<button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
-								</div>
-							</form>
-						</div>
 					</div>
 
 					<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -39,17 +52,13 @@
 						</div>
 					</a>
 
+					<div class="nav-shelf">
 					<ul class="nav">
 						<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
 						<?php
-							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) ) {
-								echo '<span class="site-name"><a href="/">' . get_bloginfo('name') . '</a></span>';
-							}
-						?>
-					</ul>
+							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) )
+								echo '<li class="site-name"><a href="/">' . get_bloginfo('name') . '</a></li>';
 
-					<div class="nav-shelf">
-						<ul class="nav"><?php
 							$args = array(
 							'theme_location' => 'main-nav',
 							'depth'		 => 0,

@@ -1,4 +1,6 @@
 Welcome
 =======
 
-Welcome to Largo. This document will give end users tips on how to use the software.
+Welcome to `Largo`_ This document will give end users tips on how to use the software.
+
+.. _Largo: http://largoproject.org

@@ -119,7 +119,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$authors = largo_author_link( false );
 		}
 
-		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . ':</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
+		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
 		if ( ! $exclude_date ) {
 			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . largo_time( false ) . '</time>';
 		}

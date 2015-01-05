@@ -214,7 +214,6 @@ ul,
 ol {
   padding: 0;
   margin: 0 0 24px 25px;
-  font-size: 17px;
 }
 ul ul,
 ul ol,
@@ -764,7 +763,7 @@ body.normal.page.page-template-full-page-php #content {
 .byline {
   margin-bottom: 12px;
   font-weight: normal;
-  font-size: 13.04px;
+  font-size: 14.64px;
 }
 .byline a {
   color: #333333;
@@ -772,7 +771,7 @@ body.normal.page.page-template-full-page-php #content {
 .byline .author,
 .byline .time-ago,
 .byline .edit-link a {
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 .byline .author {
   font-weight: bold;
@@ -1036,14 +1035,6 @@ h3.recent-posts a.rss-link:hover,
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13.04px;
   margin-bottom: 6px;
-}
-.single-post.classic #content {
-  margin-left: 0;
-}
-.single-post.classic #sidebar {
-  margin-left: 2.127659574%;
-  width: 31.914893614%;
-  clear: none;
 }
 .single-post.classic article.post .sep,
 .single-post.classic article.post .entry-date {

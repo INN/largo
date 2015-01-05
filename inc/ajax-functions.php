@@ -29,7 +29,7 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
 if (!function_exists('largo_load_more_posts')) {
 	function largo_load_more_posts() {
 		$paged = $_POST['paged'];
-		$context = $_POST['query'];
+		$context = (isset($_POST['query']))? $_POST['query'] : array();
 
 		$args = array_merge(array(
 			'paged' => $paged,

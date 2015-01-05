@@ -297,6 +297,7 @@ function largo_get_user_list($args=array()) {
  * @since 0.4
  */
 function largo_render_user_list($users, $show_users_with_empty_desc=false) {
+	echo '<div class="user-list">';
 	foreach ($users as $user) {
 		$desc = trim($user->description);
 		if (empty($desc) && empty($show_users_with_empty_desc))
@@ -310,6 +311,7 @@ function largo_render_user_list($users, $show_users_with_empty_desc=false) {
 		largo_render_template('partials/author-bio', 'description', $ctx);
 		echo '</div>';
 	}
+	echo '</div>';
 }
 
 /**

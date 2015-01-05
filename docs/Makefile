@@ -175,3 +175,11 @@ pseudoxml:
 	$(SPHINXBUILD) -b pseudoxml $(ALLSPHINXOPTS) $(BUILDDIR)/pseudoxml
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
+
+php:
+	@echo "Building .rst files"
+	@echo "functions.php"
+	doxphp < ../functions.php | doxphp2sphinx > api/functions.rst
+	doxphp < ../inc/helpers.php | doxphp2sphinx > api/inc/helpers.rst
+	doxphp < ../inc/images.php | doxphp2sphinx > api/inc/images.rst
+	doxphp < ../inc/verify.php | doxphp2sphinx > api/inc/verify.rst

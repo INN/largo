@@ -176,23 +176,31 @@
   color: @grayDark;
 }
 .widget.largo-recent-comments {
+  margin-bottom: 2em;
   ul {
     margin-left: 0;
     list-style: none;
   }
+  li {
+    float: left;
+    margin-bottom: 2em;
+  }
   p {
     margin-bottom: 3px;
+    line-height: 1.3em;
     &.comment-excerpt {
-      &:before {
-      content: open-quote;
+      font-size: 24px;
     }
-    &:after {
-      content: close-quote;
-    }
+    &.comment-post {
+      float: left;
     }
     &.comment-meta {
-      font-style: italic;
+      float: left;
+      clear: both;
       color: inherit;
+      a {
+        font-style: italic;
+      }
     }
   }
 }

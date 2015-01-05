@@ -84,14 +84,14 @@ get_header();
 				endwhile;
 
 				largo_content_nav( 'nav-below' );
-		} else {
+			?>
+			</div><!-- end content -->
+			<?php get_sidebar(); ?>
+		</div>
+		<?php } else {
 			get_template_part( 'partials/content', 'not-found' );
 		}
 	?>
-		</div><!--#content-->
-
-		<?php get_sidebar(); ?>
-	</div>
 </div>
 
-<?php get_footer(); ?>
+<?php get_footer();

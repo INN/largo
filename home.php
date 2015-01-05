@@ -81,4 +81,4 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 
 </div><!-- #content-->
 <?php if ($largo['home_rail']) get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php get_footer();

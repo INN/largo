@@ -176,11 +176,11 @@ class Largo {
 	private function register_nav_menus() {
 
 		$menus = array(
-			'global-nav'         	=> __( 'Global Navigation', 'largo' ),
-			'main-nav'          => __( 'Main Navigation', 'largo' ),
-			'dont-miss'       		=> __( 'Don\'t Miss', 'largo' ),
-			'footer'          		=> __( 'Footer Navigation', 'largo' ),
-			'footer-bottom'			=> __( 'Footer Bottom', 'largo' )
+			'global-nav' => __( 'Global Navigation', 'largo' ),
+			'main-nav' => __( 'Main Navigation', 'largo' ),
+			'dont-miss' => __( 'Don\'t Miss', 'largo' ),
+			'footer' => __( 'Footer Navigation', 'largo' ),
+			'footer-bottom' => __( 'Footer Bottom', 'largo' )
 		);
 		register_nav_menus( $menus );
 
@@ -266,7 +266,11 @@ class Largo {
 			define( 'SHOW_GLOBAL_NAV', TRUE );
 		}
 		if ( ! defined( 'SHOW_STICKY_NAV' ) ) {
-			define( 'SHOW_STICKY_NAV', TRUE );
+			if ( of_get_option( 'show_sticky_nav' ) ) {
+				define( 'SHOW_STICKY_NAV', TRUE );
+			} else {
+				define( 'SHOW_STICKY_NAV', FALSE );
+			}
 		}
 		if ( ! defined( 'SHOW_MAIN_NAV' ) ) {
 			define( 'SHOW_MAIN_NAV', TRUE );

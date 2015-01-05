@@ -33,7 +33,7 @@
 
         avatar_input.find('input').change(function() {
             avatar_display.empty();
-            avatar_display.html('<p>Click "Update Profile" to save your avatar.</p>');
+            avatar_display.html('<p>' + largo_avatar_js_L10n.update_text + '</p>');
         });
     });
 }());

@@ -318,14 +318,14 @@ jQuery(document).ready(function($) {
 	})();
 
 	// Search slide out for mobile
-	(function() {
-		var searchForm = $('.sticky-nav-holder .form-search');
-		var toggle = searchForm.find( '.toggle' );
-    toggle.on( 'click', function() {
-    	searchForm.toggleClass( 'show' );
-    });
-
-	})();
+    (function() {
+        var searchForm = $('.sticky-nav-holder .form-search');
+        var toggle = searchForm.parent().find('.toggle');
+        toggle.on('click', function() {
+            searchForm.parent().toggleClass('show');
+            return false;
+        });
+    })();
 
 	// Responsive navigation
 	$('.navbar .toggle-nav-bar').each(function() {

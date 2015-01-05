@@ -1,3 +1,4 @@
+<?php global $current_url; ?>
 <header id="site-header" class="clearfix" itemscope itemtype="http://schema.org/Organization">
 	<?php largo_header(); ?>
 </header>

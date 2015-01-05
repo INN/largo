@@ -90,4 +90,4 @@
 
 		<div id="main" class="row-fluid clearfix">
 
-		<?php do_action( 'largo_main_top' ); ?>
+		<?php do_action( 'largo_main_top' );

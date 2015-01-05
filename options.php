@@ -38,8 +38,6 @@ function optionsframework_options() {
 
 	$display_options = array(
 		'top' 	=> __('Top', 'largo'),
-		'btm' 	=> __('Bottom', 'largo'),
-		'both' 	=> __('Both', 'largo'),
 		'none' 	=> __('None', 'largo')
 	);
 
@@ -147,9 +145,16 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
+		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
+		'id'    => 'show_sticky_nav',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
 		'id' 	=> 'show_sitename_in_sticky_nav',
 		'std' 	=> '1',
+		'class' => 'hidden',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
@@ -253,9 +258,9 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at both the top and the bottom of single posts but you can choose to show them in only one or the other or to not show them at all.', 'largo'),
+		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
 		'id' 		=> 'social_icons_display',
-		'std' 		=> 'both',
+		'std' 		=> 'top',
 		'type' 		=> 'select',
 		'class'		=> 'mini',
 		'options' 	=> $display_options);
@@ -488,6 +493,12 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
+		'desc' 	=> __('Enable Optional Leaderboard Ad Zone.', 'largo'),
+		'id' 	=> 'leaderboard_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'desc' 	=> __('Default region in lefthand column of Landing Pages', 'largo'),
 		'id' 	=> 'landing_left_region_default',
 		'std' 	=> 'sidebar-main',
@@ -599,6 +610,14 @@ jQuery(document).ready(function($) {
 		$('#section-dont_miss_label').show();
 	}
 
+	$('#show_sticky_nav').click(function() {
+  		$('#section-show_sitename_in_sticky_nav').fadeToggle(400);
+	});
+
+	if ($('#show_sticky_nav:checked').val() !== undefined) {
+		$('#section-show_sitename_in_sticky_nav').show();
+	}
+console.log($('#show_sticky_nav').val());
 	$('#show_donate_button').click(function() {
   		$('#section-donate_link').fadeToggle(400);
   		$('#section-donate_button_text').fadeToggle(400);

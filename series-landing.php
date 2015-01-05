@@ -177,4 +177,4 @@ if ( 'none' != $opt['footer_style'] ) : ?>
 <?php endif; ?>
 
 <!-- /.grid_4 -->
-<?php get_footer(); ?>
+<?php get_footer();

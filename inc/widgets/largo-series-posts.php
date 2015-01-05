@@ -35,7 +35,7 @@ class largo_series_posts_widget extends WP_Widget {
 	 	$series_posts->the_post();
 	 	$instance['test'] = 'banana';
 
-	 	include(locate_template('content-tiny.php'));
+		include(locate_template('partials/content-tiny.php'));
 
  		//divider
  		echo '<h5 class="series-split top-tag">' . esc_html( $instance['heading'] ) .'</h5><ul>';

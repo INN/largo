@@ -31,8 +31,8 @@
 
 	<?php
 		if ( !is_author() ) {
-			printf( __( '<li class="author-posts-link"><a class="url" href="/author/%1$s/" rel="author" title="See all posts by %1$s">More by %2$s</a></li>', 'largo' ),
-				$author_obj->user_login,
+			printf( __( '<li class="author-posts-link"><a class="url" href="%1$s" rel="author" title="See all posts by %1$s">More by %2$s</a></li>', 'largo' ),
+				get_author_posts_url($author_obj->ID),
 				esc_attr( $author_obj->first_name )
 			);
 		}

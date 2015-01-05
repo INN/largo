@@ -34,4 +34,17 @@ class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 		}
 	}
 
+	function test_largo_load_more_posts_empty_query() {
+		$_POST['paged'] = 0;
+
+		try {
+			$this->_handleAjax("load_more_posts");
+		} catch (WPAjaxDieContinueException $e) {
+			foreach ($this->post_ids as $number) {
+				$pos = strpos($this->_last_response, 'post-' . $number);
+				$this->assertTrue((bool) $pos);
+			}
+		}
+	}
+
 }

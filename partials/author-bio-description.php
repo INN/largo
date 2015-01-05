@@ -4,8 +4,8 @@
 if ( is_author() ) {
 	echo '<h1 class="fn n">' . $author_obj->display_name . '</h1>';
 } else {
-	printf( __( '<h3 class="widgettitle">About <span class="fn n"><a class="url" href="/author/%1$s/" rel="author" title="See all posts by %1$s">%2$s</a></span></h3>', 'largo' ),
-		$author_obj->user_login,
+	printf( __( '<h3 class="widgettitle">About <span class="fn n"><a class="url" href="%1$s" rel="author" title="See all posts by %1$s">%2$s</a></span></h3>', 'largo' ),
+		get_author_posts_url($author_obj->ID),
 		esc_attr( $author_obj->display_name )
 	);
 }
