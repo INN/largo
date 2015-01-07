@@ -473,10 +473,22 @@ function optionsframework_options() {
 		'id' 	=> 'less_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
+		
+	$options[] = array(
+		'desc' 	=> __('Enable Series in menus, and features that use series.', 'largo'),
+		'id' 	=> 'series_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+		
+	$options[] = array(
+		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages. Requires series to be enabled.', 'largo'),
+		'id' 	=> 'custom_landing_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages.', 'largo'),
-		'id' 	=> 'custom_landing_enabled',
+		'desc' 	=> __('Enable Post Types in menus.', 'largo'),
+		'id' 	=> 'post_types_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 

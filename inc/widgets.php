@@ -36,15 +36,17 @@ function largo_widgets() {
 		'largo_related_posts_widget' => '/inc/widgets/largo-related-posts.php',
 		'largo_explore_related_widget' => '/inc/widgets/largo-explore-related.php',
 		'largo_author_widget' => '/inc/widgets/largo-author-bio.php',
-		'largo_series_posts_widget' => '/inc/widgets/largo-series-posts.php',
 		'largo_disclaimer_widget' => '/inc/widgets/largo-disclaimer-widget.php',
 		'largo_featured_widget' => '/inc/widgets/largo-featured.php',
 		'largo_tag_list_widget' => '/inc/widgets/largo-tag-list.php',
 		'largo_prev_next_post_links_widget' => '/inc/widgets/largo-prev-next-post-links.php',
-		'largo_post_series_links_widget' => '/inc/widgets/largo-post-series-links.php',
 		'largo_staff_widget' => '/inc/widgets/largo-staff.php'
 
 	);
+	if ( of_get_option('series_enabled') !==false ) {
+		$register['largo_series_posts_widget'] = '/inc/widgets/largo-series-posts.php';
+		$register['largo_post_series_links_widget'] = '/inc/widgets/largo-post-series-links.php';
+	}
 	foreach ( $register as $key => $val ) {
 		require_once( get_template_directory() . $val );
 		register_widget( $key );

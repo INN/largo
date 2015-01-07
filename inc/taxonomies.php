@@ -87,30 +87,32 @@ function largo_custom_taxonomies() {
 
 	do_action('largo_after_create_prominence_taxonomy', $largoProminenceTerms);
 
-	if ( ! taxonomy_exists( 'series' ) ) {
-		register_taxonomy(
-			'series',
-			'post',
-			array(
-				'hierarchical' => true,
-				'labels' => array(
-					'name' => _x( 'Series', 'taxonomy general name' ),
-					'singular_name' => _x( 'Series', 'taxonomy singular name' ),
-					'search_items' => __( 'Search Series' ),
-					'all_items' => __( 'All Series' ),
-					'parent_item' => __( 'Parent Series' ),
-					'parent_item_colon' => __( 'Parent Series:' ),
-					'edit_item' => __( 'Edit Series' ),
-					'view_item' => __( 'View Series' ),
-					'update_item' => __( 'Update Series' ),
-					'add_new_item' => __( 'Add New Series' ),
-					'new_item_name' => __( 'New Series Name' ),
-					'menu_name' => __( 'Series' ),
-				),
-				'query_var' => true,
-				'rewrite' => true,
-			)
-		);
+	if ( of_get_option('series_enabled') !== false ) {
+		if ( ! taxonomy_exists( 'series' ) ) {
+			register_taxonomy( 
+		    	'series', 
+		    	'post', 
+		    	array(
+				    'hierarchical' 	=> true,
+				    'labels'        => array(
+				    	'name'              => _x( 'Series', 'taxonomy general name' ),
+						'singular_name'     => _x( 'Series', 'taxonomy singular name' ),
+						'search_items'      => __( 'Search Series' ),
+						'all_items'         => __( 'All Series' ),
+						'parent_item'       => __( 'Parent Series' ),
+						'parent_item_colon' => __( 'Parent Series:' ),
+						'edit_item'         => __( 'Edit Series' ),
+						'view_item'         => __( 'View Series' ),
+						'update_item'       => __( 'Update Series' ),
+						'add_new_item'      => __( 'Add New Series' ),
+						'new_item_name'     => __( 'New Series Name' ),
+						'menu_name'         => __( 'Series' ),
+			    	),
+		        'query_var' 	=> true,
+		        'rewrite' 		=> true,
+		    	) 
+		    );
+		}
 	}
 }
 add_action( 'init', 'largo_custom_taxonomies' );
@@ -125,10 +127,11 @@ add_action( 'init', 'largo_custom_taxonomies' );
  * @since 1.0
  */
 function largo_post_in_series( $post_id = NULL ) {
-  global $post;
-  $the_id = ($post_id) ? $post_id : $post->ID ;
-  $features = get_the_terms( $the_id, 'series' );
-  return ( $features ) ? true : false;
+	if ( of_get_option('series_enabled') == false ) return false;
+	global $post;
+	$the_id = ($post_id) ? $post_id : $post->ID ;
+	$features = get_the_terms( $the_id, 'series' );
+	return ( $features ) ? true : false;
 }
 
 /**
@@ -272,3 +275,83 @@ function largo_category_archive_posts( $query ) {
 	$query->tax_query = NULL;	//unsetting it twice because WP is weird like that
 }
 add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Post Types" menu item from the admin menu.
+ *
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_post_type_taxonomy_menu() {
+	if (! is_admin() ) return;
+	if ( of_get_option('post_types_enabled') == false ) {
+		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post-type');
+	}
+}
+add_action( 'admin_menu', 'hide_post_type_taxonomy_menu', 999 );
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Post Types" metabox from the editor
+ *
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_post_type_taxonomy_metabox() {
+	if (! is_admin() ) return;
+	if ( of_get_option('post_types_enabled') == false ) {
+		remove_meta_box('post-typediv', 'post', 'normal');
+		remove_meta_box('post-typediv', 'page', 'normal');
+		remove_meta_box('post-typediv', 'post', 'side');
+		remove_meta_box('post-typediv', 'page', 'side');
+		remove_meta_box('post-typediv', 'post', 'advanced');
+		remove_meta_box('post-typediv', 'page', 'advanced');
+	}
+}
+add_action( 'admin_menu' , 'hide_post_type_taxonomy_metabox', 999 );
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Post Types" column from the post table.
+ *
+ * @param  array  $columns http://codex.wordpress.org/Plugin_API/Filter_Reference/manage_posts_columns
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_post_type_taxonomy_table($columns) {
+	if (! is_admin() ) return $columns;
+	unset($columns['taxonomy-post-type']);
+	return $columns;
+}
+add_action('manage_posts_columns' , 'hide_post_type_taxonomy_table');
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Series" menu item from the admin menu.
+ *
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_series_taxonomy_menu() {
+	if (! is_admin() ) return;
+	if ( of_get_option('series_enabled') == false ) {
+		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=series');
+	}
+}
+add_action( 'admin_menu', 'hide_series_taxonomy_menu', 999 );
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Series" metabox from the editor
+ *
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_series_taxonomy_metabox() {
+	if (! is_admin() ) return;
+	if ( of_get_option('series_enabled') == false ) {
+		remove_meta_box('seriesdiv', 'post', 'normal');
+		remove_meta_box('seriesdiv', 'page', 'normal');
+		remove_meta_box('seriesdiv', 'post', 'side');
+		remove_meta_box('seriesdiv', 'page', 'side');
+		remove_meta_box('seriesdiv', 'post', 'advanced');
+		remove_meta_box('seriesdiv', 'page', 'advanced');
+	}
+}
+add_action( 'admin_menu' , 'hide_series_taxonomy_metabox', 999 );

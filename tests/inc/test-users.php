@@ -12,35 +12,35 @@ class UsersTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_contactmethods() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_filter_guest_author_fields() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_admin_users_caps() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_edit_permission_check() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_clean_user_twitter_username() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');;
 	}
 
 	function test_validate_twitter_username() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_clean_user_fb_username() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_validate_fb_username() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_get_user_list() {
@@ -106,11 +106,11 @@ class UsersTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_render_user_list() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_render_staff_list_shortcode() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_more_profile_info() {

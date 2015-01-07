@@ -171,22 +171,22 @@ class HelpersTestFunctions extends WP_UnitTestCase {
 		
 	}
 	function test_largo_youtube_url_to_ID() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_largo_youtube_iframe_from_url() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_largo_youtube_image_from_url() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_largo_make_slug() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_var_log() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_render_template() {
-		$this->markTestSkipped("Not implemented");
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	
 	

@@ -592,9 +592,11 @@ class Largo_Related {
 			}
 		}
 
-		$this->get_series_posts();
-		//are we done yet?
-		if ( count($this->post_ids) >= $this->number ) return $this->cleanup_ids();
+		if ( of_get_option('series_enabled') !== false ) {
+			$this->get_series_posts();
+			//are we done yet?
+			if ( count($this->post_ids) >= $this->number ) return $this->cleanup_ids();
+		}
 
 		$this->get_term_posts();
 		//are we done yet?
