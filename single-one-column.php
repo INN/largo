@@ -13,7 +13,7 @@ add_filter( 'body_class', function( $classes ) {
 get_header();
 ?>
 
-<div id="content" class="span8" role="main">
+<div id="content" role="main">
 	<?php
 		while ( have_posts() ) : the_post();
 			$partial = ( is_page() ) ? 'page' : 'single';

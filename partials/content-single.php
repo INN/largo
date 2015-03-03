@@ -8,11 +8,10 @@
 
 	<?php do_action('largo_before_post_header'); ?>
 
-	<h5 class="top-date"><?php largo_time(); ?></h5>
-
-	<h5 class="top-tag"><?php largo_top_term(); ?></h5>
-
 	<header>
+
+		<h5 class="top-date"><?php largo_time(); ?></h5>
+		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 
  		<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
  		<?php if ( $subtitle = get_post_meta( $post->ID, 'subtitle', true ) )
@@ -32,11 +31,14 @@
 		do_action('largo_after_hero');
 	?>
 
+	
 	<?php get_sidebar(); ?>
 
-	<div class="entry-content clearfix" itemprop="articleBody">
+	<section class="entry-content clearfix" itemprop="articleBody">
+		
 		<?php largo_entry_content( $post ); ?>
-	</div>
+		
+	</section>
 
 	<?php do_action('largo_after_post_content'); ?>
 

@@ -10,7 +10,7 @@
 		<?php edit_post_link(__('Edit This Page', 'largo'), '<h5 class="byline"><span class="edit-link">', '</span></h5>'); ?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content">
+	<section class="entry-content">
 		<?php the_content(); ?>
-	</div><!-- .entry-content -->
+	</section><!-- .entry-content -->
 </article><!-- #post-<?php the_ID(); ?> -->

@@ -610,23 +610,56 @@ article img.attachment-post-thumbnail {
     display: none !important;
   }
 }
-body.normal.single-post #content,
-body.normal.page #content {
-  position: relative;
-  margin-left: 17.021276594%;
+/*------------------------------------------------------------------------------
+  Single - Styling for single posts & pages.
+------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------
+    1.0 - Normal layout overrides (override two column display)
+------------------------------------------------------------------------------*/
+body.normal.single-post,
+body.normal.page {
+  /* 1.1 - Header */
+  /* 1.2 - Hero */
+  /* 1.3 - Sidebar (left of post) */
+  /* 1.4 - Entry Content (the main post content) */
+  /* 1.5 - Article Bottom (after post content) */
+  /* 1.6 - Overrides */
 }
-@media only screen and (max-width: 768px) {
-  body.normal.single-post #content,
-  body.normal.page #content {
-    margin-left: 0;
-  }
+body.normal.single-post article.post > header,
+body.normal.page article.post > header {
+  clear: both;
+  margin: 24px 17.0213%;
+  position: relative;
+}
+body.normal.single-post article.post > header h5.top-date,
+body.normal.page article.post > header h5.top-date {
+  font-size: 14px;
+  font-weight: normal;
+  position: absolute;
+  right: 0;
+}
+body.normal.single-post article.post > header h2.subtitle,
+body.normal.page article.post > header h2.subtitle {
+  font-size: 19.552px;
+  font-weight: normal;
+  color: #999;
+}
+body.normal.single-post article.post > header .sep,
+body.normal.page article.post > header .sep,
+body.normal.single-post article.post > header .entry-date,
+body.normal.page article.post > header .entry-date {
+  display: none;
+}
+body.normal.single-post article.post > header .edit-link,
+body.normal.page article.post > header .edit-link {
+  padding-left: 5px;
 }
 body.normal.single-post .hero,
 body.normal.page .hero {
   text-align: center;
   background-color: #efefef;
-  width: 151.5%;
-  margin: 0 -25.75% 24px;
+  width: 100%;
+  margin: 0 0 24px;
 }
 body.normal.single-post .hero.is-gallery,
 body.normal.page .hero.is-gallery {
@@ -639,10 +672,9 @@ body.normal.page .hero p.wp-media-credit {
   float: none;
   margin: 0 auto;
   text-align: left;
-  font-size: 16px;
-  margin-bottom: 12px;
+  font-size: 14px;
+  margin: 0 17.0213% 12px;
   padding-top: 4px;
-  width: 70%;
 }
 body.normal.single-post .hero p.wp-media-credit,
 body.normal.page .hero p.wp-media-credit {
@@ -663,40 +695,29 @@ body.normal.page .hero.is-empty {
   min-height: 0;
   height: 0;
 }
-@media only screen and (max-width: 980px) {
-  body.normal.single-post .hero,
-  body.normal.page .hero {
-    margin: 0 0 24px;
-    width: 100%;
-  }
-}
 body.normal.single-post #sidebar,
 body.normal.page #sidebar {
-  overflow: hidden;
-  margin-left: -25.75%;
-  margin-right: 0;
-  width: 23.25%;
-  clear: left;
+  /* all to undo bootstrap */
+  float: none;
+  width: auto;
+  min-height: 0;
+  margin-left: 0;
 }
-body.normal.single-post .top-tag,
-body.normal.page .top-tag {
+body.normal.single-post #sidebar .widget,
+body.normal.page #sidebar .widget {
+  /* float widgets */
   float: left;
+  clear: left;
+  padding-right: 20px;
+  width: 14.89361702%;
 }
-body.normal.single-post article.post > header,
-body.normal.page article.post > header {
-  clear: both;
+body.normal.single-post #sidebar .widget:first-child,
+body.normal.page #sidebar .widget:first-child {
+  padding-top: 0;
 }
-body.normal.single-post article.post .sep,
-body.normal.page article.post .sep,
-body.normal.single-post article.post .entry-date,
-body.normal.page article.post .entry-date {
-  display: none;
-}
-body.normal.single-post h2.subtitle,
-body.normal.page h2.subtitle {
-  font-size: 19.552px;
-  font-weight: normal;
-  color: #999;
+body.normal.single-post .entry-content,
+body.normal.page .entry-content {
+  padding: 0 17.021276594%;
 }
 body.normal.single-post p.intro,
 body.normal.page p.intro,
@@ -704,25 +725,72 @@ body.normal.single-post p.wp-caption-text,
 body.normal.page p.wp-caption-text {
   font-style: normal;
 }
-body.normal.page.page-template-full-page-php #content {
-  margin-left: 0;
+body.normal.single-post .article-bottom,
+body.normal.page .article-bottom {
+  margin: 0 17.021276594%;
 }
-.article-bottom .widget {
+body.normal.single-post .article-bottom .widget,
+body.normal.page .article-bottom .widget {
   padding: 15px 0;
 }
-.article-bottom .widget p {
+body.normal.single-post .article-bottom .widget p,
+body.normal.page .article-bottom .widget p {
   padding-left: 0;
   padding-right: 0;
 }
-.article-bottom .post-social {
+body.normal.single-post .article-bottom .post-social,
+body.normal.page .article-bottom .post-social {
   border-top: none;
   border-bottom: none;
 }
-.article-bottom .largo-disclaimer {
+body.normal.single-post .article-bottom .largo-disclaimer,
+body.normal.page .article-bottom .largo-disclaimer {
   color: #454545;
   font-size: 15px;
   font-style: italic;
 }
+@media only screen and (max-width: 979px) {
+  body.normal.single-post #sidebar,
+  body.normal.page #sidebar {
+    display: none;
+  }
+  body.normal.single-post .article-bottom,
+  body.normal.page .article-bottom {
+    margin: 0 6.38297872%;
+  }
+  body.normal.single-post article.post > header,
+  body.normal.page article.post > header {
+    margin: 24px 6.38297872%;
+  }
+  body.normal.single-post .entry-content,
+  body.normal.page .entry-content {
+    padding: 0 6.38297872%;
+  }
+  body.normal.single-post .hero p.wp-caption-text,
+  body.normal.page .hero p.wp-caption-text,
+  body.normal.single-post .hero p.wp-media-credit,
+  body.normal.page .hero p.wp-media-credit {
+    margin: 0 2.12765957% 12px;
+  }
+}
+@media only screen and (max-width: 529px) {
+  body.normal.single-post .article-bottom,
+  body.normal.page .article-bottom {
+    margin: 0 0;
+  }
+  body.normal.single-post article.post > header,
+  body.normal.page article.post > header {
+    margin: 24px 0;
+  }
+  body.normal.single-post .entry-content,
+  body.normal.page .entry-content {
+    padding: 0 0;
+  }
+}
+/*------------------------------------------------------------------------------
+    2.0 - Entry Element Styles
+------------------------------------------------------------------------------*/
+/* 2.1 - Byline */
 .byline {
   margin-bottom: 12px;
   font-weight: normal;
@@ -743,6 +811,7 @@ body.normal.page.page-template-full-page-php #content {
 .byline .edit-link a {
   color: #bd261d;
 }
+/* 2.2 - Social media links */
 .post-social {
   min-height: 28px;
   height: auto;
@@ -791,6 +860,7 @@ body.normal.page.page-template-full-page-php #content {
 .post-social span.print a:hover {
   text-decoration: none;
 }
+/* 2.3 - Post pagination */
 .post-pagination a,
 .post-pagination span {
   padding: 5px;
@@ -802,6 +872,7 @@ body.normal.page.page-template-full-page-php #content {
 .post-pagination span:first-child {
   padding-left: 0;
 }
+/* 2.4 - Post meta */
 .labels,
 .tags,
 .pager,
@@ -846,13 +917,7 @@ h3.recent-posts a.rss-link:hover,
   opacity: 0.85;
   filter: alpha(opacity=85);
 }
-h5.top-date {
-  float: right;
-  font-size: 14px;
-  font-weight: normal;
-  margin-bottom: 0;
-  line-height: 1.5;
-}
+/* 2.5 - Lables */
 .series-label {
   margin: 5px;
   padding: 8px;
@@ -866,18 +931,19 @@ h5.top-date {
   font-size: 13.04px;
   margin-bottom: 0;
 }
-.tags {
+/* 2.6 - Tags */
+lables .tags {
   height: 100%;
   overflow: auto;
   margin-bottom: 12px;
 }
-.tags ul {
+lables .tags ul {
   padding: 0;
   margin: 0;
   font-size: 13px;
   line-height: 1.5;
 }
-.tags ul li {
+lables .tags ul li {
   display: inline;
   letter-spacing: 1px;
   margin: 0 8px 8px 0;
@@ -891,18 +957,19 @@ h5.top-date {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-.tags ul li:hover {
+lables .tags ul li:hover {
   background-color: #1a5a90;
 }
-.tags ul li i {
+lables .tags ul li i {
   margin: 1px 3px 0 0;
 }
-.tags ul li a {
+lables .tags ul li a {
   color: #ffffff;
 }
-.tags ul li a:hover {
+lables .tags ul li a:hover {
   text-decoration: none;
 }
+/* 2.6 - Next-prev navigation */
 .pager {
   line-height: 1.2;
 }
@@ -935,6 +1002,7 @@ h5.top-date {
   float: left;
   padding-right: 12px;
 }
+/* 2.7 - Related Posts */
 #related-post-nav {
   padding: 8px 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1005,10 +1073,6 @@ h5.top-date {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13.04px;
   margin-bottom: 6px;
-}
-.single-post.classic article.post .sep,
-.single-post.classic article.post .entry-date {
-  display: inline;
 }
 .author-box {
   clear: both;
