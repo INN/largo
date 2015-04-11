@@ -30,7 +30,7 @@ class largo_recent_posts_widget extends WP_Widget {
 	 */
 	function widget( $args, $instance ) {
 
-		global $ids; // an array of post IDs already on a page so we can avoid duplicating posts
+		global $shown_ids; // an array of post IDs already on a page so we can avoid duplicating posts
 
 		extract( $args );
 
@@ -52,7 +52,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			'post_status'	=> 'publish'
 		);
 
-		if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1 ) $query_args['post__not_in'] = $ids;
+		if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1 ) $query_args['post__not_in'] = $shown_ids;
 		if ( $instance['cat'] != '' ) $query_args['cat'] = $instance['cat'];
 		if ( $instance['tag'] != '') $query_args['tag'] = $instance['tag'];
 		if ( $instance['author'] != '') $query_args['author'] = $instance['author'];
@@ -74,7 +74,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
         	$output = '';
 
-        	while ( $my_query->have_posts() ) : $my_query->the_post(); $ids[] = get_the_ID();
+        	while ( $my_query->have_posts() ) : $my_query->the_post(); $shown_ids[] = get_the_ID();
 
         		// wrap the items in li's.
         		$output .= '<li>';
