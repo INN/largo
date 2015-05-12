@@ -13,7 +13,7 @@
 
 	<?php if ( $email = $author_obj->user_email ) { ?>
 		<li class="email">
-			<a href="mailto:<?php echo esc_attr( $email ); ?>" title="e-mail <?php echo esc_attr( $author_obj->display_name ); ?>"><i class="icon-mail"></i></a>
+			<a class="email" href="mailto:<?php echo esc_attr( $email ); ?>" title="e-mail <?php echo esc_attr( $author_obj->display_name ); ?>"><i class="icon-mail"></i></a>
 		</li>
 	<?php } ?>
 
