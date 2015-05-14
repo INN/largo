@@ -366,5 +366,73 @@ jQuery(document).ready(function($) {
 			li.toggleClass('open');
 			event.preventDefault();
 		});
+
+	/**
+	 * On window resize, make sure nav doesn't overflow.
+	 * Put stuff in the overflow nav if it does.
+	 *
+	 * Event should fire enough that we can do one at a time
+	 * and be ok.
+	 *
+	 * @since 0.5.1
+	 */
+	var navOverflow = function() {
+
+		/* variables */
+		var nav = $('#sticky-nav');
+		var shelf = nav.find('.nav-shelf');
+		var button = nav.find('.toggle-nav-bar');
+		var right = nav.find('.nav-right'); 
+
+		var isMobile = button.is(':visible');
+
+		if(!isMobile) {
+		
+			var navWidth = 0;
+
+			/* calculate the width of the nav */
+			var navWidth = 0;
+
+			shelf.find('ul.nav > li').each( function() {
+				navWidth += $(this).outerWidth();
+			});
+
+			var overflow = shelf.find('ul.nav > li.menu-item-has-children').last();
+			/* If there is not such a menu item, create one */
+			if ( overflow.length == 0 ) {
+				var overflowmenu ='<li class="menu-item-has-children dropdown"><a class="dropdown-toggle">More<b class="caret"></b></a><ul id="menu-more-1" class="dropdown-menu"></ul></li>';
+				overflow = $(overflowmenu);
+				shelf.find('ul.nav > li.menu-item').last().after(overflow);
+			}
+
+			if(navWidth > shelf.outerWidth() - right.outerWidth()) {
+				var li = shelf.find('ul.nav > li.menu-item').last();
+				overflow.find('ul').prepend(li);
+				li.addClass('overflowed');
+				li.data('shelfwidth',shelf.outerWidth());
+			} else {
+				var li = overflow.find('li').first();
+				if(li.hasClass('overflowed')) {
+					if(li.data('shelfwidth') < shelf.outerWidth()) {
+						shelf.find('ul.nav > li.menu-item').last().after(li);
+					}
+				}
+			}
+		
+		}
+
+	}
+	$(window).resize(navOverflow);
+	$(window).scroll(navOverflow).scroll();
+
+	// Newsletter signup form interaction
+	$('#site-header .newsletter-signup .email_address').focus(function() {
+		$(this).siblings('.first_name, .last_name, .submit').show();
 	});
+
+	$(document).mouseup(function(e) {
+		var container = $("#site-header .newsletter-signup");
+		if (!container.is(e.target) && container.has(e.target).length === 0)
+			container.find('.first_name, .last_name, .submit, .error').hide();
+	});});
 });
