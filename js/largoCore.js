@@ -119,7 +119,19 @@ jQuery(document).ready(function($) {
     }
   })();
 
-	// Sticky header and footer
+// Sticky header and footer
+
+// Account for sticky nav with fixed position at top of page
+function resetstickynavheight() {
+	var stickyNavWrapper = jQuery('.sticky-nav-wrapper');
+	var stickyNavEl = jQuery('.sticky-nav-holder');
+	var height = stickyNavEl.outerHeight();
+	if (stickyNavWrapper.length && !$('body').hasClass('home'))
+		stickyNavWrapper.height(height);
+
+	return height;
+}
+
 	(function(){
 		var stickyNavEl = $('.sticky-nav-holder');
 		var mainEl = $('.home #main');
@@ -153,10 +165,7 @@ jQuery(document).ready(function($) {
 			});
 		}
 
-		// Account for sticky nav with fixed position at top of page
-		var stickyNavWrapper = $('.sticky-nav-wrapper');
-		if (stickyNavWrapper.length && !$('body').hasClass('home'))
-			stickyNavWrapper.height(stickyNavEl.outerHeight());
+		resetstickynavheight();
 
 		// Check if there is a sticky footer
 		var stickyFooterEl = $( '.sticky-footer-holder' );
@@ -398,10 +407,10 @@ jQuery(document).ready(function($) {
 				navWidth += $(this).outerWidth();
 			});
 
-			var overflow = shelf.find('ul.nav > li.menu-item-has-children').last();
+			var overflow = shelf.find('ul.nav > li#menu-overflow.menu-item-has-children').last();
 			/* If there is not such a menu item, create one */
 			if ( overflow.length == 0 ) {
-				var overflowmenu ='<li class="menu-item-has-children dropdown"><a class="dropdown-toggle">More<b class="caret"></b></a><ul id="menu-more-1" class="dropdown-menu"></ul></li>';
+				var overflowmenu ='<li id="menu-overflow" class="menu-item-has-children dropdown"><a class="dropdown-toggle">More<b class="caret"></b></a><ul id="menu-more-1" class="dropdown-menu"></ul></li>';
 				overflow = $(overflowmenu);
 				shelf.find('ul.nav > li.menu-item').last().after(overflow);
 			}
@@ -419,6 +428,9 @@ jQuery(document).ready(function($) {
 					}
 				}
 			}
+
+			// Because the above functions change the height of the sticky nav, we need to make sure the sticky nav is the correct height on internal pages as well
+			resetstickynavheight();
 		
 		}
 
