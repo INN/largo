@@ -16,12 +16,12 @@ jQuery(document).ready(function($) {
 	if (document.documentElement.clientWidth >= 767) {
 		$('.showey-hidey').hover(function() {
 			$(this).animate({opacity: '1'}, 100);
-			}, function() {
-				if ($(window).scrollTop() < 300) {
-					$(this).animate({opacity: '1'}, 100);
-				} else {
-				    $(this).animate({opacity: '0.5'}, 100);
-				}
+		}, function() {
+			if ($(window).scrollTop() < 300) {
+				$(this).animate({opacity: '1'}, 100);
+			} else {
+				$(this).animate({opacity: '0.5'}, 100);
+			}
 		});
 	}
 
@@ -61,76 +61,79 @@ jQuery(document).ready(function($) {
 
 	//ESC triggers "clean read" close
 	$(document).keyup(function(e) {
-    if (e.keyCode == 27 && $('body').hasClass('clean-read')) $('.clean-read-close').trigger('click');
-  });
+		if (e.keyCode == 27 && $('body').hasClass('clean-read')) $('.clean-read-close').trigger('click');
+	});
 
-  //GA event tracking for image-widget items
-  $('a.image-click-track').on('click', function() {
-	  if (typeof _gaq == 'object') _gaq.push(['_trackEvent', 'Click', 'Image Widget', this.getAttribute('title')]);
-  });
+	//GA event tracking for image-widget items
+	$('a.image-click-track').on('click', function() {
+		if (typeof _gaq == 'object') _gaq.push(['_trackEvent', 'Click', 'Image Widget', this.getAttribute('title')]);
+	});
 
-  // Touch enable the drop-down menus
-  (function() {
-    if (Modernizr.touch) {
-      // iOS Safari works with touchstart, the rest work with click
-      var mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click',
-          // Open the drop down
-          openMenu = false;
+	// Touch enable the drop-down menus
+	(function() {
+		if (Modernizr.touch) {
+			// iOS Safari works with touchstart, the rest work with click
+			var mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click',
 
-      // Handle the tap for the drop down
-      $('ul.nav').on(mobileEvent + '.largo', 'li', function(event) {
-        var li = $(event.currentTarget);
+			// Open the drop down
+			openMenu = false;
 
-        if (!li.hasClass('dropdown')) {
-          window.location.href = li.find('a').attr('href');
-          event.preventDefault();
-          event.stopPropagation();
-          return false;
-        }
+			// Handle the tap for the drop down
+			$('ul.nav').on(mobileEvent + '.largo', 'li', function(event) {
+				var li = $(event.currentTarget);
 
-        if (!li.is('.open')) {
-          // The link when the menu is closed
-          closeOpenMenu();
-          li.addClass('open');
-          openMenu = li;
+				if (!li.hasClass('dropdown')) {
+					window.location.href = li.find('a').attr('href');
+					event.preventDefault();
+					event.stopPropagation();
+					return false;
+				}
 
-          event.preventDefault();
-          event.stopPropagation();
-        } else if ($(event.target).is('b.caret')) {
-          // The caret when the menu is open
-          li.removeClass('open');
-          openMenu = false;
+				if (!li.is('.open')) {
+					// The link when the menu is closed
+					closeOpenMenu();
+					li.addClass('open');
+					openMenu = li;
 
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      });
+					event.preventDefault();
+					event.stopPropagation();
+				} else if ($(event.target).is('b.caret')) {
+					// The caret when the menu is open
+					li.removeClass('open');
+					openMenu = false;
 
-      // Call this to call the open menu
-      var closeOpenMenu = function() {
-        if (openMenu) {
-          openMenu.removeClass('open');
-          openMenu = false;
-        }
-      }
+					event.preventDefault();
+					event.stopPropagation();
+				}
+			});
 
-      // Close the open menu when the user taps elsewhere
-      $('body').on(mobileEvent, closeOpenMenu);
-    }
-  })();
+			// Call this to call the open menu
+			var closeOpenMenu = function() {
+				if (openMenu) {
+					openMenu.removeClass('open');
+					openMenu = false;
+				}
+			}
 
-// Sticky header and footer
+			// Close the open menu when the user taps elsewhere
+			$('body').on(mobileEvent, closeOpenMenu);
+		}
+	})();
 
-// Account for sticky nav with fixed position at top of page
-function resetstickynavheight() {
-	var stickyNavWrapper = jQuery('.sticky-nav-wrapper');
-	var stickyNavEl = jQuery('.sticky-nav-holder');
-	var height = stickyNavEl.outerHeight();
-	if (stickyNavWrapper.length && !$('body').hasClass('home'))
-		stickyNavWrapper.height(height);
+	/**
+	 * Sticky header and footer
+	 */
 
-	return height;
-}
+	// Account for sticky nav with fixed position at top of page
+	function resetstickynavheight() {
+		var stickyNavWrapper = jQuery('.sticky-nav-wrapper');
+		var stickyNavEl = jQuery('.sticky-nav-holder');
+		var height = stickyNavEl.outerHeight();
+		if (stickyNavWrapper.length && !$('body').hasClass('home'))
+			stickyNavWrapper.height(height);
+
+		return height;
+	}
 
 	(function(){
 		var stickyNavEl = $('.sticky-nav-holder');
@@ -327,14 +330,14 @@ function resetstickynavheight() {
 	})();
 
 	// Search slide out for mobile
-    (function() {
-        var searchForm = $('.sticky-nav-holder .form-search');
-        var toggle = searchForm.parent().find('.toggle');
-        toggle.on('click', function() {
-            searchForm.parent().toggleClass('show');
-            return false;
-        });
-    })();
+		(function() {
+			var searchForm = $('.sticky-nav-holder .form-search');
+			var toggle = searchForm.parent().find('.toggle');
+			toggle.on('click', function() {
+					searchForm.parent().toggleClass('show');
+					return false;
+			});
+		})();
 
 	// Responsive navigation
 	$('.navbar .toggle-nav-bar').each(function() {
