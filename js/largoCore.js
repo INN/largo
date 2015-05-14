@@ -366,6 +366,7 @@ jQuery(document).ready(function($) {
 			li.toggleClass('open');
 			event.preventDefault();
 		});
+	});
 
 	/**
 	 * On window resize, make sure nav doesn't overflow.
@@ -434,5 +435,5 @@ jQuery(document).ready(function($) {
 		var container = $("#site-header .newsletter-signup");
 		if (!container.is(e.target) && container.has(e.target).length === 0)
 			container.find('.first_name, .last_name, .submit, .error').hide();
-	});});
+	});
 });
