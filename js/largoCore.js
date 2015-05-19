@@ -121,7 +121,9 @@ jQuery(document).ready(function($) {
 	})();
 
 	/**
-	 * Sticky header and footer
+	 * Reset ticky header height
+	 *
+	 * Written so that the sticky nav height, which is fixed, will reset when the nav moves to a state where it no longer overflows.
 	 */
 
 	// Account for sticky nav with fixed position at top of page
@@ -135,7 +137,13 @@ jQuery(document).ready(function($) {
 		return height;
 	}
 
+	/**
+	 * Header and footer visibility function controls
+	 *
+	 * @uses resetstickynavheight
+	 */
 	(function(){
+		console.log(
 		var stickyNavEl = $('.sticky-nav-holder');
 		var mainEl = $('.home #main');
 
@@ -339,7 +347,11 @@ jQuery(document).ready(function($) {
 			});
 		})();
 
-	// Responsive navigation
+	/**
+	 * Responsive navigation functions to toggle visibility of nav when sticky.
+	 *
+	 *
+	 */
 	$('.navbar .toggle-nav-bar').each(function() {
 		var toggleButton = $(this);
 		var navbar = toggleButton.closest('.navbar');
@@ -388,6 +400,7 @@ jQuery(document).ready(function($) {
 	 * and be ok.
 	 *
 	 * @since 0.5.1
+	 * @uses resetstickynavheight
 	 */
 	var navOverflow = function() {
 
