@@ -143,7 +143,6 @@ jQuery(document).ready(function($) {
 	 * @uses resetstickynavheight
 	 */
 	(function(){
-		console.log(
 		var stickyNavEl = $('.sticky-nav-holder');
 		var mainEl = $('.home #main');
 
@@ -433,7 +432,7 @@ jQuery(document).ready(function($) {
 
 			if(navWidth > shelf.outerWidth() - right.outerWidth()) {
 				var li = shelf.find('ul.nav > li.menu-item').last();
-				overflow.find('ul').prepend(li);
+				overflow.find('ul#menu-more-1').prepend(li);
 				li.addClass('overflowed');
 				li.data('shelfwidth',shelf.outerWidth());
 			} else {
