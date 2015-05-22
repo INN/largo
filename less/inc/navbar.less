@@ -283,11 +283,37 @@ li.home-link:hover i {
     white-space: nowrap;
     text-shadow: none;
   }
+  ul.dropdown-menu {
+    position: relative;
+    border: none;
+    float: none;
+    box-shadow: none;
+    li a {
+      padding-left: 45px;
+    }
+    &::before {
+      display: none;
+    }
+    .sub-menu,
+    .sub-sub-menu {
+      display: none;
+    }
+  }
+}
+#menu-overflow > ul {
+  overflow-y: scroll;
+  max-height: 80vh;
 }
 @media (min-width: 769px) {
   html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
   html.touch ul.nav li.dropdown.open ul.dropdown-menu {
       display: block;
+  }
+  html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu .sub-sub-menu,
+  html.touch ul.nav li.dropdown.open ul.dropdown-menu .sub-sub-menu,
+  html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu .sub-menu,
+  html.touch ul.nav li.dropdown.open ul.dropdown-menu .sub-menu {
+      display: none;
   }
   .home .sticky-nav-wrapper {
     height: 0;
