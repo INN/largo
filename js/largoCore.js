@@ -430,7 +430,7 @@ jQuery(document).ready(function($) {
 				shelf.find('ul.nav > li.menu-item').last().after(overflow);
 			}
 
-			if(navWidth > shelf.outerWidth() - right.outerWidth()) {
+			if(navWidth > shelf.outerWidth() - right.outerWidth() -2) {
 				var li = shelf.find('ul.nav > li.menu-item').last();
 				overflow.find('ul#menu-more-1').prepend(li);
 				li.addClass('overflowed');
