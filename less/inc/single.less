@@ -147,7 +147,8 @@ body.normal.page {
     }
   }
 
-  #comments {
+  #comments,
+  #disqus_thread {
     margin: 0 17.021276594%;
   }
 
@@ -157,7 +158,9 @@ body.normal.page {
     #sidebar {
       display: none;
     }
-    .article-bottom {
+    .article-bottom,
+    #comments,
+    #disqus_thread {
       margin: 0 @fluidGridColumnWidth;
     }
     article.post > header {
@@ -175,14 +178,16 @@ body.normal.page {
   }
 
   @media @mobile {
-    .article-bottom {
-      margin: 0 0;
+    .article-bottom,
+    #comments,
+    #disqus_thread {
+      margin: 0;
     }
     article.post > header {
       margin: 24px 0;
     }
     .entry-content {
-      padding: 0 0;
+      padding: 0;
     }
   }
 

@@ -26,11 +26,34 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 					?>
 
 					<div id="header-search">
+
+						<?php if ( of_get_option('use_gcs') && of_get_option('gcs_id') ) : ?>
+	
+							<div class="gcs_container">
+								<script>
+								  (function() {
+								    var cx = '<?php echo of_get_option('gcs_id'); ?>';
+								    var gcse = document.createElement('script');
+								    gcse.type = 'text/javascript';
+								    gcse.async = true;
+								    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+								        '//www.google.com/cse/cse.js?cx=' + cx;
+								    var s = document.getElementsByTagName('script')[0];
+								    s.parentNode.insertBefore(gcse, s);
+								  })();
+								</script>
+								<gcse:search></gcse:search>
+							</div>
+	
+						<?php else: ?>
+	
 						<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 							<div class="input-append">
-								<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('Go', 'largo'); ?></button>
+								<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
 							</div>
 						</form>
+	
+						<?php endif; ?>
 					</div>
 
 				</div>
