@@ -29,15 +29,33 @@
 								<a href="#" class="toggle">
 									<i class="icon-search" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
 								</a>
-								<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-									<div class="input-append">
-										<span class="text-input-wrapper">
-											<input type="text" placeholder="<?php esc_attr_e('Search', 'largo'); ?>"
-												class="input-medium appendedInputButton search-query" value="" name="s" />
-										</span>
-										<button type="submit" class="search-submit btn"><?php _e('Go', 'largo'); ?></button>
+								<?php if ( of_get_option('use_gcs') && of_get_option('gcs_id') ) : ?>
+									<div class="gcs_container form-search">
+										<script>
+										  (function() {
+											var cx = '<?php echo of_get_option('gcs_id'); ?>';
+											var gcse = document.createElement('script');
+											gcse.type = 'text/javascript';
+											gcse.async = true;
+											gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+												'//www.google.com/cse/cse.js?cx=' + cx;
+											var s = document.getElementsByTagName('script')[0];
+											s.parentNode.insertBefore(gcse, s);
+										  })();
+										</script>
+										<gcse:search></gcse:search>
 									</div>
-								</form>
+								<?php else: ?>
+									<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+										<div class="input-append">
+											<span class="text-input-wrapper">
+												<input type="text" placeholder="<?php esc_attr_e('Search', 'largo'); ?>"
+													class="input-medium appendedInputButton search-query" value="" name="s" />
+											</span>
+											<button type="submit" class="search-submit btn"><?php _e('Go', 'largo'); ?></button>
+										</div>
+									</form>
+								<?php endif; ?>
 							</li>
 						</ul>
 
