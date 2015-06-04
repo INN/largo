@@ -802,7 +802,7 @@ li.home-link:hover i {
       z-index: 91;
       .transition( 0.3s );
     }
-    #___gcse_1, // Google custom search engine div, may break in future but hopefully not
+    [id^="___gcse_"], // Attribute wildcard selection for Google custom search engine div, may break in future but hopefully not
     .input-append {
       position: absolute;
       right: 44px;
@@ -833,17 +833,27 @@ li.home-link:hover i {
     }
   }
   #sticky-nav-search.show {
-    #___gcse_1, // Google custom search engine div, may break in future but hopefully not
+    [id^="___gcse_"], // Attribute wildcard selection for Google custom search engine div, may break in future but hopefully not
     .input-append {
       position: absolute;
       opacity: 1;
       visibility: visible;
     }
-    #___gcse_1, // Google custom search engine div, may break in future but hopefully not
+    [id^="___gcse_"], // Attribute wildcard selection for Google custom search engine div, may break in future but hopefully not
     .input-append,
     .toggle {
       background-color: #343434;
       color: @bodyBackground;
+    }
+    .gsc-input-box {
+      height: auto;
+    }
+    .gsc-search-box {
+      margin-bottom: 0;
+    }
+    .gsc-search-button input {
+      width: 34px;
+      padding: 6px !important; // !important and a more-specific selector to override Google's rule for the padding
     }
   }
 }
