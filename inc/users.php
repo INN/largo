@@ -300,10 +300,11 @@ function largo_render_user_list($users, $show_users_with_empty_desc=false) {
 	echo '<div class="user-list">';
 	foreach ($users as $user) {
 		$desc = trim($user->description);
-		if (empty($desc) && empty($show_users_with_empty_desc))
+		if (empty($desc) && ($show_users_with_empty_desc == false))
 			continue;
 
-		if (get_user_meta($user->ID, 'hide', true))
+		$hide = get_user_meta($user->ID, 'hide', true);
+		if ($hide == 'on')
 			continue;
 
 		$ctx = array('author_obj' => $user);
