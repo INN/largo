@@ -789,6 +789,7 @@ li.home-link:hover i {
       }
     }
   }
+  .nav-right .gcs-container,
   .nav-right .form-search {
     position: relative;
     .toggle {
@@ -801,6 +802,7 @@ li.home-link:hover i {
       z-index: 91;
       .transition( 0.3s );
     }
+    [id^="___gcse_"], // Attribute wildcard selection for Google custom search engine div, may break in future but hopefully not
     .input-append {
       position: absolute;
       right: 44px;
@@ -831,15 +833,30 @@ li.home-link:hover i {
     }
   }
   #sticky-nav-search.show {
+    [id^="___gcse_"], // Attribute wildcard selection for Google custom search engine div, may break in future but hopefully not
     .input-append {
       position: absolute;
       opacity: 1;
       visibility: visible;
     }
+    [id^="___gcse_"], // Attribute wildcard selection for Google custom search engine div, may break in future but hopefully not
     .input-append,
     .toggle {
       background-color: #343434;
       color: @bodyBackground;
+    }
+    .gsc-input-box {
+      height: auto;
+    }
+    .gsc-search-box {
+      margin-bottom: 0;
+    }
+    .gsc-search-button input {
+      width: 34px;
+      padding: 6px !important; // !important and a more-specific selector to override Google's rule for the padding
+    }
+    a span {
+      padding: 6px 4px 4px 4px; // This is to reset the size of the "clear" button in the search box
     }
   }
 }
