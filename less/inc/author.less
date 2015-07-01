@@ -17,23 +17,19 @@
     margin: 0;
     float: left;
     li {
-	  display: inline;
+	  display: inline-block;
 	  float: left;
-	  margin-right: 8px;
-	  &.facebook {
-	    position: relative;
-	    top: 1px;
-	  }
+	  margin-right: 0.5em;
+    &.facebook,
+    &.twitter,
 	  &.gplus,
 	  &.linkedin,
 	  &.email {
-	    position: relative;
-		top: -1px;
-		width: 24px;
+		width: 36px;
 	    i {
-          color: @white;
-	      padding: 4px;
-	      font-size: 10px;
+        color: @white;
+	      padding: 8px;
+	      font-size: 12px;
 	      background-color: @red;
 	      .border-radius(3px);
 	      &:hover {
@@ -46,19 +42,38 @@
 	      background-color: @white;
 	      color: @black;
 	      position: relative;
-	      top: -3px;
+	      top: -5px;
 	      &:hover {
 		    .opacity(80);
 	      }
 	    }
 	    i.icon-gplus {
-		  margin-left: -3px;
+      background-color: @gplus;
+      color:#fff;
+		  margin-left: -6px;
+      &:hover {
+        background-color:darken(@gplus, 15%)
+      }
 	    }
+      i.icon-facebook {
+      background:@facebook;
+      color:#fff;
+      &:hover {
+        background-color:darken(@facebook, 15%)
+      }
+      }
+      i.icon-twitter {
+      background:@twitter;
+      color:#fff;
+      &:hover {
+        background-color:darken(@twitter, 15%)
+      }
+      }
 	    i.icon-linkedin {
 		  background-color: @blue;
 		  margin-left: -10px;
 		  &:hover {
-		    background-color: darken(@blue, 10%);
+		    background-color: darken(@linkedin, 15%);
 	      }
 	    }
 	  }
@@ -83,6 +98,7 @@
   iframe {
     margin: 0;
   }
+
 }
 .widget .author-box ul {
   padding: 0;
