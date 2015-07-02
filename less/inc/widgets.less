@@ -130,27 +130,60 @@
   }
   i {
     color: @white;
-    padding: 3px 2px 3px 3px;
-    .border-radius(4px);
+    padding: 3px 15px 3px 3px;
+    border-right:1px solid #fff;
     font-size: @baseFontSize - 3;
     margin-right: 5px;
-    &.icon-rss {
-    background-color: darken(@orange, 5%);
-    &:hover {
-      background-color: @orange;
-    }
-    }
-    &.icon-linkedin {
-    background-color: darken(#238cc3, 5%);
-    &:hover {
-      background-color: #238cc3;
-    }
-    }
+    float:left;
   }
 }
 .article-bottom .largo-follow {
   padding: 0;
 }
+
+.largo-follow {
+
+  .rss {
+    background-color: @rss;
+    color:#fff;
+  }
+
+  .twitter {
+    background-color:@twitter;
+    color:#fff;
+  }
+
+  .facebook {
+    background-color:@facebook;
+    color:#fff;
+  }
+
+  .linkedin {
+    background-color:@linkedin;
+    color:#fff;
+  }
+
+  .gplus {
+    background-color:@gplus;
+    color:#fff;
+  }
+
+  .flickr {
+    background-color:@flickr;
+    color:#fff;
+  }
+
+  .youtube {
+    background-color:@youtube;
+    color:#fff;
+  }
+
+	.social-btn {
+	width:250px;
+	}
+
+}
+
 .twitter-follow-button {
   display: block;
   margin: 0 0 10px;
