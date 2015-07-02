@@ -62,20 +62,20 @@ class largo_follow_widget extends WP_Widget {
 			<?php endif;
 
 			if ( of_get_option( 'linkedin_link' ) ) : ?>
-				<a class="linkedin subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'linkedin_link' ) ); ?>"><i class="icon-linkedin"></i><?php _e( 'Find us on LinkedIn', 'largo' ); ?></a>
+				<a class="linkedin subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'linkedin_link' ) ); ?>"><i class="icon-linkedin"></i><?php _e( 'Find on LinkedIn', 'largo' ); ?></a>
 			<?php endif;
 
 			if ( of_get_option( 'gplus_link' ) ) : ?>
-				<a class="gplus subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>"><i class="icon-gplus"></i><?php _e('Find us on G+', 'largo'); ?></a>
+				<a class="gplus subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>"><i class="icon-gplus"></i><?php _e('Follow on G+', 'largo'); ?></a>
 
 			<?php endif;
 
 			if ( of_get_option( 'flickr_link' ) ) : ?>
-				<a class="flickr subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'flickr_link' ) ); ?>"><i class="icon-flickr"></i><?php _e('Find us on Flickr', 'largo'); ?></a>
+				<a class="flickr subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'flickr_link' ) ); ?>"><i class="icon-flickr"></i><?php _e('Follow on Flickr', 'largo'); ?></a>
 			<?php endif;
 
 			if ( of_get_option( 'youtube_link' ) ) : ?>
-				<a class="youtube subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'youtube_link' ) ); ?>"><i class="icon-youtube"></i><?php _e('Find us on YouTube', 'largo'); ?></a>
+				<a class="youtube subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'youtube_link' ) ); ?>"><i class="icon-youtube"></i><?php _e('Follow on YouTube', 'largo'); ?></a>
 		<?php endif;
 
 			//the below is for G+ and YouTube subscribe buttons
