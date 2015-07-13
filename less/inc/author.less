@@ -37,15 +37,15 @@
 	      }
 	    }
 	    i.icon-mail {
-	      font-size: 24px;
-	      padding: 0;
-	      background-color: @white;
-	      color: @black;
-	      position: relative;
-	      top: -5px;
-	      &:hover {
-		    .opacity(80);
-	      }
+        background-color: @grayDark;
+        padding-right:5px;
+        color:@white;
+        &::before {
+          font-size:14px;
+        }
+        &:hover {
+          background-color:darken(@grayDark, 15%)
+        }
 	    }
 	    i.icon-gplus {
       background-color: @gplus;
