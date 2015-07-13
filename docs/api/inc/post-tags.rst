@@ -1,12 +1,5 @@
-.. php:function:: largo_time()
-
-.. php:function:: largo_author()
-
-.. php:function:: largo_author_link()
-
-.. php:function:: largo_byline()
-
-.. php:function:: largo_post_social_links()
+inc/post-tags.php
+=================
 
 .. php:function:: largo_has_gravatar()
 
@@ -29,14 +22,6 @@
 
    :since: 0.4
 
-.. php:function:: my_queryvars()
-
-.. php:function:: largo_entry_content()
-
-.. php:function:: largo_custom_wp_link_pages()
-
-.. php:function:: largo_excerpt()
-
 .. php:function:: largo_trim_sentences()
 
    Attempt to trim input at sentence breaks
@@ -48,15 +33,3 @@
    :returns: $output $rimmed string
 
    :since: 0.3
-
-.. php:function:: largo_content_nav()
-
-.. php:function:: largo_comment()
-
-.. php:function:: post_type_icon()
-
-.. php:function:: largo_hero_class()
-
-.. php:function:: largo_hero_with_caption()
-
-.. php:function:: largo_post_metadata()

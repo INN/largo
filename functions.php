@@ -26,6 +26,7 @@
  *
  * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.
  *
+ * @package Largo
  */
 
 /**
@@ -41,7 +42,7 @@ if ( ! defined( 'INN_HOSTED' ) )
 /**
  * By default we'll assume the site is not for an INN member.
  *
- * Set INN_MEMBER to TRUE to show an INN logo in the header
+ * Set INN_MEMBER to TRUE to show an INN logo in the footer
  * and a widget of INN member stories in the homepage sidebar
  */
 if ( ! defined( 'INN_MEMBER' ) )
@@ -79,16 +80,27 @@ if ( ! defined( 'LARGE_HEIGHT' ) ) {
 if ( ! defined( 'MEDIUM_HEIGHT' ) ) {
 	define( 'MEDIUM_HEIGHT', 9999 );
 }
-
-// Set the content width based on the theme's design and stylesheet.
 if ( ! isset( $content_width ) )
+	/**
+	 * Set the content width based on the theme's design and stylesheet.
+	 *
+	 * @ignore
+	 */
 	$content_width = 771;
 
-// Set the global $largo var
 if ( ! isset( $largo ) )
+	/*
+	 * Set the global $largo var
+	 *
+	 * @ignore
+	 */
 	$largo = array();
 
-// load the options framework (used for our theme options pages)
+/*
+ * load the options framework (used for our theme options pages)
+ *
+ * @ignore
+ */
 if ( ! function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
 	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
@@ -342,6 +354,8 @@ class Largo {
 
 /**
  * Load the theme
+ *
+ * @ignore
  */
 function Largo() {
 	return Largo::get_instance();
@@ -366,32 +380,35 @@ function largo_php_warning() {
 }
 add_action( 'admin_notices', 'largo_php_warning' );
 
-/**
+/*
  * Load up all of the other goodies from the /inc directory
  */
 $includes = array();
 
-// This functionality is probably not for everyone so we'll make it easy to turn it on or off
+/*
+ * This functionality is probably not for everyone so we'll make it easy to turn it on or off
+ */
 if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled' ) )
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 
-// Perform load
+/*
+ * Perform load
+ */
 foreach ( $includes as $include ) {
 	require_once( get_template_directory() . $include );
 }
 
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which runs
- * before the init hook. The init hook is too late for some features, such as indicating
- * support post thumbnails.
- *
- * To override largo_setup() in a child theme, add your own largo_setup() to your child theme's
- * functions.php file.
- */
 if ( ! function_exists( 'largo_setup' ) ) {
-
+	/**
+	 * Sets up theme defaults and registers support for various WordPress features.
+	 *
+	 * Note that this function is hooked into the after_setup_theme hook, which runs
+	 * before the init hook. The init hook is too late for some features, such as indicating
+	 * support post thumbnails.
+	 *
+	 * To override largo_setup() in a child theme, add your own largo_setup() to your child theme's
+	 * functions.php file.
+	 */
 	function largo_setup() {
 
 		// This theme styles the visual editor with editor-style.css to match the theme style.
@@ -407,13 +424,13 @@ if ( ! function_exists( 'largo_setup' ) ) {
 }
 add_action( 'after_setup_theme', 'largo_setup' );
 
-
-/**
- * Helper for setting specific theme options (optionsframework)
- * Would be nice if optionsframework included this natively
- * See https://github.com/devinsays/options-framework-plugin/issues/167
- */
 if ( ! function_exists( 'of_set_option' ) ) {
+	/**
+	 * Helper for setting specific theme options (optionsframework).
+	 *
+	 * Would be nice if optionsframework included this natively
+	 * See https://github.com/devinsays/options-framework-plugin/issues/167
+	 */
 	function of_set_option( $option_name, $option_value ) {
 		$config = get_option( 'optionsframework' );
 

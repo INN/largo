@@ -1,5 +1,6 @@
 <?php
-/*
+
+/**
  * A simple Twitter widget
  */
 class largo_twitter_widget extends WP_Widget {

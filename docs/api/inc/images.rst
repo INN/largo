@@ -1,3 +1,6 @@
+inc/images.php
+==============
+
 .. php:function:: largo_attachment_image_link_remove_filter()
 
    Remove links to attachments
@@ -7,8 +10,6 @@
    :returns: object $ost content with image links stripped out
 
    :since: 1.0
-
-.. php:function:: largo_home_icon()
 
 .. php:function:: largo_clear_home_icon_cache()
 

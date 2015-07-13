@@ -1,1 +1,0 @@
-.. php:attr:: $view_picturefill_wp

@@ -1,13 +1,12 @@
+inc/related-content.php
+=======================
+
 .. php:function:: largo_get_related_topics_for_category()
 
    Show related tags and subcategories for each main category
    Used on category.php to display a list of related terms
 
    :since: 1.0
-
-.. php:function:: _tags_associated_with_category()
-
-.. php:function:: _subcategories_for_category()
 
 .. php:function:: largo_get_post_related_topics()
 
@@ -41,30 +40,16 @@
 
    :since: 1.0
 
-.. php:function:: largo_categories_and_tags()
-
 .. php:function:: largo_top_term()
 
    Returns (and optionally echoes) the 'top term' for a post, falling back to a category if one wasn't specified
 
    :param array|string $options: Settings for post id, echo, link, use icon, wrapper and exclude
 
-.. php:function:: largo_filter_get_post_related_topics()
-
-.. php:function:: largo_filter_get_recent_posts_for_term_query_args()
-
 .. php:class:: Largo_Related
 
       The Largo Related class.
       Used to dig through posts to find IDs related to the current post
-
-   .. php:attr:: $number
-
-   .. php:attr:: $post_id
-
-   .. php:attr:: $post_ids
-
-   .. php:attr:: $post
 
    .. php:method:: Largo_Related::__construct()
 

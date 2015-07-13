@@ -1,4 +1,5 @@
-.. php:attr:: $_SERVER
+inc/wp-taxonomy-landing/functions/cftl-series-order.php
+=======================================================
 
 .. php:function:: largo_series_custom_order()
 

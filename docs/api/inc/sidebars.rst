@@ -1,3 +1,6 @@
+inc/sidebars.php
+================
+
 .. php:function:: largo_register_sidebars()
 
    Register our sidebars and other widget areas
@@ -7,8 +10,6 @@
    :todo: move $he taxonomy landing page sidebar registration here
 
    :since: 0.3
-
-.. php:function:: largo_custom_sidebars_dropdown()
 
 .. php:function:: largo_get_excluded_sidebars()
 
@@ -21,5 +22,3 @@
 .. php:function:: largo_is_sidebar_required()
 
    Determines if is_single or is_singular context requires a sidebar
-
-.. php:function:: largo_sidebar_span_class()

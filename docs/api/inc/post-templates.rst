@@ -1,8 +1,5 @@
-.. php:function:: get_post_templates()
-
-.. php:function:: post_templates_dropdown()
-
-.. php:function:: get_post_template()
+inc/post-templates.php
+======================
 
 .. php:function:: is_post_template()
 

@@ -1,3 +1,6 @@
+inc/taxonomies.php
+==================
+
 .. php:function:: largo_is_series_enabled()
 
    Check if the Series taxonomy is enabled
@@ -35,8 +38,6 @@
    :returns: array $f terms
 
    :since: 1.0
-
-.. php:function:: largo_term_to_label()
 
 .. php:function:: largo_get_series_posts()
 

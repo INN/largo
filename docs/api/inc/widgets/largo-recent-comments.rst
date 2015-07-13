@@ -1,12 +1,13 @@
+inc/widgets/largo-recent-comments.php
+=====================================
+
 .. php:class:: largo_recent_comments_widget
+
+      Largo recent-comments Widget
 
    .. php:method:: largo_recent_comments_widget::largo_recent_comments_widget()
 
       Widget setup.
-
-   .. php:method:: largo_recent_comments_widget::flush_widget_cache()
-
-   .. php:method:: largo_recent_comments_widget::widget()
 
    .. php:method:: largo_recent_comments_widget::update()
 

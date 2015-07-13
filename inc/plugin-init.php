@@ -68,12 +68,6 @@ function largo_register_required_plugins() {
 
 		// This is an example of how to include a plugin from the WordPress Plugin Repository
 		array(
-			'name' 		=> 'Ad Code Manager',
-			'slug' 		=> 'ad-code-manager',
-			'required' 	=> false,
-		),
-
-		array(
 			'name' 		=> 'Disqus Comment System',
 			'slug' 		=> 'disqus-comment-system',
 			'required' 	=> false,

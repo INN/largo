@@ -1,8 +1,8 @@
 <?php
-/*
+
+/**
  * Largo Follow Widget
  */
-
 class largo_follow_widget extends WP_Widget {
 
 	/**
@@ -23,7 +23,7 @@ class largo_follow_widget extends WP_Widget {
 
 		/* Create the widget. */
 		$this->WP_Widget( 'largo-follow-widget', __('Largo Follow', 'largo'), $widget_ops );
-	
+
 		self::$rendered = true;
 	}
 

@@ -1,12 +1,20 @@
 <?php
 /**
+ * Largo's Options Framework configuration file
+ *
+ * Defines all of the default options and available values for Largo.
+ *
+ * @package Largo
+ */
+
+//=//
+
+/**
  * A unique identifier is defined to store the options in the database and reference them from the theme.
  * By default it uses the theme name, in lowercase and without spaces, but this can be changed if needed.
  * If the identifier changes, it'll appear as if the options have been reset.
  */
-
 function optionsframework_option_name() {
-
 	// This gets the theme name from the stylesheet
 	$themename = get_option( 'stylesheet' );
 	$themename = preg_replace("/\W/", "_", strtolower($themename) );
@@ -24,9 +32,7 @@ function optionsframework_option_name() {
  * with the actual text domain for your theme.  Read more:
  * http://codex.wordpress.org/Function_Reference/load_theme_textdomain
  */
-
 function optionsframework_options() {
-
 	$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';
 	$home_templates = array();
 	$home_templates_data = largo_get_home_layouts();
@@ -652,9 +658,16 @@ function optionsframework_options() {
  * This is an example of how to add custom scripts to the options panel.
  * This example shows/hides an option when a checkbox is clicked.
  */
-
 add_action('optionsframework_custom_scripts', 'optionsframework_custom_scripts');
 
+/**
+ * This function prints Javascript on the Theme Options admin page to control the behavior
+ * of certain options that depend or require other options.
+ *
+ * For example, you can not use Custom Landing Pages unless Series taxonomy is enabled. So,
+ * this script will hide the Custom Landing Pages option until the Series taxonomy checkbox
+ * is enabled.
+ */
 function optionsframework_custom_scripts() { ?>
 <script type="text/javascript">
 jQuery(document).ready(function($) {

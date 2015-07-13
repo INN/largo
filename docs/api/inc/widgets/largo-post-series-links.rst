@@ -1,8 +1,9 @@
+inc/widgets/largo-post-series-links.php
+=======================================
+
 .. php:class:: largo_post_series_links_widget
 
-   .. php:method:: largo_post_series_links_widget::largo_post_series_links_widget()
-
-   .. php:method:: largo_post_series_links_widget::widget()
+      List all of the terms in a custom taxonomy
 
    .. php:method:: largo_post_series_links_widget::update()
 

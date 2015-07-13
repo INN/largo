@@ -1,25 +1,32 @@
 <?php
 /**
  * Template Name: MailChimp Feed
- * A feed with thumbnail images for MailChimp import
- * Feed address to use for MailChimp import will be http://myurl.com/?feed=mailchimp
+ *
+ * A feed with thumbnail images for MailChimp import.
+ * Feed address to use for MailChimp import will be http://myurl.com/?feed=mailchimp.
  *
  * @package Largo
  * @since 0.2
  */
 
+/**
+ * @ignore
+ */
 $numposts = 20;
+$posts = query_posts( array(
+  'showposts' => $numposts
+) );
+$lastpost = $numposts - 1;
 
+/**
+ * A template tag for printing the date in a format suitable for an RSS feed
+ *
+ * @param mixed $timestamp (optional) the unix timestamp for which to print the formatted date
+ */
 function rss_date( $timestamp = null ) {
   $timestamp = ($timestamp==null) ? time() : $timestamp;
   echo date(DATE_RSS, $timestamp);
 }
-
-$posts = query_posts( array(
-  'showposts' => $numposts
-) );
-
-$lastpost = $numposts - 1;
 
 header("Content-Type: application/rss+xml; charset=UTF-8");
 echo '<?xml version="1.0" encoding="UTF-8"?>';

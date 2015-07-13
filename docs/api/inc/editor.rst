@@ -1,12 +1,11 @@
+inc/editor.php
+==============
+
 .. php:function:: largo_add_mce_plugin()
 
    Add the tinymce plugin to insert modules into posts
 
    :since: 1.0
-
-.. php:function:: largo_register_mce_buttons()
-
-.. php:function:: largo_add_mce_buttons()
 
 .. php:function:: largo_module_shortcode()
 

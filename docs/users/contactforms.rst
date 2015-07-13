@@ -13,6 +13,6 @@ Feel free to put additional information on the page either before or after the c
 
 You can also use the ``[clean-contact]`` shortcode in posts to provide a contact form there.
 
-Finally, it is possible to override the default settings for the contact form directly from the shortcode using the following parameters:
+Finally, it is possible to override the default settings for the contact form directly from the shortcode using the following parameters: ::
 
-``[clean-contact: prefix="help" email="test@example.com" thanks="Cheers!" bcc="admin@example.com" thanks_url="/thankyou.html"]``
+	[clean-contact: prefix="help" email="test@example.com" thanks="Cheers!" bcc="admin@example.com" thanks_url="/thankyou.html"]
