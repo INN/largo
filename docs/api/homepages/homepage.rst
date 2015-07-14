@@ -1,3 +1,6 @@
+homepages/homepage.php
+======================
+
 .. php:function:: largo_register_default_homepage_layouts()
 
    Registers all of the standard Largo homepage layout classes

@@ -1,6 +1,7 @@
 <?php
-/*
- * A simple Twitter widget
+
+/**
+ * A simple Facebook widget
  */
 class largo_facebook_widget extends WP_Widget {
 
@@ -84,10 +85,10 @@ class largo_facebook_widget extends WP_Widget {
 
 	/**
 	 * Returns true if this widget has been rendered one or more times.
-	 * 
+	 *
 	 * @since 0.5
 	 */
-	function is_rendered() {
+	static function is_rendered() {
 		return self::$rendered;
 	}
 }

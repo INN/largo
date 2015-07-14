@@ -19,7 +19,15 @@ Applying a series to a post can be done by selecting the appropriate series from
 Creating the landing page
 -------------------------
 
-Landing pages are created through the **Landing Pages > Add New** entry in the Dashboard sidebar. Landing pages have the following options:
+Landing pages are created through the **Landing Pages > Add New** entry in the Dashboard sidebar.
+
+These settings **must** be set for the series landing page to function:
+
+- Page Template: Must be set to "Series Landing Page default"
+- Slug: A short, descriptive label for the page composed of the letters a-z and numbers 0-9. This must match the slug of the series that the landing page is for.
+- Series: In the right-hand sidebar of the page editor, you must choose the series that the landing page is for.
+
+Landing pages have the following options:
 
 - Title: The name of the series.
 - Display header: If header display is disabled, then the description will not appear.
@@ -32,7 +40,7 @@ Landing pages are created through the **Landing Pages > Add New** entry in the D
 	- One widget column on the right
 	- One widget column on the right and one narrower widget column on the left
 	- No widget columns.
-	These defaut to those set in :ref:`Theme Options > Advanced Options > Sidebars for Landing Pages <landing-pages-sidebars-option>`, but those values can be overridden.
+	These default to the options set in :ref:`Theme Options > Advanced Options > Sidebars for Landing Pages <landing-pages-sidebars-option>`, but those values can be overridden.
 - Number of posts per page: 10 is the default. Page load times may be negatively affected when choosing "All".
 - Post order and 
 - Post display options: Affects how the posts are displayed.
@@ -40,13 +48,12 @@ Landing pages are created through the **Landing Pages > Add New** entry in the D
 	- Show excerpt shows the post excerpt
 	- Show byline shows the post byline
 	- Show categories and tags shows each post's categories and tags
-- Slug: A short, descriptive label for the page composed of the letters a-z and numbers 0-9, 
-- Author: The author of the series. This defaults to the person who created the series, and can be hidden by unchecking the "Show Series Byline" option above.
+- Author: The author of the series. This defaults to the person who created the series, and can be hidden by unchecking the "Show Series Byline" option above. This can be a CoAuthors Plus guest author.
 - Footer layout style
 	- None: The series page does not have a custom footer.
 	- Use widget: Creates a new "Series Name: Bottom" :doc:`widget area <sidebarswidgets>`, editable in **Appearance > Widgets**
 	- Custom HTML: Checking this option reveals a TinyMCE editor that allows you to write additional content using the standard editor or paste in HTML through the text editor.
-	
+
 Common ways of customizing your landing page
 --------------------------------------------
 

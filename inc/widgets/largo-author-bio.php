@@ -23,7 +23,7 @@ class largo_author_widget extends WP_Widget {
 		if( get_post_meta( $post->ID, 'largo_byline_text' ) )
 			$byline_text = esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) );
 
-		$is_series_landing = (function_exists('is_series_landing'))? is_series_landing($post->ID) : false;
+		$is_series_landing = (function_exists('largo_is_series_landing'))? largo_is_series_landing() : false;
 
 		if( (is_singular() || is_author() || $is_series_landing) && empty($byline_text) ):
 

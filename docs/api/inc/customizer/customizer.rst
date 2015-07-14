@@ -1,3 +1,6 @@
+inc/customizer/customizer.php
+=============================
+
 .. php:class:: Largo_Customizer
 
       The Largo_Customizer gives a visually responsive setup interface.
@@ -5,8 +8,6 @@
    .. php:method:: Largo_Customizer::get_instance()
 
       Get the instance of the Largo Customizer
-
-   .. php:method:: Largo_Customizer::__construct()
 
    .. php:method:: Largo_Customizer::action_customize_register()
 

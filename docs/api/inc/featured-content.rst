@@ -1,3 +1,6 @@
+inc/featured-content.php
+========================
+
 .. php:function:: largo_get_featured_posts()
 
    Shorthand for querying posts from a custom taxonomy

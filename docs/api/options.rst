@@ -1,3 +1,6 @@
+options.php
+===========
+
 .. php:function:: optionsframework_option_name()
 
    A unique identifier is defined to store the options in the database and reference them from the theme.
@@ -14,3 +17,10 @@
    http://codex.wordpress.org/Function_Reference/load_theme_textdomain
 
 .. php:function:: optionsframework_custom_scripts()
+
+   This function prints Javascript on the Theme Options admin page to control the behavior
+   of certain options that depend or require other options.
+
+   For example, you can not use Custom Landing Pages unless Series taxonomy is enabled. So,
+   this script will hide the Custom Landing Pages option until the Series taxonomy checkbox
+   is enabled.

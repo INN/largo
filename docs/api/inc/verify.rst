@@ -1,3 +1,6 @@
+inc/verify.php
+==============
+
 .. php:function:: largo_verify()
 
    Adds site verification meta tags for various services

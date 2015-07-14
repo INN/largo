@@ -637,14 +637,6 @@ class Largo_Related {
 				if ( $this->have_enough_posts() ) return;
 			}
 		}
-
-		// still here? reverse and try again
-		// NOTE: we have no idea what this is used for (4/29/2015)
-		if ( ! $reversed ) {
-			$q->posts = array_reverse($q->posts);
-			$q->rewind_posts();
-			$this->add_from_query( $q, TRUE );
-		}
 	}
 
 	/**

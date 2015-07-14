@@ -67,6 +67,12 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		unset($widgets_backup);
 	}
 
+	function largo_set_new_option_defaults() {
+
+		$this->markTestIncomplete('This function relies on the real options framework');
+
+	}
+
 	function test_largo_home_transition() {
 		// old topstories
 		of_reset_options();

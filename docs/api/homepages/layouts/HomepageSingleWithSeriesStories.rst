@@ -1,4 +1,10 @@
+homepages/layouts/HomepageSingleWithSeriesStories.php
+=====================================================
+
 .. php:class:: HomepageSingleWithSeriesStories
+
+      Homepage layout that provides one BIG featured story and several other stories
+      from the same Series.
 
    .. php:method:: HomepageSingleWithSeriesStories::unregister_HomepageSingleWithSeriesStories()
 
@@ -10,7 +16,3 @@
       the register method creates a new instance of that class
       therefore the __construct method below checks largo_is_series_enabled
       and adds an auto-removal function to the init hook of series are not enabled.
-
-   .. php:method:: HomepageSingleWithSeriesStories::__construct()
-
-   .. php:method:: HomepageSingleWithSeriesStories::moreStories()

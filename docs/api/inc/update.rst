@@ -1,4 +1,5 @@
-.. php:function:: largo_version()
+inc/update.php
+==============
 
 .. php:function:: largo_need_updates()
 
@@ -9,8 +10,6 @@
    Performs various database updates upon Largo version change.
 
    :since: 0.3
-
-.. php:function:: largo_home_transition()
 
 .. php:function:: largo_update_widgets()
 
@@ -33,10 +32,6 @@
 .. php:function:: largo_deprecated_footer_widget()
 
    Admin notices of older widgets
-
-.. php:function:: largo_deprecated_sidebar_widget()
-
-.. php:function:: largo_transition_nav_menus()
 
 .. php:function:: largo_update_prominence_term_description_single()
 
@@ -70,12 +65,6 @@
 
    Update miscellaneous settings
 
-.. php:function:: largo_update_admin_notice()
-
-.. php:function:: largo_register_update_page()
-
-.. php:function:: largo_update_page_view()
-
 .. php:function:: largo_update_page_enqueue_js()
 
    Enqueues javascript used on the Largo Update page
@@ -83,8 +72,6 @@
    :global: LARGO_DEBUG
 
    :global: $_GET
-
-.. php:function:: largo_ajax_update_database()
 
 .. php:function:: largo_update_custom_less_variables()
 

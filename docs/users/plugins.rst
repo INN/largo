@@ -42,7 +42,7 @@ In addition to the Argo plugins, we have included a curated list of other plugin
 
 - `W3 Total Cache <https://wordpress.org/plugins/w3-total-cache/>`_ is a caching plugin for WordPress that will improve the load time of your site and help your server to better deal with large traffic spikes. Caching is heavily dependent on your server setup, and while `W3 Total Cache <https://wordpress.org/plugins/w3-total-cache/>`_ is one of the most powerful (and flexible) WordPress caching solutions out there, if it does not work for you `WP Super Cache <https://wordpress.org/plugins/wp-super-cache/>`_ is another popular alternative. Note that this is not relevant for sites that we host for INN members as our hosting company, WP Engine, has their own caching system.
 
-- `Ad Code Manager <https://wordpress.org/plugins/ad-code-manager/>`_ is used to insert standard ad units into Largo.
+- `DoubleClick for WordPress <https://github.com/INN/DoubleClick-for-WordPress/>`_ is used to insert standard ad units into Largo. Read its `documentation for more details <dfw.readthedocs.org/en/latest/>`_.
 
 Complete List of Plugins Available
 ----------------------------------
@@ -59,7 +59,6 @@ Here is a complete list of the plugins currently installed and available.
 
 **Recommended/curated plugins:**
 
-- `Ad Code Manager <https://wordpress.org/plugins/ad-code-manager/>`_ - Easy ad code management
 - `Akismet <http://akismet.com/wordpress/>`_ - Spam prevention
 - `Better WordPress Google XML Sitemaps <https://wordpress.org/plugins/bwp-google-xml-sitemaps/>`_ - Create and manage sitemaps for submission to Google and Google News
 - `Breadcrumb NavXT <https://wordpress.org/plugins/breadcrumb-navxt/>`_ - Used by some sites to add breadcrumb navigation
@@ -68,12 +67,12 @@ Here is a complete list of the plugins currently installed and available.
 - `Co-Authors Plus <https://wordpress.org/plugins/co-authors-plus/>`_ - Allows multiple authors to be assigned to a post.
 - `Constant Contact Plugin <https://wordpress.org/plugins/constant-contact-api/>`_ - Adds integration for the Constant Contact email marketing service
 - `Disqus Comment System <https://wordpress.org/plugins/disqus-comment-system/>`_ - The Disqus comment system replaces your WordPress comment system with your comments hosted and powered by Disqus.
+- `DoubleClick for WordPress <https://github.com/INN/DoubleClick-for-WordPress>`_ - DoubleClick ad integration, maintained by INN.
 - `Edit Flow <https://wordpress.org/plugins/edit-flow/>`_ - Adds better editorial workflow options to the WordPress admin
 - `Facebook Comments <https://wordpress.org/plugins/facebook-comments-plugin/>`_ - Replaces the default WordPress comment system with Facebook comments
 - `Liveblog <https://wordpress.org/plugins/liveblog/>`_ - A simple way to add live blogs to your site.
 - `Navis DocumentCloud <https://wordpress.org/plugins/navis-documentcloud/>`_ - Embed DocumentCloud documents that won't be eaten by the visual editor
 - `News Quizzes <https://github.com/INN/news-quiz>`_ - A WordPress wrapper for Mother Jones' news quiz tool
-- `Slack <https://wordpress.org/plugins/slack/>`_ - A plugin that sends notifications to Slack when WordPress events occur, such as publishling a post and pending comments.
 - `Redirection <https://wordpress.org/plugins/redirection/>`_ - Manage all your 301 redirects and monitor 404 errors
 - `Simple Tags <https://wordpress.org/plugins/simple-tags/>`_ - Extended Tagging for WordPress 4.0.x : Suggested Tags, Mass edit tags, Auto-tags, Autocompletion, Related Posts etc.
 - `Slack <https://wordpress.org/plugins/slack/>`_ - Adds Slack notifications when you publish posts, receive new comments, etc.

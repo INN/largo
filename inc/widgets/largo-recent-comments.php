@@ -1,8 +1,8 @@
 <?php
-/*
+
+/**
  * Largo recent-comments Widget
  */
-
 class largo_recent_comments_widget extends WP_Widget {
 
 	/**

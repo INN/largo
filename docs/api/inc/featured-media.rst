@@ -1,3 +1,6 @@
+inc/featured-media.php
+======================
+
 .. php:function:: largo_default_featured_media_types()
 
    Returns the default available featured media types
@@ -14,8 +17,6 @@
 
    :returns: bool $f a post ID has featured media or not.
 
-.. php:function:: largo_enqueue_featured_media_js()
-
 .. php:function:: largo_add_featured_media_button()
 
    Adds the "Set Featured Media" button above the post editor
@@ -31,8 +32,6 @@
 .. php:function:: largo_remove_featured_image_meta_box()
 
    Remove the default featured image meta box from post pages
-
-.. php:function:: largo_featured_media_read()
 
 .. php:function:: largo_featured_media_save()
 

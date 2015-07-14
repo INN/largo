@@ -13,38 +13,37 @@
     list-style:none;
     font-size: 11px;
     line-height: 24px;
-	li {
-	  float: left;
-	  margin: 9px 18px 0 0;
+    li {
+      float: left;
+      margin: 9px 18px 0 0;
     }
     a {
-	  .darkLight(@headerFooterColor);
+      .darkLight(@headerFooterColor);
       &:hover {
-	    text-decoration:none;
-	    color: darken(@white, 15%);
+        text-decoration:none;
+        color: darken(@white, 15%);
       }
     }
   }
   .nav-right {
     float: right;
     ul#header-social {
-	  float:left;
-	  margin: 0 0 0 0;
-	  font-size: 14px;
-	  li {
-	    margin: 5px 0 5px 10px;
-	    a {
-		  color: @white;
+      float:left;
+      margin: 0 0 0 0;
+      font-size: 14px;
+      li {
+        margin: 5px 0 5px 10px;
+        a {
+          color: @white;
           i {
             display: block;
             height: 24px;
             padding: 3px 4px 2px 4px;
-//            vertical-align: middle;
             &::before {
             }
           }
-	    }
-	  }
+        }
+      }
     }
     .donate-btn {
       float: left;
@@ -52,6 +51,7 @@
     }
   }
 }
+
 .donate-btn {
   font-size: 14px;
   line-height: 2;
@@ -71,6 +71,24 @@
     margin: 1px 3px 0 0;
   }
 }
+
+.nav-shelf li.donate {
+  a.donate-link {
+    color: @red;
+  }
+}
+
+@media (max-width: 480px) {
+  #header-extras li.donate { display: none; }
+  .nav-shelf li.donate {
+    display: block;
+  }
+}
+
+@media (min-width: 481px) {
+  .nav-shelf li.donate { display: none; }
+}
+
 #header-search {
   margin-left: 10px;
   margin-top: 5px;
@@ -80,17 +98,17 @@
     margin: 0;
   }
   input, button {
-	font-family: @sansFontFamily;
-	font-size: 13px;
-	line-height: 1;
+    font-family: @sansFontFamily;
+    font-size: 13px;
+    line-height: 1;
   }
   input {
-	height: 18px;
-	padding: 6px 4px 2px;
+    height: 18px;
+    padding: 6px 4px 2px;
   }
   button {
-	height: 28px;
-	text-transform: uppercase;
+    height: 28px;
+    text-transform: uppercase;
   }
 }
 .home #site-header {

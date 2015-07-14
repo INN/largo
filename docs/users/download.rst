@@ -38,7 +38,7 @@ At the very top of the file you need to add at least the following:
     Author URI:     Your Author URL
     Template:       largo
     Version:        0.1.0
-    */
+    \*/
 
 The line starting with "Template" must include the name of the folder that contains the parent theme files (this should be "largo" unless you name the parent theme folder something different).
 
@@ -47,6 +47,8 @@ If you would prefer, we have created `an example child theme <https://github.com
 To use this child theme, `simply download and unzip it <https://github.com/INN/Largo-Sample-Child-Theme/archive/master.zip>`_ just as you did the Largo parent theme above, modify the header block in the style.css as described above and then upload the folder to your wp-content/themes directory along with the Largo parent theme. The sample child theme contains a number of additional files and documentation that you may not need so you might consider removing the elements you do not intend to use.
 
 Now that you have a child theme created, login to your WordPress site and go to Appearance > Themes. Find your child theme, click "activate" and then you should see your new child theme in action on your site and can begin customizing.
+
+**More:** `Using Child Themes <../developers/childthemes.html>`_.
 
 Configure Theme Options
 -----------------------

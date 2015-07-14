@@ -1,4 +1,5 @@
-.. php:function:: largo_register_term_meta_post_type()
+inc/term-meta.php
+=================
 
 .. php:function:: largo_get_term_meta_post()
 

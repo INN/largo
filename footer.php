@@ -25,7 +25,7 @@
 	do_action( 'largo_before_footer' );
 ?>
 
-<div class="footer-bg clearfix">
+<div class="footer-bg clearfix nocontent">
 	<footer id="site-footer">
 
 		<?php

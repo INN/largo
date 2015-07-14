@@ -1,5 +1,6 @@
 <?php
-/*
+
+/**
  * List all of the terms in a custom taxonomy
  */
 class largo_post_series_links_widget extends WP_Widget {

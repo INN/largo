@@ -1,4 +1,5 @@
-.. php:function:: largo_custom_less_variables_init()
+inc/custom-less-variables.php
+=============================
 
 .. php:function:: largo_clv_register_files()
 
@@ -28,22 +29,6 @@
 .. php:class:: Largo_Custom_Less_Variables
 
       Class to contain the logic
-
-   .. php:attr:: $less_files
-
-   .. php:attr:: $css_files
-
-   .. php:attr:: $field_type_callbacks
-
-   .. php:attr:: $less_dir
-
-   .. php:attr:: $css_dir_uri
-
-   .. php:attr:: $variables_less_file
-
-   .. php:const:: Largo_Custom_Less_Variables:: CACHE_DURATION = WEEK_IN_SECONDS;
-
-   .. php:const:: Largo_Custom_Less_Variables:: POST_TYPE = 'largo_less_variables';
 
    .. php:method:: Largo_Custom_Less_Variables::init()
 
@@ -111,8 +96,6 @@
 
       Replace the include for the variable file with a modified version
       with the custom values.
-
-   .. php:method:: Largo_Custom_Less_Variables::fix_urls()
 
    .. php:method:: Largo_Custom_Less_Variables::style_loader_src()
 

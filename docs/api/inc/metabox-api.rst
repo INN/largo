@@ -1,6 +1,5 @@
-.. php:attr:: $largo
-
-   .. php:attr:: $largo
+inc/metabox-api.php
+===================
 
 .. php:function:: largo_add_meta_box()
 
@@ -39,5 +38,3 @@
 .. php:function:: _largo_metaboxes_content()
 
    Private function to generate fields/markup within largo metaboxes
-
-.. php:function:: _largo_meta_box_save()

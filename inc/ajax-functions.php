@@ -66,11 +66,11 @@ if (!function_exists('largo_load_more_posts_data')) {
  */
 if (!function_exists('largo_load_more_posts')) {
 	function largo_load_more_posts() {
-		
+
 		global $opt;
 
-		$paged = $_POST['paged'];
-		$context = (isset($_POST['query']))? $_POST['query'] : array();
+		$paged = (isset($_POST['paged'])) ? $_POST['paged'] : 0;
+		$context = (isset($_POST['query']))? json_decode(stripslashes($_POST['query']), true) : array();
 
 		// Making sure that this isn't home
 		if (isset($_POST['is_home']))
