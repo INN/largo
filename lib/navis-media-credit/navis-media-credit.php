@@ -86,6 +86,12 @@ class Navis_Media_Credit {
             'label' => 'Credit',
             'input' => 'text',
             'value' => ! empty( $creditor ) ? $creditor->credit : '',
+		);
+
+        $fields[ 'media_credit_url' ] = array(
+            'label' => 'Credit URL',
+            'input' => 'text',
+            'value' => ! empty( $creditor ) ? $creditor->credit_url : '',
         );
 
         $fields[ 'navis_media_credit_org' ] = array(
@@ -107,7 +113,7 @@ class Navis_Media_Credit {
 
     function save_media_credit( $post, $attachment ) {
         $creditor = new Media_Credit( $post['ID'] );
-        $fields = array( 'media_credit', 'navis_media_credit_org', 'navis_media_can_distribute' );
+        $fields = array( 'media_credit', 'media_credit_url', 'navis_media_credit_org', 'navis_media_can_distribute' );
 
         foreach ( $fields as $field ) {
             if ( $_POST['attachments'] && isset( $_POST['attachments'][$post['ID']][$field] ) ) {
@@ -231,7 +237,10 @@ class Media_Credit {
         $this->post_id = $post_id;
         $this->credit = get_post_meta( $post_id,
             MEDIA_CREDIT_POSTMETA_KEY, true
-        );
+		);
+		$this->credit_url = get_post_meta( $post_id,
+			'_media_credit_url', true
+		);
         $this->org = get_post_meta( $post_id,
             '_navis_media_credit_org', true
         );

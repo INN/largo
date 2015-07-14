@@ -116,6 +116,130 @@ if ( INN_MEMBER === TRUE ) {
 	add_action('wp_dashboard_setup', 'largo_dashboard_widgets_nonmember');
 }
 
+/**
+ * Largo Dashboard / Admin Bar Menu
+ * -- Priority 15 Places between WordPress Logo and My Sites
+ * -- To move menu to end of items use something like priority 999
+ */ 
+
+add_action( 'admin_bar_menu', 'largo_dash_admin_menu', 15 );
+function largo_dash_admin_menu( $wp_admin_bar ) {
+
+	// Add Top Level Text Node for Dropdown
+	$args = array('id' => 'largo_admin_mega', 'title' => 'Largo'); 
+	$wp_admin_bar->add_node($args);
+	
+	// Main Website
+	$args = array('id' => 'website', 'title' => 'Main Website', 'href' => 'http://largoproject.org/', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+	
+	// Documentation
+	$args = array('id' => 'largo_docs', 'title' => 'Documentation', 'href' => 'http://largo.readthedocs.org/', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+		
+		// Theme Options	
+		$args = array('id' => 'largo_docs_themeoptions', 'title' => 'Theme Options', 'href' => 'http://largo.readthedocs.org/users/themeoptions.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Menus	
+		$args = array('id' => 'largo_docs_menus', 'title' => 'Menus', 'href' => 'http://largo.readthedocs.org/users/menus.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Sidebars and Widgets	
+		$args = array('id' => 'largo_docs_sidebars', 'title' => 'Sidebars and Widgets', 'href' => 'http://largo.readthedocs.org/users/sidebarswidgets.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Series Landing Pages	
+		$args = array('id' => 'largo_docs_landings', 'title' => 'Series Landing Pages', 'href' => 'http://largo.readthedocs.org/users/landingpages.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Taxonomies	
+		$args = array('id' => 'largo_docs_tax', 'title' => 'Taxonomies', 'href' => 'http://largo.readthedocs.org/users/taxonomies.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Post Templates		
+		$args = array('id' => 'largo_docs_templates', 'title' => 'Post Templates', 'href' => 'http://largo.readthedocs.org/users/posttemplates.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Plugins
+		$args = array('id' => 'largo_docs_plugins', 'title' => 'Plugins', 'href' => 'http://largo.readthedocs.org/users/plugins.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Contact Forms
+		$args = array('id' => 'largo_docs_contactform', 'title' => 'Contact Forms', 'href' => 'http://largo.readthedocs.org/users/contactforms.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Advertising
+		$args = array('id' => 'largo_docs_ads', 'title' => 'Advertising', 'href' => 'http://largo.readthedocs.org/users/ads.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// For Developers
+		$args = array('id' => 'largo_docs_devs', 'title' => 'For Developers', 'href' => 'http://largo.readthedocs.org/developers/fordevelopers.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Image Sizes
+		$args = array('id' => 'largo_docs_imgs', 'title' => 'Image Sizes', 'href' => 'http://largo.readthedocs.org/developers/imagesizes.html', 'parent' => 'largo_docs'); 
+		$wp_admin_bar->add_node($args);
+		
+	// Knowledge Base
+	$args = array('id' => 'knowledge_base', 'title' => 'Knowledge Base', 'href' => 'http://confluence.inn.org/display/LKB/Largo+Knowledge+Base', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+	
+	// Member Help Desk
+	$args = array('id' => 'support', 'title' => 'Help Desk', 'href' => 'http://jira.inn.org/servicedesk/customer/portal/4', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+	
+	// Largo on GitHub
+	$args = array('id' => 'github', 'title' => 'Largo on GitHub', 'href' => 'https://github.com/inn/largo', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+	
+	// Largo on Twitter
+	$args = array('id' => 'twitter', 'title' => '@LargoProject on Twitter', 'href' => 'https://twitter.com/largoproject', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+	
+	
+	// INN Nerds
+	$args = array('id' => 'inn_nerds', 'title' => 'INN Nerds', 'href' => 'http://nerds.inn.org', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+
+		// Blog
+		$args = array('id' => 'inn_nerds_blog', 'title' => 'Our Blog', 'href' => 'http://nerds.inn.org', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);		
+		
+		// GitHub
+		$args = array('id' => 'inn_nerds_github', 'title' => 'Our Projects on GitHub', 'href' => 'https://github.com/inn', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Twitter
+		$args = array('id' => 'inn_nerds_twitter', 'title' => 'Twitter', 'href' => 'https://twitter.com/INNnerds', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Contact
+		$args = array('id' => 'contact_nerds', 'title' => 'Contact', 'href' => 'http://nerds.inn.org/contact/', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Friday Email Newsletter
+		$args = array('id' => 'inn_nerds_newsletter', 'title' => 'Email Newsletter', 'href' => 'http://investigativenewsnetwork.us1.list-manage.com/subscribe/post?u=81670c9d1b5fbeba1c29f2865&id=1476113985', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Friday Office Hours
+		$args = array('id' => 'inn_nerds_office_hours', 'title' => 'Open Office Hours', 'href' => 'https://docs.google.com/spreadsheets/d/1p-twn2D8oow7vXBfkcdYcZnVA4z8Q42OMs77KlHwf-g', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Monthly Book Club
+		$args = array('id' => 'inn_nerds_book_club', 'title' => 'Monthly Book Club', 'href' => 'http://newsnerdbookclub.com', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);
+	
+	// About INN	
+	$args = array('id' => 'about_inn', 'title' => 'About INN', 'href' => 'http://inn.org/about', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+	
+	// Donate
+	$args = array('id' => 'donate_inn', 'title' => 'Donate', 'href' => 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=M7T6234BREMG2', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+
+}
+
 // add a credit line to the admin footer
 function largo_admin_footer_text( $default_text ) {
      return '<span id="footer-thankyou">This website powered by <a href="http://largoproject.org">Project Largo</a> from <a href="http://inn.org">INN</a> and <a href="http://wordpress.org">WordPress</a>.</span>';

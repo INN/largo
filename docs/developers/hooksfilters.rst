@@ -36,6 +36,19 @@ This is used in the query for the series list of posts in the same series
 as the main feature. This is the maximum number of posts that will display
 in the list.
 
+------------
+
+filter: **largo_homepage_topstories_post_count**
+
+*args: $showposts*
+
+Filter the number of posts that are displayed in the right-hand side of the
+Top Stories homepage template.
+
+This is used in the query for the list of posts in the "Homepage Featured"
+taxonomy. If more than 3 posts are found, they will display under a
+"More Headlines" heading, just as headline links.
+
 Other filters and actions
 -------------------------
 

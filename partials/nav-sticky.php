@@ -1,4 +1,4 @@
-<div class="sticky-nav-wrapper">
+<div class="sticky-nav-wrapper nocontent">
 	<div class="sticky-nav-holder <?php echo (is_front_page() || is_home()) ? '' : 'show'; ?>"
 		data-hide-at-top="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>">
 

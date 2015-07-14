@@ -7,7 +7,7 @@
  */
 get_header();
 
-global $tags, $paged, $post;
+global $tags, $paged, $post, $shown_ids;
 
 $title = single_cat_title('', false);
 $description = category_description();
@@ -25,20 +25,20 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 
 	<?php
 
-	$featured_posts = largo_get_featured_posts_in_category($wp_query->query_vars['category_name']);
-	if ($paged < 2) {
-		if (count($featured_posts) > 0) {
-			foreach ($featured_posts as $idx => $featured_post) {
-				if ($idx == 0) { ?>
+	$featured_posts = largo_get_featured_posts_in_category( $wp_query->query_vars['category_name'] );
+	if ( $paged < 2 ) {
+		if ( count( $featured_posts ) > 0) {
+			foreach ( $featured_posts as $idx => $featured_post ) {
+				if ( $idx == 0 ) { 
+					$shown_ids[] = get_the_ID();
+				?>
 					<div class="primary-featured-post">
-						<?php largo_render_template(
-								'partials/archive', 'category-primary-feature', array('featured_post' => $featured_post)); ?>
+						<?php largo_render_template( 'partials/archive', 'category-primary-feature', array( 'featured_post' => $featured_post ) ); ?>
 					</div>
 					<div class="secondary-featured-post">
 						<div class="row-fluid clearfix">
 			<?php } else {
-				largo_render_template(
-					'partials/archive', 'category-secondary-feature', array('featured_post' => $featured_post));
+				largo_render_template( 'partials/archive', 'category-secondary-feature', array( 'featured_post' => $featured_post ) );
 				}
 			}
 		}
@@ -46,21 +46,20 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 		// If we don't have enough featured posts to fill in
 		// the featured area of the page, start using plain
 		// posts from the Loop.
-		if (count($featured_posts) < 5) {
-			$needed = 5 - count($featured_posts);
+		if ( count( $featured_posts ) < 5) {
+			$needed = 5 - count( $featured_posts );
 
-			foreach (range(1, $needed) as $number) {
+			foreach ( range( 1, $needed ) as $number ) {
 				the_post();
-				if (count($featured_posts) == 0 && $number == 1) { ?>
+				$shown_ids[] = get_the_ID();
+				if ( count( $featured_posts ) == 0 && $number == 1 ) { ?>
 					<div class="primary-featured-post">
-						<?php largo_render_template(
-								'partials/archive', 'category-primary-feature', array('featured_post' => $post)); ?>
+						<?php largo_render_template( 'partials/archive', 'category-primary-feature', array( 'featured_post' => $post) ); ?>
 					</div>
 					<div class="secondary-featured-post">
 						<div class="row-fluid clearfix">
 				<?php } else {
-					largo_render_template(
-						'partials/archive', 'category-secondary-feature', array('featured_post' => $post));
+					largo_render_template( 'partials/archive', 'category-secondary-feature', array( 'featured_post' => $post ) );
 				}
 			}
 		} ?>
@@ -72,14 +71,15 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 
 <div class="row-fluid clearfix">
 	<div class="stories span8" role="main" id="content">
-		<?php if (have_posts()) {
-			while (have_posts()) {
+		<?php if ( have_posts() ) {
+			while ( have_posts() ) {
 				the_post();
-				get_template_part('partials/content', 'archive');
+				$shown_ids[] = get_the_ID();
+				get_template_part( 'partials/content', 'archive' );
 			}
-			largo_content_nav('nav-below');
+			largo_content_nav( 'nav-below' );
 		} else {
-			get_template_part('partials/content', 'not-found');
+			get_template_part( 'partials/content', 'not-found' );
 		} ?>
 	</div>
 	<?php get_sidebar(); ?>

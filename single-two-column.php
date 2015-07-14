@@ -5,6 +5,8 @@
  * Description: Shows the post and sidebar if specified.
  */
 
+global $shown_ids;
+
 add_filter('body_class', function($classes) {
 	$classes[] = 'classic';
 	return $classes;
@@ -17,6 +19,8 @@ get_header();
 
 	<?php
 		while ( have_posts() ) : the_post();
+		
+			$shown_ids[] = get_the_ID();
 
 			$partial = ( is_page() ) ? 'page' : 'single-classic';
 

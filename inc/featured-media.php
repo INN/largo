@@ -145,6 +145,7 @@ function largo_get_featured_image_hero($post = null, $classes = '') {
 		$thumb_meta = array(
 			'caption' => (!empty($thumb_content->post_excerpt))? $thumb_content->post_excerpt : null,
 			'credit' => (!empty($thumb_custom['_media_credit'][0]))? $thumb_custom['_media_credit'][0] : null,
+			'credit_url' => (!empty($thumb_custom['_media_credit_url'][0]))? $thumb_custom['_media_credit_url'][0] : null,
 			'organization' => (!empty($thumb_custom['_navis_media_credit_org'][0]))? $thumb_custom['_navis_media_credit_org'][0] : null
 		);
 	}

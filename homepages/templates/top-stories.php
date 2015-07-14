@@ -53,7 +53,10 @@ global $largo, $shown_ids, $tags;
 
 	<?php if ( !is_active_sidebar('homepage-left-rail') ) { ?>
 	<div class="sub-stories span4">
-		<?php $substories = largo_get_featured_posts( array(
+		<?php
+		$showposts = 6;
+		$showposts = apply_filters('largo_homepage_topstories_post_count', $showposts);
+		$substories = largo_get_featured_posts( array(
 			'tax_query' => array(
 				array(
 					'taxonomy' 	=> 'prominence',
@@ -61,7 +64,7 @@ global $largo, $shown_ids, $tags;
 					'terms' 	=> 'homepage-featured'
 				)
 			),
-			'showposts'		=> 6,
+			'showposts'		=> $showposts,
 			'post__not_in' 	=> $shown_ids
 		) );
 		if ( $substories->have_posts() ) :
