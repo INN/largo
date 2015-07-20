@@ -1,6 +1,13 @@
+inc/term-icons.php
+==================
+
 .. php:class:: Largo_Term_Icons
 
-   .. php:method:: Largo_Term_Icons::__construct()
+      Creates $largo['term-icons'] using the Largo_Term_Icons class defined herein
+
+      Display the fields for selecting icons for terms in the "post-type" taxonomy
+
+      :global: $largo
 
    .. php:method:: Largo_Term_Icons::register_taxonomy()
 
@@ -12,15 +19,11 @@
 
       :global: $wp_filesystem
 
-   .. php:method:: Largo_Term_Icons::get_icon_taxonomies()
-
    .. php:method:: Largo_Term_Icons::display_fields()
 
       Renders the form fields on the term edit page
 
       :param object $term: A taxonomy term
-
-   .. php:method:: Largo_Term_Icons::display_add_new_field()
 
    .. php:method:: Largo_Term_Icons::admin_enqueue_scripts()
 
@@ -53,5 +56,3 @@
       :param term|string $taxonomy_or_term: - the term object of the taxonomy name
       :param int $term_id: - the term id when the first parameter is the taxonomy name
       :param string $tag: - the HTML element that shall be used for the icon
-
-   .. php:attr:: $largo

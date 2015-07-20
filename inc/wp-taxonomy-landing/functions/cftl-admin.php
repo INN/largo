@@ -396,7 +396,7 @@ function cftl_tax_landing_main($post) {
 			<strong>Lefthand Column Widget Region</strong><br/>
 			<select name="left_region">
 			<?php
-				largo_custom_sidebars_dropdown( $fields['left_region'][0], TRUE );
+				largo_landing_page_custom_sidebars_dropdown('left', $fields['left_region'][0]);
 			?>
 			</select>
 		</div>
@@ -404,7 +404,7 @@ function cftl_tax_landing_main($post) {
 			<strong>Righthand Column Widget Region</strong><br/>
 			<select name="right_region">
 			<?php
-				largo_custom_sidebars_dropdown( $fields['right_region'][0], TRUE );
+				largo_landing_page_custom_sidebars_dropdown('right', $fields['right_region'][0]);
 			?>
 			</select>
 		</div>

@@ -1,3 +1,6 @@
+inc/widgets/largo-recent-posts.php
+==================================
+
 .. php:class:: largo_recent_posts_widget
 
       Largo Recent Posts
@@ -12,7 +15,3 @@
 
       :param array $args: widget arguments.
       :param array $instance: saved values from databse.
-
-   .. php:method:: largo_recent_posts_widget::update()
-
-   .. php:method:: largo_recent_posts_widget::form()

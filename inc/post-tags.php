@@ -517,14 +517,14 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 			</nav><!-- #nav-below -->
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
-			$posts_term = of_get_option( 'posts_term_plural' );
-			if ( !$posts_term ) $posts_term = 'Posts'; ?>
-			<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-				<div class="load-more">
-					<?php next_posts_link( apply_filters('largo_next_posts_link', __('Load more ', 'largo') . strtolower($posts_term)) ); ?>
-				</div>
-			</nav>
-		<?php }
+			$posts_term = of_get_option('posts_term_plural');
+
+			largo_render_template('partials/load-more-posts', array(
+				'nav_id' => $nav_id,
+				'the_query' => $wp_query,
+				'posts_term' => ($posts_term)? $posts_term : 'Posts'
+			));
+		}
 	}
 }
 

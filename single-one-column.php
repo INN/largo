@@ -30,7 +30,7 @@ get_header();
 
 					do_action( 'largo_before_post_bottom_widget_area' );
 
-					echo '<div class="article-bottom">';
+					echo '<div class="article-bottom nocontent">';
 					dynamic_sidebar( 'article-bottom' );
 					echo '</div>';
 

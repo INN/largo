@@ -164,9 +164,12 @@ function largo_make_slug( $string, $maxLength = 63 ) {
  * @param 	mixed $stuff the stuff to be sent to the error log.
  * @since 	0.4
  */
-function var_log($stuff) {
-	error_log(var_export($stuff, true));
+if (!function_exists('var_log')) {
+	function var_log($stuff) {
+		error_log(var_export($stuff, true));
+	}
 }
+
 /**
  * @param string $slug the slug of the template file to render.
  * @param string $name the name identifier for the template file; works like get_template_part.

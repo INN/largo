@@ -250,6 +250,52 @@ function largo_get_series_posts( $series_id, $number = -1 ) {
 }
 
 /**
+* Filter: post_type_link
+*
+* Filter post permalinks for the Landing Page custom post type.
+* Replace direct post link with the link for the associated
+* Series taxonomy term, using the most recently created term
+* if multiple are set.
+*
+* This filter overrides the wp-taxonomy-landing filter,
+* which attempts to use the link for ANY term from ANY taxonomy.
+* Largo really only cares about the Series taxonomy.
+*
+* @since 0.5
+* @return filtered $post_link, replacing a Landing Page link with its Series link as needed
+*/
+function largo_series_landing_link($post_link, $post) {
+	// Get configuration setting for Custom Landing Pages
+	$opt_custom_landing_enabled = of_get_option('custom_landing_enabled');
+	$custom_landing_enabled = !empty($opt_custom_landing_enabled);
+
+	// Only process Landing Page post type when Series Landing Pages are enabled
+	if ( "cftl-tax-landing" == $post->post_type && $custom_landing_enabled ) {
+		// Get all series taxonomy terms for this landing page
+		$series_terms = wp_get_object_terms(
+			$post->ID,
+			'series',
+			array('orderby' => 'term_id', 'order' => 'DESC', 'fields' => 'slugs')
+		);
+		// Only proceed if we successfully found at least 1 series term
+		if ( !is_wp_error($series_terms) && !empty($series_terms) ) {
+			// Get the link for the first series term
+			// (ordered by the highest ID in the case of multiple terms)
+			$term_link = get_term_link($series_terms[0], 'series');
+			// Only proceed if we successfully found the term link
+			if ( !is_wp_error($term_link) && strlen(trim($term_link)) ) {
+				$post_link = esc_url($term_link);
+			}
+		}
+	}
+	// Return the filtered link
+	return $post_link;
+}
+// wp-taxonomy-landing library filters at priority 10.
+// We must filter AFTER that.
+add_filter('post_type_link', 'largo_series_landing_link', 22, 2);
+
+/**
  * Helper for getting posts in a category archive, excluding featured posts.
  */
 function largo_category_archive_posts( $query ) {

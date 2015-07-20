@@ -1,3 +1,6 @@
+inc/helpers.php
+===============
+
 .. php:function:: largo_fb_url_to_username()
 
    Returns a Facebook username or ID from the URL
@@ -77,22 +80,6 @@
    :param string $maxLength: the max length for the slug in characters
 
    :since: 0.4
-
-.. php:function:: var_log()
-
-   Send anything to the error log in a human-readable format
-
-   :param mixed $stuff: the stuff to be sent to the error log.
-
-   :since: 0.4
-
-.. php:function:: largo_render_template()
-
-   :param string $slug: the slug of the template file to render.
-   :param string $name: the name identifier for the template file; works like get_template_part.
-   :param array $context: an array with the variables that should be made available in the template being loaded.
-
-   :since: 0.4*
 
 .. php:function:: largo_get_current_url()
 

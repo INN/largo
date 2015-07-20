@@ -1,3 +1,6 @@
+inc/taxonomies.php
+==================
+
 .. php:function:: largo_is_series_enabled()
 
    Check if the Series taxonomy is enabled
@@ -36,8 +39,6 @@
 
    :since: 1.0
 
-.. php:function:: largo_term_to_label()
-
 .. php:function:: largo_get_series_posts()
 
    Helper function for getting posts in proper landing-page order for a series
@@ -45,6 +46,23 @@
    :uses: largo_is_series_enabled
    :param integer $eries: term id
    :param integer $umber: of posts to fetch, defaults to all
+
+.. php:function:: largo_series_landing_link()
+
+   Filter: post_type_link
+
+   Filter post permalinks for the Landing Page custom post type.
+   Replace direct post link with the link for the associated
+   Series taxonomy term, using the most recently created term
+   if multiple are set.
+
+   This filter overrides the wp-taxonomy-landing filter,
+   which attempts to use the link for ANY term from ANY taxonomy.
+   Largo really only cares about the Series taxonomy.
+
+   :since: 0.5
+
+   :returns: filtered $post_link, replacing a Landing Page link with its Series link as needed
 
 .. php:function:: largo_category_archive_posts()
 

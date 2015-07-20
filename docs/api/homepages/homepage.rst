@@ -1,3 +1,6 @@
+homepages/homepage.php
+======================
+
 .. php:function:: largo_register_default_homepage_layouts()
 
    Registers all of the standard Largo homepage layout classes
@@ -30,6 +33,8 @@
 .. php:function:: largo_home_featured_stories()
 
    Returns featured stories for the homepage.
+
+   :param int $max.: The maximum number of posts to return.
 
 .. php:function:: largo_home_series_stories_data()
 

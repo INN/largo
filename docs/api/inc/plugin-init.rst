@@ -1,3 +1,6 @@
+inc/plugin-init.php
+===================
+
 .. php:function:: largo_register_required_plugins()
 
    Register the required plugins for this theme.

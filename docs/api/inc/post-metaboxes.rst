@@ -1,4 +1,5 @@
-.. php:function:: largo_move_author_to_publish_metabox()
+inc/post-metaboxes.php
+======================
 
 .. php:function:: largo_remove_default_post_screen_metaboxes()
 

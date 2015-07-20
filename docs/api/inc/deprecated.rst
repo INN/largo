@@ -1,3 +1,6 @@
+inc/deprecated.php
+==================
+
 .. php:function:: largo_cached_nav_menu()
 
    Wrapper for wp_nav_menu() that previously cached nav menus. Removed caching mechanism and

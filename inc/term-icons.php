@@ -2,11 +2,10 @@
 /**
  * Creates $largo['term-icons'] using the Largo_Term_Icons class defined herein
  *
- * @global $largo
- */
-
-/**
  * Display the fields for selecting icons for terms in the "post-type" taxonomy
+ *
+ * @global $largo
+ *
  */
 class Largo_Term_Icons {
 

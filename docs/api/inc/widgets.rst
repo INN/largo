@@ -1,3 +1,6 @@
+inc/widgets.php
+===============
+
 .. php:function:: largo_widgets()
 
    Setup the Largo custom widgets

@@ -2,6 +2,10 @@
 
 include_once __DIR__ . '/HomepageSingle.php';
 
+/**
+ * Homepage layout that provides one BIG featured story and several other stories
+ * from the same Series.
+ */
 class HomepageSingleWithSeriesStories extends HomepageSingle {
 
 	/**

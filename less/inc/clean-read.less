@@ -25,6 +25,8 @@ body.clean-read {
   .global-nav-bg,
   #main-nav,
   #secondary-nav,
+  .sticky-nav-wrapper,
+  #wpadminbar,
   #sidebar,
   .footer-bg {
     display: none
@@ -60,9 +62,11 @@ body.clean-read {
   .entry-content {
     font-size: 110%;
   }
-  > .clean-read-close {
-    position: fixed;
-    top: 10px;
-    right: 20px;
+  .clean-read-close {
+    line-height: 32px;
+    vertical-align: middle;
+    a {
+      color: @linkColorHover;
+    }
   }
 }

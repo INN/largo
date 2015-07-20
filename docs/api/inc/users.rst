@@ -1,3 +1,6 @@
+inc/users.php
+=============
+
 .. php:function:: largo_contactmethods()
 
    Modify the user profile screen
@@ -25,14 +28,6 @@
 
    Checks that both the editing user and the user being edited are
    members of the blog and prevents the super admin being edited.
-
-.. php:function:: clean_user_twitter_username()
-
-.. php:function:: validate_twitter_username()
-
-.. php:function:: clean_user_fb_username()
-
-.. php:function:: validate_fb_username()
 
 .. php:function:: largo_get_user_list()
 

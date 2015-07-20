@@ -1,3 +1,6 @@
+inc/wp-taxonomy-landing/taxonomy-landing.php
+============================================
+
 .. php:function:: is_series_landing()
 
    Is this a series landing page?

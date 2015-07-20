@@ -1,5 +1,9 @@
 # Travis CI Configuration File
 
+# Use Travis CI container-based infrastructure
+# See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+sudo: false
+
 # Tell Travis CI we're using PHP
 language: php
 
@@ -11,6 +15,8 @@ php:
 env:
     - WP_VERSION=3.9.1 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
     - WP_VERSION=4.0.1 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+    - WP_VERSION=4.1.5 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+    - WP_VERSION=4.2.2 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
 
 # Only test the unittests branch for now
 branches:

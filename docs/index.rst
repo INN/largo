@@ -49,20 +49,14 @@ General Documentation
     users/contactforms
     users/ads
 
-
 .. _dev-docs:
 
 For Developers
 --------------
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 3
 
-    developers/fordevelopers
-    developers/imagesizes
-
-
-
-
-
-
+    developers/index
+    developers/constants
+    feedback

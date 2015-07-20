@@ -1,20 +1,109 @@
+inc/featured-media.php
+======================
+
 .. php:function:: largo_default_featured_media_types()
 
    Returns the default available featured media types
 
+.. php:function:: largo_hero()
+
+   Prints DOM for hero image.
+
+   Determines the type of featured media attached to a post,
+   and generates the DOM for that type of media.
+
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
+   :param String $classes: Optional. Class string to apply to outer div.hero
+
+.. php:function:: largo_get_hero()
+
+   Return DOM for hero image.
+
+   Determines the type of featured media attached to a post,
+   and generates the DOM for that type of media.
+
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
+   :param String $classes: Optional. Class string to apply to outer div.hero
+
+.. php:function:: largo_featured_image_hero()
+
+   Prints DOM for a featured image hero.
+
+   :since: 0.5.1
+
+   :see: largo_get_featured_image_hero()
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
+   :param String $classes: Optional. Class string to apply to outer div.hero
+
+.. php:function:: largo_get_featured_image_hero()
+
+   Returns DOM for a featured image hero.
+
+   :since: 0.5.1
+
+   :see: largo_get_featured_image_hero()
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
+   :param String $classes: Optional. Class string to apply to outer div.hero
+
+.. php:function:: largo_featured_embed_hero()
+
+   Prints DOM for an embed code hero.
+
+   :since: 0.5.1
+
+   :see: largo_get_featured_embed_hero()
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
+   :param String $classes: Optional. Class string to apply to outer div.hero
+
+.. php:function:: largo_get_featured_embed_hero()
+
+   Returns DOM for an embed code hero.
+
+   :since: 0.5.1
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
+   :param String $classes: Optional. Class string to apply to outer div.hero
+
+.. php:function:: largo_featured_gallery_hero()
+
+   Prints DOM for a featured gallery hero.
+
+   :since: 0.5.1
+
+   :see: largo_get_featured_gallery_hero()
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
+   :param String $classes: Optional. Class string to apply to outer div.hero
+
+.. php:function:: largo_get_featured_gallery_hero()
+
+   Returns DOM for a featured gallery hero.
+
+   :since: 0.5.1
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
+   :param String $classes: Optional. Class string to apply to outer div.hero
+
 .. php:function:: largo_get_featured_media()
 
-   Template helpers
+   Returns information about the featured media.
+
+   			'id' => int, 		// post id.
+   			'type' => string, 	// the type of featured_media
+
+   			// ... other variables, dependent on what the type is.
+
+   		}
+
+   :since: 0.4
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
+
+   :returns: array $post_type {
 
 .. php:function:: largo_has_featured_media()
 
-   Helper function to tell if a post has featured media or not
+   Does the post have featured media?
 
-   :param string $id: A post ID
+   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
 
    :returns: bool $f a post ID has featured media or not.
-
-.. php:function:: largo_enqueue_featured_media_js()
 
 .. php:function:: largo_add_featured_media_button()
 
@@ -31,8 +120,6 @@
 .. php:function:: largo_remove_featured_image_meta_box()
 
    Remove the default featured image meta box from post pages
-
-.. php:function:: largo_featured_media_read()
 
 .. php:function:: largo_featured_media_save()
 

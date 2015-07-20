@@ -1,42 +1,62 @@
 (function() {
-    var $ = jQuery;
+    var $ = jQuery,
+        LoadMorePosts = function(config) {
+            this.config = config;
+            this.$el = $('#' + this.config.nav_id);
+            return this.init();
+        };
 
-    $(function() {
-        var load_more = $('#nav-below .load-more'),
-            ajax_opts = {
-                url: LMP.ajax_url,
-                data: {
-                    action: 'load_more_posts',
-                    paged: (LMP.paged == 0)? 1:LMP.paged,
-                    is_home: LMP.is_home,
-                    is_series_landing: LMP.is_series_landing,
-                    // opt is used by partials/content-series.php to return the same type of post.
-                    opt: LMP.opt
-                },
-                type: 'POST',
-                dataType: 'html',
-                success: function(html) {
-                    var markup = $(html);
-                    $(html).insertBefore('#nav-below');
-                    load_more.removeClass('loading');
-                },
-                error: function() {
-                    load_more.removeClass('loading');
-                    throw "There was an error fetching more posts";
-                }
-            };
+    LoadMorePosts.prototype.init = function() {
+        this.ajax_opts = {
+            url: this.config.ajax_url,
+            data: {
+                action: 'load_more_posts',
+                paged: (this.config.paged == 0)? 1 : this.config.paged,
+                is_home: this.config.is_home,
+                is_series_landing: this.config.is_series_landing,
+                // opt is used by partials/content-series.php to return the same type of post.
+                opt: this.config.opt
+            },
+            type: 'POST',
+            dataType: 'html',
+            success: this._success.bind(this),
+            error: this._error
+        };
 
+        this.bind_events();
 
-        load_more.find('a').click(function() {
-            load_more.addClass('loading');
-            var last_story = $('.stories article').last();
-                id = last_story.attr('id').replace('post-', '');
+        return this;
+    };
 
-            ajax_opts.data.last = id;
-            ajax_opts.data.paged += 1;
-            ajax_opts.data.query = LMP.query;
-            $.ajax(ajax_opts);
-            return false;
-        });
-    });
+    LoadMorePosts.prototype.request = function() {
+        this.$el.addClass('loading');
+
+        this.ajax_opts.data.paged += 1;
+        this.ajax_opts.data.query = JSON.stringify(this.config.query);
+        $.ajax(this.ajax_opts);
+        return false;
+    };
+
+    LoadMorePosts.prototype.bind_events = function() {
+        this.$el.find('a').click(this.request.bind(this));
+    };
+
+    LoadMorePosts.prototype._success = function(html) {
+        if (html.trim() == '') {
+            this.$el.html("<span>" + this.config.no_more_posts + "</span>");
+        } else {
+            var markup = $(html);
+            $(html).insertBefore(this.$el);
+        }
+        this.$el.removeClass('loading');
+    };
+
+    LoadMorePosts.prototype._error = function() {
+        this.$el.removeClass('loading');
+        throw "There was an error fetching more posts";
+    };
+
+    if (typeof window.LoadMorePosts == 'undefined')
+        window.LoadMorePosts = LoadMorePosts;
+
 })();

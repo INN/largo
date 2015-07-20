@@ -3,7 +3,6 @@
  * Used to populate the sidebar when the first-choice widget area is empty,
  * but an empty sidebar is inappropriate.
  */
-
 the_widget('largo_about_widget', array(
 	'title' => __('About This Site', 'largo'))
 );

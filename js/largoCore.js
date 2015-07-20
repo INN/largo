@@ -45,7 +45,7 @@ jQuery(document).ready(function($) {
 
 	//enable "clean read" functionality
 	$('a.clean-read').on('click', function() {
-		$('body').addClass('clean-read').append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
+		$('body').addClass('clean-read').find(".sticky-footer-container").append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
 		$('.clean-read-container').append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
 		$('a.clean-read').hide();
 		return false;

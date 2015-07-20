@@ -1,4 +1,9 @@
+inc/widgets/largo-follow.php
+============================
+
 .. php:class:: largo_follow_widget
+
+      Largo Follow Widget
 
    .. php:method:: largo_follow_widget::largo_follow_widget()
 

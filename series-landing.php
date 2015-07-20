@@ -69,10 +69,14 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 
 
 <?php // display left rail
-if ( 'three-column' == $opt['cftl_layout'] ) : ?>
+if ( 'three-column' == $opt['cftl_layout'] ) :
+		$left_rail = $opt['left_region'];
+?>
 	<aside id="sidebar-left" class="span3">
 		<div class="widget-area" role="complementary">
-			<?php dynamic_sidebar( $opt['left_region'] ); ?>
+			<?php
+				dynamic_sidebar($left_rail);
+			?>
 		</div>
 	</aside>
 <?php
@@ -82,15 +86,12 @@ endif;
 <div id="content" class="span<?php echo $content_span[ $opt['cftl_layout'] ]; ?> stories" role="main">
 <?php
 
-global $wp_query;
-global $post;
-$save_post = $post;
-$save_query = $wp_query;
+global $wp_query, $post;
 
 // Make sure we're actually a series page, and pull posts accordingly
 if ( isset( $wp_query->query_vars['term'] )
-			&& isset( $wp_query->query_vars['taxonomy'] )
-			&& 'series' == $wp_query->query_vars['taxonomy'] ) {
+		&& isset( $wp_query->query_vars['taxonomy'] )
+		&& 'series' == $wp_query->query_vars['taxonomy'] ) {
 
 	$series = $wp_query->query_vars['term'];
 
@@ -127,32 +128,36 @@ if ( isset( $wp_query->query_vars['term'] )
 			break;
 	}
 
-	// Build the query, but don't use the original because that messes up pagination in a way that ignores posts_per_page
 	$series_query = new WP_Query($args);
-
-	// and finally wind the posts back so we can go through the loop as usual
 	while ( $series_query->have_posts() ) : $series_query->the_post();
 		get_template_part( 'partials/content', 'series' );
 	endwhile;
-
-	largo_content_nav( 'nav-below' );
-
 	wp_reset_postdata();
-	$post = $save_post;
-	$wp_query = $save_query;
 
+	$posts_term = of_get_option('posts_term_plural');
+	largo_render_template('partials/load-more-posts', array(
+		'nav_id' => 'nav-below',
+		'the_query' => $series_query,
+		'posts_term' => ($posts_term)? $posts_term : 'Posts'
+	));
 } ?>
 
 </div><!-- /.grid_8 #content -->
 
 <?php // display left rail
-if ($opt['cftl_layout'] != 'one-column') : ?>
+if ($opt['cftl_layout'] != 'one-column') :
+	if (!empty($opt['right_region']) && $opt['right_region'] !== 'none') {
+		$right_rail = $opt['right_region'];
+	} else {
+		$right_rail = 'single';
+	}
+?>
 <aside id="sidebar" class="span4">
 	<?php do_action('largo_before_sidebar_content'); ?>
 	<div class="widget-area" role="complementary">
 		<?php
 			do_action('largo_before_sidebar_widgets');
-			dynamic_sidebar( $opt['right_region'] );
+			dynamic_sidebar($right_rail);
 			do_action('largo_after_sidebar_widgets');
 		?>
 	</div><!-- .widget-area -->
