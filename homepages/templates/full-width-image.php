@@ -1,9 +1,7 @@
 <?php
 
-global $shown_ids;
-
 $bigStoryPost = largo_home_single_top();
-$shown_ids[] = $bigStoryPost->ID; //don't repeat the current post
+largo_mark_post_shown($bigStoryPost->ID); //don't repeat the current post
 
 ?>
 <div id="homepage-featured" class="row-fluid clearfix">

@@ -7,7 +7,7 @@
  */
 get_header();
 
-global $tags, $paged, $post, $shown_ids;
+global $tags, $paged, $post;
 
 $title = single_cat_title('', false);
 $description = category_description();
@@ -29,9 +29,8 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 	if ( $paged < 2 ) {
 		if ( count( $featured_posts ) > 0) {
 			foreach ( $featured_posts as $idx => $featured_post ) {
-				if ( $idx == 0 ) { 
-					$shown_ids[] = get_the_ID();
-				?>
+				largo_mark_post_shown($featured_post->ID);
+				if ( $idx == 0 ) { ?>
 					<div class="primary-featured-post">
 						<?php largo_render_template( 'partials/archive', 'category-primary-feature', array( 'featured_post' => $featured_post ) ); ?>
 					</div>
@@ -51,7 +50,7 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 
 			foreach ( range( 1, $needed ) as $number ) {
 				the_post();
-				$shown_ids[] = get_the_ID();
+				largo_mark_post_shown(get_the_ID());
 				if ( count( $featured_posts ) == 0 && $number == 1 ) { ?>
 					<div class="primary-featured-post">
 						<?php largo_render_template( 'partials/archive', 'category-primary-feature', array( 'featured_post' => $post) ); ?>
@@ -74,7 +73,6 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 		<?php if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
-				$shown_ids[] = get_the_ID();
 				get_template_part( 'partials/content', 'archive' );
 			}
 			largo_content_nav( 'nav-below' );

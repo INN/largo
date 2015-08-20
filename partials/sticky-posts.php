@@ -1,5 +1,4 @@
 <?php
-global $shown_ids;
 
 $sticky = get_option( 'sticky_posts' );
 if (empty($sticky))
@@ -15,7 +14,7 @@ $query = new WP_Query( $args );
 if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
 	   	$query->the_post();
-	   	$shown_ids[] = get_the_ID();
+	   	largo_mark_post_shown(get_the_ID());
 
 		if ( $sticky && $sticky[0] && ! is_paged() ) { ?>
 
@@ -55,7 +54,7 @@ if ( $query->have_posts() ) {
 						<div class="entry-content">
 						<?php
 							largo_excerpt( $post, 2, false );
-							$shown_ids[] = get_the_ID();
+							largo_mark_post_shown(get_the_ID());
 
 						if ( $feature_posts ) { //if the sticky post is in a series, show up to 3 other posts in that series ?>
 							<div class="sticky-features-list">

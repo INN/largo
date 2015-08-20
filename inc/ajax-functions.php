@@ -30,13 +30,13 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
  */
 if (!function_exists('largo_load_more_posts_data')) {
 	function largo_load_more_posts_data($nav_id, $the_query) {
-		global $shown_ids, $post, $opt;
+		global $post, $opt;
 
 		$query = $the_query->query;
 
 		// No sticky posts or featured posts
 		$query = array_merge(array(
-			'post__not_in' => $shown_ids,
+			'post__not_in' => largo_shown_posts(),
 		), $query );
 
 		$config = array(

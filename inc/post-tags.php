@@ -658,8 +658,8 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 }
 
 /**
- * Depricated 0.5.1.
- * 
+ * Deprecated 0.5.1.
+ *
  * Returns the featured image for a post
  * to be used as the hero image with caption and credit (if available)
  *
@@ -667,9 +667,7 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
  */
 if ( ! function_exists( 'largo_hero_with_caption' ) ) {
 	function largo_hero_with_caption( $post_id ) {
-		
 		largo_featured_image_hero($post_id);
-
 	}
 }
 
@@ -695,4 +693,64 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
 			return $out;
 		}
 	}
+}
+
+/**
+ * A class for tracking shown posts and dealing with post duplication across widgets, etc.
+ *
+ * @since 0.5.2
+ */
+class LargoShownPosts {
+
+	protected static $shown_ids = array();
+
+	public static function is_post_shown($post) {
+		$post = get_post($post);
+		return in_array($post->ID, self::$shown_ids);
+	}
+
+	public static function shown_posts() {
+		return self::$shown_ids;
+	}
+
+	public static function mark_post_shown($post) {
+		$post = get_post($post);
+		if (!empty($post) && !in_array($post, self::$shown_ids)) {
+			self::$shown_ids[] = $post->ID;
+			return true;
+		}
+		return false;
+	}
+}
+
+/**
+ * Mark a post as "shown" so that we can avoid duplicates on page render
+ *
+ * @param $post mixed the post ID or post object we want to mark as shown.
+ * @return boolean true if successfully marked post as shown, false if it's already been marked.
+ * @since 0.5.2
+ */
+function largo_mark_post_shown($post) {
+	return LargoShownPosts::mark_post_shown($post);
+}
+
+/**
+ * See if a post has been marked "shown"
+ *
+ * @param $post mxied the post ID or post object we want to determine is marked or not
+ * @return boolean
+ * @since 0.5.2
+ */
+function largo_is_post_shown($post) {
+	return LargoShownPosts::is_post_shown($post);
+}
+
+/**
+ * Get ID's of all "shown" posts
+ *
+ * @return array all post ID's marked as "shown"
+ * @since 0.5.2
+ */
+function largo_shown_posts() {
+	return LargoShownPosts::shown_posts();
 }

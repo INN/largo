@@ -5,7 +5,7 @@
  * Sidebars: Homepage Left Rail (An optional widget area that, when enabled, appears to the left of the main content area on the homepage)
  */
 
-global $largo, $shown_ids, $tags;
+global $largo, $tags;
 $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') ? 'top-story span12' : 'top-story span8';
 ?>
 <div id="homepage-featured" class="row-fluid clearfix">
@@ -24,7 +24,8 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 			'showposts' => 1
 		) );
 		if ( $topstory->have_posts() ) :
-			while ( $topstory->have_posts() ) : $topstory->the_post(); $shown_ids[] = get_the_ID();
+			while ( $topstory->have_posts() ) : $topstory->the_post();
+				largo_mark_post_shown(get_the_ID());
 		?>
 				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
@@ -58,11 +59,12 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 					)
 				),
 				'showposts'		=> $showposts,
-				'post__not_in' 	=> $shown_ids
+				'post__not_in' 	=> largo_shown_posts()
 			) );
 			if ( $substories->have_posts() ) :
 				$count = 1;
-				while ( $substories->have_posts() ) : $substories->the_post(); $shown_ids[] = get_the_ID();
+				while ( $substories->have_posts() ) : $substories->the_post();
+					largo_mark_post_shown(get_the_ID());
 					if ( $count <= 3 ) : ?>
 						<div <?php post_class( 'story' ); ?>
 							<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>

@@ -49,8 +49,6 @@ function homepage_big_story_headline($moreLink=false) {
  * Returns a short list (3 posts) of stories in the same series as the main feature
  **/
 function homepage_series_stories_list() {
-	global $shown_ids;
-
 	$feature = largo_get_the_main_feature(largo_home_single_top());
 
 	$min = 2;
@@ -97,7 +95,7 @@ function homepage_series_stories_list() {
 	<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link($feature); ?>">
 		<?php echo __("More in", "largo") . " " . esc_html($feature->name) ?></a></h5>
 			<?php foreach ($series_posts as $series_post) {
-				$shown_ids[] = $series_post->ID; ?>
+				largo_mark_post_shown($series_post->ID); ?>
 				<h4 class="related-story"><a href="<?php echo esc_url(get_permalink($series_post->ID)); ?>">
 					<?php echo get_the_title($series_post->ID); ?></a></h4>
 			<?php } ?>
@@ -112,8 +110,6 @@ function homepage_series_stories_list() {
 }
 
 function homepage_feature_stories_list() {
-	global $shown_ids;
-
 	$max = 3;
 
 	/**
@@ -135,7 +131,7 @@ function homepage_feature_stories_list() {
 	ob_start();
 	$featured_stories = largo_home_featured_stories($max);
 	foreach ($featured_stories as $featured) {
-		$shown_ids[] = $featured->ID;
+		largo_mark_post_shown($featured->ID);
 ?>
 		<article class="featured-story">
 			<h5 class="top-tag"><?php largo_top_term('post=' . $featured->ID); ?></h5>

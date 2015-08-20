@@ -17,8 +17,7 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_load_more_posts_data() {
-		// create $shown_ids
-		global $wp_scripts, $wp_query, $shown_ids;
+		global $wp_scripts, $wp_query;
 		$args = array(
 			'post_type' => 'post',
 		);
@@ -26,7 +25,7 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 		if ($wp_query->have_posts()) {
 			while ($wp_query->have_posts()) {
 				$wp_query->the_post();
-				$shown_ids[] = get_the_ID();
+				largo_mark_post_shown(get_the_ID());
 			}
 		}
 
