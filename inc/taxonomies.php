@@ -318,14 +318,17 @@ add_action('pre_get_posts', 'largo_category_archive_posts', 15);
  * Get posts marked as "Featured in category" for a given category name.
  *
  * @param string $category_name the category to retrieve featured posts for.
+ * @param integer $number total number of posts to return, backfilling with regular posts as necessary.
  * @since 0.5
  */
-function largo_get_featured_posts_in_category($category_name) {
-	// get the featured posts
-	$featured_posts = get_posts( array(
+function largo_get_featured_posts_in_category($category_name, $number=5) {
+	$args = array(
 		'category_name' => $category_name,
-		'numberposts' => 5,
+		'numberposts' => $number,
 		'post_status' => 'publish',
+	);
+
+	$tax_query = array(
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'prominence',
@@ -333,7 +336,21 @@ function largo_get_featured_posts_in_category($category_name) {
 				'terms' => 'category-featured',
 			)
 		)
-	));
+	);
+
+	// Get the featured posts
+	$featured_posts = get_posts(array_merge($args, $tax_query));
+
+	// Backfill with regular posts if necessary
+	if (count( $featured_posts ) < 5) {
+		$needed = 5 - count( $featured_posts );
+		$regular_posts = get_posts(array_merge($args, array(
+			'numberposts' => $needed,
+			'post__not_in' => array_map(function($x) { return $x->ID; }, $featured_posts)
+		)));
+		$featured_posts = array_merge($featured_posts, $regular_posts);
+	}
+
 	return $featured_posts;
 }
 

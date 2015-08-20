@@ -11,7 +11,7 @@
             url: this.config.ajax_url,
             data: {
                 action: 'load_more_posts',
-                paged: (this.config.paged == 0)? 1 : this.config.paged,
+                paged: this.config.paged,
                 is_home: this.config.is_home,
                 is_series_landing: this.config.is_series_landing,
                 // opt is used by partials/content-series.php to return the same type of post.
@@ -30,7 +30,6 @@
 
     LoadMorePosts.prototype.request = function() {
         this.$el.addClass('loading');
-
         this.ajax_opts.data.paged += 1;
         this.ajax_opts.data.query = JSON.stringify(this.config.query);
         $.ajax(this.ajax_opts);

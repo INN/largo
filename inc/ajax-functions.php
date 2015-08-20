@@ -42,7 +42,7 @@ if (!function_exists('largo_load_more_posts_data')) {
 		$config = array(
 			'nav_id' => $nav_id,
 			'ajax_url' => admin_url('admin-ajax.php'),
-			'paged' => (!empty($the_query->query_vars['paged']))? $the_query->query_vars['paged'] : 0,
+			'paged' => (!empty($the_query->query_vars['paged']))? $the_query->query_vars['paged'] : 1,
 			'query' => $query,
 			'is_home' => $the_query->is_home(),
 			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false,
@@ -54,7 +54,6 @@ if (!function_exists('largo_load_more_posts_data')) {
 		}
 
 		$config = apply_filters('largo_load_more_posts_json', $config);
-
 		?>
 		<script type="text/javascript">
 			new LoadMorePosts(<?php echo json_encode($config); ?>);
@@ -71,7 +70,7 @@ if (!function_exists('largo_load_more_posts')) {
 
 		global $opt;
 
-		$paged = (isset($_POST['paged'])) ? $_POST['paged'] : 0;
+		$paged = (isset($_POST['paged'])) ? $_POST['paged'] : 1;
 		$context = (isset($_POST['query']))? json_decode(stripslashes($_POST['query']), true) : array();
 
 		// Making sure that this isn't home
@@ -86,16 +85,16 @@ if (!function_exists('largo_load_more_posts')) {
 			$is_home = true;
 
 		$args = array_merge(array(
-			'paged'               => $paged,
-			'post_status'         => 'publish',
-			'posts_per_page'      => intval(get_option('posts_per_page')),
+			'paged' => (int) $paged,
+			'post_status' => 'publish',
+			'posts_per_page' => intval(get_option('posts_per_page')),
 			'ignore_sticky_posts' => true,
 		), $context);
 
 		// num_posts_home is only relevant on the homepage
 		if ( of_get_option('num_posts_home') && $is_home )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
-		// The first 'page' of the homepage is in $shown_ids, so this number should actually be minus one.
+
 		if ( $is_home ) {
 			$args['paged'] = ( $args['paged'] - 1 );
 			if ( of_get_option('cats_home') )
@@ -103,7 +102,6 @@ if (!function_exists('largo_load_more_posts')) {
 		}
 
 		$args = apply_filters('largo_lmp_args', $args);
-
 		$query = new WP_Query($args);
 
 		if ( $query->have_posts() ) {

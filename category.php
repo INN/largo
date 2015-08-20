@@ -11,7 +11,7 @@ global $tags, $paged, $post, $shown_ids;
 
 $title = single_cat_title('', false);
 $description = category_description();
-$rss_link =  get_category_feed_link(get_queried_object_id());
+$rss_link = get_category_feed_link(get_queried_object_id());
 $posts_term = of_get_option('posts_term_plural', 'Stories');
 ?>
 
@@ -27,46 +27,31 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 
 	$featured_posts = largo_get_featured_posts_in_category( $wp_query->query_vars['category_name'] );
 	if ( $paged < 2 ) {
-		if ( count( $featured_posts ) > 0) {
+		if ( count( $featured_posts ) > 0 ) {
 			foreach ( $featured_posts as $idx => $featured_post ) {
-				if ( $idx == 0 ) { 
-					$shown_ids[] = get_the_ID();
-				?>
+				$shown_ids[] = $featured_post->ID;
+				if ( $idx == 0 ) { ?>
 					<div class="primary-featured-post">
-						<?php largo_render_template( 'partials/archive', 'category-primary-feature', array( 'featured_post' => $featured_post ) ); ?>
+						<?php largo_render_template(
+							'partials/archive',
+							'category-primary-feature',
+							array( 'featured_post' => $featured_post )
+						); ?>
 					</div>
 					<div class="secondary-featured-post">
 						<div class="row-fluid clearfix">
 			<?php } else {
-				largo_render_template( 'partials/archive', 'category-secondary-feature', array( 'featured_post' => $featured_post ) );
-				}
-			}
-		}
-
-		// If we don't have enough featured posts to fill in
-		// the featured area of the page, start using plain
-		// posts from the Loop.
-		if ( count( $featured_posts ) < 5) {
-			$needed = 5 - count( $featured_posts );
-
-			foreach ( range( 1, $needed ) as $number ) {
-				the_post();
-				$shown_ids[] = get_the_ID();
-				if ( count( $featured_posts ) == 0 && $number == 1 ) { ?>
-					<div class="primary-featured-post">
-						<?php largo_render_template( 'partials/archive', 'category-primary-feature', array( 'featured_post' => $post) ); ?>
-					</div>
-					<div class="secondary-featured-post">
-						<div class="row-fluid clearfix">
-				<?php } else {
-					largo_render_template( 'partials/archive', 'category-secondary-feature', array( 'featured_post' => $post ) );
+					largo_render_template(
+						'partials/archive',
+						'category-secondary-feature',
+						array( 'featured_post' => $featured_post )
+					);
 				}
 			}
 		} ?>
-
-			</div>
-		</div>
-	<?php } ?>
+						</div>
+					</div>
+<?php } ?>
 </div>
 
 <div class="row-fluid clearfix">
@@ -74,7 +59,7 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 		<?php if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
-				$shown_ids[] = get_the_ID();
+				//$shown_ids[] = get_the_ID();
 				get_template_part( 'partials/content', 'archive' );
 			}
 			largo_content_nav( 'nav-below' );
