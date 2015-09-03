@@ -68,8 +68,8 @@ function largo_register_required_plugins() {
 
 		// This is an example of how to include a plugin from the WordPress Plugin Repository
 		array(
-			'name' 		=> 'Epoch Commenting',
-			'slug' 		=> 'epoch',
+			'name' 		=> 'Epoch',
+			'slug' 		=> 'Epoch',
 			'required' 	=> false,
 		),
 
