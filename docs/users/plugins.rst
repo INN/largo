@@ -36,7 +36,7 @@ In addition to the Argo plugins, we have included a curated list of other plugin
 
 - `Better WordPress Google XML Sitemaps <https://wordpress.org/plugins/bwp-google-xml-sitemaps/>`_ will create a sitemap index of your site that you can then submit to Google (and Google News) and other search engines to maximize the visibility of your content. Documentation for this plugin can be found on the `plug in website <http://betterwp.net/wordpress-plugins/google-xml-sitemaps/>`_
 
-- `Disqus Comment System <https://wordpress.org/plugins/disqus-comment-system/>`_ replaces the default WordPress comment system with a more robust alternative that includes more community features and enhanced moderation capability. This plugin requires a Disqus account to activate but the setup process will walk you through creating one and adding your site. Documentation can be found `on the Disqus website <https://disqus.com/>`_.
+- `Epoch Commenting <https://wordpress.org/plugins/epoch/>`_ adds realtime commenting, increases page speed, and decreases server load. Since Epoch uses native WordPress comments it is compatible `with other plugins <http://docs.gopostmatic.com/article/157-what-other-plugins-is-epoch-compatible-with>`_ for adding community, moderation, and social elements. Documentation can be found `on the Epoch support site <https://http://docs.gopostmatic.com/collection/151-epoch>`_.
 
 - `Edit Flow <http://editflow.org/>`_ adds advanced workflow features to WordPress including the ability to manage additional user roles, editorial comments and an editorial calendar. Documentation can be found `on the Edit Flow website <http://editflow.org/>`_.
 
@@ -66,7 +66,8 @@ Here is a complete list of the plugins currently installed and available.
 - `Chartbeat <https://wordpress.org/plugins/chartbeat/>`_ - Adds Chartbeat pinging to Wordpress.
 - `Co-Authors Plus <https://wordpress.org/plugins/co-authors-plus/>`_ - Allows multiple authors to be assigned to a post.
 - `Constant Contact Plugin <https://wordpress.org/plugins/constant-contact-api/>`_ - Adds integration for the Constant Contact email marketing service
-- `Disqus Comment System <https://wordpress.org/plugins/disqus-comment-system/>`_ - The Disqus comment system replaces your WordPress comment system with your comments hosted and powered by Disqus.
+- `Epoch Commenting <https://wordpress.org/plugins/epoch/>`_ - A native WordPress commenting system with a focus on speed and privacy: 100% realtime native commenting that increases page speed and reduces server load.
+.
 - `DoubleClick for WordPress <https://github.com/INN/DoubleClick-for-WordPress>`_ - DoubleClick ad integration, maintained by INN.
 - `Edit Flow <https://wordpress.org/plugins/edit-flow/>`_ - Adds better editorial workflow options to the WordPress admin
 - `Facebook Comments <https://wordpress.org/plugins/facebook-comments-plugin/>`_ - Replaces the default WordPress comment system with Facebook comments

@@ -39,6 +39,8 @@ The settings found in Settings > Discussion control commenting, comment moderati
 
 For an in-depth discussion of what these options do see the `WP Codex entry on this screen <http://codex.wordpress.org/Settings_Discussion_Screen>`_.
 
+These settings will apply to sites which use the `Epoch <https://wordpress.org/plugins/epoch/>`_ commenting system.
+
 Note that many sites use a third-party system or plugin such as `Disqus <https://wordpress.org/plugins/disqus-comment-system/>`_ or `Facebook <https://wordpress.org/plugins/facebook-comments-plugin/>`_ to replace the default WordPress comment engine. If you use one of these third-party systems it may or may not respect the settings from this menu and you should consult that plugin's documentation to be sure.
 
 Media
