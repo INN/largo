@@ -3248,9 +3248,17 @@ body.normal.page .article-bottom .largo-disclaimer {
 body.normal.single-post #comments,
 body.normal.page #comments,
 body.normal.single-post #disqus_thread,
-body.normal.page #disqus_thread {
+body.normal.page #disqus_thread,
+body.normal.single-post #epoch-wrap,
+body.normal.page #epoch-wrap {
   margin: 0 17.021276594%;
 }
+
+/*Override Epoch Sniffer*/
+#epoch-wrap {
+  width: auto !important;
+{
+  
 @media only screen and (max-width: 979px) {
   body.normal.single-post #sidebar,
   body.normal.page #sidebar {
