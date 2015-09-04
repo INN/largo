@@ -149,7 +149,7 @@ function largo_update_widgets() {
 	$checks['show_tags'] = array(
 		'values' => array(1),
 		'widget' => 'largo-tag-list',
-		'settings' => array('title' => __( 'Filed Under:', 'largo' ), 'tag_limit' => 20),
+		'settings' => array('title' => __( 'Tags ', 'largo' ), 'tag_limit' => 20),
 	);
 
 	$checks['show_author_box'] = array(

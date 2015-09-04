@@ -71,4 +71,8 @@ class largo_author_widget extends WP_Widget {
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		return $instance;
 	}
+
+	function form( $instance ) {
+		return true;
+	}
 }
