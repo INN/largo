@@ -1,6 +1,18 @@
 <?php
 
 /**
+ * Is sticky nav enabled?
+ * @since 0.5.2
+ */
+ 
+ function largo_sticky_nav_active() {
+   if ( SHOW_STICKY_NAV == true && of_get_option( ' show_sticky_nav' )) {
+    return true;
+   }
+   return false;
+ }
+
+/**
  * Output the site header
  *
  * @since 1.0
@@ -13,19 +25,21 @@ if ( ! function_exists( 'largo_header' ) ) {
 		$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
 		$divider = $header_class == 'branding' ? '' : ' - ';
 
-		// print the text-only version of the site title
-		printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
-			$header_tag,
-			$header_class,
-			esc_url( home_url( '/' ) ),
-			esc_attr( get_bloginfo('name') ),
-			$divider,
-			esc_attr( get_bloginfo('description') )
-		);
+		if( is_home() || is_front_page() && !largo_sticky_nav_active() ) {
+			// print the text-only version of the site title
+			printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
+				$header_tag,
+				$header_class,
+				esc_url( home_url( '/' ) ),
+				esc_attr( get_bloginfo('name') ),
+				$divider,
+				esc_attr( get_bloginfo('description') )
+			);
+		}
 
 		// add an image placeholder, the src is added by largo_header_js() in inc/enqueue.php
 		if ($header_class != 'branding') {
-			if (is_home() || !of_get_option( 'show_sticky_nav' ))
+			if (is_home() || !largo_sticky_nav_active())
 				echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
 		}
 
