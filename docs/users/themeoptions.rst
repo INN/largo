@@ -99,6 +99,8 @@ Layout Options
 
 **Single Article Template** - Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice.
 
+**Category Options** - Starting with version 0.5.3, Largo allows you to disable the standard featured posts area on top of category archive pages. The five posts that are normally displayed on top of the page become part of the main column of posts.
+
 **Sidebar Options** - These affect the presentation of the sidebar to the reader.
 
 - Add a third sidebar used only on archive pages (category, tag, author and series pages), configurable in Appearance > Widgets

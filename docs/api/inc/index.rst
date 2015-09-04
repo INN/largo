@@ -5,11 +5,6 @@ WordPress theme custom functions are defined in functions.php. To make maintenan
 
 Miscellaneous functions:
 ------------------------
-  - ad-codes.php: If you have the `Ad Codes Manager <http://wordpress.org/extend/plugins/ad-code-manager/>`_ plugin installed, this provides:
-
-    - some additional whitelisting
-    - ad tag locations for Largo
-
   - cached-core-functions.php:
 
     - caches the ``wp_nav_menu`` for all tag and category pages used in the nav menus

@@ -1,6 +1,6 @@
 <?php
 
-class FeaturedMedaiTestFunctions extends WP_UnitTestCase {
+class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 
 	function setUp() {
 		parent::setUp();
@@ -127,11 +127,6 @@ class FeaturedMedaiTestFunctions extends WP_UnitTestCase {
 		$this->assertTrue(function_exists('largo_featured_media_templates'));
 	}
 
-	function test_largo_featured_media_css() {
-		// Same deal -- since this function prints A LOT of stuff, let's just make sure it exists
-		$this->assertTrue(function_exists('largo_featured_media_css'));
-	}
-
 	function test_largo_remove_featured_image_meta_box() {
 		largo_remove_featured_image_meta_box();
 
@@ -145,6 +140,17 @@ class FeaturedMedaiTestFunctions extends WP_UnitTestCase {
 			foreach (array('high', 'core', 'default', 'low') as $priority)
 				$this->assertTrue($wp_meta_boxes[$page][$context][$priority][$id] == false);
 		}
+	}
+
+	function test_largo_featured_media_post_classes() {
+		global $post;
+		$tmp_post = $post;
+		$post = get_post($this->post);
+		update_post_meta($this->post, 'featured_media', $this->media_types['image']);
+		$ret = largo_featured_media_post_classes(array());
+		$this->assertTrue(in_array('featured-media', $ret));
+		$this->assertTrue(in_array('featured-media-image', $ret));
+		$post = $tmp_post;
 	}
 }
 
@@ -188,7 +194,9 @@ class FeaturedMediaTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 			$this->_handleAjax("largo_featured_media_save");
 		} catch (WPAjaxDieContinueException $e) {
 			// The response should be equal to the $_POST data we sent
-			$this->assertEquals($_POST['data'], $this->_last_response);
+			$data = json_decode($_POST['data']);
+			$response = json_decode($this->_last_response);
+			$this->assertEquals($data->id, $response->id);
 		}
 	}
 
@@ -211,4 +219,5 @@ class FeaturedMediaTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 		// so let's just make sure this function exists.
 		$this->assertTrue(function_exists('largo_fetch_video_oembed'));
 	}
+
 }

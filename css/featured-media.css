@@ -1,0 +1,83 @@
+#set-featured-media-button .dashicons {
+  position: relative;
+  top: 2px;
+  color: #888;
+}
+.featured-media-modal .featured-media-view form {
+  margin: 20px;
+}
+.featured-media-modal .featured-media-view form div {
+  margin: 0 0 20px 0;
+}
+.featured-media-modal .featured-media-view form label {
+  clear: both;
+  padding: 10px 0;
+  margin: 0 0 10px 0;
+}
+.featured-media-modal .featured-media-view form label span {
+  display: block;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 6px 0;
+}
+.featured-media-modal .featured-media-view form textarea,
+.featured-media-modal .featured-media-view form input,
+.featured-media-modal .featured-media-view #embed-thumb .uploader-inline {
+  width: 100%;
+  max-width: 700px;
+}
+.featured-media-modal .featured-media-view form textarea {
+  min-height: 120px;
+}
+.featured-media-modal .featured-media-view .media-frame-router p {
+  margin: 0 0 0 15px;
+}
+.featured-media-modal .media-toolbar-primary span.spinner {
+  display: inline-block;
+  float: left;
+  margin: 0;
+  position: relative;
+  top: 20px;
+  visibility: visible;
+}
+.featured-media-modal #featured-video-form label[for="url"] span.spinner {
+  position: relative;
+  top: -2px;
+  float: none;
+  margin: 0;
+  display: inline-block;
+  visibility: visible;
+}
+.featured-media-modal #embed-thumb .uploader-inline-content {
+  position: relative;
+  top: 0;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  padding-top: 20px;
+}
+.featured-media-modal #embed-thumb .media-uploader-status.uploading {
+  margin: 20px auto;
+}
+.featured-media-modal #embed-thumb .remove-thumb {
+  display: block;
+  float: none;
+  clear: both;
+}
+.featured-media-modal #embed-thumb .thumb-container img {
+  max-width: 336px;
+}
+.featured-media-modal .media-toolbar-secondary form {
+  margin-top: 20px;
+}
+.featured-media-modal .featured-remove-featured-confirm {
+  text-align: center;
+}
+.featured-media-modal .featured-remove-featured-confirm h1 {
+  margin: 20px 50px 0 50px;
+  line-height: 42px;
+}
+#wp-content-media-buttons .spinner {
+  position: relative;
+  top: 2px;
+  visibility: visible;
+}

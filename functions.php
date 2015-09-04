@@ -182,10 +182,6 @@ class Largo {
 			$includes[] = '/inc/custom-less-variables.php';
 		}
 
-		if ( $this->is_plugin_active( 'ad-code-manager' ) ) {
-			$includes[] = '/inc/ad-codes.php';
-		}
-
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
 		}
@@ -339,9 +335,6 @@ class Largo {
 	public function is_plugin_active( $plugin_slug ) {
 
 		switch ( $plugin_slug ) {
-			case 'ad-code-manager':
-				return (bool) class_exists( 'Ad_Code_Manager' );
-
 			case 'co-authors-plus':
 				return (bool) class_exists( 'coauthors_plus' );
 

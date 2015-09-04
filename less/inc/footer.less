@@ -141,76 +141,87 @@
   max-width: 25%;
   padding: 1px 8px;
 }
-#footer-social {
+
+/*
+ * image displays 300px wide, but is physically 1699x385 px^2
+ * We'll use math to get the padding top and bottom correct, according to the brand guidelines
+ * margin top and margin bottom should be equal to the height of one of the squares.
+ * By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
+ * 184/1669 = x/300
+ */
+@inn-logo-physical-width: 1669px;
+@inn-logo-physical-height: 385px;
+@inn-logo-width: 200px;
+@inn-logo-square: (@inn-logo-width*184/@inn-logo-physical-width); // 184 comes form the width of one square in INN's 2015 logo
+@inn-logo-height: (@inn-logo-width*@inn-logo-physical-height/@inn-logo-physical-width); // the rendered height of the logo image
+@footer-social-logo-font-size: @baseFontSize + 2;
+#inn-logo {
+  margin-top: @inn-logo-square;
+  margin-bottom: @inn-logo-square*0.75;
+  max-width: @inn-logo-width;
+}
+ul#footer-social {
+  padding-top: @inn-logo-square;
+  padding-bottom: @inn-logo-square*0.75;
   margin: 0 auto;
   width: 100%;
-  margin-bottom: 1em;
-  margin-top: 1.5em;
-  text-align: right;
+  @media (max-width: 768px) {
+    text-align: left;
+  }
+
   li {
-    margin-top: (300px*184/1699); // see #inn-logo
-    display: inline-block;
+    height: @inn-logo-height;
+    display: table-cell;
+    vertical-align: middle;
     font-size: 18px;
+    @media (max-width: 768px) {
+      margin-top: 0;
+    }
     a {
       padding-right: 10px;
+      padding-top: ((@inn-logo-height - @footer-social-logo-font-size)/1.75);
     }
     i {
       position: relative;
       top: 0;
       color: #fff;
-      padding: 10px;
-      border-radius: 50%;
+      padding: 5px;
+      .border-radius(50%);
+      background-color: #777;
+      margin-top: 1.25*@inn-logo-square;
       &:hover {
         background-color: #fff;
       }
       &.icon-github:hover {
         color: @black;
       }
-      font-size: @baseFontSize + 2;
+      font-size: @footer-social-logo-font-size;
       .darkLight(@headerFooterColor);
-      .opacity(75);
-      &:hover {
-        .opacity(100);
-      }
-    }
-    @media (max-width: 768px) {
-      margin-top: 0;
     }
   }
-  @media (max-width: 768px) {
-    text-align: left;
+  li:last-child a {
+    padding-right: 0;
   }
-}
-#inn-logo {
-  // image is max 300px wide, but is 1699x385 px
-  // We'll use math to get the padding top and bottom correct
-  // margin top and margin bottom should be equal to the height of one of the squares.
-  // By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
-  // 184/1669 = x/300
-  margin-top: (300px*184/1699);
-  margin-bottom: (300px*184/1699);
 }
 #supplementary {
   padding: @baseline 0 0 0;
+  &._1col aside {
+    text-align: center;
+  }
+}
+._1col .widget_nav_menu li {
+  display: inline;
+  margin-right: 1em;
 }
 #boilerplate {
   width: 100%;
   font-family: @sansFontFamily;
   p {
     margin-bottom: 0;
-    color: @grayLight;
-    &.footer-credit {
-      float: none;
-    }
-    &.back-to-top {
-      float: right;
-    }
-    &#mobile-member-since {
-      margin-bottom: (300px*184/1699);
-    }
+    color:#9F9FA3;
   }
   .menu {
-    clear: both;
+    display: inline;
     margin: 0;
     font-size: @baseFontSize * 0.667;
     li {
@@ -221,43 +232,61 @@
   .row-fluid {
   //  margin-top: 1.5em;
   }
-  .span3 {
-    position: relative;
-    float: left;
-    margin-left: 0;
-  }
-  .span9 {
-    float: right;
-    position: relative;
-    text-align: right;
-  }
   .menu {
     clear: none;
   }
 }
-#inn-since-mobile {
-  margin-top: 28px;
-}
 
-@media (max-width: 768px) {
-  #boilerplate .row-fluid {
-    .span3,
-    .span9 {
-      width: 100%;
-      clear: both;
-      margin-left: 0;
-      text-align: left;
-    }
-    img {
-      max-width: 300px;
+/* highly descriptive to prevent accidental override */
+/* boilerplate text color to match gray logo*/
+footer #boilerplate {
+  p {
+    color:#9F9FA3;
+  }
+  a {
+    color:#848487;
+    &:hover {
+      color:#09C9FF;
     }
   }
 }
+
+@media (min-width: 769px) {
+  #boilerplate .span6.right {
+    text-align: right;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 979px) {
+  // If the INN logo is not displayed, the footer credit gets some padding up top
+  .footer-credit-padding-inn-logo-missing {
+    margin-top: @inn-logo-height + 1.75*@inn-logo-square;
+  }
+}
 @media (max-width: 979px) {
+  #boilerplate .row-fluid {
+    .span6 {
+      width: 100%;
+      clear: both;
+      margin-left: 0;
+      text-align: center;
+    }
+  }
+  ul#footer-social {
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
+  }
   .footer-credit span {
     display: block;
   }
 }
+
+/*
+ * Sticky Footer
+ */
 
 .sticky-footer-holder {
   position: fixed;
@@ -363,4 +392,8 @@
   .sticky-footer-container {
     padding-right: 40px;
   }
+}
+
+.back-to-top {
+  .visuallyhidden
 }

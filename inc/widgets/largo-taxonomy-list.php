@@ -23,11 +23,9 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			echo $before_title . $title . $after_title;
 
 		$cat_args = array(
-				'orderby' 	=> 'name',
-				'taxonomy' 	=> $instance['taxonomy'],
-				'name'		=> 'term_id',
-				'id'		=> 'term_id'
-    		);
+			'orderby' 	=> 'name',
+			'taxonomy' 	=> $instance['taxonomy'],
+		);
 
 		if ( $d ) {
 			$cats = get_categories($cat_args); ?>

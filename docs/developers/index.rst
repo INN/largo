@@ -6,7 +6,7 @@ Overview
 
 Project Largo is released as open source software and anyone is welcome to `download or fork the project from our github repository <https://github.com/INN/Largo>`_ and use it as they like.
 
-If you use Largo for a project `we'd love to hear from you <mailto:largo@inn.org>`_ so can we add you to our list of sites using Largo and help get the word out.
+If you use Largo for a project we'd love to hear from you so can we add you to our list of sites using Largo and help get the word out. Send us an email! largo@inn.org
 
 The preferred way of building a site with Largo is by creating a WordPress child theme. We have created a `sample, heavily documented, child theme <childthemes.html#advanced-theme-development-and-modification>`_ to help you understand the way we structure our child themes in the hopes that it will give you a solid framework to get started. There is more information on setting up Largo and `using child themes <../users/download.html#creating-child-themes>`_ in the download and installation section of our documentation.
 

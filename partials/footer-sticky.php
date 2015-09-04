@@ -64,9 +64,9 @@
 					echo $cat_feed_link;
 			} ?>
 
-			<?php if ( !empty( $byline_text ) && !empty( $byline_link ) ): ?>
+			<?php if ( !empty( $byline_text ) && !empty( $byline_link ) ) { ?>
 				<a href="<?php echo $byline_link; ?>" class="icon-link"><?php echo esc_html( $byline_text ); ?></a>
-			<?php else : ?>
+			<?php } else if ( !empty( $coauthors )) { ?>
 				<?php // $coauthor covers base case (1 dimensional) or where coauthors were defined. ?>
 				<?php foreach( $coauthors as $author ) : ?>
 					<div class="follow-author">
@@ -77,7 +77,7 @@
 					<a href="<?php echo get_author_posts_url( $author->ID, $author->user_nicename ); ?>"><?php echo esc_html( $author->display_name ); ?></a>
 					</div>
 				<?php endforeach; ?>
-			<?php endif; ?>
+			<?php } ?>
 
 		</div>
 

@@ -10,20 +10,14 @@ $shown_ids[] = $bigStoryPost->ID; //don't repeat the current post
 	<div class="home-single span12">
 		<?php echo $viewToggle; // View toggle zone ?>
 		<div class="home-top">
-			<?php if ($has_video = get_post_meta($bigStoryPost->ID, 'youtube_url', true)) { ?>
-				<div class="embed-container max-wide">
-					<iframe src="http://www.youtube.com/embed/<?php echo substr(strrchr( $has_video, "="), 1 ); ?>?modestbranding=1"
-						frameborder="0" allowfullscreen></iframe>
-				</div>
-			<?php } else { ?>
-				<div class="full-hero">
-					<a href="<?php echo esc_attr(get_permalink($bigStoryPost->ID)); ?>">
-						<?php echo get_the_post_thumbnail($bigStoryPost->ID, 'full'); ?>
-					</a>
-				</div>
-			<?php } ?>
 
-			<div id="dark-top" <?php echo (!$has_video) ? 'class="overlay"' : ''; ?>>
+			<div <?php post_class( 'full-hero' ); ?>>
+				<a href="<?php echo esc_attr(get_permalink($bigStoryPost->ID)); ?>">
+					<?php echo get_the_post_thumbnail($bigStoryPost->ID, 'full'); ?>
+				</a>
+			</div>
+
+			<div id="dark-top" class="overlay">
 				<div class="span10">
 					<div class="row-fluid">
 					<?php if (!empty($moreStories)) { ?>
@@ -39,6 +33,7 @@ $shown_ids[] = $bigStoryPost->ID; //don't repeat the current post
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </div>

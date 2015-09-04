@@ -468,6 +468,16 @@ function optionsframework_options() {
 			)
 		);
 
+	$options[] = array(
+		'name' => __('Category Options', 'largo'),
+		'type' => 'info');
+
+	$options[] = array(
+		'desc' => __('Hide the featured posts area on category pages?'),
+		'id' => 'hide_category_featured',
+		'std' => '0',
+		'type' => 'checkbox');
+
 	$widget_options[] = $options[] = array(
 		'name' 	=> __('Sidebar Options', 'largo'),
 		'type' 	=> 'info');
@@ -503,9 +513,14 @@ function optionsframework_options() {
 		'std' 	=> '3col-default',
 		'type' 	=> 'images',
 		'options' 	=> array(
-			'3col-default'	=> $imagepath . 'footer-3col-lg-center.png',
-			'3col-equal' 	=> $imagepath . 'footer-3col-equal.png',
-			'4col' 			=> $imagepath . 'footer-4col.png')
+			'3col-default' => $imagepath . 'footer-3col-lg-center.png',
+			'3col-equal' => $imagepath . 'footer-3col-equal.png',
+			'4col' => $imagepath . 'footer-4col.png',
+			'4col-asymm' => $imagepath . 'footer-4col-asymm.png',
+			'1col' => $imagepath . 'footer-1col.png'
+			// Want to add something to this list in a child theme? Use the largo_options filter!
+		)
+	
 	);
 
 	/*
@@ -657,17 +672,14 @@ function optionsframework_options() {
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
+/*
+ * Removing inn_member_since in 0.5.2
 	if ( INN_MEMBER ) { // only relevant in this case, options affecting the logo display
 		$options[] = array(
 			'name' 	=> __('INN Membership Options', 'largo'),
 			'type'	=> 'info');
-
-		$options[] = array(
-			'desc' 	=> __('<b>When did your organization join INN?</b> Leave this field blank if you do not want to display a membership year on your site.', 'largo'),
-			'id' 	=> 'inn_member_since',
-			'std' 	=> '',
-			'type' 	=> 'text');
 	}
+*/
 
 	return apply_filters('largo_options', $options);
 }

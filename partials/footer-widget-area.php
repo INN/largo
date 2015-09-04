@@ -1,42 +1,32 @@
-<div id="supplementary" class="row-fluid">
-	<?php
-	/**
-	 * The Footer widget areas.
-	 */
-	 $layout = of_get_option('footer_layout');
-	 if ( $layout === '3col-equal') {
-	 	$layout_spans = array( 'span4', 'span4', 'span4' );
-	 } elseif ($layout === '4col') {
-		 $layout_spans = array( 'span3', 'span3', 'span3' );
-	 } else {
-		 $layout_spans = array( 'span3', 'span6', 'span3' );
-	 }
-	?>
+<?php
+/**
+ * The Footer widget areas.
+ *
+ * If you would like to use a custom footer widget area, simply save it in your child theme's partials directory.
+ * Then create a Wordpress filter hooked to 'largo_options' that adds:
+ *     $options[$value]['options']['your_id'] = 'path to the option image';
+ * using this function to find $value:
+ *     array_search('footer_layout', array_column($options, 'id'));
+ *
+ * At the same time, you may remove the Largo default footer options form the $options array.
+ *
+ * @link https://secure.php.net/manual/en/function.array-search.php
+ * @link https://codex.wordpress.org/Function_Reference/get_template_part
+ * @see optionsframework_options
+ * @since 0.5.2
+ *
+ */
 
-	<div class="<?php echo $layout_spans[0]; ?> widget-area" role="complementary">
-		<?php if ( ! dynamic_sidebar( 'footer-1' ) )
-			largo_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) );
-		?>
-	</div>
+ // Get the layout from the options.
+$layout = of_get_option('footer_layout');
 
-	<div class="<?php echo $layout_spans[1]; ?> widget-area" role="complementary">
-		<?php if ( ! dynamic_sidebar( 'footer-2' ) )
-			the_widget( 'largo_footer_featured_widget', array( 'title' => __('In Case You Missed It', 'largo'), 'num_sentences' => 2, 'num_posts' => 2 ) );
-		?>
-	</div>
+// If the specified template does not exist in the child or parent theme, use 3col-default
+if ( locate_template( 'partials/footer-widget-' . $layout . '.php' ) == '' ) {
+	$layout = '3col-default';
+}
 
-	<div class="<?php echo $layout_spans[2]; ?> widget-area" role="complementary">
-		<?php if ( ! dynamic_sidebar( 'footer-3' ) ) {
-			the_widget( 'WP_Widget_Search', array( 'title' => __('Search This Site', 'largo') ) );
-			the_widget( 'WP_Widget_Archives', array( 'title' => __('Browse Archives', 'largo' ), 'dropdown' => 1 ) );
-		} ?>
-	</div>
+?>
 
-	<?php if ($layout === '4col') { ?>
-	<div class="span3 widget-area" role="complementary">
-		<?php if ( ! dynamic_sidebar( 'footer-4' ) ) { ?>
-			<p><?php _e('Please add widgets to this content area in the WordPress admin area under appearance > widgets.', 'largo'); ?></p>
-		<?php } ?>
-	</div>
-	<?php } ?>
+<div id="supplementary" class="row-fluid _<?php echo $layout ?>">
+	<?php get_template_part( 'partials/footer-widget', $layout); ?>
 </div>

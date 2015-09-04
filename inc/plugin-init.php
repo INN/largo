@@ -45,25 +45,25 @@ function largo_register_required_plugins() {
 		// This is an example of how to include a plugin pre-packaged with a theme
 
 		array(
-			'name'     				=> 'Argo Links', // The plugin name
-			'slug'     				=> 'argo-links', // The plugin slug (typically the folder name)
-			'source'   				=> 'https://github.com/INN/argo-links/archive/master.zip', // The plugin source
+			'name'     				=> 'Link Roundups', // The plugin name
+			'slug'     				=> 'link-roundups', // The plugin slug (typically the folder name)
+			'source'   				=> 'https://github.com/INN/link-roundups/archive/master.zip', // The plugin source
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> 'http://argoproject.org/argo-links.php', // If set, overrides default API URL and points to an external URL
+			'external_url' 			=> 'https://github.com/INN/link-roundups', // If set, overrides default API URL and points to an external URL
 		),
 
 		array(
-			'name'     				=> 'Navis Documentcloud', // The plugin name
-			'slug'     				=> 'navis-documentcloud', // The plugin slug (typically the folder name)
-			'source'   				=> 'https://github.com/INN/navis-documentcloud/archive/master.zip', // The plugin source
+			'name'     				=> 'Documentcloud', // The plugin name
+			'slug'     				=> 'documentcloud', // The plugin slug (typically the folder name)
+			'source'   				=> 'https://github.com/documentcloud/wordpress-documentcloud/archive/master.zip', // The plugin source
 			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
 			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> 'http://argoproject.org/documentcloud.php', // If set, overrides default API URL and points to an external URL
+			'external_url' 			=> 'https://github.com/documentcloud/wordpress-documentcloud', // If set, overrides default API URL and points to an external URL
 		),
 
 		// This is an example of how to include a plugin from the WordPress Plugin Repository
@@ -112,8 +112,8 @@ function largo_register_required_plugins() {
 	$config = array(
 		'domain'       		=> $theme_text_domain,         	// Text domain - likely want to be the same as your theme.
 		'default_path' 		=> '',                         	// Default absolute path to pre-packaged plugins
-		'parent_menu_slug' 	=> 'themes.php', 				// Default parent menu slug
-		'parent_url_slug' 	=> 'themes.php', 				// Default parent URL slug
+		'parent_slug' 		=> 'themes.php', 				// Default parent menu slug
+		'capability' 		=> 'edit_theme_options', 				// Default parent URL slug
 		'menu'         		=> 'install-required-plugins', 	// Menu slug
 		'has_notices'      	=> true,                       	// Show admin notices or not
 		'is_automatic'    	=> false,					   	// Automatically activate plugins after installation or not

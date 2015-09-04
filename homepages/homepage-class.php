@@ -83,11 +83,13 @@ class Homepage {
 	}
 
 	public function enqueueAssets() {
-		foreach ($this->assets as $asset) {
-			if (preg_match('/\.js$/', $asset[1]))
-				call_user_func_array('wp_enqueue_script', $asset);
-			if (preg_match('/\.css$/', $asset[1]))
-				call_user_func_array('wp_enqueue_style', $asset);
+		if ( is_home() ) {
+			foreach ($this->assets as $asset) {
+				if (preg_match('/\.js$/', $asset[1]))
+					call_user_func_array('wp_enqueue_script', $asset);
+				if (preg_match('/\.css$/', $asset[1]))
+					call_user_func_array('wp_enqueue_style', $asset);
+			}
 		}
 	}
 

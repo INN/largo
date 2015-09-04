@@ -36,7 +36,7 @@ TGM Plugin Activation
 
 We use `TGM Plugin Activation <https://github.com/thomasgriffin/TGM-Plugin-Activation>`_ to package a couple of plugins with the Largo theme that are not currently available in the WordPress plugin directory and to recommend plugins for a number of tasks that are commonly requested for news websites.
 
-- The rest of the theme files and the folder structure should be familiar to most WordPress developers, but if you have any questions, feel free to `get in touch <mailto:largo@inn.org>`_.
+- The rest of the theme files and the folder structure should be familiar to most WordPress developers, but if you have any questions, feel free to send us an email at largo@inn.org
 
 Compiling translation files
 ---------------------------

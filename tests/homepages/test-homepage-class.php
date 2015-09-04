@@ -29,6 +29,19 @@ class HomepageClassTest extends WP_UnitTestCase {
 			'zoneMarker' => 'Hello World!'
 		);
 		$this->layout = new TestHomepageLayout($this->layoutOptions);
+
+		global $wp_styles, $wp_scripts;
+		$this->wp_styles_backup = $wp_styles;
+		$this->wp_scripts_backup = $wp_scripts;
+		$wp_styles = new WP_Styles;
+		$wp_scripts = new WP_Scripts;
+	}
+
+	function tearDown() {
+		global $wp_styles, $wp_scripts;
+		$wp_styles = $this->wp_styles_backup;
+		$wp_scripts = $this->wp_scripts_backup;
+
 	}
 
 	function testLoad() {
@@ -85,13 +98,40 @@ class HomepageClassTest extends WP_UnitTestCase {
 		// appropriate global -- $wp_styles or $wp_scripts.
 		global $wp_styles, $wp_scripts;
 
+		$this->go_to('/'); // Run this on the homepage
 		$this->layout->enqueueAssets();
 
 		$expected_css_handle = $this->layoutOptions['assets'][0][0];
-		$this->assertTrue(!empty($wp_styles->registered[$expected_css_handle]));
+		$this->assertTrue(wp_style_is( $expected_css_handle, 'enqueued'), "Homepage styles were not enqueued on the homepage");
 
 		$expected_js_handle = $this->layoutOptions['assets'][1][0];
-		$this->assertTrue(!empty($wp_scripts->registered[$expected_js_handle]));
+		$this->assertTrue(wp_script_is( $expected_js_handle, 'enqueued'), "Homepage scripts were not enqueued on the homepage");
+	}
+
+	function testEnqueueAssets_791() {
+		/*
+		 * Regression test for #791, where homepage assets were being enqueued on pages not the homepage.
+		 *
+		 * @since 0.5.2
+		 */
+
+		// Homepage::enqueueAssets should add js and css asset definitions to the
+		// appropriate global -- $wp_styles or $wp_scripts.
+		global $wp_styles, $wp_scripts;
+
+		// create a post
+		$post_id = $this->factory->post->create();
+		$this->go_to("/?p=$post_id"); // a page that is not the homepage
+
+		$this->layout->enqueueAssets();
+		
+		$expected_css_handle = $this->layoutOptions['assets'][0][0];
+		$this->assertFalse(wp_style_is( $expected_css_handle, 'enqueued'), "Homepage styles were enqueued on not the homepage");
+		//$this->assertEmpty($wp_styles->registered[$expected_css_handle], "Homepage styles were enqueued on not the homepage");
+
+		$expected_js_handle = $this->layoutOptions['assets'][1][0];
+		$this->assertFalse(wp_script_is( $expected_js_handle, 'enqueued'), "Homepage scripts were enqueued on not the homepage");
+		//$this->assertEmpty($wp_scripts->registered[$expected_js_handle], "Homepage scripts were enqueued on not the homepage");
 	}
 
 	function testRegisterSidebars() {

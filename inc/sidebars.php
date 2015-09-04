@@ -20,21 +20,6 @@ function largo_register_sidebars() {
 			'desc' 	=> __( 'The sidebar for posts and pages', 'largo' ),
 			'id' 	=> 'sidebar-single'
 		),
-		array (
-			'name' 	=> __( 'Footer 1', 'largo' ),
-			'desc' 	=> __( 'The first footer widget area.', 'largo' ),
-			'id' 	=> 'footer-1'
-		),
-		array (
-			'name' 	=> __( 'Footer 2', 'largo' ),
-			'desc' 	=> __( 'The second footer widget area.', 'largo' ),
-			'id' 	=> 'footer-2'
-		),
-		array(
-			'name' 	=> __( 'Footer 3', 'largo' ),
-			'desc' 	=> __( 'The third footer widget area.', 'largo' ),
-			'id' 	=> 'footer-3'
-		),
 		array(
 			'name' 	=> __( 'Article Bottom', 'largo' ),
 			'desc' 	=> __( 'Footer widget area for posts', 'largo' ),
@@ -44,9 +29,35 @@ function largo_register_sidebars() {
 			'name' 	=> __( 'Homepage Alert', 'largo' ),
 			'desc' 	=> __( 'Region atop homepage reserved for breaking news and announcements', 'largo' ),
 			'id' 	=> 'homepage-alert'
-		),	);
+		),
+		array (
+			'name' 	=> __( 'Footer 1', 'largo' ),
+			'desc' 	=> __( 'The first footer widget area.', 'largo' ),
+			'id' 	=> 'footer-1'
+		)
+	);
 
-	// optional widget areas
+	if ( of_get_option('footer_layout') !== '1col') {
+		$sidebars[] = array (
+			'name' 	=> __( 'Footer 2', 'largo' ),
+			'desc' 	=> __( 'The second footer widget area.', 'largo' ),
+			'id' 	=> 'footer-2'
+		);
+		$sidebars[] = array(
+			'name' 	=> __( 'Footer 3', 'largo' ),
+			'desc' 	=> __( 'The third footer widget area.', 'largo' ),
+			'id' 	=> 'footer-3'
+		);
+	}
+
+	if ( of_get_option('footer_layout') == '4col' || of_get_option('footer_layout') == '4col-asymm' ) {
+		$sidebars[] = array(
+			'name' 	=> __( 'Footer 4', 'largo' ),
+			'desc' 	=> __( 'The fourth footer widget area.', 'largo' ),
+			'id' 	=> 'footer-4'
+		);
+	}
+
 	if ( of_get_option( 'use_topic_sidebar' ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Archive/Topic Sidebar', 'largo' ),
@@ -54,18 +65,12 @@ function largo_register_sidebars() {
 			'id' 	=> 'topic-sidebar'
 		);
 	}
+
 	if ( of_get_option( 'use_before_footer_sidebar' ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Before Footer', 'largo' ),
 			'desc' 	=> __( 'Full-width area immediately above footer', 'largo' ),
 			'id' 	=> 'before-footer'
-		);
-	}
-	if ( of_get_option('footer_layout') == '4col' ) {
-		$sidebars[] = array(
-			'name' 	=> __( 'Footer 4', 'largo' ),
-			'desc' 	=> __( 'The fourth footer widget area.', 'largo' ),
-			'id' 	=> 'footer-4'
 		);
 	}
 

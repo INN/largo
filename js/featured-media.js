@@ -369,12 +369,93 @@ var LFM = _.extend(LFM || {}, {
         className: 'featured-media-view'
     });
 
-    LFM.Views.featuredEmbedCodeView = LFM.Views.featuredBaseView.extend({
+    LFM.Views.featuredEmbeddableView = LFM.Views.featuredBaseView.extend({
+        attachments: new wp.media.model.Attachments(),
+
+        initialize: function() {
+            LFM.Views.featuredBaseView.prototype.initialize.apply(this, arguments);
+
+            var model = this.controller.model;
+            if (this.controller.state().id !== model.get('type') || typeof model.get('attachment_data') == 'undefined')
+                this.createUploader();
+
+            return this;
+        },
+
+        render: function() {
+            LFM.Views.featuredBaseView.prototype.render.apply(this, arguments);
+            var model = this.controller.model;
+            if (this.controller.state().id == model.get('type') && typeof model.get('attachment_data') !== 'undefined') {
+                var attachment = new wp.media.model.Attachment(model.get('attachment_data'));
+                this.updateThumbnail(attachment);
+            }
+            return this;
+        },
+
+        createUploader: function() {
+            this.attachments.reset([]);
+            this.attachments.observe(wp.Uploader.queue);
+            this.attachments.on('change:uploading', this.uploadProgress.bind(this));
+            this.on('attachmentUploaded', this.attachmentUploaded.bind(this));
+
+            var inlineUploader = new wp.media.view.UploaderInline({
+                controller: this.controller,
+                status: true,
+                postId: null
+            });
+            this.views.add('#embed-thumb', inlineUploader);
+        },
+
+        attachmentUploaded: function() {
+            var attachment = this.attachments.first();
+            this.updateThumbnail(attachment);
+            this.off('attachmentUploaded');
+            this.attachments.off();
+            this.attachments.unobserve(wp.Uploader.queue);
+        },
+
+        updateThumbnail: function(attachment) {
+            var self = this;
+
+            this.thumbnail = new LFM.Views.featuredThumbnail({
+                el: this.$el.find('#embed-thumb'),
+                model: attachment
+            }).render();
+
+            this.thumbnail.on('remove', function() {
+                self.createUploader();
+                self.thumbnail.off();
+            });
+
+            this.attachments.unobserve(wp.Uploader.queue);
+        },
+
+        uploadProgress: function() {
+            if (this.attachments.first().get('uploading') == false)
+                this.trigger('attachmentUploaded');
+        }
+    });
+
+    LFM.Views.featuredEmbedCodeView = LFM.Views.featuredEmbeddableView.extend({
         id: 'media-editor-embed-code',
         template: wp.media.template('featured-embed-code')
     });
 
-    LFM.Views.featuredVideoView = LFM.Views.featuredBaseView.extend({
+    LFM.Views.featuredThumbnail = LFM.Views.featuredBaseView.extend({
+        events: {
+            'click a.remove-thumb': 'removeThumb'
+        },
+
+        template: wp.media.template('featured-thumb'),
+
+        removeThumb: function(event) {
+            var target = $(event.currentTarget);
+            target.parent().remove();
+            this.trigger('remove');
+        }
+    });
+
+    LFM.Views.featuredVideoView = LFM.Views.featuredEmbeddableView.extend({
         events: {
             'paste input.url': 'fetchVideo',
             'keypress input.url': 'fetchVideo'
@@ -395,16 +476,20 @@ var LFM = _.extend(LFM || {}, {
                 if (typeof this.kp !== 'undefined')
                     clearTimeout(this.kp);
 
-                this.kp = setTimeout(function() {
+                var address_input = $('input[name="url"]'),
                     url_pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-                    address = $('input[name="url"]').val();
 
-                    if (url_pattern.test(address))
-                        self.fetchMeta(address);
-                    else {
-                        error.html('Error: please enter a valid URL.');
-                    }
-                }, 100);
+                    address_input.on('input propertychange', function() {
+                        self.kp = setTimeout(function() {
+                            var address = address_input.val();
+
+                            if (url_pattern.test(address))
+                                self.fetchMeta(address);
+                            else {
+                                error.html('Error: please enter a valid URL.');
+                            }
+                        }, 100);
+                    });
 
             }
             this.kp = event.keyCode;
@@ -415,10 +500,21 @@ var LFM = _.extend(LFM || {}, {
                 success = function(data) {
                     var error = self.$el.find('p.error');
                     error.html('');
+
                     if (!data.embed)
                         error.html('Please enter a valid video URL.');
                     else
                         self.$el.find('textarea').html(data.embed);
+
+                    if (data.title)
+                        self.$el.find('[name="title"]').val(data.title);
+
+                    if (data.author_name)
+                        self.$el.find('[name="credit"]').val(data.author_name);
+
+                    if (self.$el.find('[name="attachment"]').length < 1)
+                        self.updateThumbnail(new Backbone.Model(data));
+
                     self.hideSpinner();
                 },
                 failure = function() {
@@ -503,7 +599,8 @@ var LFM = _.extend(LFM || {}, {
                 success: function() {
                     self.saving = false;
                     self.hideSpinner();
-                    $('#set-featured-media-button').text('Edit Featured Media');
+                    $('#set-featured-media-button').html(
+                        '<span class="dashicons dashicons-admin-generic"></span> Edit Featured Media');
                     LFM.has_featured_media = true;
                     LFM.instances.modal.close();
                 }
@@ -718,6 +815,8 @@ var LFM = _.extend(LFM || {}, {
                     }
                 }
             });
+
+            return false;
         });
     });
 }());

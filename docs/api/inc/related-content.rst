@@ -85,6 +85,8 @@ inc/related-content.php
 
       :access: protected
 
+      :see: largo_series_custom_order
+
    .. php:method:: Largo_Related::get_term_posts()
 
       Fetches posts contained within the categories and tags this post has. Feeds them into $this->post_ids array

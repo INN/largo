@@ -6,13 +6,13 @@
  */
 
 global $largo, $shown_ids, $tags;
+$topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') ? 'top-story span12' : 'top-story span8';
 ?>
 <div id="homepage-featured" class="row-fluid clearfix">
-	<?php if ( is_active_sidebar('homepage-left-rail') ) { ?>
-	<div class="top-story span12">
-	<?php } else { ?>
-	<div class="top-story span8">
-	<?php }
+
+	<div <?php post_class( $topstory_classes ); ?>>
+
+	<?php
 		$topstory = largo_get_featured_posts( array(
 			'tax_query' => array(
 				array(
@@ -25,19 +25,12 @@ global $largo, $shown_ids, $tags;
 		) );
 		if ( $topstory->have_posts() ) :
 			while ( $topstory->have_posts() ) : $topstory->the_post(); $shown_ids[] = get_the_ID();
-
-				if( $has_video = get_post_meta( $post->ID, 'youtube_url', true ) ) { ?>
-					<div class="embed-container">
-						<iframe src="http://www.youtube.com/embed/<?php echo substr(strrchr( $has_video, "="), 1 ); ?>?modestbranding=1" frameborder="0" allowfullscreen></iframe>
-					</div>
-				<?php } else { ?>
-					<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
-				<?php } ?>
-
+		?>
+				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-			    <h5 class="byline"><?php largo_byline(); ?></h5>
-			    <?php largo_excerpt( $post, 4, false ); ?>
-			    <?php if ( largo_post_in_series() ):
+				<h5 class="byline"><?php largo_byline(); ?></h5>
+				<?php largo_excerpt( $post, 4, false ); ?>
+				<?php if ( largo_post_in_series() ):
 					$feature = largo_get_the_main_feature();
 					$feature_posts = largo_get_recent_posts_for_term( $feature, 1, 1 );
 					if ( $feature_posts ):
@@ -51,43 +44,43 @@ global $largo, $shown_ids, $tags;
 		endif; // end top story ?>
 	</div>
 
-	<?php if ( !is_active_sidebar('homepage-left-rail') ) { ?>
-	<div class="sub-stories span4">
-		<?php
-		$showposts = 6;
-		$showposts = apply_filters('largo_homepage_topstories_post_count', $showposts);
-		$substories = largo_get_featured_posts( array(
-			'tax_query' => array(
-				array(
-					'taxonomy' 	=> 'prominence',
-					'field' 	=> 'slug',
-					'terms' 	=> 'homepage-featured'
-				)
-			),
-			'showposts'		=> $showposts,
-			'post__not_in' 	=> $shown_ids
-		) );
-		if ( $substories->have_posts() ) :
-			$count = 1;
-			while ( $substories->have_posts() ) : $substories->the_post(); $shown_ids[] = get_the_ID();
-				if ($count <= 3) : ?>
-					<div class="story">
-			        	<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>
-			        		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
-			        	<?php endif; ?>
-			        	<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-			        	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
-			            <?php largo_excerpt( $post, 3, false ); ?>
-			        </div>
-			    <?php elseif ($count == 4) : ?>
-			        <h4 class="subhead"><?php _e('More Headlines', 'largo'); ?></h4>
-			        <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-			    <?php else : ?>
-			        <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-			    <?php endif;
-				$count++;
-			endwhile;
-		endif; // end more featured posts ?>
-	</div>
+	<?php if ( largo_get_active_homepage_layout() !== 'LegacyThreeColumn' ) { ?>
+		<div class="sub-stories span4">
+			<?php
+			$showposts = 6;
+			$showposts = apply_filters( 'largo_homepage_topstories_post_count', $showposts );
+			$substories = largo_get_featured_posts( array(
+				'tax_query' => array(
+					array(
+						'taxonomy' 	=> 'prominence',
+						'field' 	=> 'slug',
+						'terms' 	=> 'homepage-featured'
+					)
+				),
+				'showposts'		=> $showposts,
+				'post__not_in' 	=> $shown_ids
+			) );
+			if ( $substories->have_posts() ) :
+				$count = 1;
+				while ( $substories->have_posts() ) : $substories->the_post(); $shown_ids[] = get_the_ID();
+					if ( $count <= 3 ) : ?>
+						<div <?php post_class( 'story' ); ?> >
+							<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>
+								<h5 class="top-tag"><?php largo_top_term(); ?></h5>
+							<?php endif; ?>
+							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+							<?php largo_excerpt( $post, 3, false ); ?>
+						</div>
+					<?php elseif ( $count == 4 ) : ?>
+						<h4 class="subhead"><?php _e('More Headlines', 'largo'); ?></h4>
+						<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+					<?php else : ?>
+						<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+					<?php endif;
+					$count++;
+				endwhile;
+			endif; // end more featured posts ?>
+		</div>
 	<?php } ?>
 </div>

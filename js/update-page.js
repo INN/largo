@@ -18,9 +18,9 @@
             success: function(data) {
                 spinner.css('display', 'none');
                 if (!data.success)
-                    parent.append('<div class="message error">' + data.status + '</div>');
+                    parent.append('<div class="error">' + data.status + '</div>');
                 else
-                    parent.html('<div class="message updated">' + data.status + '</div>');
+                    parent.html('<div class="updated">' + data.status + '</div>');
             },
             error: function() {
                 throw "There was an error running the update.";

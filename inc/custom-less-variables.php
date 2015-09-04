@@ -253,6 +253,18 @@ class Largo_Custom_Less_Variables {
 
 			$css = $compiler->compile( $less );
 			$css = self::fix_urls( $css );
+
+			/*
+			 * Make all URLs protocol-relative by replacing https:// and http:// with //
+			 */
+			$css = str_replace(
+				array(
+					'http:',
+					'https:'
+				),
+				'',
+				$css
+			);
 			return $css;
 		} catch ( Exception $e ) {
 			return $less;

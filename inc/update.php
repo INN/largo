@@ -3,9 +3,7 @@
  * Contains functions and tools for transitioning between Largo 0.3 and Largo 0.4
  */
 
-
-
-/** --------------------------------------------------------
+/* --------------------------------------------------------
  * Start updates and helpers
  * ------------------------------------------------------ */
 
@@ -13,8 +11,8 @@
  * Performs various update functions and set a new verion number.
  *
  * This acts as a main() for applying database updates when the update ajax is
- * called. 
- * 
+ * called.
+ *
  * @since 0.3
  */
 function largo_perform_update() {
@@ -50,7 +48,7 @@ function largo_perform_update() {
 
 /**
  * Returns current version of largo as set in stylesheet.
- * 
+ *
  * @since 0.3
  */
 function largo_version() {
@@ -61,12 +59,11 @@ function largo_version() {
 	return $theme->get('Version');
 }
 
-
 /**
  * Checks if updates need to be run.
- * 
+ *
  * @since 0.3
- * 
+ *
  * @return boolean if updates need to be run
  */
 function largo_need_updates() {
@@ -83,22 +80,16 @@ function largo_need_updates() {
 	return true;
 }
 
-
-
-
-
-
-/** --------------------------------------------------------
+/* --------------------------------------------------------
  * Upgrades for moving from 0.3 -> 0.4
- * 
->>>>>>> develop
+ *
  * In which many theme options became widgets
  * And homepage templates are implemented
  * ------------------------------------------------------ */
 
 /**
  * Convert old theme option of 'homepage_top' to new option of 'home_template'
- * 
+ *
  * @since 0.4
  */
 function largo_home_transition() {
@@ -127,7 +118,7 @@ function largo_home_transition() {
 
 /**
  * Puts new widgets into sidebars as appropriate based on old theme options
- * 
+ *
  * @since 0.4
  */
 function largo_update_widgets() {
@@ -257,7 +248,7 @@ function largo_transition_nav_menus() {
  * This function does not touch custom prominence term descriptions, except those that are identical to the descriptions of current or 0.3 prominence term descriptions.
  *
  * @since 0.4
- * 
+ *
  * @uses largo_update_prominence_term_description_single
  */
 function largo_update_prominence_term_descriptions() {
@@ -328,7 +319,7 @@ function largo_update_prominence_term_descriptions() {
  * This function contains commented-out logic that will allow you to from description to olddescription
  *
  * @since 0.4
- * 
+ *
  * @param array $update The new details for the prominence tax term to be updated
  * @param array $term_descriptions Array of prominence terms, each prominence term as an associative array with keys: name, description, olddescription, slug
  * @uses var_log
@@ -399,9 +390,9 @@ function largo_force_settings_update() {
 
 /**
  * Enable series if series have been created.
- * 
+ *
  * @since 0.4
- * 
+ *
  * @return bool If series were enabled by this function
  */
 function largo_enable_if_series() {
@@ -421,9 +412,9 @@ function largo_enable_if_series() {
 
 /**
  * Enable the series taxonomy if the series landing pages are in use.
- * 
+ *
  * @since 0.4
- * 
+ *
  * @return bool If series landing pages (and series) were enabled by this function.
  */
 function largo_enable_series_if_landing_page() {
@@ -447,12 +438,7 @@ function largo_enable_series_if_landing_page() {
 	}
 }
 
-
-
-
-
-
-/** --------------------------------------------------------
+/* --------------------------------------------------------
  * Upgrades for moving from 0.4 -> 0.5
  *
  * In which top stories are no registered by default.
@@ -490,12 +476,7 @@ function largo_remove_topstory_prominence_term() {
 	return $del_terms;
 }
 
-
-
-
-
-
-/** --------------------------------------------------------
+/* --------------------------------------------------------
  * Always run
  *
  * Functions that should run any time the largo version
@@ -503,11 +484,11 @@ function largo_remove_topstory_prominence_term() {
  * ------------------------------------------------------ */
 
 /**
- * Save default values for any newly introduced options to the database.
- * 
- * Note: this must be called before any other update function calls `of_set_option`, 
- *       as `of_set_uption` defaults all values to null.
- * 
+ * Save default values for any newly introduced options to the database
+ *
+ * Note: this must be called before any other update function calls `of_set_option`,
+ * as `of_set_uption` defaults all values to null.
+ *
  * @since 0.5.1
  */
 function largo_set_new_option_defaults() {
@@ -580,12 +561,7 @@ function largo_deprecated_sidebar_widget() { ?>
 	<?php
 }
 
-
-
-
-
-
-/** --------------------------------------------------------
+/* --------------------------------------------------------
  * Update helper functions
  * ------------------------------------------------------ */
 
@@ -611,9 +587,9 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
  * Inserts a widget programmatically.
  * This is slightly dangerous as it makes some assumptions about existing plugins
  * if $instance_settings are wrong, bad things might happen
- * 
+ *
  * @since 0.5
- * 
+ *
  * @param String $kind. Kind of widget to instantiate.
  * @param Array $instance_settings. Settings for that array.
  * @param String $region. Sidebar region to add to.
@@ -664,21 +640,19 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 
 }
 
-
-
-
-
-
-/** --------------------------------------------------------
+/* --------------------------------------------------------
  * Update.php admin page logic.
  * ------------------------------------------------------ */
 
 /**
  * Add an admin notice if largo needs to be updated.
- * 
+ *
  * @since 0.3
  */
 function largo_update_admin_notice() {
+	if (!current_user_can('edit_theme_options'))
+		return;
+
 	if (largo_need_updates() && !(isset($_GET['page']) && $_GET['page'] == 'update-largo')) {
 ?>
 	<div class="update-nag" style="display: block;">
@@ -691,7 +665,7 @@ add_action('admin_notices', 'largo_update_admin_notice');
 
 /**
  * Register an admin page for updates.
- * 
+ *
  * @since 0.3
  */
 function largo_register_update_page() {
@@ -713,7 +687,7 @@ add_action('admin_menu', 'largo_register_update_page');
 
 /**
  * DOM for admin page for updates.
- * 
+ *
  * @since 0.3
  */
 function largo_update_page_view() { ?>
@@ -782,7 +756,7 @@ function largo_update_page_view() { ?>
 
 /**
  * Enqueues javascript used on the Largo Update page
- * 
+ *
  * @since 0.3
  *
  * @global LARGO_DEBUG
@@ -800,14 +774,14 @@ add_action('admin_enqueue_scripts', 'largo_update_page_enqueue_js');
 
 /**
  * Ajax handler for when update is applied from the updates page.
- * 
+ *
  * @since 0.3
  *
  * @global LARGO_DEBUG
  * @global $_GET
  */
 function largo_ajax_update_database() {
-	if (!current_user_can('activate_plugins')) {
+	if (!current_user_can('edit_theme_options')) {
 		print json_encode(array(
 			"status" => __("An error occurred."),
 			"success" => false

@@ -64,3 +64,9 @@ inc/widgets.php
    :since: 1.0
 
    :uses: add_filter() $widget_title'
+
+.. php:function:: largo_is_sidebar_registered_and_active()
+
+   Check to see if a widget area is registered and has widgets assigned
+
+   :since: 0.5.2

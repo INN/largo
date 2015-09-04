@@ -221,3 +221,19 @@ function largo_add_link_to_widget_title( $title, $instance = null ) {
   return $title;
 }
 add_filter( 'widget_title', 'largo_add_link_to_widget_title', 99, 2 );
+
+/**
+ * Check to see if a widget area is registered and has widgets assigned
+ *
+ * @since 0.5.2
+ */
+function largo_is_sidebar_registered_and_active($sidebar) {
+	$sidebars_widgets = get_option('sidebars_widgets', array());
+
+	if (in_array($sidebar, array_keys($sidebars_widgets))) {
+		if (count($sidebars_widgets[$sidebar]) > 0)
+			return true;
+	}
+
+	return false;
+}

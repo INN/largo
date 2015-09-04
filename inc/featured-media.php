@@ -288,6 +288,9 @@ function largo_get_featured_media( $post = null ) {
 			'attachment' => $post_thumbnail,
 			'type' => 'image'
 		);
+	} else if (!empty($ret) && in_array($ret['type'], array('embed', 'video')) && !empty($post_thumbnail)) {
+		$attachment = wp_prepare_attachment_for_js($post_thumbnail);
+		$ret = array_merge($ret, array('attachment_data' => $attachment));
 	}
 
 	// Backwards compatibility with posts that have a youtube_url set
@@ -344,6 +347,10 @@ function largo_enqueue_featured_media_js($hook) {
 		'largo_featured_media', get_template_directory_uri() . '/js/featured-media' . $suffix . '.js',
 		array('media-models', 'media-views'), false, 1);
 
+	wp_enqueue_style(
+		'largo_featured_media',
+		get_template_directory_uri(). '/css/featured-media' . $suffix . '.css');
+
 	wp_localize_script('largo_featured_media', 'LFM', array(
 		'options' => largo_default_featured_media_types(),
 		'featured_image_display' => !empty($featured_image_display),
@@ -361,7 +368,7 @@ function largo_add_featured_media_button($context) {
 	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
 	ob_start();
 ?>
-	<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><?php echo $language; ?> Featured Media</a> <span class="spinner"></span>
+	<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span>
 <?php
 	$context .= ob_get_contents();
 	ob_end_clean();
@@ -402,6 +409,11 @@ function largo_featured_media_templates() { ?>
 				<label for="embed"><span>Embed code</span></label>
 				<textarea name="embed"><# if (model.get('type') == 'embed-code') { #>{{ model.get('embed') }}<# } #></textarea>
 			</div>
+
+			<div>
+				<label><span>Embed thumbnail</span></span></label>
+				<div id="embed-thumb"></div>
+			</div>
 		</form>
 	</script>
 
@@ -423,6 +435,11 @@ function largo_featured_media_templates() { ?>
 			</div>
 
 			<div>
+				<label><span>Video thumbnail</span></span></label>
+				<div id="embed-thumb"></div>
+			</div>
+
+			<div>
 				<label for="title"><span>Title</span></span></label>
 				<input type="text" name="title" <# if (model.get('type') == 'video') { #>value="{{ model.get('title') }}"<# } #> />
 			</div>
@@ -440,6 +457,20 @@ function largo_featured_media_templates() { ?>
 		</form>
 	</script>
 
+	<script type="text/template" id="tmpl-featured-thumb">
+		<div class="thumb-container">
+			<# if (typeof data.model.get('sizes') !== 'undefined') { #>
+				<img src="{{ data.model.get('sizes').medium.url }}" title="Thumbnail: '{{ data.model.get('title') }}'" />
+				<input type="hidden" name="attachment" value="{{ data.model.get('id') }}" />
+			<# } else if (data.model.get('thumbnail_url')) { #>
+				<img src="{{ data.model.get('thumbnail_url') }}" title="Thumbnail for '{{ data.model.get('title') }}'" />
+				<input type="hidden" name="thumbnail_url" value="{{ data.model.get('thumbnail_url') }}" />
+				<input type="hidden" name="thumbnail_type" value="oembed" />
+			<# } #>
+			<a href="#" class="remove-thumb">Remove thumbnail</a>
+		</div>
+	</script>
+
 	<script type="text/template" id="tmpl-featured-image-override">
 		<form>
 			<input type="checkbox" name="featured-image-display" <# if (LFM.featured_image_display !== '') { #>checked="checked"<# } #>/> Override display of featured image for this post?
@@ -451,71 +482,6 @@ function largo_featured_media_templates() { ?>
 	</script>
 <?php }
 add_action('admin_print_footer_scripts', 'largo_featured_media_templates', 1);
-
-/**
- * Print featured media css
- */
-function largo_featured_media_css() { ?>
-	<style type="text/css">
-		.featured-media-modal .featured-media-view form {
-			margin: 20px;
-		}
-		.featured-media-modal .featured-media-view form div {
-			margin: 0 0 20px 0;
-		}
-		.featured-media-modal .featured-media-view form label {
-			clear: both;
-			padding: 10px 0;
-			margin: 0 0 10px 0;
-		}
-		.featured-media-modal .featured-media-view form label span {
-			display: block;
-			font-size: 18px;
-			line-height: 22px;
-			margin: 6px 0;
-		}
-		.featured-media-modal .featured-media-view form textarea,
-		.featured-media-modal .featured-media-view form input {
-			width: 100%;
-			max-width: 700px;
-		}
-		.featured-media-modal .featured-media-view form textarea {
-			min-height: 120px;
-		}
-		.featured-media-modal .featured-media-view .media-frame-router p {
-			margin: 0 0 0 15px;
-		}
-		.featured-media-modal .media-toolbar-primary span.spinner {
-			display: inline-block;
-			float: left;
-			margin: 0;
-			position: relative;
-			top: 20px;
-		}
-		.featured-media-modal #featured-video-form label[for="url"] span.spinner {
-			position: relative;
-			top: 3px;
-			float: none;
-			margin: 0;
-			display: inline-block;
-		}
-		.featured-media-modal .media-toolbar-secondary form {
-			margin-top: 20px;
-		}
-		.featured-media-modal .featured-remove-featured-confirm {
-			text-align: center;
-		}
-		.featured-media-modal .featured-remove-featured-confirm h1 {
-			margin: 20px 50px 0 50px;
-			line-height: 42px;
-		}
-		#wp-content-media-buttons .spinner {
-			position: relative;
-			top: 2px;
-		}
-	</style>
-<?php }
-add_action('admin_head', 'largo_featured_media_css', 1);
 
 /**
  * Remove the default featured image meta box from post pages
@@ -573,6 +539,21 @@ function largo_featured_media_save() {
 		if (!empty($youtube_url))
 			delete_post_meta($data['id'], 'youtube_url');
 
+		// Set the featured image for embed or oembed types
+		if (isset($data['thumbnail_url']) && isset($data['thumbnail_type']) && $data['thumbnail_type'] == 'oembed')
+			$thumbnail_id = largo_media_sideload_image($data['thumbnail_url'], null);
+		else if (isset($data['attachment']))
+			$thumbnail_id = $data['attachment'];
+
+		// If featured media is a gallery, use the first image as the representative thumbnail
+		if ($data['type'] == 'gallery')
+			$thumbnail_id = $data['gallery'][0];
+
+		if (isset($thumbnail_id)) {
+			update_post_meta($data['id'], '_thumbnail_id', $thumbnail_id);
+			$data['attachment_data'] = wp_prepare_attachment_for_js($thumbnail_id);
+		}
+
 		// Don't save the post ID in post meta
 		$save = $data;
 		unset($save['id']);
@@ -616,9 +597,36 @@ add_action('wp_ajax_largo_save_featured_image_display', 'largo_save_featured_ima
 function largo_fetch_video_oembed() {
 	if (!empty($_POST['data'])) {
 		$data = json_decode(stripslashes($_POST['data']), true);
-		$ret = wp_oembed_get($data['url']);
-		print json_encode(array('embed' => $ret));
+
+		require_once( ABSPATH . WPINC . '/class-oembed.php' );
+		$oembed = _wp_oembed_get_object();
+		$url = $data['url'];
+		$provider = $oembed->get_provider($url);
+		$data = $oembed->fetch($provider, $url);
+		$embed = $oembed->data2html($data, $url);
+		$ret = array_merge(array('embed' => $embed), (array) $data);
+		print json_encode($ret);
 		wp_die();
 	}
 }
 add_action('wp_ajax_largo_fetch_video_oembed', 'largo_fetch_video_oembed');
+
+/**
+ * Add post classes to indicate whether a post has featured media and what type it is
+ *
+ * @since 0.5.2
+ */
+function largo_featured_media_post_classes($classes) {
+	global $post;
+
+	$featured = largo_get_featured_media($post->ID);
+	if (!empty($featured)) {
+		$classes = array_merge($classes, array(
+			'featured-media',
+			'featured-media-' . $featured['type']
+		));
+	}
+
+	return $classes;
+}
+add_filter('post_class', 'largo_featured_media_post_classes');

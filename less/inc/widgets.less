@@ -11,6 +11,7 @@
     6.0 - Series Posts Widget
     7.0 - Related Posts Widget
     8.0 - Roster Widget
+    9.0 - WordPress Image Widget
 ------------------------------------------------------------------------------*/
 
 
@@ -21,7 +22,8 @@
 /* 1.1 - Base styles */
 
 .widget {
-  padding: @baseline * 0.75 0;
+  padding: 0 @baseline;
+  margin-bottom: @baseline * 1.5;
   p, ul {
     font-size: @baseFontSize;
   }
@@ -29,14 +31,12 @@
     margin: @baseline/5 0 0 16px;
     line-height: 1.2;
     ul {
-      margin-bottom:@baseline/5;
+      margin-bottom: @baseline/5;
+      margin-top: @baseline * 0.5;
     }
   }
   p.morelink {
     margin: -@baseline/4 0 0;
-  }
-  + .widget {
-    border-top: 1px solid @grayLighter;
   }
 }
 
@@ -300,6 +300,17 @@
   }
 }
 
+// Styles specifically for the deprecated Largo Sidebar Featured widget
+.largo-sidebar-featured {
+  img {
+    float: left;
+    margin-right: 0.5em;
+  }
+  .post-lead {
+    margin-bottom: 1em;
+  }
+}
+
 /*------------------------------------------------------------------------------
     6.0 - Series Posts Widget
 ------------------------------------------------------------------------------*/
@@ -326,10 +337,11 @@
     display: block;
     float: left;
     font-size: 110%;
-    margin-right: -100%
+    margin-right: -100%;
   }
   li a {
     margin-left: 0;
+    padding-left: 24px;
     display: inline-block;
     font-family: @sansFontFamily;
   }
@@ -428,4 +440,11 @@ ul.staff-roster {
     line-height: 17px;
     color: #bbbbbb;
   }
+}
+
+/*------------------------------------------------------------------------------
+    9.0 - WordPress Image Widget
+------------------------------------------------------------------------------*/
+#site-footer .widget-sp-image img {
+  max-width: 100% !important; // because the widget uses inline max-width:px fixed widths
 }

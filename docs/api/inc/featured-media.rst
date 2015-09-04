@@ -113,10 +113,6 @@ inc/featured-media.php
 
    Prints the templates used by featured media modal.
 
-.. php:function:: largo_featured_media_css()
-
-   Print featured media css
-
 .. php:function:: largo_remove_featured_image_meta_box()
 
    Remove the default featured image meta box from post pages
@@ -135,3 +131,9 @@ inc/featured-media.php
 
    When a URL is typed/pasted into the url field of the featured video view,
    this function tries to fetch the oembed information for that video.
+
+.. php:function:: largo_featured_media_post_classes()
+
+   Add post classes to indicate whether a post has featured media and what type it is
+
+   :since: 0.5.2
