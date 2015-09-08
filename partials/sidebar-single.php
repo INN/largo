@@ -1,6 +1,8 @@
 <?php
-/**
+/*
  * For single post and pages
+ *
+ * @package Largo
  */
 $custom_sidebar = largo_get_custom_sidebar();
 if ($custom_sidebar !== 'none') {

@@ -1,13 +1,13 @@
 <ul class="social-links">
 	<?php if ( $fb = $author_obj->fb ) { ?>
 		<li class="facebook">
-			<div class="fb-follow" data-href="https://facebook.com/<?php echo largo_fb_url_to_username(esc_url( $fb )); ?>" data-layout="button_count" data-show-faces="false" data-width="225"></div>
+			<a href="https://facebook.com/<?php echo largo_fb_url_to_username(esc_url( $fb )); ?>" title="<?php echo esc_attr( $author_obj->display_name ); ?> on Facebook" rel="me"><i class="icon-facebook"></i></a>
 		</li>
 	<?php } ?>
 
 	<?php if ( $twitter = $author_obj->twitter ) { ?>
 		<li class="twitter">
-			<a href="https://twitter.com/<?php echo largo_twitter_url_to_username ( $twitter ); ?>" class="twitter-follow-button" data-show-count="false"><?php printf( __('Follow @%1$s', 'largo'), largo_twitter_url_to_username ( $twitter ) ); ?></a>
+			<a href="https://twitter.com/<?php echo largo_twitter_url_to_username ( $twitter ); ?>"><i class="icon-twitter"></i></a>
 		</li>
 	<?php } ?>
 

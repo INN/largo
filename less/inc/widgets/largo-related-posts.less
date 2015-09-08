@@ -1,0 +1,50 @@
+/**
+ * Styles for the Largo Related Posts widget
+ *
+ * @see /less/inc/responsive-767px-max.less
+ * @see /less/inc/single.less
+ * @since 0.5.3
+ */
+
+.widget.largo-related-posts {
+  .widgettitle {
+    font-size: 21px;
+    margin-bottom: 12px;
+    text-align: center;
+    color: @red;
+  }
+  ul.related {
+    margin: 0;
+    li {
+      list-style: none;
+      display: block;
+      .clearfix();
+    }
+  }
+  h4 {
+    font-size: @baseFontSize * 1.5;
+    margin-bottom: 8px;
+    @media only screen and (max-width: 640px) {
+      font-size: 18px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+  }
+  h5.byline {
+    font-size: 11px;
+    margin-bottom: 8px;
+    @media only screen and (max-width: 640px) {
+      display: none;
+    }
+  }
+  p {
+    margin-bottom: 1em;
+    @media only screen and (max-width: 640px) {
+      font-size: 14px;
+    }
+  }
+  .wp-post-image {
+    float: left;
+    margin: 5px 20px 0 0;
+  }
+}

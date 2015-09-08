@@ -1,0 +1,116 @@
+/**
+ * Styles for Largo Explore Related widget
+ *
+ * @see /less/inc/single.less
+ * @see /less/inc/responsive-767px-max.less
+ * @since 0.5.3
+ */
+
+// There are no styles hooked on .largo-explore-related.
+// See the above files for more information about #related-posts
+#related-post-nav {
+  padding: 8px 0;
+  font-family: @sansFontFamily;
+  li {
+    list-style-type: none;
+    margin-bottom: 0;
+    font-size: @baseFontSize - 2;
+    &:last-child a {
+      border-bottom: 1px solid @grayLight;
+    }
+  }
+  h5 {
+    margin: 0 0 5px 0;
+  }
+  a {
+    display: block;
+    padding: 6px;
+    font-weight: normal;
+    text-decoration: none;
+    border-top: 1px solid @grayLight;
+    outline: none;
+    &:hover {
+      background-color: @grayLighter;
+    }
+    &.selected {
+      color: @white;
+      background: @baseColor;
+      border: none;
+      letter-spacing: 1px;
+	}
+  }
+}
+.related-items {
+  div {
+    display:none;
+    padding: 0 2.5%;
+    img {
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+  }
+  ul {
+    margin: 5px 0;
+    li {
+      list-style: disc;
+      margin-left: 15px;
+      margin-bottom: 0;
+      font-size: @baseFontSize * 0.815;
+      &.top-related {
+        list-style: none;
+        margin-left: 0;
+        border-bottom: 1px solid @grayLighter;
+        margin-bottom: @baseline / 2;
+        font-size: @baseFontSize * 0.5;
+        h3 {
+          font-size: @baseFontSize * 1.222;
+          font-weight: bold;
+          margin-bottom: @baseline / 4;
+        }
+        p {
+          font-family: @baseFontFamily;
+          font-size: @baseFontSize * 0.667;
+          margin-bottom: @baseline / 2;
+        }
+      }
+    }
+  }
+  p {
+    font-family: @sansFontFamily;
+    font-size: @baseFontSize * 0.815;
+    margin-bottom: @baseline / 4;
+  }
+}
+
+@media (max-width: 768px) {
+  #related-post-nav,
+  #related-posts .related-items {
+    clear: both;
+    float: none;
+    width: 100%;
+    margin: 0 0 @baseline;
+  }
+  #related-post-nav,
+  #related-posts .related-items {
+    margin: 0;
+  }
+  #related-post-nav a {
+    padding: 8px 5px;
+  }
+  #related-posts .related-items ul li.top-related {
+    margin-bottom: @baseline / 2;
+  }
+  #related-posts .related-items ul li.top-related h3 {
+    font-size: @baseFontSize * 1.5;
+    margin-bottom: @baseline / 3;
+  }
+  #related-posts .related-items ul li.top-related p,
+  #related-posts .related-items div img {
+    display: none;
+  }
+  #related-posts .related-items ul li {
+    font-size: @baseFontSize;
+    line-height: 1.2;
+    margin-bottom: @baseline / 3;
+  }
+}

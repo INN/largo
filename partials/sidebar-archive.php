@@ -1,6 +1,8 @@
 <?php
-/**
+/*
  * For archive/taxonomy pages
+ *
+ * @package Largo
  */
 $custom_sidebar = largo_get_custom_sidebar();
 if (!dynamic_sidebar($custom_sidebar)) { // try custom sidebar

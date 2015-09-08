@@ -19,19 +19,19 @@ class largo_tag_list_widget extends WP_Widget {
 		// only useful on post pages
 		if ( !is_single() ) return;
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Filed Under:', 'largo' ) : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Tags ', 'largo' ) : $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
 		?>
-	      <!-- Post tags -->
-        <?php if ( largo_has_categories_or_tags() ): ?>
-    		<div class="tags clearfix">
-    			<h5><?php echo $title; ?></h5>
-    			<ul>
-    				<?php largo_categories_and_tags( $instance['tag_limit'], true, true, true, '', 'li' ); ?>
-    			</ul>
-    		</div>
-    	<?php endif;
+		  <!-- Post tags -->
+		<?php if ( largo_has_categories_or_tags() ): ?>
+			<div class="tags clearfix">
+				<h5><?php echo $title; ?></h5>
+				<ul>
+					<?php largo_categories_and_tags( $instance['tag_limit'], true, true, false, '', 'li' ); ?>
+				</ul>
+			</div>
+		<?php endif;
 
 		echo $after_widget;
 	}

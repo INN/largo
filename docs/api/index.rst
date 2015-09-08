@@ -42,7 +42,3 @@ Function reference by file
 * `inc/widgets/largo-twitter.php <inc/widgets/largo-twitter.html>`_
 * `inc/wp-taxonomy-landing/functions/cftl-admin.php <inc/wp-taxonomy-landing/functions/cftl-admin.html>`_
 * `inc/wp-taxonomy-landing/functions/cftl-series-order.php <inc/wp-taxonomy-landing/functions/cftl-series-order.html>`_
-* `partials/content.php <partials/content.html>`_
-* `partials/sidebar-archive.php <partials/sidebar-archive.html>`_
-* `partials/sidebar-single.php <partials/sidebar-single.html>`_
-* `partials/sidebar.php <partials/sidebar.html>`_

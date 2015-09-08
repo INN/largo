@@ -24,6 +24,12 @@ inc/update.php
 
    :returns: boolean $f updates need to be run
 
+.. php:function:: largo_home_transition()
+
+   Convert old theme option of 'homepage_top' to new option of 'home_template'
+
+   :since: 0.4
+
 .. php:function:: largo_update_widgets()
 
    Puts new widgets into sidebars as appropriate based on old theme options
@@ -81,6 +87,21 @@ inc/update.php
 
    :returns: bool $f series landing pages (and series) were enabled by this function.
 
+.. php:function:: largo_remove_topstory_prominence_term()
+
+   Remove "top-story" prominence term to avoid conflicts with homepages that will register it
+
+   :returns: array $f deleted prominence terms
+
+.. php:function:: largo_set_new_option_defaults()
+
+   Save default values for any newly introduced options to the database
+
+   Note: this must be called before any other update function calls `of_set_option`,
+   as `of_set_uption` defaults all values to null.
+
+   :since: 0.5.1
+
 .. php:function:: largo_update_custom_less_variables()
 
    Make sure custom CSS is regenerated if we're using custom LESS variables
@@ -93,6 +114,10 @@ inc/update.php
 
    Admin notices of older widgets
 
+.. php:function:: largo_widget_in_region()
+
+   Checks to see if a given widget is in a given region already
+
 .. php:function:: largo_instantiate_widget()
 
    Inserts a widget programmatically.
@@ -103,6 +128,12 @@ inc/update.php
    :param String $kind.: Kind of widget to instantiate.
    :param Array $instance_settings.: Settings for that array.
    :param String $region.: Sidebar region to add to.
+
+.. php:function:: largo_update_admin_notice()
+
+   Add an admin notice if largo needs to be updated.
+
+   :since: 0.3
 
 .. php:function:: largo_register_update_page()
 
