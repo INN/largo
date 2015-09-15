@@ -1,0 +1,36 @@
+/**
+ * Styles for the Largo Recent Comments widget
+ *
+ * @see /less/inc/comments.less provides many styles not enumerated here
+ * @since 0.5.3
+ */
+
+.widget.largo-recent-comments {
+  margin-bottom: 2em;
+  ul {
+    margin-left: 0;
+    list-style: none;
+  }
+  li {
+    float: left;
+    margin-bottom: 2em;
+  }
+  p {
+    margin-bottom: 3px;
+    line-height: 1.3em;
+    &.comment-excerpt {
+      font-size: 24px;
+    }
+    &.comment-post {
+      float: left;
+    }
+    &.comment-meta {
+      float: left;
+      clear: both;
+      color: inherit;
+      a {
+        font-style: italic;
+      }
+    }
+  }
+}

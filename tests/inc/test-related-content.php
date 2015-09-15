@@ -371,8 +371,6 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$lr = new Largo_Related(3, $this->considered);
 		$ids = $lr->ids();
 		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
-		var_log($feat);
-		var_log($ids);
 		$this->assertFalse($feat == $ids[2], "The featured post is the last post in the return.");
 		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
 	}
@@ -419,8 +417,6 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		));
 		$lr = new Largo_Related(3, $this->considered);
 		$ids = $lr->ids();
-		var_log($feat);
-		var_log($ids);
 		$this->assertEquals(3, count($ids), "Largo_Related returned other than 3 posts");
 		$this->assertFalse($feat == $ids[2], "The featured post is the last post in the return.");
 		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");

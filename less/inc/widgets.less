@@ -3,15 +3,9 @@
   Widgets - Styling widgets and sidebars.
 
   Contents:
-    1.0 - Global widget styles
-    2.0 - Follow Widget
-    3.0 - About Widget
-    4.0 - Donate Widget
-    5.0 - Featured and Recent Posts Widget
-    6.0 - Series Posts Widget
-    7.0 - Related Posts Widget
-    8.0 - Roster Widget
-    9.0 - WordPress Image Widget
+    1 - Global widget styles
+    2 - Wordpress desfualt widget styles
+    3 - Largo widget styles
 ------------------------------------------------------------------------------*/
 
 
@@ -81,6 +75,9 @@
     color: @white;
     font-weight: bold;
   }
+  .widgettitle a {
+    color: @grayDark;
+  }
 }
 .widget.no-bg {
   background: none;
@@ -95,322 +92,56 @@
 
 /* 1.5 - adjustments for default WP widgets */
 
-.widget_archive select,
-.widget_categories select,
-.largo-taxonomy-list select,
-.widget_search form {
-  margin: @baseline/5 0;
-}
 #sidebar iframe {
   max-width: 100%;
 }
 
 /*------------------------------------------------------------------------------
-    2.0 - Follow Widget
+    2 - Wordpress default widget styles
+
+    This section does not have one file per widget, but if you are creating a
+    new rule for a default widget, please create a new file for the widget
+    or document here the file you are adding the rule to.
 ------------------------------------------------------------------------------*/
 
-.subscribe {
-  display: block;
-  height: 24px;
-  line-height: 1.5;
-  font-size: @baseFontSize - 2;
-  font-family: @sansFontFamily;
-  margin-bottom: 5px;
-  color: @gray;
-  &:hover {
-  text-decoration: none;
-  color: @grayDarker;
-  }
-  i {
-    color: @white;
-    padding: 3px 2px 3px 3px;
-    font-size: @baseFontSize - 3;
-    margin-right: 5px;
-    &.icon-rss {
-    background-color: darken(@orange, 5%);
-    &:hover {
-      background-color: @orange;
-    }
-    }
-    &.icon-linkedin {
-    background-color: darken(#238cc3, 5%);
-    &:hover {
-      background-color: #238cc3;
-    }
-    }
-  }
-}
-.article-bottom .largo-follow {
-  padding: 0;
-}
-.twitter-follow-button {
-  display: block;
-  margin: 0 0 10px;
-}
-.widget .fb-like {
-  margin: 0 0 5px;
-}
-.fb-like, .fb-like span, .fb-like.fb_iframe_widget span iframe,
-.fb-like-box, .fb-like-box span, .fb-like-box span iframe[style] {
-  width: 100% !important;
-}
-.fb-like-box {
-  background: white !important;
-  background-color: white !important;
-}
-.flickr-follow {
-  margin-bottom: 8px;
-}
+@import "widgets/wp-general.less";
+  // The above file includes styles for:
+  //   .widget_archives Archives dropdown
+  //   .widget_categories Categories dropdown
+  //   .widget_search Search form
+  //   .largo-taxonomy-list Largo Taxonomy List dropdown
+
 
 /*------------------------------------------------------------------------------
-    3.0 - About Widget
+    3 - Largo widget styles
+
+    This section aims to have one file for every widget included in Largo, and
+    select third-party widgets that Largo supports. If you add a rule for a
+    widget in a file that does not belong to that widget, please document here
+    the file you are adding the rule to.
+
+    Some files in this section contain no rules. See their @see directives for
+    more information.
 ------------------------------------------------------------------------------*/
 
-.largo-about p {
-  margin-bottom: 0;
-}
-
-/*------------------------------------------------------------------------------
-    4.0 - Donate Widget
-------------------------------------------------------------------------------*/
-
-.largo-donate p {
-  margin-bottom: @baseline/3;
-}
-
-/*------------------------------------------------------------------------------
-    5.0 - Featured and Recent Posts Widget
-------------------------------------------------------------------------------*/
-
-.largo-sidebar-featured,
-.largo-featured,
-.largo-recent-posts,
-.largo-INN-RSS {
-  ul {
-    list-style: none;
-    margin-left: 0;
-  }
-  li {
-    overflow: hidden;
-    margin-bottom: 15px;
-  }
-  img {
-    // Small thumbnails are either right or left aligned.
-    &.right-align {
-      float: right;
-      padding: 3px 0px 6px 10px;
-    }
-    &.left-align {
-      float: left;
-      padding: 3px 10px 6px 0px;
-    }
-    // Large thumbnails get different padding.
-    &.attachment-large,&.attachment-medium {
-      padding: 0px 0 10px;
-    }
-  }
-  h5 {
-    margin-bottom: 2px;
-    font-size: 1.15*@baseFontSize;
-  }
-  p {
-    font-size: 0.9*@baseFontSize;
-    margin-bottom: 0;
-  }
-}
-#sidebar .largo-INN-RSS {
-  ul {
-    margin: @baseline/2 0;
-    padding: 0;
-  }
-  li {
-    margin-bottom: @baseline/2;
-    list-style: none;
-    h5,
-    h6,
-    p {
-    margin-bottom: @baseline/5;
-    }
-  }
-}
-.widget.rev .widgettitle a {
-  color: @grayDark;
-}
-.widget.largo-recent-comments {
-  margin-bottom: 2em;
-  ul {
-    margin-left: 0;
-    list-style: none;
-  }
-  li {
-    float: left;
-    margin-bottom: 2em;
-  }
-  p {
-    margin-bottom: 3px;
-    line-height: 1.3em;
-    &.comment-excerpt {
-      font-size: 24px;
-    }
-    &.comment-post {
-      float: left;
-    }
-    &.comment-meta {
-      float: left;
-      clear: both;
-      color: inherit;
-      a {
-        font-style: italic;
-      }
-    }
-  }
-}
-
-// Styles specifically for the deprecated Largo Sidebar Featured widget
-.largo-sidebar-featured {
-  img {
-    float: left;
-    margin-right: 0.5em;
-  }
-  .post-lead {
-    margin-bottom: 1em;
-  }
-}
-
-/*------------------------------------------------------------------------------
-    6.0 - Series Posts Widget
-------------------------------------------------------------------------------*/
-
-.widget.largo-series-posts {
-  h5.top-tag,
-  h5.top-tag a{
-    color: @black;
-  }
-  h4 {
-    margin-bottom: 0.4em;
-    // this specific h4 should the same size as the standard text
-    line-height: 1.3;
-    font-size: @baseFontSize;
-  }
-  ul {
-    margin-left: 0;
-    list-style: none;
-  }
-  img {
-    max-width: 100px;
-  }
-  i {
-    display: block;
-    float: left;
-    font-size: 110%;
-    margin-right: -100%;
-  }
-  li a {
-    margin-left: 0;
-    padding-left: 24px;
-    display: inline-block;
-    font-family: @sansFontFamily;
-  }
-  p {
-    font-size: 15px;
-    line-height: 1.4;
-  }
-  a.more {
-    text-align: right;
-    float: right;
-    &:after {
-      content: " »";
-    }
-  }
-}
-
-/*------------------------------------------------------------------------------
-    7.0 - Related Posts Widget
-------------------------------------------------------------------------------*/
-
-.widget.largo-related-posts {
-  .widgettitle {
-    font-size: 21px;
-    margin-bottom: 12px;
-    text-align: center;
-    color: @red;
-  }
-  ul.related {
-    margin: 0;
-    li {
-      list-style: none;
-      display: block;
-      .clearfix();
-    }
-  }
-  h4 {
-    font-size: @baseFontSize * 1.5;
-    margin-bottom: 8px;
-    @media only screen and (max-width: 640px) {
-      font-size: 18px;
-      line-height: 1.2;
-      margin-bottom: 4px;
-    }
-  }
-  h5.byline {
-    font-size: 11px;
-    margin-bottom: 8px;
-    @media only screen and (max-width: 640px) {
-      display: none;
-    }
-  }
-  p {
-    margin-bottom: 1em;
-    @media only screen and (max-width: 640px) {
-      font-size: 14px;
-    }
-  }
-  .wp-post-image {
-    float: left;
-    margin: 5px 20px 0 0;
-  }
-}
-
-/*------------------------------------------------------------------------------
-    8.0 - Staff Roster Widget
-------------------------------------------------------------------------------*/
-
-ul.staff-roster {
-  float: left;
-  clear: both;
-  margin: 12px 0 0;
-  list-style-type: none;
-  width: 100%;
-  li {
-    display: block;
-    float: left;
-    clear: both;
-    margin: 0 0 16px 0;
-    width: 100%;
-    img {
-      float: left;
-      width: 65px;
-      height: auto;
-      margin: 0 14px 7px 0;
-      box-shadow: 0 1px 8px #bbbbbb;
-      padding: 4px;
-    }
-  }
-  .staff-name {
-    font-family: "museo-sans", helvetica, arial, sans-serif;
-    font-size: 18px;
-  }
-  p {
-    margin: 5px 0 0;
-    font-size: 14px;
-    line-height: 17px;
-    color: #bbbbbb;
-  }
-}
-
-/*------------------------------------------------------------------------------
-    9.0 - WordPress Image Widget
-------------------------------------------------------------------------------*/
-#site-footer .widget-sp-image img {
-  max-width: 100% !important; // because the widget uses inline max-width:px fixed widths
-}
+// Filenames are based on the name of the widget as it appears in the WP Admin.
+@import "widgets/largo-about-site.less";
+@import "widgets/largo-author-bio.less";
+@import "widgets/largo-disclaimer.less";
+@import "widgets/largo-donate-widget.less";
+@import "widgets/largo-explore-related.less";
+@import "widgets/largo-featured-posts.less";
+  // The above file includes styles for:
+  //   Largo Sidebar Featured (deprecated)
+  //   Largo Footer Featured (deprecated)
+  //   Largo Featured
+  //   Largo Recent Posts
+  //   Largo INN RSS
+@import "widgets/largo-follow.less";
+@import "widgets/largo-image-widget.less";
+@import "widgets/largo-prev-next-links.less";
+@import "widgets/largo-recent-comments.less";
+@import "widgets/largo-related-posts.less";
+@import "widgets/largo-series-posts.less";
+@import "widgets/largo-staff-roster.less";
+@import "widgets/largo-tag-list.less";

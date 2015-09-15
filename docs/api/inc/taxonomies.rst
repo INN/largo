@@ -73,6 +73,7 @@ inc/taxonomies.php
    Get posts marked as "Featured in category" for a given category name.
 
    :param string $category_name: the category to retrieve featured posts for.
+   :param integer $number: total number of posts to return, backfilling with regular posts as necessary.
 
    :since: 0.5
 

@@ -18,11 +18,17 @@
 function largo_perform_update() {
 	if (largo_need_updates()) {
 
+		// Stash the options from the previous version of the theme for later use
+		$previous_options = largo_preserve_previous_options();
+
+		if (!isset($previous_options['largo_version']))
+			$previous_options['largo_version'] = null;
+
 		// this must run before any other function that makes use of of_set_option()
 		largo_set_new_option_defaults();
 
 		// Run when updating from pre-0.4
-		if (version_compare(of_get_option('largo_version'), '0.4') < 0) {
+		if (version_compare($previous_options['largo_version'], '0.4') < 0) {
 			largo_home_transition();
 			largo_update_widgets();
 			largo_transition_nav_menus();
@@ -37,6 +43,7 @@ function largo_perform_update() {
 
 		// Always run
 		largo_update_custom_less_variables();
+		largo_replace_deprecated_widgets();
 		largo_check_deprecated_widgets();
 
 		// Set version.
@@ -93,16 +100,17 @@ function largo_need_updates() {
  * @since 0.4
  */
 function largo_home_transition() {
-	$old_regime = of_get_option('homepage_top', 0);
+	$previous_options = largo_retrieve_previous_options();
+	$old_regime = (isset($previous_options['homepage_top']))? $previous_options['homepage_top'] : 0;
 	$new_regime = of_get_option('home_template', 0);
 
 	// we're using the old system and the new one isn't in place, act accordingly
 	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
 	// however, it will not run if the new system has already been set up, so largo-dev to 0.4 will not overwrite details.
 	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
-	if (of_get_option('homepage_layout') == '3col') {
+	if (isset($previous_options['homepage_layout']) && $previous_options['homepage_layout']== '3col') {
 		of_set_option('home_template', 'LegacyThreeColumn');
-	} else if ($old_regime && !$new_regime) {
+	} else if ($old_regime) {
 		if ($old_regime == 'topstories')
 			$home_template = 'TopStories';
 		if ($old_regime == 'slider')
@@ -147,14 +155,14 @@ function largo_update_widgets() {
 	);
 
 	$checks['show_tags'] = array(
-		'values' => array(1),
+		'values' => array('1'),
 		'widget' => 'largo-tag-list',
-		'settings' => array('title' => __( 'Filed Under:', 'largo' ), 'tag_limit' => 20),
+		'settings' => array('title' => __( 'Tags ', 'largo' ), 'tag_limit' => 20),
 	);
 
 	$checks['show_author_box'] = array(
 		'values' => array('1'),
-		'widget' => 'largo-author-bio',
+		'widget' => 'largo-author',
 		'settings' => array('title' => __( 'Author', 'largo' ) ),
 	);
 
@@ -171,8 +179,9 @@ function largo_update_widgets() {
 	);
 
 	//loop thru, see if value is present, then see if widget exists, if not, create one
+	$previous_options = largo_retrieve_previous_options();
 	foreach( $checks as $option => $i ) {
-		$opt = of_get_option( $option );
+		$opt = $previous_options[$option];
 		if ( $i['values'] === NULL || in_array($opt, $i['values']) ) {
 			//we found an option that suggests we need to add a widget.
 			//if there's not aleady one present, add it
@@ -307,11 +316,8 @@ function largo_update_prominence_term_descriptions() {
 
 	foreach ($largoOldProminenceTerms as $update ) {
 		largo_update_prominence_term_description_single($update, $term_descriptions);
-
 	}
 }
-// Uncomment this line if you would like to force prominence terms to update.
-# add_action('init', 'largo_update_prominence_term_descriptions');
 
 /**
  * Compares an array containing an old and new prominence term description and the appropriate slug and name to an array of current term descriptions. For each term whose current description matches the old description, the function updates the current description to the new description.
@@ -322,7 +328,6 @@ function largo_update_prominence_term_descriptions() {
  *
  * @param array $update The new details for the prominence tax term to be updated
  * @param array $term_descriptions Array of prominence terms, each prominence term as an associative array with keys: name, description, olddescription, slug
- * @uses var_log
  * @uses wp_update_term
  * @uses clean_term_cache
  *
@@ -351,10 +356,6 @@ function largo_update_prominence_term_description_single($update, $term_descript
 	    // Clean the entire prominence term cache
 	    clean_term_cache( $id['term_id'], 'prominence', true );
 	}
-
-	// These are here so you can grep your server logs to see if the terms were updated.
-	# var_log($logarray);
-	# var_log("Done updating prominence terms");
 
 	return $update;
 }
@@ -492,16 +493,14 @@ function largo_remove_topstory_prominence_term() {
  * @since 0.5.1
  */
 function largo_set_new_option_defaults() {
-
 	// Gets the unique id, returning a default if it isn't defined
 	$config = get_option( 'optionsframework' );
 	if ( isset( $config['id'] ) ) {
-		$options = get_option( $config['id'] );			// a list of saved options
-		$defaults = of_get_default_values();			// the list of default values.
-		$options = wp_parse_args($options,$defaults);	// merge 'em.
+		$defaults = of_get_default_values(); // the list of default values.
+		$previous_options = largo_retrieve_previous_options();
+		$options = wp_parse_args($previous_options, $defaults);
 		update_option($config['id'], $options);
 	}
-
 }
 
 /**
@@ -561,26 +560,135 @@ function largo_deprecated_sidebar_widget() { ?>
 	<?php
 }
 
+/**
+ * Replace deprecated widgets with new widgets
+ *
+ * To add widgets to this list of widgets to be upgraded:
+ *   - Add the deprecated widget class and its replacement to $upgrades
+ *
+ * @uses largo_get_widget_basename
+ * @uses largo_get_widget_number
+ * @since 0.5.3
+ */
+function largo_replace_deprecated_widgets() {
+
+	// This defines the classes of widget that will be updated, the class that they will be
+	// replaced with, and the default args on the replacement widget that must be set.
+	$upgrades = array(
+		'largo-footer-featured' => array(
+			'class' => 'largo-featured',
+			'defaults' => array(
+				'term' => 'footer-featured',
+				'title' => __('In Case You Missed It', 'largo')
+			)
+		),
+		'largo-sidebar-featured' => array(
+			'class' => 'largo-featured',
+			'defaults' => array(
+				'term' => 'sidebar-featured',
+				'title' => __('We Recommend', 'largo')
+			)
+		)
+	);
+	$all_widgets = get_option( 'sidebars_widgets' );
+
+	/*
+	 * Find the widgets that need to be replaced,
+	 * Move their arguments to new widgets,
+	 * Name the new widgets appropriately
+	 * Place the new widgets into the widgets list and into the sidebars list
+	 */
+	foreach ( $all_widgets as $region => $current_sidebar ) {
+		// Unlike largo_check_deprecated_widgets, this does not care if the
+		// widget is inactive. This replaces *all* widgets.
+		if ( $region != 'array_version' && is_array($current_sidebar) ) {
+			foreach ( $current_sidebar as $current_widget_slug ) {
+				foreach ( $upgrades as $old_widget_name => $upgrade ) {
+					// Check if the current widget matches a widget in
+					// $updates that needs to be replaced.
+					if (strpos($current_widget_slug, $old_widget_name) === 0) {
+						// Update all this here and now, in case the indexes are off because this
+						// has been meddled with in a previous loop.
+						$local_all_widgets = get_option( 'sidebars_widgets' );
+						$local_current_sidebar = $local_all_widgets[$region];
+						$index = array_search($current_widget_slug, $local_current_sidebar);
+
+						/*
+						 * So many variables ...
+						 *
+						 * $local_all_widgets: Associative array of $region a sidebar or widget area => $local_current_sidebar array of widget slugs in regione
+						 * $local_current_sidebar: Array of the widgets in the current sidebar/widget area/$region
+						 * $current_widget_slug: the old widget's ID: slug-widget-2
+						 * $old_widget_name: The slug of the widget that needs to be updated, from $upgrades: slug
+						 * $region: the id of the current sidebar/widget area
+						 * $index: Where @current_widget_slug is located in $local_current_sidebar
+						 * $basename: the slug of the widget $current_widget_slug, when you remove the prefix widget_ and postfix -number
+						 * $all_instances_of_widget: All instance of $current_widget_slug in all sidebars.
+						 * $upgrade['class'] : The class of the replacement widget, which needs -widget appended to it.
+						 * $upgrade['defaults'] : Default instance arguments for the replacement widget.
+						 * $all_instances_of_upgrade: All instances of $$upgrade['class'] in all sidebars.
+						 * $upgrade_instance_args: The merged old args of the widget with the args from $upgrade['defaults']
+						 * $liw_return: array returned by largo_instantiate_widget with the widget's slug info and place in the sidebar.
+						 */
+
+						// Let's steal some logic from INN/wp-scripts/inc/class-cmd-sidebars.php's dump()
+						$basename = largo_get_widget_basename($current_widget_slug);
+						$number = largo_get_widget_number($current_widget_slug);
+						if (!empty($basename)) {
+							// get all the widgets of this basename
+							$all_instances_of_widget = get_option('widget_' . $basename, false);
+
+							$upgrade_instance_args = array_replace($all_instances_of_widget[$number], $upgrade['defaults']);
+							// create the new widget.
+							$liw_return = largo_instantiate_widget($upgrade['class'], $upgrade_instance_args, $region);
+
+							// remove the old widget
+							unset($all_instances_of_widget[$number]);
+							update_option('widget_' . $basename, $all_instances_of_widget);
+							// @todo: if there are no widgets left in the array, why not just remove the option?
+
+							// update $local_current_sidebar
+							$local_all_widgets = get_option( 'sidebars_widgets' );
+							$local_current_sidebar = $local_all_widgets[$region];
+
+							// Shuffle the new widget around
+							// replace the old widget slug with the new widget slug
+							$local_current_sidebar[$index] = $liw_return['id'];
+
+							// remove the now-duplicate instance of the old widget
+							// added by largo_instantiate_widget
+							unset($local_current_sidebar[$liw_return['place']]);
+							$local_all_widgets[$region] = $local_current_sidebar;
+							update_option('sidebars_widgets', $local_all_widgets);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 /* --------------------------------------------------------
  * Update helper functions
  * ------------------------------------------------------ */
 
 /**
  * Checks to see if a given widget is in a given region already
+ *
+ * @since 0.5.2
+ * @return bool Whether or not the widget was found.
  */
 function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
 
 	$widgets = get_option( 'sidebars_widgets ');
 
-	if ( !isset( $widgets[$region] ) ) {
-		return new WP_Error( 'region-missing', __('Invalid region specified.', 'largo' ) );
-	}
+	if ( !isset( $widgets[$region] ) )
+		return false;
 
 	foreach( $widgets[$region] as $key => $widget ) {
 		if ( stripos( $widget, $widget_name ) === 0 ) return true;	//we found a copy of this widget! Note this may return a false positive if the widget we're checking is the same name (but shorter) as another kind of widget
 	}
 	return false;	// the widget wasn't there
-
 }
 
 /**
@@ -593,6 +701,7 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
  * @param String $kind. Kind of widget to instantiate.
  * @param Array $instance_settings. Settings for that array.
  * @param String $region. Sidebar region to add to.
+ * @return Array ('id' => the id with number of the new widget , 'place' => the index of the id in its region )
  */
 function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 
@@ -608,7 +717,7 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 	$full_kind = 'widget_' . str_replace("_", "-", $kind) . '-widget';
 
 	// step 1: add the widget instance to the database and get the ID
-	$widget_instances = get_option( $kind );
+	$widget_instances = get_option( $full_kind );
 
 	// no instances of this exist, yay
 	if ( !$widget_instances ) {
@@ -620,6 +729,7 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 		);
 
 	} else {
+
 		//figure out what ID we're creating. Don't just use count() as things might get deleted or something...
 		//there's probably a smarter way to do this...
 		while ( array_key_exists( $instance_id, $widget_instances) ) {
@@ -628,16 +738,45 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 
 		//pop off _multiwidget, add our element to the end, then add _multiwidget back
 		$new_instances = array_pop( $widget_instances );
-		$new_instances[ $instance_id ] = wp_parse_args( $instance_settings, $defaults );
-		$new_instances[ '_multiwidget' ] = 1;
-		update_option( $full_kind, $new_instances );
+		$widget_instances[ $instance_id ] = wp_parse_args( $instance_settings, $defaults );
+		$widget_instances[ '_multiwidget' ] = 1;
+		update_option( $full_kind, $widget_instances );
 	}
 
 	// step 2: add the widget instance we just created to the region; this isn't so bad
 	$region_widgets = get_option( 'sidebars_widgets' );
 	$region_widgets[ $region ][] = $kind . '-widget-' . $instance_id;
 	update_option( 'sidebars_widgets', $region_widgets );
+	$place = array_search($kind . '-widget-' . $instance_id, $region_widgets[$region]);
 
+	return array(
+		'id' => $kind . '-widget-' . $instance_id,
+		'place' => $place
+	);
+
+}
+
+/**
+ * Utility function to get the basename of a widget from the widget's slug
+ *
+ * @since 0.5.3
+ */
+function largo_get_widget_basename($slug) {
+	if (preg_match('/^(.*)\-\d+$/', $slug, $matches)) {
+		return $matches[1];
+	}
+	return false;
+}
+/**
+ * Utility function to get the number of a widget from the widget's slug
+ *
+ * @since 0.5.3
+ */
+function largo_get_widget_number($slug) {
+	if (preg_match('/^.*\-(\d+)$/', $slug, $matches)) {
+		return $matches[1];
+	}
+	return false;
 }
 
 /* --------------------------------------------------------
@@ -818,3 +957,126 @@ function largo_ajax_update_database() {
 	}
 }
 add_action('wp_ajax_largo_ajax_update_database', 'largo_ajax_update_database');
+
+/**
+ * A singleton utility class for preserving and retrieving previous Largo options
+ *
+ * @since 0.5.3
+ */
+class LargoPreviousOptions {
+
+	protected static $version;
+
+	protected static function _setVersion($version) {
+		self::$version = $version;
+	}
+
+	protected static function _getSuffix() {
+		$version = (!empty(self::$version))? self::$version : of_get_option('largo_version');
+		if (!empty($version)) {
+			self::_setVersion($version);
+			return '_' . self::$version;
+		} else
+			return '_pre_0.4';
+	}
+
+	/**
+	 * Call this method before saving theme options for the first time after updating Largo
+	 * to preserve the state of theme options for the previous version.
+	 */
+	public static function preserve() {
+		$config = get_option('optionsframework');
+
+		if (isset($config['id'])) {
+			$options = get_option($config['id']);
+
+			if (!empty($options['largo_version']))
+				self::_setVersion($options['largo_version']);
+			else
+				self::_setVersion('pre_0.4');
+
+			update_option($config['id'] . self::_getSuffix(), $options);
+			return $options;
+		}
+
+		return array();
+	}
+
+	/**
+	 * Retrieve the theme options for the version of Largo that immediately preceeded the
+	 * currently-deployed version.
+	 *
+	 * Optionally, retrieve a previous set of theme options by passing a version string to the
+	 * method.
+	 *
+	 * @param string $largo_version for example '0.5.2'
+	 */
+	public static function retrieve($largo_version=false) {
+		$config = get_option('optionsframework');
+
+		if (isset($config['id'])) {
+			$options = get_option($config['id']);
+
+			if (!empty($largo_version))
+				self::_setVersion($largo_version);
+
+			return get_option($config['id'] . self::_getSuffix());
+		}
+
+		return array();
+	}
+
+}
+
+/**
+ * Convenience function for storing the theme options for the version of the theme that immediately
+ * preceeded the currently-deployed version.
+ *
+ * @since 0.5.3
+ */
+function largo_preserve_previous_options() {
+	return LargoPreviousOptions::preserve();
+}
+
+/**
+ * Convenience function for retrieving the theme options for the version of the theme that immediately
+ * preceeded the currently-deployed version.
+ *
+ * @since 0.5.3
+ */
+function largo_retrieve_previous_options($largo_version=false) {
+	return LargoPreviousOptions::retrieve($largo_version);
+}
+
+/**
+ * If Largo needs to be updated, prevent the user from access the Theme Options edit page.
+ *
+ * @since 0.5.3
+ */
+function largo_block_theme_options_for_update() {
+	if (largo_need_updates()) {
+		add_action('admin_init', function() {
+			remove_submenu_page('themes.php', 'options-framework');
+		});
+
+		add_theme_page(
+			__('Theme Options', 'options_framework_theme'),
+			__('Theme Options', 'options_framework_theme'),
+			'edit_theme_options',
+			'largo-block-theme-options',
+			'largo_block_theme_options'
+		);
+	}
+}
+add_action('admin_menu', 'largo_block_theme_options_for_update', 10);
+
+/**
+ * Displays a message indicating the user should update their Largo install before
+ * attempting to edit Theme Options
+ *
+ * @since 0.5.3
+ */
+function largo_block_theme_options() { ?>
+	<h3>Please <a href="<? echo admin_url('index.php?page=update-largo'); ?>">visit the update page</a> to apply required Largo updates before editing Theme Options.</h3>
+<?php
+}

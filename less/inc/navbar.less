@@ -26,11 +26,6 @@
   width: auto;
 }
 
-// Override the default collapsed state
-.nav-collapse.collapse {
-  height: auto;
-}
-
 // Brand, links, text, and buttons
 .navbar {
   color: @navbarText;
@@ -74,12 +69,12 @@
   color: @navbarLinkColor;
   text-decoration: none;
   line-height: @navbarHeight;
-  vertical-align: middle;
   padding-left: @navbarHeight/4;
   padding-right: @navbarHeight/4;
 }
 .navbar #header-social li > a {
-  padding-right: 0;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 .navbar li.dropdown > a {
   padding-right: 0;
@@ -152,18 +147,17 @@ li.home-link:hover i {
 }
 
 // Navbar button for toggling navbar items in responsive layouts
+// First, let's define how tall these bars are:
+@iconbarHeight: 3px;
+
 // These definitions need to come after '.navbar .btn'
 .navbar .btn-navbar {
   display: none;
   float: left;
-  margin: 4px 0;
   margin-right: 10px;
-  padding: @navbarHeight/5 10px;
-  background-color: @navbarBackgroundHighlight;
+  padding: (floor(@navbarHeight - (5 * @iconbarHeight) ))/2 10px; // @iconbarHeight is used 5x: 3x for the bars, 2x for the margin between them.
+  background-color: transparent;
   border: none;
-}
-.navbar .btn-navbar:hover {
-  background-color: darken(@navbarBackgroundHighlight, 10%);
 }
 .navbar .btn-navbar .label {
   float: right;
@@ -179,11 +173,11 @@ li.home-link:hover i {
 .navbar .btn-navbar .icon-bar {
   display: block;
   width: 18px;
-  height: 3px;
-  background-color: @navbarText;
+  height: @iconbarHeight;
+  background-color: @linkColor;
 }
 .btn-navbar .icon-bar + .icon-bar {
-  margin-top: 3px;
+  margin-top: @iconbarHeight;
 }
 
 // DROPDOWN MENUS
@@ -225,6 +219,7 @@ li.home-link:hover i {
     border-top:   6px solid @white;
     border-right: 5px solid transparent;
     border-left:  5px solid transparent;
+    border-bottom:  5px solid transparent;
     content: "";
   }
 
@@ -303,9 +298,6 @@ li.home-link:hover i {
 // Hover state
 // -----------
 
-.dropdown-menu li a:hover {
-  background: none;
-}
 .dropdown-menu li a:hover {
   color: @dropdownLinkColorHover;
   text-decoration: none;
@@ -439,201 +431,6 @@ li.home-link:hover i {
   left: -8px;
 }
 
-// TABLETS AND BELOW
-// -----------------
-@media (max-width: 979px) {
-  .supplemental {
-    overflow: hidden;
-    height: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    position: relative;
-    z-index: 9;
-  }
-  .navbar .container {
-    width: auto;
-    padding: 0;
-  }
-  .navbar .toggle-nav-bar {
-    display: block;
-  }
-  .navbar .nav-shelf {
-    position: absolute;
-    top: 100%;
-    left: -10px;
-    right: -10px;
-    visibility: hidden;
-    opacity: 0;
-    .site-name, .home-icon, .home-link {
-    	display: none;
-    }
-  }
-  .navbar.open .nav-shelf {
-    visibility: visible;
-    opacity: 1;
-    border-bottom: solid 1px @dropdownBorder;
-    &:after {
-      position: absolute;
-      content: " ";
-      display: block;
-      bottom: -5px;
-      left: 0;
-      right: 0;
-      height: 5px;
-      #gradient > .vertical( rgba(0,0,0,0.5), rgba(0,0,0,0) );
-      background-color: transparent;
-    }
-  }
-  .navbar .nav-shelf {
-    background: @dropdownBackground;
-    ul, li {
-      float: none;
-    }
-    li.home-link { display: none; }
-    li .caret {
-      float: right;
-      background-color: @linkColor;
-      margin-right: 5px;
-      padding: 0px 7px;
-      //top: -3px;
-      &:before {
-        border-top-color: @dropdownBackground !important;
-      }
-    }
-    a {
-      color: @linkColor;
-      font-size: 112%;
-    }
-    li.dropdown.open > a.dropdown-toggle {
-      background-color: @linkColor;
-      color: @dropdownBackground;
-      .caret:before {
-        border-top-color: @dropdownBackground !important;
-      }
-    }
-    li.open > a .caret {
-      .rotate( 180deg );
-    }
-    li.open > ul.dropdown-menu {
-      display: block;
-      position: relative;
-      .box-shadow( none );
-      &:before, &:after {
-        display: none;
-      }
-    }
-  }
-
-  // COLLAPSIBLE NAVBAR
-  // ------------------
-  // Nav collapse clears brand
-  .sticky-nav-holder .nav-collapse,
-  .sticky-nav-holder .nav-middle {
-    clear: both;
-    overflow: hidden;
-    height: 0;
-    background-color: @navbarBackground;
-    color: @navbarLinkColor;
-    .nav {
-      float: none;
-      margin: 0 0 (@baseline / 2);
-      > li,
-      > span > li {
-        float: none;
-        display: block;
-        > a {
-          color: @navbarLinkColor;
-          display: block;
-          padding: 10px !important;
-          &:hover {
-            background:none !important;
-            color: @navbarLinkColorHover;
-          }
-          .caret {
-            float: right;
-            border-top-color: @navbarLinkColor !important;
-          }
-        }
-        &:hover > a {
-          background:none;
-        }
-      }
-      > .divider-vertical {
-        display: none;
-      }
-      .nav-header {
-        color: @navbarText;
-        text-shadow: none;
-      }
-      .dropdown-menu a {
-        color: @navbarLinkColor;
-        &:hover {
-          background:none !important;
-          color: @grayLighter;
-        }
-      }
-    }
-    .divider {
-      height: 1px;
-      width: 94%;
-      margin: 10px 10px 5px;
-      padding:0;
-      overflow: hidden;
-      background-color: @white;
-      border-bottom: 1px solid @navbarBackground;
-    }
-    .btn {
-      padding: 4px 10px 4px;
-      font-weight: normal;
-    }
-      .dropdown-menu li + li a {
-      margin-bottom: 2px;
-    }
-    .nav-collapse .nav > li > a:hover,
-    .nav-collapse .dropdown-menu a:hover {
-      background-color: @navbarBackground;
-    }
-    // Dropdowns in the navbar
-    .dropdown-menu {
-      position: static;
-      top: auto;
-      left: auto;
-      float: none;
-      display: block;
-      max-width: none;
-      margin: 0 15px;
-      padding: 0;
-      background-color: transparent;
-      border: none;
-      .box-shadow(none);
-   &:before,
-    &:after,
-    .divider {
-        display: none;
-    }
-    }
-  }
-}
-
-// DEFAULT DESKTOP
-// ---------------
-// Hides the second site name in the sticky header when .nav-shelf is visible
-@media (min-width: 769px) {
-  .navbar .nav-left {
-    display: none;
-  }
-}
-// Required to make the collapsing navbar work on regular desktops
-@media (min-width: 980px) {
-  .nav-collapse.collapse {
-    height: auto !important;
-    overflow: visible !important;
-  }
-}
-
 // The "Don't Miss" Secondary Nav
 // ---------------
 
@@ -692,33 +489,26 @@ li.home-link:hover i {
     li {
       > a {
         color: @linkColor;
+        background-color: transparent;
+      }
+      .caret {
+        float: right;
+        margin-right: 5px;
+        padding: 0px 7px;
       }
       .caret:before {
         border-top-color: @linkColor;
-        border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8);
-      }
-      > a:hover .caret:before {
-        border-top-color: @bodyBackground;
+        border-left-color: transparent;
       }
     }
     .social-icons {
       margin: 0;
       float: left;
-      li > a {
-        color: #fff;
-        &:hover {
-          background-color: transparent;
-        }
-      }
     }
-    .nav > li {
-      &.active > a,
-      &.active > a:hover {
-        color: #fff;
-      }
     &.home-link {
       min-width: 40px;
       text-align: center;
+      .nav > li {
         a {
           img {
             width: 1.49em;
@@ -732,16 +522,13 @@ li.home-link:hover i {
       }
     }
   }
-  .navbar .nav li.dropdown.open > .dropdown-toggle,
-  .navbar .nav li.dropdown.active > .dropdown-toggle,
-  .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  .navbar li.dropdown.open > .dropdown-toggle,
+  .navbar li.dropdown.active > .dropdown-toggle,
+  .navbar li.dropdown.open.active > .dropdown-toggle {
     color: @grayLighter;
     background: @linkColor;
     .caret:before {
       border-top-color: @white;
-    }
-    &:hover {
-      color: @white;
     }
   }
   .site-name {
@@ -833,5 +620,146 @@ li.home-link:hover i {
       background-color: #343434;
       color: @bodyBackground;
     }
+  }
+}
+
+// TABLETS AND BELOW
+// -----------------
+@media (max-width: 979px) {
+  .supplemental {
+    overflow: hidden;
+    height: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    position: relative;
+    z-index: 9;
+    li.dropdown .dropdown-menu li a {
+      line-height: @navbarHeight;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: @navbarHeight;
+    }
+  }
+  .navbar .container {
+    width: auto;
+    padding: 0;
+  }
+  .navbar .toggle-nav-bar {
+    display: block;
+  }
+  .navbar .nav-shelf {
+    background: @dropdownBackground;
+    position: absolute;
+    top: 100%;
+    left: -10px;
+    right: -10px;
+    visibility: hidden;
+    opacity: 0;
+    .site-name, .home-icon, .home-link {
+      display: none;
+    }
+    ul, li {
+      float: none;
+    }
+    li.home-link { display: none; }
+    li b.caret {
+      float: right;
+      margin-right: 5px;
+      padding: 0px 7px;
+      //top: -3px;
+      &:before {
+        border-top-color: transparent;
+        border-left-color: @linkColor;
+      }
+    }
+    a {
+      color: @linkColor;
+    }
+    li.open > a .caret {
+      .rotate( 90deg );
+    }
+    li.open > ul.dropdown-menu {
+      display: block;
+      position: relative;
+      .box-shadow( none );
+      border: none;
+      padding: 0;
+      &:before, &:after {
+        display: none;
+      }
+    }
+    .nav > li {
+      border-bottom: 1px solid @grayLight;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: none;
+      }
+    }
+  }
+  .dropdown-menu li:hover .sub-sub-menu,
+  .dropdown-menu li:hover .sub-menu {
+    display: none;
+    visibility: hidden;
+    &:before {
+      display: none;
+    }
+  }
+  .navbar.open .nav-shelf {
+    visibility: visible;
+    opacity: 1;
+    border-bottom: solid 1px @dropdownBorder;
+    &:after {
+      position: absolute;
+      content: " ";
+      display: block;
+      bottom: -5px;
+      left: 0;
+      right: 0;
+      height: 5px;
+      #gradient > .vertical( rgba(0,0,0,0.5), rgba(0,0,0,0) );
+      background-color: transparent;
+    }
+  }
+  .sticky-nav-holder .navbar {
+    li.dropdown.open {
+      & > .dropdown-toggle {
+        color: @linkColor;
+        background: transparent;
+      }
+    }
+  }
+  /*
+   * Dealing with active and open sections
+   */
+  .navbar .dropdown-menu .active > a,
+  .navbar .dropdown-menu .active > a:hover {
+    font-weight: normal;
+  }
+  .navbar .nav li.dropdown.active > .dropdown-toggle:hover {
+    color: @linkColor;
+  }
+  // I really wish this did not have to be as specific as it is.
+  .sticky-nav-holder .navbar li.dropdown.open > .dropdown-toggle,
+  .sticky-nav-holder .navbar li.dropdown.active > .dropdown-toggle,
+  .sticky-nav-holder .navbar li.dropdown.open.active > .dropdown-toggle {
+    color: @linkColor;
+    background: transparent;
+    .caret:before {
+      border-top-color: transparent;
+    }
+  }
+}
+
+// DEFAULT DESKTOP
+// ---------------
+// Hides the second site name in the sticky header when .nav-shelf is visible
+@media (min-width: 769px) {
+  .navbar .nav-left {
+    display: none;
   }
 }

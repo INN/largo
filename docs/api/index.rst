@@ -34,7 +34,6 @@ Function reference by file
 * `inc/widgets.php <inc/widgets.html>`_
 * `inc/customizer/customizer.php <inc/customizer/customizer.html>`_
 * `inc/widgets/largo-facebook.php <inc/widgets/largo-facebook.html>`_
-* `inc/widgets/largo-follow.php <inc/widgets/largo-follow.html>`_
 * `inc/widgets/largo-image-widget.php <inc/widgets/largo-image-widget.html>`_
 * `inc/widgets/largo-post-series-links.php <inc/widgets/largo-post-series-links.html>`_
 * `inc/widgets/largo-recent-comments.php <inc/widgets/largo-recent-comments.html>`_
@@ -42,7 +41,3 @@ Function reference by file
 * `inc/widgets/largo-twitter.php <inc/widgets/largo-twitter.html>`_
 * `inc/wp-taxonomy-landing/functions/cftl-admin.php <inc/wp-taxonomy-landing/functions/cftl-admin.html>`_
 * `inc/wp-taxonomy-landing/functions/cftl-series-order.php <inc/wp-taxonomy-landing/functions/cftl-series-order.html>`_
-* `partials/content.php <partials/content.html>`_
-* `partials/sidebar-archive.php <partials/sidebar-archive.html>`_
-* `partials/sidebar-single.php <partials/sidebar-single.html>`_
-* `partials/sidebar.php <partials/sidebar.html>`_

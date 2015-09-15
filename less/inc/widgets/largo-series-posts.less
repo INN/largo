@@ -1,0 +1,49 @@
+/**
+ * Styles for the Largo Series Posts widget
+ *
+ * @since 0.5.3
+ */
+
+.widget.largo-series-posts {
+  h5.top-tag,
+  h5.top-tag a{
+    color: @black;
+  }
+  h4 {
+    margin-bottom: 0.4em;
+    // this specific h4 should the same size as the standard text
+    line-height: 1.3;
+    font-size: @baseFontSize;
+  }
+  ul {
+    margin-left: 0;
+    list-style: none;
+  }
+  img {
+    max-width: 100px;
+  }
+  i {
+    display: block;
+    float: left;
+    font-size: 110%;
+    margin-right: -100%;
+  }
+  li a {
+    margin-left: 0;
+    padding-left: 24px;
+    display: inline-block;
+    font-family: @sansFontFamily;
+  }
+  p {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  a.more {
+    text-align: right;
+    float: right;
+    &:after {
+      content: " »";
+    }
+  }
+}
+

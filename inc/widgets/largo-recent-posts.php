@@ -120,11 +120,6 @@ class largo_recent_posts_widget extends WP_Widget {
 	                $output .= '<p>' . get_the_excerpt() . '</p>';
 				}
 
-				// read more link
-				if ( isset( $instance['show_read_more'] ) && $instance['show_read_more'] === 1) {
-					$output .= '<p class="more-link"><a href="' . get_permalink() . '">' . __( 'Read More','largo') . '</a></p>';
-				}
-
 				// close the item
 				$output .= '</li>';
 
@@ -161,7 +156,6 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance['num_sentences'] = intval( $new_instance['num_sentences'] );
 		$instance['show_byline'] = ! empty($new_instance['show_byline']);
 		$instance['show_top_term'] = ! empty($new_instance['show_top_term']);
-		$instance['show_read_more'] = ! empty( $new_instance['show_read_more'] ) ? 1 : 0;
 		$instance['cat'] = intval( $new_instance['cat'] );
 		$instance['tag'] = sanitize_text_field( $new_instance['tag'] );
 		$instance['taxonomy'] = sanitize_text_field( $new_instance['taxonomy'] );
@@ -183,7 +177,6 @@ class largo_recent_posts_widget extends WP_Widget {
 			'num_sentences' 	=> 2,
 			'show_byline'       => '',
 			'show_top_term'     => '',
-			'show_read_more' 	=> '',
 			'cat' 				=> 0,
 			'tag'				=> '',
 			'taxonomy'			=> '',
@@ -196,7 +189,6 @@ class largo_recent_posts_widget extends WP_Widget {
 		$duplicates = $instance['avoid_duplicates'] ? 'checked="checked"' : '';
 		$showbyline = $instance['show_byline'] ? 'checked="checked"' : '';
 		$show_top_term = $instance['show_top_term'] ? 'checked="checked"' : '';
-		$showreadmore = $instance['show_read_more'] ? 'checked="checked"' : '';
 		?>
 
 		<p>
@@ -252,10 +244,6 @@ class largo_recent_posts_widget extends WP_Widget {
 
 		<p>
 			<input class="checkbox" type="checkbox" <?php echo $show_top_term; ?> id="<?php echo $this->get_field_id('show_top_term'); ?>" name="<?php echo $this->get_field_name('show_top_term'); ?>" /> <label for="<?php echo $this->get_field_id('show_top_term'); ?>"><?php _e('Show the top term on posts?', 'largo'); ?></label>
-		</p>
-
-		<p>
-			<input class="checkbox" type="checkbox" <?php echo $showreadmore; ?> id="<?php echo $this->get_field_id('show_read_more'); ?>" name="<?php echo $this->get_field_name('show_read_more'); ?>" /> <label for="<?php echo $this->get_field_id('show_read_more'); ?>"><?php _e('Show read more link?', 'largo'); ?></label>
 		</p>
 
 		<p><strong><?php _e('Limit by Author, Categories or Tags', 'largo'); ?></strong><br /><small><?php _e('Select an author or category from the dropdown menus or enter post tags separated by commas (\'cat,dog\')', 'largo'); ?></small></p>

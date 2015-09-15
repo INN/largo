@@ -1,0 +1,56 @@
+/**
+ * Styles for the Largo Tag List widget
+ *
+ * @see /less/inc/single.less
+ * @since 0.5.3
+ */
+
+// The Largo Tag List widget has no styles hooked on its class .largo-tag-list.
+// What styles there are are in /less/inc/single.less under .tags, with a lot of similar styles.
+
+.labels,
+.tags {
+  height: 100%;
+  overflow: auto;
+  margin-bottom: @baseline / 2;
+  // This stays an h5 for semantic reasons, but gains the appearance of just normal text
+  h5 {
+    display: inline;
+    margin: 0;
+    font-size: @baseFontSize - 3;
+    line-height: @baseFontSize - 3;
+    text-transform: uppercase;
+    margin-right: 0.5em;
+  }
+  ul {
+    padding: 0;
+    display: inline;
+    margin: 0;
+    font-size: @baseFontSize - 3;
+    line-height: @baseFontSize - 3;
+    white-space: normal;
+    li {
+      display: inline;
+      vertical-align: baseline;
+      font-weight: 300;
+      white-space: normal;
+      &::after {
+        content: "  |  ";
+        white-space: pre-wrap;
+      }
+      &:last-child::after {
+        display: none;
+      }
+      i {
+        margin: 1px 3px 0 0;
+      }
+      a {
+        color: @gray;
+        text-transform: uppercase;
+        &:hover {
+          color: darken(@grayDark, 10%);
+        }
+      }
+    }
+  }
+}
