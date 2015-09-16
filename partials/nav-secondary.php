@@ -6,15 +6,18 @@
  * in the Basic Settings tab under Menu Options. Once enabled the Secondary Nav
  * will appear with the other menus in the WordPress Menu manager.
  *
- * Menu is hidden for mobile phones (>769px)
- *
  * @package Largo
  * @link http://largo.readthedocs.org/users/menus.html#available-menu-areas
  */
 ?>
 <nav id="secondary-nav" class="clearfix">
   <div id="topics-bar" class="span12 hidden-phone">
-    <?php largo_nav_menu(
+    <?php 
+     /* 
+      * A simple navigation menu.
+      * Menu is hidden for mobile phones (>769px) 
+      */
+    largo_nav_menu(
         array(
           'theme_location' => 'dont-miss',
           'container' => false,
