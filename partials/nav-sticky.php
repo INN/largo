@@ -161,6 +161,7 @@
 								</li><?php
 								}
 							}
+
               /* Check for a Global Navigation Menu */
 							if (has_nav_menu('global-nav')) {
 								$args = array(
@@ -171,6 +172,7 @@
 									'echo'           => false
 								);
 								$global_nav = largo_nav_menu($args);
+
                 /* If no Global Navigation exists, return About Page */
 								if (!empty($global_nav)) { ?>
 									<li class="menu-item-has-childen dropdown">
@@ -187,6 +189,8 @@
 							<?php } ?>
 						</ul>
 					</div>
+          <!-- END DESKTOP MENU -->
+          
 				</div>
 			</nav>
 		</div>
