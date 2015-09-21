@@ -1,5 +1,5 @@
 (function() {
-    $ = jQuery;
+    var $ = jQuery;
 
     $('input#update').click(function() {
         var parent = $('.update-message'),
@@ -21,6 +21,8 @@
                     parent.append('<div class="error">' + data.status + '</div>');
                 else
                     parent.html('<div class="updated">' + data.status + '</div>');
+
+                $('[href="themes.php?page=largo-block-theme-options"]').attr('href', 'themes.php?page=options-framework');
             },
             error: function() {
                 throw "There was an error running the update.";

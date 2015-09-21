@@ -1,0 +1,92 @@
+/**
+ * Styles for Largo Featured and Largo Recent Posts widgets
+ *
+ * Also included are some styles for Largo INN RSS and the deprecated Largo Sidebar Featured widget.
+ *
+ * @since 0.5.3
+ */
+
+.largo-sidebar-featured,
+.largo-featured,
+.largo-recent-posts,
+.largo-INN-RSS {
+  ul {
+    list-style: none;
+    margin-left: 0;
+  }
+  li {
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+  img {
+    // Small thumbnails are either right or left aligned.
+    &.right-align {
+      float: right;
+      padding: 3px 0px 6px 10px;
+    }
+    &.left-align {
+      float: left;
+      padding: 3px 10px 6px 0px;
+    }
+    // Large thumbnails get different padding.
+    &.attachment-large,&.attachment-medium {
+      padding: 0px 0 10px;
+    }
+  }
+  h5 {
+    margin-bottom: 2px;
+    font-size: 1.15*@baseFontSize;
+  }
+  p {
+    font-size: 0.9*@baseFontSize;
+    margin-bottom: 0;
+  }
+}
+#sidebar .largo-INN-RSS {
+  ul {
+    margin: @baseline/2 0;
+    padding: 0;
+  }
+  li {
+    margin-bottom: @baseline/2;
+    list-style: none;
+    h5,
+    h6,
+    p {
+    margin-bottom: @baseline/5;
+    }
+  }
+}
+// Styles specifically for the deprecated Largo Sidebar Featured widget
+.largo-sidebar-featured {
+  img {
+    float: left;
+    margin-right: 0.5em;
+  }
+  .post-lead {
+    margin-bottom: 1em;
+  }
+}
+// Styles specifically for the deprecated Largo Footer Featured widget
+#site-footer .largo-footer-featured {
+  margin-bottom: @baseline / 2;
+  .post-lead {
+    min-height: 60px;
+    margin-bottom: @baseline / 3;
+  }
+  img {
+    float:left;
+    margin: 0 10px 10px 0;
+    padding-top: 4px;
+  }
+  h5 {
+    font-size: @baseFontSize;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  p {
+    font-size: @baseFontSize * 0.667;
+    margin-bottom: 0;
+  }
+}
+

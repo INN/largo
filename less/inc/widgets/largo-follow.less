@@ -1,0 +1,105 @@
+/**
+ * Styles for the Largo Follow widget
+ *
+ * @since 0.5.3
+ */
+.subscribe {
+  display: block;
+  font-size: @baseFontSize - 2;
+  font-family: @sansFontFamily;
+  margin-bottom: 5px;
+  color: @gray;
+  &:hover {
+  text-decoration: none;
+  color: @grayDarker;
+  }
+  i {
+    color: @white;
+    padding: 0 1em 0 0.5em;
+    border-right:1px solid #fff;
+    font-size: @baseFontSize - 3;
+    margin-right: 5px;
+    float: left;
+  }
+}
+
+.largo-follow {
+  .rss {
+    background-color: @rss;
+    color:#fff;
+    &:hover {
+      background-color: darken(@rss, 5%);
+    }
+  }
+  .twitter {
+    background-color:@twitter;
+    color:#fff;
+    &:hover {
+      background-color: darken(@twitter, 5%);
+    }
+  }
+  .facebook {
+    background-color:@facebook;
+    color:#fff;
+    &:hover {
+      background-color: darken(@facebook, 5%);
+    }
+  }
+  .linkedin {
+    background-color:@linkedin;
+    color:#fff;
+    &:hover {
+      background-color: darken(@linkedin, 5%);
+    }
+  }
+  .gplus {
+    background-color:@gplus;
+    color:#fff;
+    &:hover {
+      background-color: darken(@gplus, 5%);
+    }
+  }
+  .flickr {
+    background-color:@flickr;
+    color:#fff;
+    &:hover {
+      background-color: darken(@flickr, 5%);
+    }
+  }
+  .youtube {
+    background-color:@youtube;
+    color:#fff;
+    &:hover {
+      background-color: darken(@youtube, 5%);
+    }
+  }
+  .social-btn {
+    line-height: 1.5em;
+    max-width: 250px;
+    margin: 0.5em 0;
+    padding: 0.5em;
+  }
+}
+
+.article-bottom .largo-follow {
+  padding: 0;
+}
+.twitter-follow-button {
+  display: block;
+  margin: 0 0 10px;
+}
+.widget .fb-like {
+  margin: 0 0 5px;
+}
+.fb-like, .fb-like span, .fb-like.fb_iframe_widget span iframe,
+.fb-like-box, .fb-like-box span, .fb-like-box span iframe[style] {
+  width: 100% !important;
+}
+.fb-like-box {
+  background: white !important;
+  background-color: white !important;
+}
+.flickr-follow {
+  margin-bottom: 8px;
+}
+

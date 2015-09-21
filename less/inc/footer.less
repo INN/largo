@@ -98,30 +98,6 @@
 #site-footer li.menu-label {
   padding-top: 0 !important;
 }
-#site-footer .largo-footer-featured {
-  margin-bottom: @baseline / 2;
-  .post-lead {
-    min-height: 60px;
-    margin-bottom: @baseline / 3;
-  }
-  img {
-	float:left;
-	margin: 0 10px 10px 0;
-	padding-top: 4px;
-  }
-  h5 {
-    font-size: @baseFontSize;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  p {
-    font-size: @baseFontSize * 0.667;
-    margin-bottom: 0;
-  }
-}
-#site-footer .largo-about p {
-  margin-bottom: @baseline / 2;
-}
 #site-footer input,
 #site-footer select {
   font-family: @sansFontFamily;
@@ -184,16 +160,11 @@ ul#footer-social {
     i {
       position: relative;
       top: 0;
-      color: #fff;
+      color: @white;
       padding: 5px;
-      .border-radius(50%);
-      background-color: #777;
       margin-top: 1.25*@inn-logo-square;
       &:hover {
-        background-color: #fff;
-      }
-      &.icon-github:hover {
-        color: @black;
+        color: darken(@white, 25%);
       }
       font-size: @footer-social-logo-font-size;
       .darkLight(@headerFooterColor);

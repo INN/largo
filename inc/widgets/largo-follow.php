@@ -1,19 +1,20 @@
 <?php
 
-/**
+/*
  * Largo Follow Widget
+ *
+ * @package Largo
  */
 class largo_follow_widget extends WP_Widget {
 
-	/**
+	/*
 	 * Used to tell largo_footer_js whether it needs
 	 * to load twitter scripts.
+	 *
+	 * @ignore
 	 */
 	private static $rendered = false;
 
-	/**
-	 * Widget setup.
-	 */
 	function largo_follow_widget() {
 		/* Widget settings. */
 		$widget_ops = array(
@@ -27,9 +28,6 @@ class largo_follow_widget extends WP_Widget {
 		self::$rendered = true;
 	}
 
-	/**
-	 * How to display the widget on the screen.
-	 */
 	function widget( $args, $instance ) {
 		extract( $args );
 
@@ -51,36 +49,32 @@ class largo_follow_widget extends WP_Widget {
 			if ( of_get_option( 'rss_link' ) )
 				$feed = esc_url (of_get_option( 'rss_link' ) );
 
-			printf(__('<a class="subscribe" href="%1$s"><i class="icon-rss"></i>Subscribe via RSS</a>', 'largo'), $feed );
+			printf(__('<a class="rss subscribe btn social-btn" href="%1$s"><i class="icon-rss"></i>Subscribe via RSS</a>', 'largo'), $feed );
 
 			if ( of_get_option( 'twitter_link' ) ) : ?>
-				<a href="<?php echo esc_url( of_get_option( 'twitter_link' ) ); ?>" class="twitter-follow-button" data-width="100%" data-align="left" data-size="large"><?php printf( __('Follow @%1$s', 'largo'), largo_twitter_url_to_username ( of_get_option( 'twitter_link' ) ) ); ?></a>
+				<a href="<?php echo esc_url( of_get_option( 'twitter_link' ) ); ?>" class="twitter subscribe btn social-btn"><i class="icon-twitter"></i><?php printf( __('Follow @%1$s', 'largo'), largo_twitter_url_to_username ( of_get_option( 'twitter_link' ) ) ); ?></a>
 			<?php endif;
 
 			if ( of_get_option( 'facebook_link' ) ) : ?>
-				<div class="fb-like" data-href="<?php echo esc_url( of_get_option( 'facebook_link' ) ); ?>" data-send="false" data-show-faces="false"></div>
+				<a href="<?php echo esc_url( of_get_option( 'facebook_link' ) ); ?>" class="facebook subscribe btn social-btn"><i class="icon-facebook"></i> <?php _e( 'Like on Facebook', 'largo' ); ?></a>
 			<?php endif;
 
 			if ( of_get_option( 'linkedin_link' ) ) : ?>
-				<a class="subscribe" href="<?php echo esc_url( of_get_option( 'linkedin_link' ) ); ?>"><i class="icon-linkedin"></i>Find Us on LinkedIn</a>
+				<a class="linkedin subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'linkedin_link' ) ); ?>"><i class="icon-linkedin"></i><?php _e( 'Find on LinkedIn', 'largo' ); ?></a>
 			<?php endif;
 
 			if ( of_get_option( 'gplus_link' ) ) : ?>
-				<div class="g-follow" data-annotation="bubble" data-height="24" data-href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>" data-rel="publisher"></div>
+				<a class="gplus subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>"><i class="icon-gplus"></i><?php _e('Follow on G+', 'largo'); ?></a>
 
 			<?php endif;
 
 			if ( of_get_option( 'flickr_link' ) ) : ?>
-				<div class="flickr-follow"><a href="<?php echo esc_url( of_get_option( 'flickr_link' ) ); ?>" title="See our photos on Flickr!"><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a></div>
+				<a class="flickr subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'flickr_link' ) ); ?>"><i class="icon-flickr"></i><?php _e('Follow on Flickr', 'largo'); ?></a>
 			<?php endif;
 
-			if ( of_get_option( 'youtube_link' ) ) :
-				$path = parse_url( of_get_option( 'youtube_link' ), PHP_URL_PATH);
-				$pathFragments = explode('/', $path);
-				$yt_user = end($pathFragments);
-				?>
-				<div class="g-ytsubscribe" data-channel="<?php echo esc_attr( $yt_user ); ?>" data-layout="default" data-count="default"></div>
-			<?php endif;
+			if ( of_get_option( 'youtube_link' ) ) : ?>
+				<a class="youtube subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'youtube_link' ) ); ?>"><i class="icon-youtube"></i><?php _e('Follow on YouTube', 'largo'); ?></a>
+		<?php endif;
 
 			//the below is for G+ and YouTube subscribe buttons
 			?>
@@ -97,18 +91,12 @@ class largo_follow_widget extends WP_Widget {
 		echo $after_widget;
 	}
 
-	/**
-	 * Update the widget settings.
-	 */
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		return $instance;
 	}
 
-	/**
-	 * Displays the widget settings controls on the widget panel.
-	 */
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
@@ -124,13 +112,7 @@ class largo_follow_widget extends WP_Widget {
 	<?php
 	}
 
-	/**
-	 * Returns true if this widget has been rendered one or more times.
-	 * 
-	 * @since 0.5
-	 */
-	static function is_rendered() {
+	function is_rendered() {
 		return self::$rendered;
 	}
-	
 }
