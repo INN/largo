@@ -2,7 +2,7 @@
 /**
  * Main Navigation
  *
- * This is the primary navigation for "verticals" on a homepage. Other pages use 
+ * This is the primary navigation for "verticals" on a homepage. Other pages use
  * sticky navigation if enabled.
  *
  * @link URL
@@ -17,37 +17,36 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 		<div class="container">
 			<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 			<a class="btn btn-navbar toggle-nav-bar"  title="<?php esc_attr_e('More', 'largo'); ?>">
-        			<!-- BEGIN Mobile Off-Canvas Menu Button -->
-        			<div class="bars">
-        				<span class="icon-bar"></span>
-        				<span class="icon-bar"></span>
-        				<span class="icon-bar"></span>
-        			</div>
-        			<!-- END Mobile Off-Canvas Menu Button -->
-      			</a>
-      			
-      			<div class="nav-shelf">
-        			<ul class="nav">
-        			<?php
-	        			/**
-	        			 * Generate the Main Navigation shown mainly on homepages
-	        			 * A Bootstrap Navbar is generated from a walker (ref in @see).
-	        			 * 
-	        			 * @see inc/nav-menus.php
-	        			 * @package Largo
-	        			 */
-	        			 $args = array(
-	        			 	'theme_location' => 'main-nav',
-	        			 	'depth' => 0,
-	        			 	'container' => false,
-	        			 	'items_wrap' => '%3$s',
-	        			 	'menu_class' => 'nav',
-	        			 	'walker' => new Bootstrap_Walker_Nav_Menu()
-	        			);
+				<!-- BEGIN Mobile Off-Canvas Menu Button -->
+				<div class="bars">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</div>
+				<!-- END Mobile Off-Canvas Menu Button -->
+			</a>
+
+			<div class="nav-shelf">
+				<ul class="nav">
+				<?php
+					/*
+					 * Generate the Main Navigation shown mainly on homepages
+					 * A Bootstrap Navbar is generated from a walker (ref in @see).
+					 *
+					 * @see inc/nav-menus.php
+					 */
+					 $args = array(
+						'theme_location' => 'main-nav',
+						'depth' => 0,
+						'container' => false,
+						'items_wrap' => '%3$s',
+						'menu_class' => 'nav',
+						'walker' => new Bootstrap_Walker_Nav_Menu()
+					);
 					largo_nav_menu( $args );
 				?>
 				</ul>
-				
+
 				<!-- BEGIN Mobile-Only Menu -->
 				<ul class="nav visible-phone">
 				<?php if ( has_nav_menu( 'global-nav' ) ) { ?>
@@ -72,7 +71,7 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 						?>
 					</li>
 				<?php } ?>
-        			</ul>
+				</ul>
 				<!-- END Mobile-Only Menu -->
 			</div>
 		</div>
