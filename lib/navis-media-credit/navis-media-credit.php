@@ -257,7 +257,9 @@ class Media_Credit {
             return esc_attr( $this->credit );
         } elseif ( $this->org ) {
             return esc_attr( $this->org );
-        }
+        } else {
+			return false;
+		}
     }
 
     function update( $field, $value ) {
