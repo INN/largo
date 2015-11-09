@@ -135,10 +135,21 @@ class Navis_Media_Credit {
     }
 
 
-    /**
-     * navis_add_caption_shortcode(): replaces the built-in caption shortcode
-     * with one that supports a credit field.
-     */
+	/**
+	 * Navis' add_caption_shortcode(): replaces the built-in caption shortcode
+	 * with one that supports a credit field.
+	 *
+	 * @param string $html
+	 * @param string $id
+	 * @param string $caption Image caption
+	 * @param string $title Image title attribute
+	 * @param string $align Image css alignment property
+	 * @param string $url Image src URL
+	 * @param string $size Image size (thumbnail, medium, large, full, or one added with add_image_size() )
+	 * @param string $alt Alt text for the image
+	 *
+	 * @see the original WordPress function: https://developer.wordpress.org/reference/functions/image_add_caption/
+	 */
     function add_caption_shortcode( $html, $id, $caption, $title, $align, $url, $size, $alt = '' ) {
         $creditor = navis_get_media_credit( $id );
 
