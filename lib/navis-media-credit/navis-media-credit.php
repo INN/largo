@@ -142,18 +142,14 @@ class Navis_Media_Credit {
     function add_caption_shortcode( $html, $id, $caption, $title, $align, $url, $size, $alt = '' ) {
         $creditor = navis_get_media_credit( $id );
 
-        if ( empty( $caption ) && !$creditor->to_string()) {
-            return $html;
-        };
-
         $id = ( 0 < (int) $id ) ? 'attachment_' . $id : '';
         if ( ! preg_match( '/width="([0-9]+)/', $html, $matches ) )
             return $html;
 
         $width = $matches[1];
 
-        // XXX: not sure what this does
-        $html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)\s?/', '$1', $html );
+        // Tries to remove the class "align*" in the passed $html
+        $html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)/', '$1', $html );
         if ( empty($align) )
             $align = 'none';
 
@@ -193,7 +189,13 @@ class Navis_Media_Credit {
         }
 
         // XXX: maybe remove module and image classes at some point
-        $out = sprintf( '<div %s class="wp-caption module image %s" style="max-width: %spx;">%s', $id, $align, $width, do_shortcode( $content ) );
+        $out = sprintf(
+			'<div %s class="wp-caption module image %s" style="max-width: %spx;">%s',
+			$id,
+			$align,
+			$width,
+			do_shortcode( $content )
+		);
         if ( $credit ) {
             $out .= sprintf( '<p class="wp-media-credit">%s</p>', $credit );
         }
