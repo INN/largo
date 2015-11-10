@@ -98,9 +98,14 @@ function largo_media_sideload_image($file, $post_id, $desc=null) {
 /**
  * Set the default image link to 'none'
  *
+ * This is so that we can eventually do away with largo_attachment_image_link_remove_filter
+ *
  * @since 0.5.4
+ * @see largo_attachment_image_link_remove_filter
  */
-function largo_image_default_link_type() {
-	update_option('image_default_link_type','none');
+if ( ! function_exists( 'largo_image_default_link_type' ) ) {
+	function largo_image_default_link_type() {
+		update_option('image_default_link_type','none');
+	}
 }
 add_action('admin_init', 'largo_image_default_link_type');
