@@ -4,12 +4,12 @@
  */
 class largo_taxonomy_list_widget extends WP_Widget {
 
-	function largo_taxonomy_list_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-taxonomy-list',
 			'description' 	=> __('List all of the terms in a custom taxonomy with links', 'largo')
 		);
-		$this->WP_Widget( 'largo-taxonomy-list-widget', __('Largo Taxonomy List', 'largo'), $widget_ops);
+		parent::__construct( 'largo-taxonomy-list-widget', __('Largo Taxonomy List', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {

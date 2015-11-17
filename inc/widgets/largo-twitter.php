@@ -11,12 +11,12 @@ class largo_twitter_widget extends WP_Widget {
 	 */
 	private static $rendered = false;
 
-	function largo_twitter_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-twitter',
 			'description' 	=> __('Show a Twitter profile, list or search widget', 'largo')
 		);
-		$this->WP_Widget( 'largo-twitter-widget', __('Largo Twitter Widget', 'largo'), $widget_ops);
+		parent::__construct( 'largo-twitter-widget', __('Largo Twitter Widget', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {

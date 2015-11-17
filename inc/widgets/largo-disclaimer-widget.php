@@ -4,12 +4,12 @@
  */
 class largo_disclaimer_widget extends WP_Widget {
 
-	function largo_disclaimer_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-disclaimer',
 			'description'	=> __('Show the article disclaimer', 'largo')
 		);
-		$this->WP_Widget( 'largo-disclaimer-widget', __('Largo Disclaimer', 'largo'), $widget_ops);
+		parent::__construct( 'largo-disclaimer-widget', __('Largo Disclaimer', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {

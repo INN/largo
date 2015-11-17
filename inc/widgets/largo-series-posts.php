@@ -4,12 +4,12 @@
  */
 class largo_series_posts_widget extends WP_Widget {
 
-	function largo_series_posts_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-series-posts',
 			'description' 	=> __('Lists posts in the given series', 'largo')
 		);
-		$this->WP_Widget( 'largo-series-posts-widget', __('Largo Series Posts', 'largo'), $widget_ops);
+		parent::__construct( 'largo-series-posts-widget', __('Largo Series Posts', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
