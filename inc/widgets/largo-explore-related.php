@@ -4,12 +4,12 @@
  */
 class largo_explore_related_widget extends WP_Widget {
 
-	function largo_explore_related_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-explore-related',
 			'description' 	=> __('A fancy tabbed interface showing posts related to the current post; formerly a theme option.', 'largo')
 		);
-		$this->WP_Widget( 'largo-explore-related-widget', __('Largo Explore Related', 'largo'), $widget_ops);
+		parent::__construct( 'largo-explore-related-widget', __('Largo Explore Related', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {

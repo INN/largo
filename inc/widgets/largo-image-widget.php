@@ -22,10 +22,10 @@ class largo_image_widget extends WP_Widget {
 	 *
 	 * @author Modern Tribe, Inc.
 	 */
-	function Largo_Image_Widget() {
+	function __construct() {
 		$widget_ops = array( 'classname' => 'widget_sp_image', 'description' => __( 'Showcase a single image with a Title, URL, and a Description', 'largo' ) );
 		$control_ops = array( 'id_base' => 'widget_sp_image' );
-		$this->WP_Widget('widget_sp_image', __('Image Widget', 'largo'), $widget_ops, $control_ops);
+		parent::__construct('widget_sp_image', __('Image Widget', 'largo'), $widget_ops, $control_ops);
 		add_action( 'sidebar_admin_setup', array( $this, 'admin_setup' ) );
 		add_action( 'admin_head-widgets.php', array( $this, 'admin_head' ) );
 	}

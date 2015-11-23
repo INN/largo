@@ -11,12 +11,12 @@ class largo_facebook_widget extends WP_Widget {
 	 */
 	private static $rendered = false;
 
-	function largo_facebook_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-facebook',
 			'description' 	=> __('Show a Facebook Like Box for your page', 'largo')
 		);
-		$this->WP_Widget( 'largo-facebook-widget', __('Largo Facebook Widget', 'largo'), $widget_ops);
+		parent::__construct( 'largo-facebook-widget', __('Largo Facebook Widget', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {

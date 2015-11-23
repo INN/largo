@@ -4,12 +4,12 @@
  */
 class largo_tag_list_widget extends WP_Widget {
 
-	function largo_tag_list_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-tag-list',
 			'description' 	=> __('A list of tags for the current post; formerly a theme option.', 'largo')
 		);
-		$this->WP_Widget( 'largo-tag-list-widget', __('Largo Tag List', 'largo'), $widget_ops);
+		parent::__construct( 'largo-tag-list-widget', __('Largo Tag List', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {

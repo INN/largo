@@ -8,16 +8,18 @@ class largo_recent_comments_widget extends WP_Widget {
 	/**
 	 * Widget setup.
 	 */
-	function largo_recent_comments_widget() {
+	function __construct() {
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname' 	=> 'largo-recent-comments',
 			'description' 	=> __('Show recent comments', 'largo'),
 		);
+		
+		/* Preserve Other Slug Condition To Avoid Breaking Things */
+		$this->alt_option_name = 'largo_recent_comments';
 
 		/* Create the widget. */
-		$this->WP_Widget( 'largo-recent-comments-widget', __('Largo Recent Comments', 'largo'), $widget_ops );
-		$this->alt_option_name = 'largo_recent_comments';
+		parent::__construct( 'largo-recent-comments-widget', __('Largo Recent Comments', 'largo'), $widget_ops );
 
 		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
 		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache') );

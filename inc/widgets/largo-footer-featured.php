@@ -4,12 +4,12 @@
  */
 class largo_footer_featured_widget extends WP_Widget {
 
-	function largo_footer_featured_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-footer-featured',
 			'description' 	=> '*DEPRECATED* Show recent featured posts with thumbnails and excerpts', 'largo-footer-featured'
 		);
-		$this->WP_Widget( 'largo-footer-featured-widget', __('Largo Footer Featured Posts', 'largo'), $widget_ops);
+		parent::__construct( 'largo-footer-featured-widget', __('Largo Footer Featured Posts', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {

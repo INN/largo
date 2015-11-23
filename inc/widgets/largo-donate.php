@@ -4,12 +4,12 @@
  */
 class largo_donate_widget extends WP_Widget {
 
-	function largo_donate_widget() {
+	function __construct() {
 		$widget_opts = array(
 			'classname' => 'largo-donate',
 			'description'=> __('Call-to-action for donations', 'largo')
 		);
-		$this->WP_Widget('largo-donate-widget', __('Largo Donate Widget', 'largo'),$widget_opts);
+		parent::__construct('largo-donate-widget', __('Largo Donate Widget', 'largo'),$widget_opts);
 	}
 	function widget( $args, $instance ) {
 		extract( $args );

@@ -4,12 +4,12 @@
  */
 class largo_prev_next_post_links_widget extends WP_Widget {
 
-	function largo_prev_next_post_links_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-prev-next-post-links',
 			'description' 	=> __('Prev/next post navigation, typically at the bottom of single posts; formerly a theme option.', 'largo')
 		);
-		$this->WP_Widget( 'largo-prev-next-post-links-widget', __('Largo Prev/Next Links', 'largo'), $widget_ops);
+		parent::__construct('largo-prev-next-post-links-widget', __('Largo Prev/Next Links', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {

@@ -5,12 +5,12 @@
  */
 class largo_post_series_links_widget extends WP_Widget {
 
-	function largo_post_series_links_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-post-series-links',
 			'description' 	=> __('Shows the titles/descriptions of the series the post belongs to.', 'largo')
 		);
-		$this->WP_Widget( 'largo-post-series-links-widget', __('Largo Post Series Links', 'largo'), $widget_ops);
+		parent::__construct( 'largo-post-series-links-widget', __('Largo Post Series Links', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {

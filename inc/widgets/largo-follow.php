@@ -15,7 +15,7 @@ class largo_follow_widget extends WP_Widget {
 	 */
 	private static $rendered = false;
 
-	function largo_follow_widget() {
+	function __construct() {
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname' 	=> 'largo-follow',
@@ -23,7 +23,7 @@ class largo_follow_widget extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'largo-follow-widget', __('Largo Follow', 'largo'), $widget_ops );
+		parent::__construct( 'largo-follow-widget', __('Largo Follow', 'largo'), $widget_ops );
 
 		self::$rendered = true;
 	}
