@@ -14,6 +14,9 @@ class largo_recent_comments_widget extends WP_Widget {
 			'classname' 	=> 'largo-recent-comments',
 			'description' 	=> __('Show recent comments', 'largo'),
 		);
+		
+		/* Preserve Other Slug Condition To Avoid Breaking Things */
+		$this->alt_option_name = 'largo_recent_comments';
 
 		/* Create the widget. */
 		parent::__construct( 'largo-recent-comments-widget', __('Largo Recent Comments', 'largo'), $widget_ops );
