@@ -1,7 +1,6 @@
 // NAVBAR (FIXED AND STATIC)
 // -------------------------
 
-
 // COMMON STYLES
 // -------------
 
@@ -699,6 +698,18 @@ li.home-link:hover i {
       }
       > a:hover .caret:before {
         border-top-color: @bodyBackground;
+      }
+    }
+    li.home-icon {
+     > a {
+        img {
+          padding:0 5px 0 0;
+          height:@navbarHeight;
+          width:auto;
+        }
+        &:hover {
+          background-color:transparent;
+        }
       }
     }
     .social-icons {
