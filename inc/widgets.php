@@ -285,7 +285,6 @@ add_action('after_switch_theme', 'largo_populate_article_bottom_widget_area');
  */
 function largo_filter_abp_article_bottom($instance, $args) {
 	if ( $args['id'] == 'article-bottom' ) {
-		var_log("success!");
 		$instance['num_posts'] = 3;
 		$instance['thumbnail_display'] = 'medium';
 	}
