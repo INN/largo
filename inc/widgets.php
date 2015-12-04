@@ -269,3 +269,26 @@ function largo_populate_article_bottom_widget_area($theme) {
 	}
 }
 add_action('after_switch_theme', 'largo_populate_article_bottom_widget_area');
+
+/*
+ * Begin functions specific to controlling external, INN-supported widgets
+ */
+
+/**
+ * Filter for INN/analytic-bridge's Analytics Bridge Popular Posts widget in the article-bottom position
+ * 
+ * The purpose of this filter is to force the ABP Pop Posts widget in the article-bottom position to display three posts with thumbnails, if the thumbnails are available.
+ *
+ * @param array $instance the widget's instance variables
+ * @param array $args the widget args
+ * @link https://github.com/INN/Largo/issues/971
+ */
+function largo_filter_abp_article_bottom($instance, $args) {
+	if ( $args['id'] == 'article-bottom' ) {
+		var_log("success!");
+		$instance['num_posts'] = 3;
+		$instance['thumbnail_display'] = 'medium';
+	}
+	return $instance;
+}
+add_action('abp-widget-force-unsaved-options', 'largo_filter_abp_article_bottom', 10, 2);
