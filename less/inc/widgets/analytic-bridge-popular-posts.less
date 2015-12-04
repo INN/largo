@@ -1,0 +1,26 @@
+.article-bottom .widget_analytic-bridge-popular-posts {
+
+  // three-column layout
+  .count-9,
+  .count-6,
+  .count-3 {
+    box-sizing: border-box;
+    position: relative;
+    margin-left: 0;
+    @media (min-width: 481px) {
+      li {
+        list-style: unset;
+        display: block;
+        float: left;
+        width: 25%;
+        &:nth-child(3n+1),
+        &:nth-child(3n+2) {
+          margin-right: 12.5%;
+        }
+        &:nth-child(3n+1) {
+          clear: left;
+        }
+      }
+    }
+  }
+}
