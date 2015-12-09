@@ -138,33 +138,35 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 	function largo_load_more_posts_choose_partial($post_query) {
 		global $opt;
 
+		$qv = $post_query->query_vars;
+
 		// Default is to use partials/content-home.php
 		$partial = 'home';
 
 		// This might be a category, tag, search, date, author, non-landing-page series, or other other archive
 
 		// check if this query is for a category
-		if ( isset($post_query->category_name) && $post_query->category_name != '' ) {
+		if ( isset($qv['category_name']) && $qv['category_name'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for an author page
-		if ( isset($post_query->author_name) && $post_query->author_name != '' ) {
+		if ( isset($qv['author_name']) && $qv['author_name'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a tag
-		if ( isset($post_query->tag) && $post_query->tag != '' ) {
+		if ( isset($qv['tag']) && $qv['tag'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a search
-		if ( isset($post_query->s) && $post_query->s != '' ) {
+		if ( isset($qv['s']) && $qv['s'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a date, assuming that all date queries have a year.
-		if ( isset($post_query->year) && $post_query->year != 0 ) {
+		if ( isset($qv['year']) && $qv['year'] != 0 ) {
 			$partial = 'archive';
 		}
 
@@ -175,7 +177,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		}
 
 		// Non-series-landing series archives
-		if ( isset($post_query->query_vars['series']) && $post_query->query_vars['series'] != '' ) {
+		if ( isset($qv['series']) && $qv['series'] != '' ) {
 			$partial = 'archive';
 		}
 
