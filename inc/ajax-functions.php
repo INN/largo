@@ -189,9 +189,18 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		/**
 		 * Filter to modify the Load More Posts template partial.
 		 *
+		 * When building your own filter, you must set the fourth parameter of add_filter to 2:
+		 *
+		 *     add_filter('largo_lmp_template_partial', 'your_filter_name', 10, 2);
+		 *                                                                      ^
+		 *
+		 * Without setting '2', your filter will not be passed the $post_query argument.
+		 * In order to set 2, you must set the third parameter, which defaults to 10. It is safe to leave that at 10.
+		 *
 		 * @since 0.5.3
 		 * @param string $partial The string represeting the template partial to use for the current context
 		 * @param object $post_query The query object used to produce the LMP markup
+		 * @link https://codex.wordpress.org/Function_Reference/add_filter
 		 */
 		$partial = apply_filters( 'largo_lmp_template_partial', $partial, $post_query );
 
