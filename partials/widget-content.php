@@ -21,10 +21,16 @@ if ($thumb == 'small') {
 	$img_attr = array();
 	$img_attr['class'] .= " attachment-large"; ?>
 	<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail( get_the_ID(), 'large', $img_attr); ?></a>
+<?php } elseif ($thumb == 'first-large') {
+    if( $count == 1 ) {
+      $img_attr = array();
+	  $img_attr['class'] .= " attachment-large"; ?>
+      <a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail( get_the_ID(), 'large', $img_attr); ?></a>
 <?php }
+}
+?>
 
-// the headline
-?><h5><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></h5>
+<h5><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></h5>
 
 <?php // byline on posts
 if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) { ?>

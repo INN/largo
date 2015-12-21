@@ -76,16 +76,27 @@ class largo_recent_posts_widget extends WP_Widget {
         if ( $my_query->have_posts() ) {
 
         	$output = '';
-
-			while ( $my_query->have_posts() ) : $my_query->the_post(); $shown_ids[] = get_the_ID();
-
+        	
+        	// setup a counter only if needed
+        	if($thumb == 'first-large') { 
+        	  $count = 0;
+        	}
+        	
+			while ( $my_query->have_posts() ) : $my_query->the_post(); $shown_ids[] = get_the_ID(); 
+			    
+			    // setup a counter only if needed
+			    if($thumb == 'first-large') {
+			      $count++;
+			    }
+			    
         		// wrap the items in li's.
 				$output .= '<li>';
 
 				$context = array(
 					'instance' => $instance,
 					'thumb' => $thumb,
-					'excerpt' => $excerpt
+					'excerpt' => $excerpt,
+					'count'   => $count
 				);
 
 				ob_start();
@@ -183,6 +194,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			    <option <?php selected( $instance['thumbnail_display'], 'small'); ?> value="small"><?php _e('Small (60x60)', 'largo'); ?></option>
 			    <option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium"><?php _e('Medium (140x140)', 'largo'); ?></option>
 			    <option <?php selected( $instance['thumbnail_display'], 'large'); ?> value="large"><?php _e('Large (Full width of the widget)', 'largo'); ?></option>
+			    <option <?php selected( $instance['thumbnail_display'], 'first-large'); ?> value="first-large"><?php _e('First Large (First has large, subsequent imageless)', 'largo'); ?></option>
 			    <option <?php selected( $instance['thumbnail_display'], 'none'); ?> value="none"><?php _e('None', 'largo'); ?></option>
 			</select>
 		</p>
