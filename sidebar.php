@@ -3,13 +3,12 @@
 if ((is_single() || is_singular()) && !largo_is_sidebar_required())
 	return;
 
-$showey_hidey_class = (of_get_option('showey-hidey'))? 'showey-hidey':'';
 $span_class = largo_sidebar_span_class();
 
 do_action('largo_before_sidebar'); ?>
 <aside id="sidebar" class="<?php echo $span_class; ?> nocontent">
 	<?php do_action('largo_before_sidebar_content'); ?>
-	<div class="widget-area <?php echo $showey_hidey_class ?>" role="complementary">
+	<div class="widget-area" role="complementary">
 		<?php
 			do_action('largo_before_sidebar_widgets');
 

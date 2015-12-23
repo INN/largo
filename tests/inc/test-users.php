@@ -201,13 +201,13 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		$output = ob_get_contents();
 		ob_end_clean();
 
-		// Three inputs should be present and they should be checked or "on" after running
-		// `save_more_profile_info`.
-		$this->assertEquals(substr_count($output, 'checked'), 3);
+		// Four inputs should be present and four should be checked or "on" after running
+		// `save_more_profile_info`, because $this->_more_profile_info sets show_email to true.
+		$this->assertEquals(4, substr_count($output, 'checked'), "Not all inputs that should have been checked were.");
 
 		// There should be one job_title input and it should be populated with the value set by
 		// `save_more_profile_info`.
-		$this->assertEquals(substr_count($output, 'value="' . $job_title), 1);
+		$this->assertEquals(1, substr_count($output, 'value="' . $job_title));
 	}
 
 	function test_save_more_profile_info() {
@@ -231,7 +231,8 @@ class UsersTestFunctions extends WP_UnitTestCase {
 			'job_title' => 'Test Job Title',
 			'hide' => 'on',
 			'emeritus' => 'on',
-			'honorary' => 'on'
+			'honorary' => 'on',
+			'show_email' => 'on'
 		);
 
 		extract($args);
@@ -240,7 +241,8 @@ class UsersTestFunctions extends WP_UnitTestCase {
 			'hide' => $hide,
 			'emeritus' => $emeritus,
 			'honorary' => $honorary,
-			'job_title' => $job_title
+			'job_title' => $job_title,
+			'show_email' => $show_email
 		));
 
 		return array_merge(array('user_id' => $user_id), $args);

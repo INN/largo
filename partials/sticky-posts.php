@@ -29,7 +29,7 @@ if ( $query->have_posts() ) {
 
 			<div class="sticky-solo">
 
-				<h4><?php _e('Featured', 'largo'); ?></h4>
+				<h5 class="top-tag"><?php _e('Featured', 'largo'); ?></h5>
 
 				<div class="sticky-main-feature row-fluid">
 

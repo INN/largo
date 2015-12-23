@@ -3,7 +3,6 @@
 #site-footer,
 #footer-logos,
 .sticky-nav-container,
-.sticky-footer-container,
 #before-footer {
   max-width: @containerMaxWidth;
   padding: 0 2.5%;
@@ -28,5 +27,48 @@
 @media screen and (max-width: 480px) {
   .home #main {
     margin-top: 32px;
+  }
+}
+
+.popover {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 180px;
+  background: @white;
+  text-transform: none;
+  color: @gray;
+  text-align: left;
+  padding: 1em;
+  border: 1px solid @grayLighter;
+  border: 1px solid rgba(0,0,0,.2);
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  .box-shadow(0 5px 10px rgba(0,0,0,.2));
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid @grayLighter;
+    border-bottom-color: @dropdownBorder;
+    position: absolute;
+    top: -10px;
+    left: 9px;
+  }
+  &:after {
+    content: '';
+    display: inline-block;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid @dropdownBackground;
+    position: absolute;
+    top: -9px;
+    left: 10px;
   }
 }

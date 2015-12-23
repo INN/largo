@@ -55,18 +55,24 @@ if( !function_exists( 'post_templates_dropdown' ) ) {
 	}
 }
 
-//	Filter the single template value, and replace it with
-//	the template chosen by the user, if they chose one.
-add_filter( 'single_template', 'get_post_template' );
+/**
+ * Filter the single template value, and replace it with
+ * the template chosen by the user, if they chose one.
+ */
 if( !function_exists( 'get_post_template' ) ) {
 	function get_post_template( $template ) {
 		global $post;
 		$custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
-		//TO DO: This needs to be smarter about parent/child theme stuff with get_template_directory() and get_stylesheet_directory()
-		if( !empty( $custom_field ) && file_exists( get_template_directory() . "/{$custom_field}") ) {
-			$template = get_template_directory() . "/{$custom_field}"; }
+		if ( !empty( $custom_field ) ) {
+			if ( file_exists( get_stylesheet_directory() . "/{$custom_field}") ) {
+				$template = get_stylesheet_directory() . "/{$custom_field}";
+			} else if ( file_exists( get_template_directory() . "/{$custom_field}") ) {
+				$template = get_template_directory() . "/{$custom_field}";
+			}
+		}
 		return $template;
 	}
+	add_filter( 'single_template', 'get_post_template' );
 }
 
 /**
@@ -215,4 +221,48 @@ function largo_url_to_attachmentid($url) {
     else
     	return false;
 
+}
+
+/**
+ * Given a post type and an optional context, return the partial that should be loaded for that sort of post.
+ *
+ * The default context is search, and the context isn't actually used by this function,
+ * but it is passed to the filter this function runs, largo_partial_by_post_type.
+ *
+ * @link https://github.com/INN/Largo/issues/1023
+ * @param string $partial Required, the default partial in this context.
+ * @param string $post_type Required, the given post's post type
+ * @param string $context Required, the context of this partial.
+ * @return string The partial that should be loaded. This defaults to 'search'.
+ * @filter largo_partial_by_post_type
+ * @since 0.5.4
+ */
+function largo_get_partial_by_post_type($partial, $post_type, $context) {
+	// Remove this conditional in #926.
+	if ($post_type == 'argolinks') {
+		$partial = 'argolinks';
+	}
+
+	/**
+	 * Filter the output of largo_get_partial_by_post_type
+	 *
+	 * When building your own filter, you must set the fourth parameter of add_filter to 3:
+	 *
+	 *     function your_filter_name($partial, $post_type, $context) {
+	 *         // things
+	 *         return $partial;
+	 *     }
+	 *     add_filter('largo_partial_by_post_type', 'your_filter_name', 10, 3);
+	 *                                                                      ^
+	 * Without setting '3', your filter will not be passed the $post_type or $context arguments.
+	 * In order to set '3', you must set the third parameter of add_filter, which defaults to 10. it is safe to leave that at 10.
+	 *
+	 * @since 0.5.4
+	 * @param string $partial The string representing the template partial to use for the current post
+	 * @param string $post_type The current post's post_type
+	 * @param string $context The context in which this filter is being called, defaulting to search.
+	 */
+	$partial = apply_filters('largo_partial_by_post_type', $partial, $post_type, $context);
+
+	return $partial;
 }

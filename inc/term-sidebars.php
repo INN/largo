@@ -24,7 +24,7 @@ class Largo_Term_Sidebars {
 	}
 
 	/**
-	 * Renders the form fields on the term edit page
+	 * Renders the form fields on the term's edit page
 	 */
 	function display_fields( $term ) {
 		if ( !in_array( $term->taxonomy, $this->get_sidebar_taxonomies() ) ) {
@@ -52,6 +52,9 @@ class Largo_Term_Sidebars {
 		<?php
 	}
 
+	/**
+	 * Renders the form fields for the new form creation on the term listing paga
+	 */
 	function display_add_new_field( $taxonomy ) {
 		?>
 		<div class="form-field">

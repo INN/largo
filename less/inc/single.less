@@ -228,37 +228,46 @@ body.normal.page {
     margin-left: 0.2em;
   }
 }
+
 .post-social {
   margin-bottom: @baseline;
-  &> span {
+  & > span {
     // copied from widgets/largo-follow.less
     line-height: 1.5em;
     max-width: 250px;
     margin: 0.5em 0;
-    padding: 0.3em 0.6em;
     text-align: center;
-
     text-transform: uppercase;
     font-weight: 300;
     font-family: @sansFontFamily;
     position: relative;
     font-size: @baseFontSize;
-    color: white;
+    color: @white;
+
     &:hover {
-      .opacity(85);
+      cursor: pointer;
     }
     &:last-child {
       margin-right: 0;
     }
+
+    & > a {
+      display: block;
+      padding: 0.3em 1em 0.3em 0.5em; // Irregular padding is to counter 0.2em margin-left on the icon.
+
+      @media (max-width: 768px) {
+        padding: 0.3em 0.6em;
+      }
+      @media (max-width: 480px) {
+        padding: 0.3em 0.2em;
+      }
+    }
   }
   a {
-    color: white;
+    color: @white;
     &:hover {
-      color: white;
+      color: @white;
       text-decoration: none;
-      i {
-        .opacity(85);
-      }
     }
   }
   i, &::before {
@@ -266,6 +275,208 @@ body.normal.page {
   }
   .email:hover {
     cursor: pointer;
+  }
+  .more-social-links {
+    background-color: @orange;
+    color: @white;
+    &:hover {
+      background-color: lighten(@orange, 5%);
+    }
+
+    .popover {
+      top: 40px;
+
+      a {
+        color: @gray;
+        position: relative;
+        float: left;
+        &:hover {
+          color: @grayDark;
+          text-decoration: underline;
+        }
+      }
+
+      i {
+        color: @grayLight;
+        margin-right: 0.25em;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      ul, li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      li {
+        margin-bottom: 0.5em;
+        float: left;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        span {
+          display: block;
+          margin-left: 28px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        left: auto;
+        right: 0;
+
+        &:before,
+        &:after {
+          left: auto;
+        }
+        &:before {
+          right: 19px;
+        }
+        &:after {
+          right: 20px;
+        }
+      }
+    }
+  }
+}
+
+#floating-social-buttons {
+  transition: opacity 0.2s;
+  border: 1px solid @grayLighter;
+  .hidden-phone {
+    display: none;
+  }
+
+  .post-social {
+    & > span {
+      padding-left: -100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+
+      &:hover { cursor: pointer; }
+
+      & > a {
+        color: @grayLighter;
+        display: block;
+        padding: 18px;
+        min-width: 28px;
+        min-height: 28px;
+      }
+    }
+    & > .email:hover,
+    & > span:hover > a {
+      color: @white;
+    }
+  }
+  .rss {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@rss, 5%);
+    }
+  }
+  .twitter {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@twitter, 5%);
+    }
+  }
+  .facebook {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@facebook, 5%);
+    }
+  }
+  .linkedin {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@linkedin, 5%);
+    }
+  }
+  .gplus {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@gplus, 5%);
+    }
+  }
+  .flickr {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@flickr, 5%);
+    }
+  }
+  .youtube {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@youtube, 5%);
+    }
+  }
+  .print {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(#85898F, 5%);
+    }
+  }
+  .email {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(#62656F, 5%);
+    }
+  }
+  .more-social-links {
+    background-color: @white;
+    color: @grayLighter;
+    a.popped,
+    &:hover {
+      background-color: @orange;
+      color: @white;
+    }
+
+    .popover {
+      top: 68px;
+      font-size: 14px;
+
+      i {
+        margin-right: 0.25em;
+      }
+      a {
+        color: @gray;
+        &:hover {
+          color: @grayDark;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .social-btn {
+    line-height: 1.5em;
+    max-width: 250px;
+    margin: 0.5em 0;
+    padding: 0.5em;
+  }
+  .post-social {
+    a:hover i {
+      opacity: 1;
+    }
+    margin-bottom: 0;
+    i {
+      margin: 0;
+    }
   }
 }
 

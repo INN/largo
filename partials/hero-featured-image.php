@@ -1,5 +1,5 @@
 <div class="<?php echo $classes; ?>">
-	<?php echo get_the_post_thumbnail($post->ID, 'full'); ?>
+	<?php echo get_the_post_thumbnail($the_post->ID, 'full'); ?>
 	<?php if (!empty($thumb_meta)) {
 		if (!empty($thumb_meta['credit'])) {
 			if (!empty($thumb_meta['credit_url'])) { ?>

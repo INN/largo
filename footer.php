@@ -66,8 +66,6 @@
 	 */
 	do_action( 'largo_after_footer' );
 
-	get_template_part( 'partials/footer', 'sticky' );
-
 	wp_footer();
 ?>
 

@@ -136,10 +136,6 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 		}
 
-		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' && $post_id == get_queried_object()->ID ) {
-			$output .= '<a href="#" class="clean-read">' . __( 'View as "Clean Read"', 'largo') . '</a>';
-		}
-
 		if ( $echo ) {
 			echo $output;
 		} else {
@@ -158,6 +154,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
  */
 if ( ! function_exists( 'largo_post_social_links' ) ) {
 	function largo_post_social_links( $echo = true ) {
+		global $post, $wpdb;
+
 		$utilities = of_get_option( 'article_utilities' );
 
 		$output = '<div class="largo-follow post-social clearfix">';
@@ -187,10 +185,70 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		}
 
 		if ($utilities['email'] === '1' ) {
-			$output .= '<span data-service="email" class="email custom-share-button share-button"><i class="icon-mail"></i> <span class="hidden-phone">Email</span></span>';
+			$output .= '<span data-service="email" class="email custom-share-button share-button"><a><i class="icon-mail"></i> <span class="hidden-phone">Email</span></a></span>';
+		}
+
+		// More social links
+		$more_social_links = array();
+
+		// Try to get the top term permalink and RSS feed
+		$top_term_id = get_post_meta( $post->ID, 'top_term', TRUE );
+		$top_term_taxonomy = $wpdb->get_var(
+			$wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $top_term_id)
+		);
+
+		if ( empty( $top_term_id ) || empty( $top_term_taxonomy ) ) {
+			$top_term_id = get_the_category( $post );
+			if ( is_array( $top_term_id ) && count( $top_term_id ) ) {
+				$top_term_taxonomy = 'category';
+				$top_term_id = $top_term_id[0]->term_id;
+			}
+		}
+
+		if ( ! empty( $top_term_id ) ) {
+			$top_term = get_term( (int) $top_term_id, $top_term_taxonomy );
+			$top_term_link = get_term_link( (int) $top_term_id, $top_term_taxonomy );
+			if ( ! is_wp_error( $top_term_link ) ) {
+				$more_social_links[] = '<li><a href="' . $top_term_link . '"><i class="icon-link"></i> <span>More on ' . $top_term->name . '</span></a></li>';
+			}
+
+			$top_term_feed_link = get_term_feed_link( $top_term_id, $top_term_taxonomy );
+			if ( ! is_wp_error( $top_term_feed_link ) ) {
+				$more_social_links[] = '<li><a href="' . $top_term_feed_link . '"><i class="icon-rss"></i> <span>Subscribe to ' . $top_term->name . '</span></a></li>';
+			}
+		}
+
+		// Try to get the author's Twitter link
+		$twitter_username = get_user_meta( $post->post_author, 'twitter', true );
+		if ( ! empty( $twitter_username ) ) {
+			$twitter_link = 'https://twitter.com/' . $twitter_username;
+			$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> <span>Follow this author</span></a></li>';
+		}
+
+		if ( count( $more_social_links ) ) {
+			$more_social_links_str = implode( $more_social_links, "\n" );
+
+			$output .= <<<EOD
+<span class="more-social-links">
+	<a class="popover-toggle" href="#"><i class="icon-plus"></i><span class="hidden-phone">More</span></a>
+	<span class="popover">
+	<ul>
+		${more_social_links_str}
+	</ul>
+	</span>
+</span>
+EOD;
 		}
 
 		$output .= '</div>';
+
+		/**
+		 * Filter the output text of largo_post_social_links() after the closing </div> but before it is echoed or returned.
+		 *
+		 * @since 0.5.3
+		 * @param string $output A div containing a number of spans containing social links and other utilities.
+		 */
+		apply_filters('largo_post_social_links', $output);
 
 		if ( $echo ) {
 			echo $output;
@@ -693,3 +751,69 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
 		}
 	}
 }
+
+/**
+ * New floating social buttons
+ *
+ * Only displayed if the floating share icons option is checked.
+ * @since 0.5.4
+ * @link https://github.com/INN/Largo/issues/961
+ * @see largo_floating_social_button_width_json
+ */
+if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
+	function largo_floating_social_buttons() {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && of_get_option('single_template') == 'normal' ) {
+			// of_get_option('single_template') is filtered to return not the global option but this post's custom option if that is set.
+			echo '<script type="text/template" id="tmpl-floating-social-buttons">';
+			largo_post_social_links();
+			echo '</script>';
+		}
+	}
+}
+add_action('wp_footer', 'largo_floating_social_buttons');
+
+/**
+ * Responsive viewport information for the floating social buttons, in the form of JSON in a script tag, and the relevant javascript.
+ *
+ * @since 0.5.4
+ * @see largo_floating_social_buttons
+ */
+if ( ! function_exists('largo_floating_social_button_width_json') ) {
+	function largo_floating_social_button_width_json() {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && of_get_option('single_template') == 'normal' ) {
+			$config = array(
+				'min' => '980',
+				'max' => '9999',
+			);
+			$config = apply_filters( 'largo_floating_social_button_width_json', $config );
+			?>
+			<script type="text/javascript" id="floating-social-buttons-width-json">
+				window.floating_social_buttons_width = <?php echo json_encode( $config ); ?>
+			</script>
+			<?php
+		}
+	}
+}
+add_action('wp_footer', 'largo_floating_social_button_width_json');
+
+/**
+ * Enqueue floating social button javascript
+ *
+ * @since 0.5.4
+ * @see largo_floating_social_buttons
+ * @global LARGO_DEBUG
+ */
+if ( ! function_exists('largo_floating_social_button_js') ) {
+	function largo_floating_social_button_js() {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && of_get_option('single_template') == 'normal' ) {
+			?>
+			<script type="text/javascript" src="<?php
+				$suffix = (LARGO_DEBUG)? '' : '.min';
+				$version = largo_version();
+				echo get_template_directory_uri() . '/js/floating-social-buttons' . $suffix . '.js?ver=' . $version;
+			?>" async></script>
+			<?php
+		}
+	}
+}
+add_action('wp_footer', 'largo_floating_social_button_js');

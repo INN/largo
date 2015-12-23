@@ -419,6 +419,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_instantiate_widget('largo-footer-featured', array('title'=>'Bar'), 'footer-1');
 		largo_instantiate_widget('largo-featured', array('title'=>'Baz'), 'sidebar-main');
 		largo_instantiate_widget('largo-follow', array('title'=>'Baz'), 'homepage-alert');
+		largo_instantiate_widget('largo-recent-posts', array('title'=>'Baz'), 'homepage-alert');
 
 		// chek that things were set up correctly
 		$this->assertTrue(
@@ -437,16 +438,25 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 			largo_widget_in_region('largo-follow', 'homepage-alert'),
 			"Setup: The Largo Follow widget was not created in the Homepage Alert widget area.");
 
+		$this->assertTrue(
+			largo_widget_in_region('largo-recent-posts', 'homepage-alert'),
+			"Setup: The Largo Recent Posts was not created in the Homepage Alert widget area.");
+
+		// Run the actual updates
 		largo_replace_deprecated_widgets();
 
-		// Currently unused.
+		// This array is currently unused.
 		$updates = array(
 			'largo-sidebar-featured' => array(
-				'name' => 'largo-featured',
+				'name' => 'largo-recent-posts',
 				'count' => 0,
 			),
 			'largo-sidebar-featured' => array(
-				'name' => 'largo-featured',
+				'name' => 'largo-recent-posts',
+				'count' => 0,
+			),
+			'largo-featured' => array(
+				'name' => 'largo-recent-posts',
 				'count' => 0,
 			)
 		);
@@ -460,20 +470,37 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 			"The Largo Footer Featured widget was left in the Footer 1 widget area.");
 
 		$this->assertTrue(
-			largo_widget_in_region('largo-featured', 'sidebar-single'),
+			largo_widget_in_region('largo-recent-posts', 'sidebar-single'),
 			"The new Largo Featured widget was not found in the Sidebar Single widget area.");
 
 		$this->assertTrue(
-			largo_widget_in_region('largo-featured', 'footer-1'),
+			largo_widget_in_region('largo-recent-posts', 'footer-1'),
 			"The new Largo Featured widget was not found in the Footer 1 widget area.");
 
 		$this->assertTrue(
-			largo_widget_in_region('largo-featured', 'sidebar-main'),
+			largo_widget_in_region('largo-recent-posts', 'sidebar-main'),
 			"The old Largo Featured widget was not found in the Sidebar Main widget area.");
 
 		$this->assertTrue(
 			largo_widget_in_region('largo-follow', 'homepage-alert'),
 			"The Largo Follow widget was not found in the Homepage Alert widget area.");
+
+		$this->assertTrue(
+			largo_widget_in_region('largo-recent-posts', 'homepage-alert'),
+			"The old Largo Featured widget was not found in the Homepage Alert widget area.");
+
+	}
+
+	function test_largo_deprecated_callback_largo_featured() {
+		$replacement = array(
+			'foo' => 'bar',
+		);
+		$deprecated = array(
+			'thumb' => 'there was an old farmer',
+		);
+		$return = largo_deprecated_callback_largo_featured($deprecated, $replacement);
+		$this->assertEquals($return['thumbnail_display'], $deprecated['thumb']);
+		$this->assertEquals($return['foo'], $replacement['foo']);
 	}
 }
 

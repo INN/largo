@@ -6,6 +6,7 @@
  * @since 0.1
  */
 get_header();
+$queried_object = get_queried_object();
 ?>
 
 <div class="clearfix">
@@ -32,7 +33,6 @@ get_header();
 				$description = term_description();
 
 				// rss links for custom taxonomies are a little tricky
-				$queried_object = get_queried_object();
 				$term_id = intval( $queried_object->term_id );
 				$tax = $queried_object->taxonomy;
 				$rss_link = get_term_feed_link( $term_id, $tax );
@@ -53,6 +53,9 @@ get_header();
 				if ( isset( $rss_link ) ) {
 					printf( '<a class="rss-link rss-subscribe-link" href="%1$s">%2$s <i class="icon-rss"></i></a>', $rss_link, __( 'Subscribe', 'largo' ) );
 				}
+
+				$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
+				largo_hero($post_id);
 
 				if ( isset( $title ) ) {
 					echo '<h1 class="page-title">' . $title . '</h1>';

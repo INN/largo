@@ -7,8 +7,7 @@
  */
  ?>
  <div class="sticky-nav-wrapper nocontent">
-	<div class="sticky-nav-holder <?php echo (is_front_page() || is_home()) ? '' : 'show'; ?>"
-		data-hide-at-top="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>">
+	<div class="sticky-nav-holder">
 
 	<?php
     /*
@@ -69,29 +68,30 @@
 									</div>
 								</form>
 							</li>
+							<li>
+								<!-- "hamburger" button (3 bars) to trigger off-canvas navigation -->
+								<a class="btn btn-navbar toggle-nav-bar" title="<?php esc_attr_e('More', 'largo'); ?>">
+									<div class="bars">
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</div>
+								</a>
+							</li>
 						</ul>
 
 					</div>
 
-					<!-- "hamburger" button (3 bars) to trigger off-canvas navigation -->
-					<a class="btn btn-navbar toggle-nav-bar" title="<?php esc_attr_e('More', 'largo'); ?>">
-						<div class="bars">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</div>
-					</a>
-
 					<!-- BEGIN MOBILE MENU (hidden on desktop) -->
 					<div class="nav-left">
-						<?php
-							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) ) {
-								echo '<li class="site-name"><a href="/">' . get_bloginfo('name') . '</a></li>';
-							} else if ( of_get_option( 'sticky_header_logo' ) == '' ) { ?>
-								<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
-							<?php } else { ?>
-								<li class="home-icon"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' , 'medium' ); ?></a></li>
-
+						<?php if ( of_get_option( 'sticky_header_logo' ) !== '' ) { ?>
+							<ul>
+								<li class="home-icon"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white', 'orig' ); ?></a></li>
+							</ul>
+						<?php } else { ?>
+							<ul>
+								<li class="site-name"><a href="/"><?php echo get_bloginfo('name'); ?></a></li>
+							</ul>
 						<?php } ?>
 					</div>
 					<!-- END MOBILE MENU -->
@@ -99,25 +99,18 @@
 					<!-- BEGIN DESKTOP MENU -->
 					<div class="nav-shelf">
 					<ul class="nav">
-						<li class="<?php echo (of_get_option('sticky_header_logo') == '' ? 'home-link' : 'home-icon' ) ?>">
-							<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-								<?php
-								if ( of_get_option( 'sticky_header_logo' ) == '' )
-									largo_home_icon( 'icon-white' );
-								else
-									largo_home_icon( 'icon-white' , 'orig' );
-								?>
-							</a>
-						</li>
-						<?php
-							/*
-							 * Build the mobile off-canvas menu
-							 *
-							 * Checks if sitename is shown in sticky nav
-							 *
-							 */
-							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) )
-								echo '<li class="site-name"><a href="/">' . get_bloginfo('name') . '</a></li>';
+						<?php if ( of_get_option('sticky_header_logo') !== '') { ?>
+							<li class="home-icon">
+								<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+									<?php
+									if ( of_get_option( 'sticky_header_logo' ) !== '' )
+										largo_home_icon( 'icon-white' , 'orig' );
+									?>
+								</a>
+							</li>
+						<?php } else { ?>
+							<li class="site-name"><a href="/"><?php echo get_bloginfo('name'); ?></a></li>
+						<?php }
 
 							/* Build Main Navigation using Boostrap_Walker_Nav_Menu() */
 							$args = array(

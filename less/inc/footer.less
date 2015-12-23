@@ -1,12 +1,10 @@
 /**
- * Before Footer, Site Footer and Sticky Footer
+ * Before Footer, Site Footer
  *
  * #before-footer - a dynamic widget area prior to #site-footer
  * #site-footer
  *   #supplementary - primary widget zones for site footer
  *   #boilerplate - social icons, copyright, INN logo and footer links
- *
- * .sticky-footer-holder - optional sticky/floating footer for single articles
  *
  * @since 0.5.3
  */
@@ -195,117 +193,6 @@ footer #boilerplate {
   }
   .footer-credit span {
     display: block;
-  }
-}
-
-/*
- * Sticky Footer
- * -----------------------
- */
-
-.sticky-footer-holder {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 99998;
-  visibility: hidden;
-  opacity: 0;
-  height: 36px;
-  background-color: @white;
-  font-family: @sansFontFamily;
-  padding: 7px 0;
-  .box-shadow(0 2px 12px @gray);
-
-  .transition( opacity 0.3s );
-
-  &.show {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .sticky-footer-container {
-    margin: 0 auto;
-  }
-
-  .share {
-    float: left;
-    margin-right: 40px;
-  }
-
-  .share-button {
-    display: inline-block;
-    width: 2em;
-    height: 2em;
-    cursor: pointer;
-    text-align: center;
-    color: @textColor;
-
-    &:hover {
-      color: @baseColor;
-    }
-
-    &:before {
-      margin: 0;
-    }
-  }
-
-  a {
-    color: @textColor;
-
-    &:hover {
-      text-decoration: none;
-      color: @baseColor;
-    }
-  }
-
-  .comments {
-    float: left;
-    margin-right: 40px;
-  }
-
-  .follow {
-    float: right;
-  }
-
-  .follow-author {
-    display: inline-block;
-  }
-
-  .follow-author,
-  .post-category-link {
-    padding-left: 1em;
-  }
-
-  h4 {
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 1em;
-    font-weight: normal;
-    margin: 0;
-    color: @baseColor;
-  }
-
-  [class^="icon-"]:before,
-  [class*=" icon-"]:before {
-    font-size: 130%;
-    width: auto;
-  }
-
-  .dismiss {
-	  position: absolute;
-    top: 7px;
-    right: 7px;
-
-	  a {
-    	.opacity(50);
-	  }
-  }
-}
-
-@media ( max-width: @containerMaxWidth ) {
-  .sticky-footer-container {
-    padding-right: 40px;
   }
 }
 

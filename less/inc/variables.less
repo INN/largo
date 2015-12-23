@@ -6,9 +6,9 @@
 // -------------------------
 @black:                 #000;
 @grayDarker:            #222;
-@grayDark:              #333;
-@gray:                  #555;
-@grayLight:             #999;
+@grayDark:              #484848;
+@gray:                  #7D8185;
+@grayLight:             #aaa;
 @grayLighter:           #ddd;
 @white:                 #fff;
 
@@ -246,35 +246,42 @@
 // Navbar
 // -------------------------
 @navbarHeight:                    40px;
-@navbarFontSize:				  15px;
-@navbarBackground:                darken(@baseColor, 5%);
-@navbarBackgroundHighlight:       @baseColor;
+@navbarFontSize:                  15px;
+@navbarBackground:                @bodyBackground;
+// Navbar button (burger) for toggling navbar items in responsive layouts
+@iconbarHeight: 3px;
 
-@navbarText:                      @white;
-@navbarLinkColor:                 @white;
-@navbarLinkColorHover:            @grayLighter;
-@navbarLinkColorActive:           @navbarLinkColorHover;
-@navbarLinkBackgroundHover:       transparent;
-@navbarLinkBackgroundActive:      @navbarBackground;
+    // Navbar dropdowns
+    @dropdownBackground: @white;
+    @dropdownBorder: rgba(0,0,0,.2);
+    @dropdownDividerTop: #e5e5e5;
+    @dropdownDividerBottom: @white;
 
-// Dropdowns
-// -------------------------
-@dropdownBackground:            @white;
-@dropdownBorder:                rgba(0,0,0,.2);
-@dropdownLinkColor:             @grayDark;
-@dropdownLinkColorHover:        @white;
-@dropdownLinkBackgroundHover:   @baseColor;
-@dropdownDividerTop:            #e5e5e5;
-@dropdownDividerBottom:         @white;
+    // Main navbar
+    @navbarText: @textColor;
+    @navbarLinkColor: @navbarText;
+    @navbarLinkColorHover: darken(@navbarLinkColor, 5%);
+    @navbarLinkBackgroundActive: darken(@navbarBackground, 5%);
+    @navbarDropdownCaretColor: @navbarLinkColor;
+    @navbarDropdownCaretColorHover: @navbarLinkColorHover;
+    @navbarRuleColor: @grayLight;
+
+    // Sticky navbar
+    @stickyNavbarText: @textColor;
+    @stickyNavbarLinkColor: @stickyNavbarText;
+    @stickyNavbarLinkColorHover: darken(@stickyNavbarLinkColor, 5%);
+    @stickyNavbarBackgroundColor: @white;
+    @stickyNavbarDropdownCaretColor: @stickyNavbarLinkColor;
+    @stickyNavbarDropdownCaretColorHover: @stickyNavbarLinkColorHover;
 
 
 // Social Brands
 // -------------------------
-@rss:  #f89406;
-@facebook:  #3a5795;
-@twitter:  #55acee;
-@youtube:  #e52d27;
-@gplus:  #dd4b39;
-@flickr:  #ff0084;
-@linkedin:  #007bb6;
-@tumblr:  #35465c;
+@rss: #f89406;
+@facebook: #3a5795;
+@twitter: #55acee;
+@youtube: #e52d27;
+@gplus: #dd4b39;
+@flickr: #ff0084;
+@linkedin: #007bb6;
+@tumblr: #35465c;

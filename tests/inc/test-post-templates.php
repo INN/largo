@@ -78,5 +78,10 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 
 	}
 
+	function test_largo_get_partial_by_post_type() {
+		$ret = largo_get_partial_by_post_type('foo', 'bar', 'baz');
+		$this->assertEquals($ret, 'foo'); // dummy test so that this test will run. Mostly we're just asserting that the function doesn't cause errors.
+		$this->markTestIncomplete();
+	}
 
 }

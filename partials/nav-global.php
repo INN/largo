@@ -11,8 +11,8 @@
  * @package Largo
  */
 
- /* check is homepage and sticky nav is NOT enabled */
-if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
+if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
+?>
 	<div class="global-nav-bg">
 		<div class="global-nav">
 			<nav id="top-nav" class="span12">
@@ -53,4 +53,4 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 			</nav>
 		</div> <!-- /.global-nav -->
 	</div> <!-- /.global-nav-bg -->
-<?php endif;
+<?php }

@@ -1,0 +1,501 @@
+.navbar {
+  // Fix for IE7's bad z-indexing so dropdowns don't
+  // appear below content that follows the navbar
+  *position: relative;
+  *z-index: 2;
+  overflow: visible;
+  margin-bottom: @baseline / 5;
+
+  .container {
+    width: auto;
+  }
+
+  .toggle-nav-bar {
+    display: none;
+  }
+
+  .navbar-inner {
+    background-color: @navbarBackground;
+  }
+
+  // Brand, links, text, and buttons
+  color: @navbarText;
+  font-family: @sansFontFamily;
+
+  // Hover and active states
+  // Plain text in topbar
+  .navbar-text {
+    margin-bottom: 0;
+  }
+
+  // Social icons appearing in main or sticky nav
+  #header-social li > a {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  // Common nav layout
+  .nav {
+    position: relative;
+    left: 0;
+    display: block;
+    float: left;
+    margin: 0;
+    color: @navbarText;
+
+    & > li > a {
+      color: @navbarLinkColor;
+    }
+  }
+
+  // Individual nav links
+  li {
+    display: block;
+    float: left;
+    margin-bottom: 0;
+
+    & > a {
+      display: block;
+      text-decoration: none;
+      line-height: @navbarHeight;
+      padding-left: @navbarHeight / 4;
+      padding-right: @navbarHeight / 4;
+    }
+  }
+
+  // Dropdowns within nav
+  li.dropdown > a {
+    padding-right: 0;
+  }
+  li.dropdown .dropdown-menu li a {
+    color: @navbarLinkColor;
+    padding-right: 10px;
+    line-height: @baseLineHeight;
+
+    &:hover {
+      color: @navbarLinkColorHover;
+    }
+  }
+
+  li > a:hover {
+    background-color: @navbarLinkBackgroundActive;
+    color: @navbarLinkColorHover;
+
+    .caret:before {
+      border-top-color: @navbarDropdownCaretColorHover;
+    }
+  }
+
+  // Sub menus
+  .sub-menu:before,
+  .sub-sub-menu:before {
+    border-bottom: 9px solid transparent;
+    border-left: none;
+    border-right: 9px solid rgba(0, 0, 0, 0.2);
+    border-top: 9px solid transparent;
+    left: -9px;
+    top: 30%;
+  }
+  .sub-menu:after,
+  .sub-sub-menu:after {
+    border-top: 8px solid transparent;
+    border-left: none;
+    border-right: 8px solid @white;
+    border-bottom: 8px solid transparent;
+    top: 31%;
+    left: -8px;
+  }
+
+  // Home link and home icon
+  li.home-icon,
+  li.home-link {
+    a:hover {
+      background-color: transparent;
+      color: lighten(@linkColorHover, 5%);
+    }
+  }
+
+  .home-icon:hover img,
+  li.home-link:hover i {
+    .opacity(85);
+  }
+
+  li.home-link {
+    overflow: hidden;
+
+    & > a {
+      display: block;
+      &:hover {
+        background: none;
+      }
+
+      img {
+        display: block;
+        height: @navbarHeight;
+        width: @navbarHeight;
+      }
+    }
+  }
+
+  li.home-icon > a {
+    padding: 0;
+    &:hover {
+      background: none;
+    }
+
+    img {
+      display: inline-block;
+      height: (@navbarHeight - 16px);
+      width: auto;
+      margin-right: 1em;
+    }
+  }
+
+  // Nav toggle (burger button)
+  .btn-navbar {
+    display: none;
+    float: left;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+
+    // @iconbarHeight is used 5x: 3x for the bars, 2x for the margin between them.
+    padding: (floor(@navbarHeight - (5 * @iconbarHeight))) / 2 10px;
+
+    .label {
+      float: right;
+      color: white;
+      line-height: 1;
+      margin: -2px 0 0 5px;
+      padding: 0;
+      font-size: @navbarFontSize;
+    }
+
+    .navbar .btn-navbar .bars {
+      float: left;
+    }
+
+    .icon-bar {
+      display: block;
+      width: 18px;
+      height: @iconbarHeight;
+    }
+
+    .icon-bar + .icon-bar {
+      margin-top: @iconbarHeight;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .nav-left {
+      display: none;
+    }
+  }
+
+  // Responsive styles for .navbar
+  @media (max-width: 768px) {
+    position: relative;
+    z-index: 9;
+
+    li.dropdown {
+      .dropdown-menu li a {
+        line-height: @navbarHeight;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: @navbarHeight;
+      }
+    }
+
+    .container {
+      width: auto;
+      padding: 0;
+    }
+
+    .toggle-nav-bar {
+      display: block;
+    }
+
+    .nav-shelf {
+      background: @dropdownBackground;
+      position: absolute;
+      top: 100%;
+      left: -10px;
+      right: -10px;
+      visibility: hidden;
+      opacity: 0;
+
+      .site-name, .home-icon, .home-link {
+        display: none;
+      }
+
+      ul, li {
+        float: none;
+      }
+
+      li.home-link {
+        display: none;
+      }
+
+      li b.caret {
+        float: right;
+      }
+
+      li.open > a .caret {
+        .rotate( 90deg );
+      }
+
+      li.open > ul.dropdown-menu {
+        display: block;
+        position: relative;
+        .box-shadow( none );
+        border: none;
+        padding: 0;
+        &:before, &:after {
+          display: none;
+        }
+      }
+
+      .nav > li {
+        &:last-child {
+          border-bottom: none;
+          padding-bottom: none;
+        }
+      }
+
+    }
+
+    &.open .nav-shelf {
+      visibility: visible;
+      opacity: 1;
+      border-bottom: 1px solid @grayLighter;
+    }
+
+    .nav li {
+      &.home-link,
+      &.site-name {
+        display: none;
+      }
+    }
+  }
+}
+
+// Gradient is applied to it's own element because overflow
+// visible is not honored by IE when filter is present
+.navbar-inner {
+  float: left;
+  width: 100%;
+}
+
+// Dropdown arrow/caret
+.caret {
+  display: inline-block;
+  position: relative;
+  width: @baseFontSize;
+  padding: 0 (@baseFontSize / 2);
+  top: 2px;
+
+  &:before {
+    display: block;
+    position: relative;
+
+    width: 0;
+    height: 0;
+    border-top: 6px solid @navbarDropdownCaretColor;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom:  5px solid transparent;
+    content: "";
+  }
+}
+
+// General dropdown/dropup styles
+.dropup,
+.dropdown {
+  position: relative;
+
+  .caret {
+    border-top-color: @white;
+    border-bottom-color: @white;
+  }
+
+  &.active .caret {
+    .opacity(100);
+  }
+}
+
+.dropdown-toggle {
+  // The caret makes the toggle a bit too tall in IE7
+  *margin-bottom: -3px;
+}
+
+// Dropdown menu
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: @zindexDropdown;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 3px 0;
+  margin: 0; // override default ul
+  list-style: none;
+  background-color: @dropdownBackground;
+  border: 1px solid @grayLighter;
+  border: 1px solid rgba(0,0,0,.2);
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  .box-shadow(0 5px 10px rgba(0,0,0,.2));
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+
+  li {
+    padding-top: 0;
+    width: 100%;
+  }
+
+  // Links within the dropdown menu
+  li {
+    margin-bottom: 0;
+
+    & > a {
+      display: block;
+      width: auto;
+      padding: 3px 15px;
+      clear: both;
+      white-space: nowrap;
+      text-shadow: none;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  // Active links/menus within dropdowns
+  .active > a,
+  .active > a:hover {
+    color: @navbarLinkColor;
+    background-color: @dropdownBackground;
+  }
+
+  // TODO: What is this?
+  &:before {
+    content: '';
+    display: inline-block;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid @grayLighter;
+    border-bottom-color: @dropdownBorder;
+    position: absolute;
+    top: -10px;
+    left: 9px;
+  }
+  &:after {
+    content: '';
+    display: inline-block;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid @dropdownBackground;
+    position: absolute;
+    top: -9px;
+    left: 10px;
+  }
+
+  // Add support for second level dropdown menus
+  .sub-menu,
+  .sub-sub-menu {
+    position: absolute;
+    top: -20%;
+    left: 99%;
+    visibility: hidden;
+    margin-top: 0;
+  }
+  .icon-arrow-right {
+    position: relative;
+    top: 2px;
+    left: 3px;
+  }
+  li:hover .sub-menu,
+  .sub-menu li:hover .sub-sub-menu {
+    visibility: visible;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    li:hover .sub-sub-menu,
+    li:hover .sub-menu {
+      display: none;
+      visibility: hidden;
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
+  html.touch ul.nav li.dropdown.open ul.dropdown-menu {
+      display: block;
+  }
+}
+
+// Open state for the dropdown
+// ---------------------------
+.open {
+  // IE7's z-index only goes to the nearest positioned ancestor, which would
+  // make the menu appear below buttons that appeared later on the page
+  *z-index: @zindexDropdown;
+
+  & > .dropdown-menu {
+    display: block;
+
+    @media (min-width: 769px) {
+      display: none;
+    }
+  }
+}
+
+// Allow for dropdowns to go bottom up (aka, dropup-menu)
+.dropup,
+.navbar-fixed-bottom .dropdown {
+  // Reverse the caret
+  .caret {
+    border-top: 0;
+    border-bottom: 4px solid @black;
+    content: "\2191";
+  }
+  // Different positioning for bottom up menu
+  .dropdown-menu {
+    top: auto;
+    bottom: 100%;
+    margin-bottom: 1px;
+  }
+}
+
+// "Don't miss"/topics bar
+#topics-bar {
+  padding: 3px 0;
+  ul {
+    margin: 0;
+    font-family: @sansFontFamily;
+    li {
+      display: inline;
+      margin-right: 10px;
+      white-space: nowrap;
+      font-size: 14px;
+      &.menu-label {
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// Navbar search form
+#main-nav.navbar {
+  border-top: 1px solid @navbarRuleColor;
+  border-bottom: 1px solid @navbarRuleColor;
+}

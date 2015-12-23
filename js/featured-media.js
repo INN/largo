@@ -63,7 +63,13 @@ var LFM = _.extend(LFM || {}, {
                 state: 'image',
                 metadata: {},
                 className: 'featured-media-modal',
-                model: new featuredMediaModel()
+                model: new featuredMediaModel(),
+                states: [
+                    'embed-code',
+                    'video',
+                    'image',
+                    'gallery'
+                ]
             });
 
             wp.media.view.MediaFrame.Select.prototype.initialize.apply(this, arguments);
@@ -72,58 +78,71 @@ var LFM = _.extend(LFM || {}, {
         },
 
         createStates: function() {
-            var options = this.options;
+            var options = this.options,
+                embed = [
+                    // Embed code
+                    new wp.media.controller.Embed({
+                        title: 'Featured embed code',
+                        id: 'embed-code',
+                        content: 'embed',
+                        priority: 0
+                    }),
+                ],
+                video = [
+                    // Video embed
+                    new wp.media.controller.Embed({
+                        title: 'Featured video',
+                        id: 'video',
+                        content: 'video',
+                        priority: 10
+                    }),
+                ],
+                image = [
+                    // Featured image
+                    new wp.media.controller.FeaturedImage({
+                        title: 'Featured image',
+                        priority: 20,
+                        id: 'image',
+                    }),
 
-            this.states.add([
-                // Embed code
-                new wp.media.controller.Embed({
-                    title: 'Featured embed code',
-                    id: 'embed-code',
-                    content: 'embed',
-                    priority: 0
-                }),
+                    new wp.media.controller.EditImage({ model: options.editImage })
+                ],
+                gallery = [
+                    // Featured gallery
+                    new wp.media.controller.Library({
+                        id: 'gallery',
+                        title: 'Featured gallery',
+                        priority: 30,
+                        toolbar: 'main-gallery',
+                        filterable: 'uploaded',
+                        multiple: 'add',
+                        editable: false,
+                        library: wp.media.query(_.defaults({
+                            type: 'image'
+                        }, options.library))
+                    }),
 
-                // Video embed
-                new wp.media.controller.Embed({
-                    title: 'Featured video',
-                    id: 'video',
-                    content: 'video',
-                    priority: 10
-                }),
+                    // Gallery states.
+                    new wp.media.controller.GalleryEdit({
+                        library: options.selection,
+                        editing: options.editing,
+                        menu: 'gallery'
+                    }),
 
-                // Featured image
-                new wp.media.controller.FeaturedImage({
-                    title: 'Featured image',
-                    priority: 20,
-                    id: 'image',
-                }),
+                    new wp.media.controller.GalleryAdd()
+                ];
 
-				new wp.media.controller.EditImage({ model: options.editImage }),
+            if (_.indexOf(options.states, 'embed-code') >= 0)
+                this.states.add(embed);
 
-                // Featured gallery
-                new wp.media.controller.Library({
-                    id: 'gallery',
-                    title: 'Featured gallery',
-                    priority: 30,
-                    toolbar: 'main-gallery',
-                    filterable: 'uploaded',
-                    multiple: 'add',
-                    editable: false,
-                    library: wp.media.query(_.defaults({
-                        type: 'image'
-                    }, options.library))
-                }),
+            if (_.indexOf(options.states, 'video') >= 0)
+                this.states.add(video);
 
-                // Gallery states.
-                new wp.media.controller.GalleryEdit({
-                    library: options.selection,
-                    editing: options.editing,
-                    menu: 'gallery'
-                }),
+            if (_.indexOf(options.states, 'image') >= 0 )
+                this.states.add(image);
 
-                new wp.media.controller.GalleryAdd(),
-
-            ]);
+            if (_.indexOf(options.states, 'gallery') >= 0)
+                this.states.add(gallery);
 
             if (LFM.has_featured_media) {
                 this.states.add([
@@ -780,12 +799,19 @@ var LFM = _.extend(LFM || {}, {
                     LFM.fetching = false;
                     spinner.hide();
 
+                    var post = wp.media.view.settings.post;
+
+                    if (data.get('type') == 'image' && post.id == 0) {
+                        post.featuredImageId = $('#featured_image_id').val();
+                    }
+
                     var modal,
-                        initialViewId = data.get('type') || 'embed-code',
+                        initialViewId = data.get('type') || 'image',
                         option = _.findWhere(LFM.options, { id: initialViewId }),
                         args = {
                             state: option.id,
-                            model: model
+                            model: model,
+                            states: _.map(LFM.options, function(opt) { return opt.id; })
                         }
 
                     if (initialViewId == 'gallery') {

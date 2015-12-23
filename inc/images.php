@@ -32,11 +32,7 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 		$default = '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
 
 		if ( ! empty( $logo ) ) {
-			$cache_key = 'largo_sticky_header_logo_attachment_id';
-			if ( false === ( $attachment_id = get_transient( $cache_key ) ) ) {
-				$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
-				set_transient( $cache_key, $attachment_id );
-			}
+			$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
 			if (!empty($attachment_id))
 				echo wp_get_attachment_image( $attachment_id, $size );
 			else {

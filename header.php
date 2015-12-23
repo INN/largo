@@ -83,11 +83,7 @@
 
 	<div id="page" class="hfeed clearfix">
 
-		<?php
-			if ( SHOW_STICKY_NAV === TRUE ) {
-				get_template_part( 'partials/nav', 'sticky' );
-			}
-		?>
+		<?php get_template_part( 'partials/nav', 'sticky' ); ?>
 
 		<?php get_template_part('partials/header-ad-zone'); ?>
 
@@ -110,9 +106,8 @@
 		?>
 
 		<?php
-			if ( SHOW_MAIN_NAV === TRUE ) {
-				get_template_part( 'partials/nav', 'main' );
-			}
+			get_template_part( 'partials/nav', 'main' );
+
 			if ( SHOW_SECONDARY_NAV === TRUE ) {
 				get_template_part( 'partials/nav', 'secondary' );
 			}

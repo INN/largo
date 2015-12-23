@@ -5,6 +5,10 @@ inc/ajax-functions.php
 
    Enqueue script for "load more posts" functionality
 
+   :since: 0.5.3
+
+   :global: LARGO_DEBUG
+
 .. php:function:: largo_load_more_posts_data()
 
    Print an HTML script tag for a post navigation element and corresponding query

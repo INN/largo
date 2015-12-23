@@ -61,9 +61,6 @@
     font-size: @baseFontSize * 2;
     line-height: 1.2;
   }
-  .home #site-header {
-    display: none;
-  }
   .category-background .related-topics ul {
     line-height: 1.5;
   }
@@ -120,28 +117,14 @@
   #boilerplate p.back-to-top {
     padding-top: @baseline / 2;
   }
-  .byline .clean-read {
-  	display: none;
-  }
   #series-main #sidebar-left {
     display: none;
   }
   #series-main #content {
     margin-left: 0;
   }
-  .sticky-footer-holder .follow-author {
-    display: none;
-  }
-  .home .sticky-nav-holder.show {
-    visibility: visible;
-    opacity: 1;
-  }
-  .home #main-nav,
   .global-nav-bg {
     display: none;
-  }
-  .sticky-nav-container {
-    padding: 0 10px;
   }
   .navbar .btn-navbar {
     display: block;
@@ -168,22 +151,6 @@
 // UP TO LANDSCAPE PHONE
 // ---------------------
 @media (max-width: 480px) {
-  #header-search {
-    float:right;
-  }
-  #header-search input {
-    height: 23px;
-    padding: 2px 4px;
-    overflow: visible;
-    font-size: @baseFontSize;
-    line-height: 1;
-  }
-  #header-search button {
-    height: 29px;
-  }
-  #header-search .input-medium {
-    width: 110px;
-  }
   h1.branding,
   h2.branding {
     margin-top: 10px;
@@ -191,25 +158,13 @@
     text-align: center;
     span {
       font-size: @baseFontSize;
-	}
+    }
   }
   #footer-logos h6 a {
   	display: inline;
   	clear: both;
   	float: none;
   	text-align: left;
-  }
-  .sticky-footer-holder {
-    .share {
-      margin-right: 0;
-    }
-    .comments {
-      margin-right: 0;
-      float: right;
-    }
-    .follow {
-      display: none;
-    }
   }
 }
 

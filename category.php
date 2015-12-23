@@ -13,11 +13,16 @@ $title = single_cat_title('', false);
 $description = category_description();
 $rss_link = get_category_feed_link(get_queried_object_id());
 $posts_term = of_get_option('posts_term_plural', 'Stories');
+$queried_object = get_queried_object();
 ?>
 
 <div class="clearfix">
 	<header class="archive-background clearfix">
 		<a class="rss-link rss-subscribe-link" href="<?php echo $rss_link; ?>"><?php echo __( 'Subscribe', 'largo' ); ?> <i class="icon-rss"></i></a>
+		<?php
+			$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
+			largo_hero($post_id);
+		?>
 		<h1 class="page-title"><?php echo $title; ?></h1>
 		<div class="archive-description"><?php echo $description; ?></div>
 		<?php get_template_part('partials/archive', 'category-related'); ?>

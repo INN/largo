@@ -72,11 +72,8 @@ get_header();
 
 			<?php
 				while ( have_posts() ) : the_post();
-					if ( get_post_type( $post ) == 'argolinks' ) {
-						get_template_part( 'partials/content', 'argolinks' );
-					} else {
-						get_template_part( 'partials/content', 'search' );
-					}
+					$partial = largo_get_partial_by_post_type('search', get_post_type( $post ), 'search');
+					get_template_part( 'partials/content', $partial );
 				endwhile;
 				largo_content_nav( 'nav-below' );
 			} else {

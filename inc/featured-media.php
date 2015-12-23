@@ -60,7 +60,7 @@ function largo_get_hero($post = null,$classes = '') {
 	$ret = '';
 
 	$values = get_post_custom($post->ID);
-	
+
 	// If the box is checked to override the featured image display, obey it.
 	// EXCEPT if a youtube_url is added in the old way for the post. This is to respect
 	// behavior before v0.4,
@@ -97,6 +97,7 @@ function largo_get_hero($post = null,$classes = '') {
 	 */
 	$ret = apply_filters('largo_get_hero',$ret,$post,$classes);
 
+
 	return $ret;
 
 }
@@ -127,18 +128,18 @@ function largo_featured_image_hero($post = null, $classes = '') {
  */
 function largo_get_featured_image_hero($post = null, $classes = '') {
 
-	$post = get_post($post);
-	$featured_media = largo_get_featured_media($post->ID);
+	$the_post = get_post($post);
+	$featured_media = largo_get_featured_media($the_post->ID);
 
 	if( $featured_media['type'] != 'image' ) {
 		return;
 	}
 
-	$hero_class = largo_hero_class($post->ID, false);
+	$hero_class = largo_hero_class($the_post->ID, false);
 	$classes = "hero $hero_class $classes";
 
 	$thumb_meta = null;
-	if ($thumb_id = get_post_thumbnail_id($post->ID)) {
+	if ($thumb_id = get_post_thumbnail_id($the_post->ID)) {
 		$thumb_content = get_post($thumb_id);
 		$thumb_custom = get_post_custom($thumb_id);
 
@@ -152,7 +153,8 @@ function largo_get_featured_image_hero($post = null, $classes = '') {
 
 	$context = array(
 		'classes' => $classes,
-		'thumb_meta' => $thumb_meta
+		'thumb_meta' => $thumb_meta,
+		'the_post' => $the_post
 	);
 
 	ob_start();
@@ -188,19 +190,20 @@ function largo_featured_embed_hero($post = null, $classes = '') {
  */
 function largo_get_featured_embed_hero($post = null, $classes = '') {
 
-	$post = get_post($post);
-	$featured_media = largo_get_featured_media($post->ID);
+	$the_post = get_post($post);
+	$featured_media = largo_get_featured_media($the_post->ID);
 
 	if( !in_array($featured_media['type'], array('embed-code', 'video')) ) {
 		return;
 	}
 
-	$hero_class = largo_hero_class($post->ID, false);
+	$hero_class = largo_hero_class($the_post->ID, false);
 	$classes = "hero $hero_class $classes";
 
 	$context = array(
 		'classes' => $classes,
-		'featured_media' => $featured_media
+		'featured_media' => $featured_media,
+		'the_post' => $the_post
 	);
 
 	ob_start();
@@ -235,19 +238,20 @@ function largo_featured_gallery_hero($post = null, $classes = '') {
  */
 function largo_get_featured_gallery_hero( $post = null, $classes = '' ) {
 
-	$post = get_post($post);
-	$featured_media = largo_get_featured_media($post->ID);
+	$the_post = get_post($post);
+	$featured_media = largo_get_featured_media($the_post->ID);
 
 	if( $featured_media['type'] != 'gallery' ) {
 		return;
 	}
 
-	$hero_class = largo_hero_class($post->ID, false);
+	$hero_class = largo_hero_class($the_post->ID, false);
 	$classes = "hero $hero_class $classes";
 
 	$context = array(
 		'classes' => $classes,
-		'gallery_ids' => implode(',', $featured_media['gallery'])
+		'gallery_ids' => implode(',', $featured_media['gallery']),
+		'the_post' => $the_post
 	);
 
 	ob_start();
@@ -335,10 +339,14 @@ function largo_has_featured_media( $post = null ) {
  * @param array $hook The page that this function is being run on.
  */
 function largo_enqueue_featured_media_js($hook) {
-	if (!in_array($hook, array('edit.php', 'post-new.php', 'post.php')))
+	if (!in_array($hook, array('edit.php', 'edit-tags.php', 'post-new.php', 'post.php')))
 		return;
 
-	global $post;
+	global $post, $wp_query;
+
+	if ( in_array($hook, array('edit-tags.php')) && isset($_GET['action']) ) {
+		$post = get_post( largo_get_term_meta_post( $_GET['taxonomy'], $_GET['tag_ID'] ) );
+	}
 
 	$featured_image_display = get_post_meta($post->ID, 'featured-image-display', true);
 

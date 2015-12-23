@@ -367,6 +367,7 @@ add_shortcode('roster', 'largo_render_staff_list_shortcode');
  * @since 0.4
  */
 function more_profile_info($user) {
+	$show_email = get_user_meta( $user->ID, "show_email", true );
 	$hide = get_user_meta( $user->ID, "hide", true );
 	$emeritus = get_user_meta( $user->ID, "emeritus", true );
 	$honorary = get_user_meta( $user->ID, "honorary", true );
@@ -381,6 +382,16 @@ function more_profile_info($user) {
 				<span class="description">Please enter your job title.</span>
 			</td>
 		</tr>
+
+		<tr>
+			<th><label for="show_email">Show Email Address</label></th>
+			<td>
+				<input type="checkbox" name="show_email" id="show_email"
+					<?php if (esc_attr($show_email) == "on" || empty($show_email)) { ?>checked<?php } ?> />
+				<label for="show_email"><?php _e("Show email address publicly?"); ?></label><br />
+			</td>
+		</tr>
+
 		<?php if (current_user_can('edit_users')) { ?>
 		<tr>
 			<th><label for="staff_widget">Staff status</label></th>
@@ -414,8 +425,13 @@ add_action( 'edit_user_profile', 'more_profile_info' );
 function save_more_profile_info($user_id) {
 	if (!current_user_can('edit_user', $user_id ))
 		return false;
+	
+	if ( ! isset($_POST['show_email']) ) {
+		$_POST['show_email'] = 'off';
+	}
 
 	$values = wp_parse_args($_POST, array(
+		'show_email' => 'on',
 		'hide' => 'off',
 		'emeritus' => 'off',
 		'honorary' => 'off'
@@ -424,6 +440,7 @@ function save_more_profile_info($user_id) {
 	extract($values);
 
 	update_user_meta($user_id, 'job_title', $job_title);
+	update_user_meta($user_id, 'show_email', $show_email);
 	update_user_meta($user_id, 'hide', $hide);
 	update_user_meta($user_id, 'emeritus', $emeritus);
 	update_user_meta($user_id, 'honorary', $honorary);

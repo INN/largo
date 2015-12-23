@@ -33,12 +33,6 @@
 
 	<footer class="post-meta bottom-meta">
 
-	<?php if ( of_get_option( 'clean_read' ) === 'footer' ) : ?>
-		<div class="clean-read-container clearfix">
-			<a href="#" class="clean-read"><?php _e("View as 'Clean Read'", 'largo') ?></a>
-		</div>
-	<?php endif; ?>
-
 	</footer><!-- /.post-meta -->
 
 	<?php do_action('largo_after_post_footer'); ?>
