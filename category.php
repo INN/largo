@@ -22,7 +22,10 @@ $queried_object = get_queried_object();
 		<a class="rss-link rss-subscribe-link" href="<?php echo $rss_link; ?>"><?php echo __( 'Subscribe', 'largo' ); ?> <i class="icon-rss"></i></a>
 		<?php
 			$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
-			largo_hero($post_id);
+			$term_post_custom = get_post_meta($post_id, 'featured-image-display');
+			if ( empty( $term_post_custom ) ) {
+				largo_hero($post_id);
+			}
 		?>
 		<h1 class="page-title"><?php echo $title; ?></h1>
 		<div class="archive-description"><?php echo $description; ?></div>

@@ -66,7 +66,10 @@ $queried_object = get_queried_object();
 				}
 
 				$post_id = largo_get_term_meta_post( $queried_object->taxonomy, $queried_object->term_id );
-				largo_hero($post_id);
+				$term_post_custom = get_post_meta($post_id, 'featured-image-display');
+				if ( empty( $term_post_custom ) ) {
+					largo_hero($post_id);
+				}
 
 				if ( isset( $title ) ) {
 					echo '<h1 class="page-title">' . $title . '</h1>';
