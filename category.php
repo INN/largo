@@ -70,7 +70,10 @@ $queried_object = get_queried_object();
 		if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
-				//$shown_ids[] = get_the_ID();
+				// Do not add posts in the main river to $shown_ids; doing so will mess up Load More Posts
+				// See https://github.com/INN/Largo/pull/1150
+				// See https://github.com/INN/Largo/blob/master/inc/ajax-functions.php#L49-L52
+				// $shown_ids[] = get_the_ID();
 				$post_type = get_post_type();
 				$partial = largo_get_partial_by_post_type('archive', $post_type, 'archive');
 				get_template_part( 'partials/content', 'archive' );

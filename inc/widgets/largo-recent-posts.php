@@ -27,10 +27,15 @@ class largo_recent_posts_widget extends WP_Widget {
 	 *
 	 * @param array $args widget arguments.
 	 * @param array $instance saved values from databse.
+	 * @global $post
+	 * @global $shown_ids An array of post IDs already on the page, to avoid duplicating posts
+	 * @global $wp_query Used to get posts on the page not in $shown_ids, to avoid duplicating posts
 	 */
 	function widget( $args, $instance ) {
 
-		global $post, $shown_ids; // an array of post IDs already on a page so we can avoid duplicating posts;
+		global $post,
+			$wp_query, // grab this to copy posts in the main column
+			$shown_ids; // an array of post IDs already on a page so we can avoid duplicating posts;
 		
 		// Preserve global $post
 		$preserve = $post;
@@ -55,7 +60,16 @@ class largo_recent_posts_widget extends WP_Widget {
 			'post_status'	=> 'publish'
 		);
 
-		if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1 ) $query_args['post__not_in'] = $shown_ids;
+		if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1 ) {
+			// Create a temporary array and fill it with posts from $shown_ids and from the page's original query
+			// https://github.com/INN/Largo/pull/1150
+			$duplicates = (array) $shown_ids;
+			foreach($wp_query->posts as $post) {
+				$duplicates[] = $post->ID;
+			}
+			var_log($duplicates);
+			$query_args['post__not_in'] = $duplicates;
+		}
 		if ( $instance['cat'] != '' ) $query_args['cat'] = $instance['cat'];
 		if ( $instance['tag'] != '') $query_args['tag'] = $instance['tag'];
 		if ( $instance['author'] != '') $query_args['author'] = $instance['author'];
