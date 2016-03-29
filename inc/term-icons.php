@@ -22,31 +22,6 @@ class Largo_Term_Icons {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts') );
 		add_action( 'edit_terms', array( $this, 'edit_terms' ) );
 		add_action( 'create_term', array( $this, 'edit_terms' ) );
-		add_action( 'init', array( $this, 'register_taxonomy' ) );
-	}
-
-
-	/**
-	 * Register the taxonomy post-type
-	 */
-	function register_taxonomy() {
-		register_taxonomy( 'post-type', array( 'post' ), array(
-			'label' => __( 'Post Types', 'largo' ),
-			'labels' => array(
-				'name' => __( 'Post Types', 'largo' ),
-				'singular_name' => __( 'Post Type', 'largo' ),
-				'all_items' => __( 'All Post Types', 'largo' ),
-				'edit_item' => __( 'Edit Post Type', 'largo' ),
-				'update_item' => __( 'Update Post Type', 'largo' ),
-				'view_item' => __( 'View Post Type', 'largo' ),
-				'add_new_item' => __( 'Add New Post Type', 'largo' ),
-				'new_item_name' => __( 'New Post Type Name', 'largo' ),
-				'search_items' => __( 'Search Post Type'),
-			),
-			'public' => true,
-			'show_admin_column' => true,
-			'hierarchical' => true,
-		) );
 	}
 
 	/**

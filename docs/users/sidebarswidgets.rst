@@ -170,15 +170,29 @@ Typically used in the Article Bottom widget area, this will display a list of ca
 Largo Taxonomy List
 -------------------
 
-List all of the terms in a given taxonomy with links to their archive pages. This is most commonly used to generate a list of series/projects with links to their project pages. To use this widget begin by entering in the Taxonomy field the slug of the taxonomy you want to use. For example, the slug for Categories is "category"; the slug for Tags is "post_tag"; the slug for Post Prominence is "prominence"; and the slug for Series is "series". You must enter one of these slugs for the widget to function correctly. 
+List all of the terms in a given taxonomy with links to their archive pages. This widget is most commonly used to generate a list of series/projects with links to their project pages. An explanation of the options:
 
-By default the widget will pull in *all* posts in the taxonomy, which could be a very large number of posts. Use the Count field to limit the number of posts displayed. You can also limit the display to specific terms in the taxonomy. To do this you must find the term's ID by visiting the list of terms in the taxonomy (under Posts in the dashboard), then hover over or click on the term and find the tag_ID number in the URL for that term. 
+	**Title**: This is what the widget will be named. Leave blank to have no title displayed.
 
-For example, in this URL for the term "Bacon" the term ID is 482:
+	**Taxonomy**: This dropdown allows you to configure the taxonomy from which terms will be drawn. Example taxonomies are Category, Tag, Post Prominence, and Series. This option defaults to Series.
 
-	``/wp-admin/edit-tags.php?action=edit&taxonomy=post_tag&tag_ID=482&post_type=post``
+	**Sort order**:
+		- Alphabetically: Terms will be sorted in alphabetical order by their name. Terms beginning with punctuation will come after terms beginning with letters. Terms beginning with numbers will come before terms beginning with letters.
+		- Most Recent: Terms created more recently will appear first. Term sort order is determined by the term's ID, and newer terms always have higher ID values.
 
-After setting the taxonomy slug, count, and optionally limiting by term ID, you choose to display thumbnails and a headline of the most recent post in the taxonomy, or display the taxonomy list as as dropdown menu. The Title of the widget defaults to Categories, but you can override this with a title of your choice.
+	**Count**: By default the widget will pull in 5 posts from the taxonomy. Use the Count field to increase or decrease the number of posts displayed. The minimum number of terms displayed is 1. In theory you can display all terms in a taxonomy by setting the count to the number of posts in the taxonomy, but in practice you should not set the number higher than 10. Using a large count number in conjunction with the thumbnail or headline options will negatively affect your site's performance, and may cause your server to run out of memory.
+
+	**Exclude**: Entering a comma-separated list of term IDs will exclude those terms from displayed results. To do this, go to "Posts" in the dashboard. Under "Posts" will be a list of taxonomies. Click on the desired taxonomy entry. A list of taxonomy terms will appear. Find your term in the list, then hover over or click on the term and find the tag_ID number in the URL for that term.
+
+	For example, in this URL for the term "Bacon" the term ID is 482:
+
+		``/wp-admin/edit-tags.php?action=edit&taxonomy=post_tag&tag_ID=482&post_type=post``
+
+	**Display as dropdown**: This option causes the term results to be displayed as a plain dropdown. No thumbnails or recent posts will be displayed.
+
+	**Display thumbnails**: Check this option if you want to display thumbnails next to the term link. If the taxonomy is "Series" and a series landing page exists for the series term, the series landing page's featured image will be displayed if it is available. In all other cases, the featured media thumbnail image from the most-recent post in the term will be displayed.
+
+	**Display headline**: If checked, the headline of the most-recent post in the taxonomy term will be displayed.
 
 Largo Twitter Widget
 --------------------

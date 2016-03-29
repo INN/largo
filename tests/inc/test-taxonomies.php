@@ -45,6 +45,14 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_custom_taxonomies(){
+		// unregister the taxonomies using register_taxonomy('slug', array());
+		// largo_custom_taxonomies();
+		// Test that taxonomy_exists('prominence')
+		// Test that taxonomy_exists('post-type')
+		// Test that post-type's 'public' property is equal to of_get_option('post_types_enabled')
+		// Test that prominence terms are registered
+		// Test that taxonomy_exists('series')
+
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
