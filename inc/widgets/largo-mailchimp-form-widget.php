@@ -63,6 +63,15 @@ class largo_mailchimp_signup_widget extends WP_Widget {
 			</form>
 		<?php
 		$output = ob_get_clean();
+
+		/**
+		 * Filter the HTML output of the Largo Mailchimp Widget
+		 *
+		 * @filter
+		 * @param String $output The HTML of the Largo Mailchimp Signup Widget, containing in its entirety the <form> element and all contents.
+		 * @link https://github.com/INN/Largo/issues/1154
+		 * @since Largo 0.5.5
+		 */
 		echo apply_filters( 'largo_mailchimp_signup_output', $output );
 		echo $args['after_widget'];
 	}

@@ -187,6 +187,21 @@ filter: **largo_post_social_more_social_links**
         }
         add_filter('largo_post_social_more_social_links', 'add_linkedin');
 
+filter: **largo_mailchimp_signup_output**
+    *args: String $output*
+
+    Called in the Largo Mailchimp Signup widget to allow modifications to the ``<form>`` element output by that widget.
+
+    Passed is a string containing the form element and its children, which will look something like this by default: ::
+
+       <form action="The form's URL" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+           Any call-to-action text given by the user
+           <input type="email" value="email address" name="EMAIL" class="required email" id="mce-EMAIL">
+           Any additional HTML given by the user
+           <div style="position: absolute; left: -5000px;"><input type="text" name="The form's anti-bot field ID" tabindex="-1" value=""></div>
+           <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn">
+       </form>
+
 
 
 Template Hooks
