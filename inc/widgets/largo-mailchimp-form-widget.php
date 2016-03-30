@@ -54,15 +54,13 @@ class largo_mailchimp_signup_widget extends WP_Widget {
 		if ( ! empty( $title ) ) {
 			echo $args['before_title'] . $title . $args['after_title'];
 		} ?>
-			<div class="textwidget">
-				<form action="<?php echo $form_url; ?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-					<?php echo $text; ?>
-					<input type="email" value="email address" name="EMAIL" class="required email" id="mce-EMAIL">
-					<?php echo $forms; ?>
-					<div style="position: absolute; left: -5000px;"><input type="text" name="<?php echo $anti_bot; ?>" tabindex="-1" value=""></div>
-					<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn">
-				</form>
-			</div>
+			<form action="<?php echo $form_url; ?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+				<?php echo $text; ?>
+				<input type="email" value="email address" name="EMAIL" class="required email" id="mce-EMAIL">
+				<?php echo $forms; ?>
+				<div style="position: absolute; left: -5000px;"><input type="text" name="<?php echo $anti_bot; ?>" tabindex="-1" value=""></div>
+				<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn">
+			</form>
 		<?php
 		$output = ob_get_clean();
 		echo apply_filters( 'largo_mailchimp_signup_output', $output );
