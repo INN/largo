@@ -21,25 +21,26 @@ function largo_widgets() {
 		unregister_widget( $widget );
 	}
 	$register = array(
+		'largo_INN_RSS_widget' => '/inc/widgets/largo-inn-rss.php',
 		'largo_about_widget' => '/inc/widgets/largo-about.php',
+		'largo_author_widget' => '/inc/widgets/largo-author-bio.php',
 		'largo_donate_widget' => '/inc/widgets/largo-donate.php',
+		'largo_explore_related_widget' => '/inc/widgets/largo-explore-related.php',
 		'largo_facebook_widget' => '/inc/widgets/largo-facebook.php',
+		'largo_featured_widget' => '/inc/widgets/largo-featured.php',
 		'largo_follow_widget' => '/inc/widgets/largo-follow.php',
 		'largo_footer_featured_widget' => '/inc/widgets/largo-footer-featured.php',
 		'largo_image_widget' => '/inc/widgets/largo-image-widget.php',
-		'largo_INN_RSS_widget' => '/inc/widgets/largo-inn-rss.php',
+		'largo_mailchimp_signup_widget' => '/inc/widgets/largo-mailchimp-form-widget.php',
+		'largo_prev_next_post_links_widget' => '/inc/widgets/largo-prev-next-post-links.php',
 		'largo_recent_comments_widget' => '/inc/widgets/largo-recent-comments.php',
 		'largo_recent_posts_widget' => '/inc/widgets/largo-recent-posts.php',
+		'largo_related_posts_widget' => '/inc/widgets/largo-related-posts.php',
 		'largo_sidebar_featured_widget' => '/inc/widgets/largo-sidebar-featured.php',
+		'largo_staff_widget' => '/inc/widgets/largo-staff.php',
+		'largo_tag_list_widget' => '/inc/widgets/largo-tag-list.php',
 		'largo_taxonomy_list_widget' => '/inc/widgets/largo-taxonomy-list.php',
 		'largo_twitter_widget' => '/inc/widgets/largo-twitter.php',
-		'largo_related_posts_widget' => '/inc/widgets/largo-related-posts.php',
-		'largo_explore_related_widget' => '/inc/widgets/largo-explore-related.php',
-		'largo_author_widget' => '/inc/widgets/largo-author-bio.php',
-		'largo_featured_widget' => '/inc/widgets/largo-featured.php',
-		'largo_tag_list_widget' => '/inc/widgets/largo-tag-list.php',
-		'largo_prev_next_post_links_widget' => '/inc/widgets/largo-prev-next-post-links.php',
-		'largo_staff_widget' => '/inc/widgets/largo-staff.php'
 	);
 
 	// If series are enabled
