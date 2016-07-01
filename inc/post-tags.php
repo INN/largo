@@ -84,64 +84,41 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 /**
  * Outputs custom byline and link (if set), otherwise outputs author link and post date
  *
- * @param $echo bool Echo the string or return it (default: echo)
- * @param $exclude_date bool Whether to exclude the date from byline (default: false)
- * @param $post object or int The post object or ID to get the byline for. Defaults to current post.
- * @return string Byline as formatted html
+ * @param Boolean $echo Echo the string or return it (default: echo)
+ * @param Boolean $exclude_date Whether to exclude the date from byline (default: false)
+ * @param WP_Post|Integer $post The post object or ID to get the byline for. Defaults to current post.
+ * @return String Byline as formatted html
  * @since 0.3
+ * @uses largo_byline_coauthors
+ * @uses largo_byline_normal_or_custom
  */
 if ( ! function_exists( 'largo_byline' ) ) {
 	function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
+
+		// Get the post ID
 		if (!empty($post)) {
 			if (is_object($post))
 				$post_id = $post->ID;
 			else if (is_numeric($post))
 				$post_id = $post;
-		} else
+		} else {
 			$post_id = get_the_ID();
+		}
 
 		$values = get_post_custom( $post_id );
 
-		// If Co-Authors Plus is enabled and there is not a custom byline
 		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
-			$coauthors = get_coauthors( $post_id );
-			foreach( $coauthors as $author ) {
-				$byline_text = $author->display_name;
-				$show_job_titles = of_get_option('show_job_titles');
-				if ( $org = $author->organization )
-					$byline_text .= ' (' . $org . ')';
-
-				$byline_temp = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
-				if ( $show_job_titles && $job = $author->job_title ) {
-					// Use parentheses in case of multiple guest authorss. Comma separators would be nonsensical: Firstname lastname, Job Title, Secondname Thirdname, and Fourthname Middle Fifthname
-					$byline_temp .= ' <span class="job-title"><span class="paren-open">(</span>' . $job . '<span class="paren-close">)</span></span>';
-				}
-
-				$out[] = $byline_temp;
-
-			}
-
-			if ( count($out) > 1 ) {
-				end($out);
-				$key = key($out);
-				reset($out);
-				$authors = implode( ', ', array_slice( $out, 0, -1 ) );
-				$authors .= ' <span class="and">' . __( 'and', 'largo' ) . '</span> ' . $out[$key];
-			} else {
-				$authors = $out[0];
-			}
-
-		// If Co-Authors Plus is not enabled or if there is a custom byline
+			// If Co-Authors Plus is enabled and there is not a custom byline
+			$authors = largo_byline_coauthors( $post_id );
 		} else {
-			$authors = largo_author_link( false, $post_id );
-			$author_id = get_post_meta( $post_id, 'post_author', true );
-			$show_job_titles = of_get_option('show_job_titles');
-			if ( !isset( $values['largo_byline_text'] ) && $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
-				$authors  .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
-			}
+			// If Co-Authors Plus is not enabled or if there is a custom byline
+			$authors = largo_byline_normal_or_custom( $post_id );
 		}
 
+		// Generate the HTML for the author portion of the byline
 		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
+
+		// Add the date if it is not excluded
 		if ( ! $exclude_date ) {
 			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
 		}
@@ -155,7 +132,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		 */
 		$output = apply_filters( 'largo_byline', $output );
 
-
+		// Add the edit link if the current user can edit the post
 		if ( current_user_can( 'edit_post', $post_id ) ) {
 			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 		}
@@ -168,6 +145,77 @@ if ( ! function_exists( 'largo_byline' ) ) {
 	}
 }
 
+/**
+ * function to output the coauthors for a post
+ *
+ * If this function is called and Co-Authors Plus is not active (as determined by the presence of `get_coauthors()`), then it will fallback to `largo_byline_regular_user()`
+ *
+ * @uses get_coauthors
+ * @param Integer $post_id The ID of the post
+ * @return String HTML of the author links
+ * @since 0.5.5
+ */
+if ( ! function_exists( 'largo_byline_coauthors' ) ) {
+	function largo_byline_coauthors( $post_id ) {
+		if ( ! function_exists( 'get_coauthors' ) ) {
+			error_log( 'largo_byline_coauthors was called but Co Authors Plus does not appear to be installed. Using largo_byline_normal_or_custom instead' );
+			return largo_byline_normal_or_custom( $post_id );
+		}
+
+		$coauthors = get_coauthors( $post_id );
+		foreach( $coauthors as $author ) {
+			$byline_text = $author->display_name;
+			$show_job_titles = of_get_option('show_job_titles');
+			if ( $org = $author->organization )
+				$byline_text .= ' (' . $org . ')';
+
+			$byline_temp = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+			if ( $show_job_titles && $job = $author->job_title ) {
+				// Use parentheses in case of multiple guest authorss. Comma separators would be nonsensical: Firstname lastname, Job Title, Secondname Thirdname, and Fourthname Middle Fifthname
+				$byline_temp .= ' <span class="job-title"><span class="paren-open">(</span>' . $job . '<span class="paren-close">)</span></span>';
+			}
+
+			$out[] = $byline_temp;
+		}
+
+		// If there are multiple coauthors, join them with commas and 'and'
+		if ( count($out) > 1 ) {
+			end($out);
+			$key = key($out);
+			reset($out);
+			$authors = implode( ', ', array_slice( $out, 0, -1 ) );
+			$authors .= ' <span class="and">' . __( 'and', 'largo' ) . '</span> ' . $out[$key];
+		} else {
+			$authors = $out[0];
+		}
+
+		return $authors;
+	}
+}
+
+/**
+ * Return largo_author_link for the post, and if applicable the post author's job title
+ *
+ * @param Integer $post_id The id of the post
+ * @return String HTML for the author, possibly including the author's link and job description
+ * @since 0.5.5
+ */
+if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
+	function largo_byline_normal_or_custom( $post_id ) {
+		$values = get_post_custom( $post_id );
+
+		$authors = largo_author_link( false, $post_id );
+
+		// add the author's job title
+		$author_id = get_post_meta( $post_id, 'post_author', true );
+		$show_job_titles = of_get_option('show_job_titles');
+		if ( !isset( $values['largo_byline_text'] ) && $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
+			$authors  .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
+		}
+
+		return $authors;
+	}
+}
 /**
  * Outputs facebook, twitter and print utility links on article pages
  *
