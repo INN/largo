@@ -647,3 +647,31 @@ function largo_featured_media_post_classes($classes) {
 	return $classes;
 }
 add_filter('post_class', 'largo_featured_media_post_classes');
+
+/**
+ * Determines what type of hero image/video a single post should use
+ * and returns a class that gets added to its container div
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_hero_class' ) ) {
+	function largo_hero_class( $post_id, $echo = TRUE ) {
+		$hero_class = "is-empty";
+		$featured_media = (largo_has_featured_media($post_id))? largo_get_featured_media($post_id) : array();
+		$type = (isset($featured_media['type']))? $featured_media['type'] : false;
+
+		if (get_post_meta($post_id, 'youtube_url', true) || $type == 'video')
+			$hero_class = 'is-video';
+		else if ($type == 'gallery')
+			$hero_class = 'is-gallery';
+		else if ($type == 'embed-code')
+			$hero_class = 'is-embed';
+		else if (has_post_thumbnail($post_id) || $type == 'image')
+			$hero_class = 'is-image';
+
+		if ($echo)
+			echo $hero_class;
+		else
+			return $hero_class;
+	}
+}

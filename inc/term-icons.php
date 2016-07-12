@@ -222,3 +222,38 @@ class Largo_Term_Icons {
 }
 
 $largo['term-icons'] = new Largo_Term_Icons();
+
+/**
+ * Post format icon
+ * @since 0.4
+ */
+if ( ! function_exists( 'post_type_icon' ) ) {
+	function post_type_icon( $options = array() ) {
+
+		if ( ! taxonomy_exists('post-type') ) return false;
+
+		$defaults = array(
+			'echo' => TRUE,
+			'id' => get_the_ID()
+		);
+		$args = wp_parse_args( $options, $defaults );
+		$terms = wp_get_post_terms( $args['id'], 'post-type' );
+		if ( ! count($terms) ) return false;
+		//try to get a child term if there is one
+		$the_term = 0;
+		foreach ( $terms as $term ) {
+			if ( $term->parent ) {
+				$the_term = $term;
+				break;
+			}
+		}
+		//just grab the first one otherwise
+		if ( ! $the_term ) $the_term = $terms[0];
+
+		//get the icon value
+		if ( ! $args['echo'] ) ob_start();
+		$icons = new Largo_Term_Icons();
+		$icons->the_icon( $the_term );
+		if ( ! $args['echo'] ) return ob_get_clean();
+	}
+}

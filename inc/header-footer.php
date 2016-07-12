@@ -191,6 +191,30 @@ if ( ! function_exists ( 'largo_seo' ) ) {
 add_action( 'wp_head', 'largo_seo' );
 
 /**
+ * Schema.org article metadata we include in the header of each single post
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_post_metadata' ) ) {
+	function largo_post_metadata( $post_id, $echo = TRUE ) {
+		$out = '<meta itemprop="description" content="' . strip_tags( largo_excerpt( get_post( $post_id ), 5, false, '', false ) ) . '" />' . "\n";
+		$out .= '<meta itemprop="datePublished" content="' . get_the_date( 'c', $post_id ) . '" />' . "\n";
+		$out .= '<meta itemprop="dateModified" content="' . get_the_modified_date( 'c', $post_id ) . '" />' . "\n";
+
+		if ( has_post_thumbnail( $post_id ) ) {
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
+			$out .= '<meta itemprop="image" content="' . $image[0] . '" />';
+		}
+
+		if ( $echo ) {
+			echo $out;
+		} else {
+			return $out;
+		}
+	}
+}
+
+/**
  * Remove extraneous <head> elements
  *
  * @since 0.3
