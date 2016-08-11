@@ -270,13 +270,6 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_deprecated_footer_widget();
 	}
 
-	function test_largo_deprecated_sidebar_widget() {
-		// prints a nag
-		// uses __
-		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
-		largo_deprecated_sidebar_widget();
-	}
-
 	function test_largo_transition_nav_menus() {
 		// Test the function's ability to create the Main Navigation nav menu
 		$this->assertFalse(wp_get_nav_menu_object('Main Navigation'));
@@ -326,11 +319,16 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		);
 		$term_descriptions = array('Term Description 9');
 
+		foreach ($this->term_ids as $term) {
+			var_log( get_term_by('id', $term, 'prominence') );
+		}
+
 		$return = largo_update_prominence_term_description_single($update, $term_descriptions);
 		$this->assertTrue(is_array($return));
 
-		$term9 = get_term_by('slug', 'term-9', 'prominence', 'ARRAY_A');
-		$this->assertEquals('Term 9 From Outer Space', $term9['description']);
+		$term9 = get_term_by('slug', 'term-9', 'prominence');
+		var_log($term9);
+		$this->assertEquals('Term 9 From Outer Space', $term9->description);
 	}
 
 	function test_largo_update_prominence_term_descriptions() {

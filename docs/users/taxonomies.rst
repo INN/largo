@@ -92,9 +92,9 @@ Default Terms (added by Largo when the theme is activated):
 - **Top Story:** If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage
 - **Featured in Category:** This will allow you to designate a story to appear more prominently on category archive pages.
 - **Featured in Series:** Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.
-- **Footer Featured Widget:** If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.
+- **Footer Featured:** If you are using the Recent Posts widget in the footer, we recommend configuring it to show posts in this term.
 - **Homepage Featured:** If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.
-- **Sidebar Featured Widget:** If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.
+- **Sidebar Featured:** If you are using the Recent Posts widget in the footer, we recommend configuring it to show posts in this term.
 
 It is rare that you will add additional terms to this taxonomy as they are typically added by your theme but should you need to they can be added from the Posts > Post Prominence menu.
 

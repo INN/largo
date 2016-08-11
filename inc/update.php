@@ -515,12 +515,27 @@ function largo_update_custom_less_variables() {
 
 /**
  * Checks for use of deprecated widgets and posts an alert
+ *
+ * Widgets that were checked in the past, but have been removed from the check after their files were removed form the theme:
+ * - 'largo-footer-featured'
+ * - 'largo-sidebar-featured'
+ * - 'largo-featured'
+ * @since 0.4
  */
 function largo_check_deprecated_widgets() {
 
+	/*
+	 * The format of this array is:
+	 * array(
+	 *     'widget-css-class' => 'admin_notice_function',
+	 *     'largo-footer-featured' => 'largo_deprecated_footer_widget',
+	 * )
+	 *
+	 * In the above example, the presence of 'widget-css-class' will cause 'admin_notice_function' to be hooked on 'admin_notices'.
+	 * The function 'admin_notice_function' should output a div.update-nag.
+	 * An example of such a function is largo_deprecated_footer_widget, which can be found in inc/update.php in Largo v0.5.4
+	 */
 	$deprecated = array(
-		'largo-footer-featured' => 'largo_deprecated_footer_widget',
-		'largo-sidebar-featured' => 'largo_deprecated_sidebar_widget'
 	);
 
 	$widgets = get_option( 'sidebars_widgets ');
@@ -544,13 +559,6 @@ function largo_check_deprecated_widgets() {
 function largo_deprecated_footer_widget() { ?>
 	<div class="update-nag"><p>
 	<?php printf( __('You are using the <strong>Largo Footer Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
-	</p></div>
-	<?php
-}
-
-function largo_deprecated_sidebar_widget() { ?>
-	<div class="update-nag"><p>
-	<?php printf( __( 'You are using the <strong>Largo Sidebar Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
 	</p></div>
 	<?php
 }
@@ -643,7 +651,7 @@ function largo_replace_deprecated_widgets() {
 						/*
 						 * So many variables ...
 						 *
-						 * $local_all_widgets: Associative array of $region a sidebar or widget area => $local_current_sidebar array of widget slugs in regione
+						 * $local_all_widgets: Associative array of $region a sidebar or widget area => $local_current_sidebar array of widget slugs in region
 						 * $local_current_sidebar: Array of the widgets in the current sidebar/widget area/$region
 						 * $current_widget_slug: the old widget's ID: slug-widget-2
 						 * $old_widget_name: The slug of the widget that needs to be updated, from $upgrades: slug

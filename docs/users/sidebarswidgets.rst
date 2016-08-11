@@ -214,8 +214,8 @@ For more on how this works see the `Link Roundups widget documentation <https://
 Widgets Deprecated in 0.4x
 =========================
 
-- **Largo Footer Featured Posts** - Works similarly to the Featured Widget above but limited to the "footer featured" term in the prominence taxonomy.
-- **Largo Sidebar Featured Posts** - Works similarly to the Featured Widget above but limited to the "footer featured" term in the prominence taxonomy.
+- **Largo Footer Featured Posts** - Works similarly to the Featured Widget but limited to the "footer featured" term in the prominence taxonomy.
+- **Largo Sidebar Featured Posts** - Works similarly to the Featured Widget but limited to the "footer featured" term in the prominence taxonomy.
 
 Widgets Deprecated in 0.5x
 =========================
