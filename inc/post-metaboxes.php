@@ -62,17 +62,7 @@ add_filter( 'default_hidden_meta_boxes', 'largo_change_default_hidden_metaboxes'
  * @since 0.4
  */
 
-// Related posts controls
-largo_add_meta_box(
-	'largo_additional_options',
-	__( 'Additional Options', 'largo' ),
-	'largo_custom_related_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
-	'post',
-	'side',
-	'core'
-);
-
-// Related posts controls
+// Byline controls
 largo_add_meta_box(
 	'largo_byline_meta',
 	__( 'Custom Byline Options', 'largo' ),
@@ -307,7 +297,8 @@ function largo_top_tag_display() {
 	echo '<option value="none"' . selected( 'none' , $top_term, FALSE ) . ">None</option>";
 	echo '</select>';
 }
-largo_add_meta_content('largo_top_tag_display', 'largo_additional_options');
+
+add_action( 'largo_related_posts_metabox', 'largo_top_tag_display', 10, 2 ); 
 largo_register_meta_input( 'top_term', 'sanitize_key' );
 
 /**
