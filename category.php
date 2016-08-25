@@ -69,13 +69,20 @@ $queried_object = get_queried_object();
 	<?php 
 		do_action( 'largo_before_category_river' );
 		if ( have_posts() ) {
+			$counter = 1;
 			while ( have_posts() ) {
 				the_post();
 				$post_type = get_post_type();
-				$partial = largo_get_partial_by_post_type('archive', $post_type, 'archive');
+				$partial = largo_get_partial_by_post_type( 'archive', $post_type, 'archive' );
 				get_template_part( 'partials/content', $partial );
+				do_action( 'largo_loop_after_post_x', $counter, $context = 'archive' );
+				$counter++;
 			}
 			largo_content_nav( 'nav-below' );
+		} elseif ( count($featured_posts) > 0 ) {
+			// do nothing
+			// We have n > 1 posts in the featured header
+			// It's not appropriate to display partials/content-not-found here.
 		} else {
 			get_template_part( 'partials/content', 'not-found' );
 		}

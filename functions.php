@@ -419,6 +419,9 @@ if ( ! function_exists( 'largo_setup' ) ) {
 
 		// Add support for localization (this is a work in progress)
 		load_theme_textdomain('largo', get_template_directory() . '/lang');
+		
+		//Add support for <title> tags
+		add_theme_support( 'title-tag' );
 
 	}
 }

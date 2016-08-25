@@ -271,6 +271,29 @@ Here is the current list of hooks available in Largo (available as of v.0.4):
 
  - **largo_header_before_largo_header** - immediately before ``largo_header()`` is output
  - **largo_header_after_largo_header** - immediately after ``largo_header()`` is output. By default, ``largo_header_widget_sidebar`` is hooked here.
+ 
+**for all lists of posts**
+
+-  **largo_loop_after_post_x** - fires after every post in a river of posts on the homepage or archive pages. This is helpful if you want to insert interstitial content in a river of posts (typically things like newsletter subscription widgets, donation messages, etc.). 
+
+This action takes a couple of arguments that may come in handy:
+
+	do_action( 'largo_loop_after_post_x', $counter, $context );
+	
+	- **$counter** tracks the number of posts in any given loop
+	- **$context** is presently either 'archive' or 'home' to give you flexibility to insert different interstitials for different page types. 
+	
+an example of this in use might look like:
+
+	function mytheme_interstitial( $counter, $context ) {
+		if ( $counter === 2  && $context === 'home' ) {
+			// do homepage stuff
+		} elseif ( $counter === 2 && $context === 'archive' ) {
+			// do something different in the same spot on archive pages
+		}
+	}
+	add_action( 'largo_loop_after_post_x', 'mytheme_interstitial', 10, 2 );	
+	
 
 **home.php**
 
@@ -322,6 +345,7 @@ These actions are run on all homepage templates, including the Legacy Three Colu
 
  - **largo_category_after_description_in_header** - between the ``div.archive-description`` and before ``get_template_part('partials/archive', 'category-related');``.
  - **largo_before_category_river** - just before the river of stories at the bottom of the category archive page (for adding a header to this column, for example)
+ - **largo_loop_after_post_x** - runs after every post, with arguments ``$counter`` and ``context`` describing which post it's running after and what the context is. (In categories, the context is ``archive``.)
  - **largo_after_category_river** - immediately after the river of stories at the bottom of the category archive page, after the Load More Posts button (for adding a footer to this column, for example.)
 
 **search.php**

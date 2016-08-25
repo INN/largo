@@ -321,20 +321,10 @@ add_action( 'admin_enqueue_scripts', 'largo_top_terms_js' );
  *
  */
 function largo_prominence_meta_box($post, $args) {
-	$largoProminenceTerms = $args['args'];
-
-	$terms = get_terms('prominence', array(
+	$termList = get_terms('prominence', array(
 		'hide_empty' => false,
 		'fields' => 'all'
 	));
-
-	$slugs = array_map(function($arg) { return $arg['slug']; }, $largoProminenceTerms);
-
-	$termList = array();
-	foreach ($terms as $k => $v) {
-		if (in_array($v->slug, $slugs))
-			$termList[] = $v;
-	}
 
 	$tax = get_taxonomy('prominence');
 	$args = array(

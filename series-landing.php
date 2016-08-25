@@ -129,8 +129,11 @@ if ( isset( $wp_query->query_vars['term'] )
 	}
 
 	$series_query = new WP_Query($args);
+	$counter = 1;
 	while ( $series_query->have_posts() ) : $series_query->the_post();
 		get_template_part( 'partials/content', 'series' );
+		do_action( 'largo_loop_after_post_x', $counter, $context = 'archive' );
+		$counter++;
 	endwhile;
 	wp_reset_postdata();
 
