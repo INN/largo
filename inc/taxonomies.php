@@ -367,6 +367,7 @@ add_action('pre_get_posts', 'largo_category_archive_posts', 15);
  *
  * @param string $category_name the category to retrieve featured posts for.
  * @param integer $number total number of posts to return, backfilling with regular posts as necessary.
+ * @see largo_category_archive_posts
  * @since 0.5
  */
 function largo_get_featured_posts_in_category($category_name, $number=5) {
