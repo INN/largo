@@ -1,4 +1,5 @@
 <?php
+	
 /**
  * Returns a Facebook username or ID from the URL
  * 
@@ -7,12 +8,12 @@
  * @since   0.4
  */
 function largo_fb_url_to_username( $url )  {
-	$urlParts = explode("/", $url);
-	if ( end($urlParts) == '' ) {
+	$urlParts = explode( "/", $url );
+	if ( end( $urlParts ) == '' ) {
 		// URL has a trailing slash
-		$urlParts = array_slice($urlParts, 0 , -1);
+		$urlParts = array_slice( $urlParts, 0 , -1 );
 	}
-	$username = end($urlParts);
+	$username = end( $urlParts );
 	if ( preg_match( "/profile.php/", $username ) ) {
 		// a profile id
 		preg_match( "/id=([0-9]+)/", $username, $matches );
@@ -20,7 +21,7 @@ function largo_fb_url_to_username( $url )  {
 	} else {
 		// hopefully there's a username
 		preg_match( "/[^\?&#]+/", $username, $matches);
-		if (isset($matches[0])){
+		if ( isset( $matches[0] ) ){
 			$username = $matches[0];
 		}
 	}
@@ -41,10 +42,10 @@ function largo_fb_url_to_username( $url )  {
  */
 function largo_fb_user_is_followable( $username ) {
 	// syntax for this iframe taken from https://developers.facebook.com/docs/plugins/follow-button/
-	$get = wp_remote_get( "https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F" . $username . "&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true");
+	$get = wp_remote_get( 'https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F' . $username . '&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true' );
 	if (! is_wp_error( $get ) ) {
 		$response = $get['body'];
-		if ( strpos($response, 'table') !== false ) {
+		if ( strpos( $response, 'table' ) !== false ) {
 			// can follow
 			return true;
 		} else {
@@ -69,17 +70,17 @@ function largo_fb_user_is_followable( $username ) {
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
  */
-function clean_user_fb_username($user_id) {
+function clean_user_fb_username( $user_id ) {
 
-	if ( current_user_can('edit_user', $user_id) ) {
+	if ( current_user_can( 'edit_user', $user_id ) ) {
 		$fb = largo_fb_url_to_username( $_POST['fb'] );
 		if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb ) ) {
 			// it's not a valid Facebook username, because it uses an invalid character
 			$fb = "";
 		}
-		update_user_meta($user_id, 'fb', $fb);
-		if ( get_user_meta($user_id, 'fb', true) != $fb ) {
-			wp_die(__('An error occurred.'));
+		update_user_meta( $user_id, 'fb', $fb );
+		if ( get_user_meta( $user_id, 'fb', true) != $fb ) {
+			wp_die( __( 'An error occurred.', 'largo' ) );
 		}
 		$_POST['fb'] = $fb;
 	}
@@ -126,11 +127,11 @@ function largo_twitter_url_to_username( $url ) {
 		// URL has a trailing slash
 		$urlParts = array_slice($urlParts, 0 , -1);
 	}
-	$username = preg_replace( "/@/", '', end($urlParts) );
+	$username = preg_replace( "/@/", '', end( $urlParts ) );
 	// strip the ?&# URL parameters if they're present
 	// this will let through all other characters
-	preg_match( "/[^\?&#]+/", $username, $matches);
-	if (isset($matches[0])){
+	preg_match( "/[^\?&#]+/", $username, $matches );
+	if ( isset( $matches[0] ) ){
 		$username = $matches[0];
 	}
 	return $username;
@@ -151,17 +152,17 @@ function largo_twitter_url_to_username( $url ) {
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
  */
-function clean_user_twitter_username($user_id) {
+function clean_user_twitter_username( $user_id ) {
 
-	if ( current_user_can('edit_user', $user_id) ) {
+	if ( current_user_can( 'edit_user', $user_id ) ) {
 		$twitter = largo_twitter_url_to_username( $_POST['twitter'] );
 		if ( preg_match( '/[^a-zA-Z0-9_]/', $twitter ) ) {
 			// it's not a valid twitter username, because it uses an invalid character
 			$twitter = "";
 		}
-		update_user_meta($user_id, 'twitter_link', $twitter);
-		if ( get_user_meta($user_id, 'twitter_link', true) != $twitter ) {
-			wp_die(__('An error occurred.'));
+		update_user_meta( $user_id, 'twitter_link', $twitter );
+		if ( get_user_meta( $user_id, 'twitter_link', true ) != $twitter ) {
+			wp_die( __( 'An error occurred.', 'largo' ) );
 		}
 		$_POST['twitter'] = $twitter;
 	}
@@ -232,7 +233,6 @@ function largo_youtube_iframe_from_url( $url, $echo = TRUE ) {
  * @uses 	largo_youtube_url_to_ID
  * @since 0.4
  */
-
 function largo_youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
 	$id = largo_youtube_url_to_ID( $url );
 
@@ -274,35 +274,23 @@ function largo_make_slug( $string, $maxLength = 63 ) {
 }
 
 /**
- * Send anything to the error log in a human-readable format
- *
- * @param 	mixed $stuff the stuff to be sent to the error log.
- * @since 	0.4
- */
-if (!function_exists('var_log')) {
-	function var_log($stuff) {
-		error_log(var_export($stuff, true));
-	}
-}
-
-/**
  * @param string $slug the slug of the template file to render.
  * @param string $name the name identifier for the template file; works like get_template_part.
  * @param array $context an array with the variables that should be made available in the template being loaded.
- * @since 0.4*
+ * @since 0.4
  */
-function largo_render_template($slug, $name=null, $context=array()) {
+function largo_render_template( $slug, $name=null, $context=array() ) {
 	global $wp_query;
 
-	if (is_array($name) && empty($context))
+	if ( is_array( $name ) && empty( $context ) )
 		$context = $name;
 
-	if (!empty($context)) {
-		$context = apply_filters('largo_render_template_context', $context, $slug, $name);
-		$wp_query->query_vars = array_merge($wp_query->query_vars, $context);
+	if ( ! empty( $context ) ) {
+		$context = apply_filters( 'largo_render_template_context', $context, $slug, $name );
+		$wp_query->query_vars = array_merge( $wp_query->query_vars, $context );
 	}
 
-	get_template_part($slug, $name);
+	get_template_part( $slug, $name );
 }
 
 /**
@@ -312,8 +300,60 @@ function largo_render_template($slug, $name=null, $context=array()) {
  */
 function largo_get_current_url() {
 	$is_ssl = is_ssl();
-	if (!empty($is_ssl))
+	if ( ! empty( $is_ssl ) )
 		return "https://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 	else
 		return "http://" .$_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+}
+
+/**
+ * Return the first featured image thumbnail found in a given array of WP_Posts
+ *
+ * Useful if you wint to create a thumbnail for a given taxonomy
+ *
+ * @param array An array of WP_Post objects to iterate over
+ * @return str|false The HTML for the image, or false if no images were found.
+ * @since 0.5.3
+ * @uses largo_has_featured_media
+ */
+function largo_first_thumbnail_in_post_array( $array ) {
+	$thumb = '';
+	foreach ( $array as $post ) {
+		$thumb = get_the_post_thumbnail( $post->ID );
+		if ( $thumb != '' ) return $thumb;
+	}
+	return $thumb;
+}
+
+/**
+ * Return the first headline link for an array of WP_Posts
+ *
+ * Useful if you want to link to an example post in a series.
+ *
+ * @param array An array of WP_Post objects to iterate over
+ * @return str The HTML for the link
+ * @since 0.5.3
+ */
+function largo_first_headline_in_post_array( $array ) {
+	$headline = '';
+	foreach ( $array as $post ) {
+		$headline = sprintf( '<a href="%s">%s</a>',
+			get_permalink( $post->ID ),
+			get_the_title( $post->ID )
+		);
+		if ( $headline != '') return $headline;
+	}
+	return $headline;
+}
+
+/**
+ * Send anything to the error log in a human-readable format
+ *
+ * @param 	mixed $stuff the stuff to be sent to the error log.
+ * @since 	0.4
+ */
+if (!  function_exists( 'var_log' ) ) {
+	function var_log( $stuff ) {
+		error_log( var_export( $stuff, true ) );
+	}
 }
