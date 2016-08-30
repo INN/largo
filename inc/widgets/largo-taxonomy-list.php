@@ -1,21 +1,35 @@
 <?php
 /*
- * List all of the terms in a custom taxonomy
+ * List all of the terms in a custom taxonom
+ *
+ * This widget takes two primary forms: 1) a <select> element of terms, or 2) a customizable UL of terms.
  */
 class largo_taxonomy_list_widget extends WP_Widget {
 
+	/**
+	 * Constructor
+	 */
 	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-taxonomy-list',
-			'description' 	=> __('List all of the terms in a custom taxonomy with links', 'largo')
+			'description' 	=> __( 'List all (or some) of the terms in a given taxonomy. Optionally with links to recent stories in each term.', 'largo' )
 		);
 		parent::__construct( 'largo-taxonomy-list-widget', __('Largo Taxonomy List', 'largo'), $widget_ops);
 	}
 
+	/**
+	 * Output the widget
+	 *
+	 * @param array $args Sidebar-related args
+	 * @param array $instance Instance-specific widget arguments
+	 * @link https://developer.wordpress.org/reference/functions/get_terms/
+	 * @uses largo_taxonomy_list_widget::render_series_list
+	 * @uses largo_taxonomy_list_widget::render_term_list
+	 */
 	function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Categories', 'largo' ) : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Series', 'largo' ) : $instance['title'], $instance, $this->id_base );
 		$is_dropdown = ! empty( $instance['dropdown'] ) ? '1' : '0';
 
 		/*
@@ -25,23 +39,43 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title;
 
-		/*
-		 * The widget
-		 */
-		$cat_args = array(
-			'orderby' => 'name',
+		// Set us up the term args
+		$term_args = array(
 			'taxonomy' => $instance['taxonomy'],
 			'number' => $instance['count'],
-			'include' => $instance['include'],
+			'exclude' => $instance['exclude'],
 		);
+		switch ( $instance['sort'] ) {
+			case 'name_asc':
+				$term_args['orderby'] = 'name';
+				$term_args['order'] = 'ASC';
+				break;
+			default:
+				$term_args['orderby'] = 'id';
+				$term_args['order'] = 'DESC';
+				break;
+		}
 
+		$defaults = array(
+			'taxonomy' => 'series',
+			'number' => 5,
+			'exclude' => null,
+			'orderby' => 'id',
+			'order' => 'DESC'
+		);
+		$term_args = wp_parse_args( $term_args, $defaults );
+
+		/*
+		 * The dropdown option
+		 */
 		if ( $is_dropdown ) {
-			$cats = get_categories($cat_args); ?>
+			$term_args['orderby'] = 'name';
+			$terms = get_categories( $term_args ); ?>
 
 			<select id="taxonomy-list-widget">
-				<option value=""><?php printf( __('Select %s', 'largo'), ucwords($instance['taxonomy']) ); ?></option>
-			<?php foreach ($cats as $cat) : ?>
-				<option value="<?php echo get_term_link($cat, $cat->taxonomy) ?>"><?php echo $cat->name ?></option>
+				<option value=""><?php printf( __( 'Select %s', 'largo' ), ucwords( $instance['taxonomy'] ) ); ?></option>
+			<?php foreach ( $terms as $term ) : ?>
+				<option value="<?php echo get_term_link( $term, $term->taxonomy ) ?>"><?php echo $term->name ?></option>
 			<?php endforeach; ?>
 			</select>
 
@@ -53,24 +87,19 @@ class largo_taxonomy_list_widget extends WP_Widget {
 				});
 			</script>
 
-		<?php } else { 
+		<?php
+		/*
+		 * Not the dropdown option
+		 */
+		} else {
 			echo '<ul class="' . $instance['taxonomy'] . '">';
 
-			$cat_args['title_li'] = '';
-			$tax_items = get_categories($cat_args);
+			$tax_items = get_categories($term_args);
 
-			switch ($instance['taxonomy']) {
-				case 'series':
-					$this->render_series_list($tax_items, $instance);
-					break;
-				case 'category':
-					$this->render_cat_list($tax_items, $instance);
-					break;
-				case 'post_tag':
-					$this->render_tag_list($tax_items, $instance);
-					break;
-				default:
-					$this->render_term_list($tax_items, $instance);
+			if ( $instance['taxonomy'] === 'series' ) {
+				$this->render_series_list( $tax_items, $instance );
+			} else {
+				$this->render_term_list( $tax_items, $instance );
 			}
 
 			echo '</ul>';
@@ -92,13 +121,13 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 * @private
 	 * @since 0.5.3
 	 */
-	private function render_li($item, $thumbnail = '', $headline = '') {
+	private function render_li( $item, $thumbnail = '', $headline = '' ) {
 		echo sprintf(
 			'<li class="%s-%s %s"><a href="%s">%s <h5>%s</h5></a> %s</li>',
 			$item->taxonomy,
 			$item->term_id,
 			( $thumbnail != '' ) ? "has-thumbnail" : "no-thumbnail" ,
-			get_term_link($item),
+			get_term_link( $item ),
 			$thumbnail, // the image for the series
 			$item->cat_name,
 			$headline
@@ -112,14 +141,15 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 * @uses largo_taxonomy_list_widget::render_li
 	 * @uses largo_featured_thumbnail_in_post_array
 	 * @uses largo_first_headline_in_post_array
+	 * @since 0.5.3
 	 */
 	private function render_series_list($tax_items, $instance) {
-		foreach ($tax_items as $item) {
+		foreach ( $tax_items as $item ) {
 			$thumbnail = '';
 			$headline = '';
 			$posts = array();
 
-			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
+			if ( $instance['thumbnails'] == '1' || $instance['use_headline'] == '1' ) {
 				$query_args = array(
 					'tax_query' => array(
 						array(
@@ -129,87 +159,27 @@ class largo_taxonomy_list_widget extends WP_Widget {
 						),
 					),
 				);
-				$posts = get_posts($query_args);
+				$posts = get_posts( $query_args );
 			}
 
-			if ($instance['thumbnails'] == '1' && largo_is_series_landing_enabled() ) {
-				$landing_array = largo_get_series_landing_page_by_series($item);
+			if ( $instance['thumbnails'] == '1' && largo_is_series_landing_enabled() ) {
+				$landing_array = largo_get_series_landing_page_by_series( $item );
 				
 				// Thumbnail shall be the one for the landing page post
-				foreach ($landing_array as $post) {
-					$thumbnail = get_the_post_thumbnail($post->ID);
+				foreach ( $landing_array as $post ) {
+					$thumbnail = get_the_post_thumbnail( $post->ID );
 				}
 			}
 
-			if ($thumbnail == '') {
-				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
+			if ( $thumbnail == '' ) {
+				$thumbnail = largo_first_thumbnail_in_post_array( $posts );
 			}
 
-			if ($instance['use_headline'] == '1') {
-				$headline = largo_first_headline_in_post_array($posts);
+			if ( $instance['use_headline'] == '1' ) {
+				$headline = largo_first_headline_in_post_array( $posts );
 			}
 
-			$this->render_li($item, $thumbnail, $headline);
-		}
-	}
-
-	/**
-	 * Find the first thumbnailed post in the category and create an <li>
-	 *
-	 * @private
-	 * @uses largo_taxonomy_list_widget::render_li
-	 * @uses largo_featured_thumbnail_in_post_array
-	 * @uses largo_first_headline_in_post_array
-	 */
-	private function render_cat_list($tax_items, $instance) {
-		foreach ($tax_items as $item) {
-			$headline = '';
-			$thumbnail = '';
-			$posts = array();
-
-			// Only get posts if we're going to use them.
-			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
-				$posts = get_posts(array(
-					'category_name' => $item->name,
-				));
-			}
-			if ($instance['thumbnails'] == '1') {
-				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
-			}
-			if ($instance['use_headline'] == '1') {
-				$headline = largo_first_headline_in_post_array($posts);
-			}
-			$this->render_li($item, $thumbnail, $headline);
-		}
-	}
-
-	/**
-	 * For a tag, find the first thumbnailed post and create an <li>
-	 *
-	 * @private
-	 * @uses largo_taxonomy_list_widget::render_li
-	 * @uses largo_featured_thumbnail_in_post_array
-	 * @uses largo_first_headline_in_post_array
-	 */
-	private function render_tag_list($tax_items, $instance) {
-		foreach ($tax_items as $item) {
-			$headline = '';
-			$thumbnail = '';
-			$posts = array();
-
-			// Only get posts if we're going to use them.
-			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
-				$posts = get_posts(array(
-					'tag' => $item->slug,
-				));
-			}
-			if ($instance['thumbnails'] == '1') {
-				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
-			}
-			if ($instance['use_headline'] == '1') {
-				$headline = largo_first_headline_in_post_array($posts);
-			}
-			$this->render_li($item, $thumbnail, $headline);
+			$this->render_li( $item, $thumbnail, $headline );
 		}
 	}
 
@@ -220,15 +190,16 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 * @uses largo_taxonomy_list_widget::render_li
 	 * @uses largo_featured_thumbnail_in_post_array
 	 * @uses largo_first_headline_in_post_array
+	 * @since 0.5.3
 	 */
-	private function render_term_list($tax_items, $instance) {
-		foreach ($tax_items as $item) {
+	private function render_term_list( $tax_items, $instance ) {
+		foreach ( $tax_items as $item ) {
 			$thumbnail = '';
 			$headline = '';
 			$posts = array();
 
 			// Only get posts if we're going to use them.
-			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
+			if ( $instance['thumbnails'] == '1' || $instance['use_headline'] == '1' ) {
 				$query_args = array(
 					'tax_query' => array(
 						array(
@@ -240,76 +211,132 @@ class largo_taxonomy_list_widget extends WP_Widget {
 				);
 				$posts = get_posts($query_args);
 			}
-			if ($instance['thumbnails'] == '1') {
-				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
+			if ( $instance['thumbnails'] == '1' ) {
+				$thumbnail = largo_featured_thumbnail_in_post_array( $posts );
 			}
-			if ($instance['use_headline'] == '1') {
-				$headline = largo_first_headline_in_post_array($posts);
+			if ( $instance['use_headline'] == '1' ) {
+				$headline = largo_first_headline_in_post_array( $posts );
 			}
-			$this->render_li($item, $thumbnail, $headline);
+			$this->render_li( $item, $thumbnail, $headline );
 		}
 	}
 
+	/**
+	 * Sanitize and save widget arguments
+	 */
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = sanitize_text_field($new_instance['title']);
-		$instance['taxonomy'] = strtolower(strip_tags($new_instance['taxonomy']));
-		$instance['count'] = sanitize_text_field($new_instance['count']);
-		if ($instance['count'] == '' ) {
-			$instance['count'] = '';
-		} else if ($instance['count'] < 1) {
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['taxonomy'] = isset( $new_instance['taxonomy'] ) ? strtolower( strip_tags( $new_instance['taxonomy'] ) ) : 'series';
+		$instance['sort'] = isset( $new_instance['sort'] ) ? strtolower( strip_tags( $new_instance['sort'] ) ) : 'id_desc';
+		$instance['count'] = sanitize_text_field( $new_instance['count'] );
+
+		// Default is 5 as of 0.5.5, not infinite
+		if ( $instance['count'] == '' ) {
+			$instance['count'] = 5;
+		} else if ( $instance['count'] < 1 ) {
 			$instance['count'] = 1;
 		}
 
-		$instance['include'] = sanitize_text_field($new_instance['include']);
-		$instance['dropdown'] = !empty($new_instance['dropdown']) ? 1 : 0;
-		$instance['thumbnails'] = !empty($new_instance['thumbnails']) ? 1 : 0;
-		$instance['use_headline'] = !empty($new_instance['use_headline']) ? 1 : 0;
+		$instance['dropdown'] = !empty( $new_instance['dropdown'] ) ? 1 : 0;
+		$instance['thumbnails'] = !empty( $new_instance['thumbnails'] ) ? 1 : 0;
+		$instance['use_headline'] = !empty( $new_instance['use_headline'] ) ? 1 : 0;
+		$instance['exclude'] = sanitize_text_field( $new_instance['exclude'] );
 
 		return $instance;
 	}
 
+	/**
+	 * Render the widget form
+	 */
 	function form( $instance ) {
 		//Defaults
 		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'taxonomy' => '' ) );
 		$title = esc_attr( $instance['title'] );
-		$taxonomy = esc_attr( $instance['taxonomy'] );
-		$count = $instance['count'];
-		$include = $instance['include'];
+		$count = isset( $instance['count'] ) ? esc_attr( $instance['count'] ) : 5;
+		$sort = esc_attr( $instance['sort'] );
+		$instance['taxonomy'] = isset( $instance['taxonomy'] ) ? $instance['taxonomy'] : 'series';
 		$dropdown = isset( $instance['dropdown'] ) ? (bool) $instance['dropdown'] : false;
 		$thumbnails = isset( $instance['thumbnails'] ) ? (bool) $instance['thumbnails'] : false;
 		$use_headline = isset( $instance['use_headline'] ) ? (bool) $instance['use_headline'] : false;
+		$exclude = $instance['exclude'];
+
+		// Create <option>s of taxonomies for the <select>
+		$taxonomies = get_taxonomies( null, 'objects' );
+		$taxonomies_options = '';
+		foreach ( $taxonomies as $taxonomy ) {
+			if ( $taxonomy->public ) {
+				$taxonomies_options .= sprintf(
+					'<option value="%1$s" %2$s>%3$s</option>',
+					$taxonomy->name,
+					selected( $instance['taxonomy'], $taxonomy->name, false ),
+					$taxonomy->label
+				);
+			}
+		}
+
+		// Create <option>s of sort orders for the <select>
+		$sort_orders = array(
+			'name_asc' => __( 'Alphabetically (A to Z)', 'largo' ),
+			'id_desc' => __( 'Most Recent First', 'largo' )
+		); // list from https://developer.wordpress.org/reference/functions/get_terms/
+		$sort_order_options = '';
+		foreach ( $sort_orders as $order => $label ) {
+			$sort_order_options .= sprintf(
+				'<option value="%1$s" %2$s>%3$s</option>',
+					$order,
+					selected( $instance['sort'], $order, false ),
+					$label
+			);
+		}
 
 		?>
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'largo' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('include'); ?>"><?php _e('Only display the terms in this comma-separated list of term IDs:', 'largo'); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id('include'); ?>" name="<?php echo $this->get_field_name('include'); ?>" type="text" value="<?php echo $include; ?>" />
-			<small><?php _e('Find term IDs by examining the URL of the taxonomy when you click the "edit" button in the list', 'largo'); ?>.</small>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'largo' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 
 		<p>
-			<label for"<?php echo $this->get_field_id('count'); ?>"><?php _e('Count: (leave blank to receive all items)', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count')?>" type="number" value="<?php echo $count; ?>" />
+			<label for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><?php _e( 'Taxonomy:', 'largo' ); ?></label>
+			<select class="widefat" id="<?php echo $this->get_field_id( 'taxonomy' ); ?>" name="<?php echo $this->get_field_name( 'taxonomy' ); ?>" type="text" value="<?php echo $instance['taxonomy'] ?>">
+				<?php echo $taxonomies_options; ?>
+			</select>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:', 'largo'); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" type="text" value="<?php echo $taxonomy; ?>" />
+			<label for="<?php echo $this->get_field_id( 'sort' ); ?>"><?php _e( 'How should the terms be ordered?', 'largo' ); ?></label>
+			<select class="widefat" id="<?php echo $this->get_field_id( 'sort' ); ?>" name="<?php echo $this->get_field_name( 'sort' ); ?>" type="text" value="<?php echo $instance['sort'] ?>">
+				<?php echo $sort_order_options; ?>
+			</select>
 		</p>
 
-		<p><input type="checkbox" class="checkbox ltlw-dropdown" id="<?php echo $this->get_field_id('dropdown'); ?>" name="<?php echo $this->get_field_name('dropdown'); ?>"<?php checked( $dropdown ); ?> />
-			<label for="<?php echo $this->get_field_id('dropdown'); ?>"><?php _e( 'Display as dropdown', 'largo' ); ?></label>
+		<p>
+			<label for"<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Number of terms to display (must be greater than 1):', 'largo' ); ?></label>
+			<input id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name('count')?>" type="number" value="<?php echo $count; ?>" />
+		</p>
+		
+		<p>
+			<label for="<?php echo $this->get_field_id( 'exclude' ); ?>"><?php _e( 'Terms to exclude:', 'largo' ); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id( 'exclude' ); ?>" name="<?php echo $this->get_field_name( 'exclude' ); ?>" type="text" value="<?php echo $exclude; ?>" />
+			<small><?php _e( 'Comma-separated list of term IDs', 'largo'); ?></small>
 		</p>
 
-		<p><input type="checkbox" class="checkbox ltlw-thumbnails" id="<?php echo $this->get_field_id('thumbnails'); ?>" name="<?php echo $this->get_field_name('thumbnails'); ?>"<?php checked( $thumbnails ); ?> />
-			<label for="<?php echo $this->get_field_id('thumbnails'); ?>"><?php _e( 'Display thumbnails?', 'largo' ); ?></label>
+		<p>
+			<input type="checkbox" class="checkbox ltlw-dropdown" id="<?php echo $this->get_field_id( 'dropdown' ); ?>" name="<?php echo $this->get_field_name( 'dropdown' ); ?>"<?php checked( $dropdown ); ?> />
+			<label for="<?php echo $this->get_field_id( 'dropdown' ); ?>"><?php _e( 'Display terms as dropdown', 'largo' ); ?></label>
+			<br/>
+			<small><?php _e( 'If you choose to display terms as a dropdown, no thumbnails or headlines will be displayed.', 'largo' ); ?></small>
 		</p>
 
-		<p><input type="checkbox" class="checkbox ltlw-headline" id="<?php echo $this->get_field_id('use_headline'); ?>" name="<?php echo $this->get_field_name('use_headline'); ?>"<?php checked( $use_headline ); ?> />
-			<label for="<?php echo $this->get_field_id('use_headline'); ?>"><?php _e( 'Display headline of most-recent post in taxonomy?', 'largo' ); ?></label>
+		<p>
+			<input type="checkbox" class="checkbox ltlw-thumbnails" id="<?php echo $this->get_field_id( 'thumbnails' ); ?>" name="<?php echo $this->get_field_name( 'thumbnails' ); ?>"<?php checked( $thumbnails ); ?> />
+			<label for="<?php echo $this->get_field_id( 'thumbnails' ); ?>"><?php _e( 'Display thumbnail images?', 'largo' ); ?></label>
+		</p>
+
+		<p>
+			<input type="checkbox" class="checkbox ltlw-headline" id="<?php echo $this->get_field_id( 'use_headline' ); ?>" name="<?php echo $this->get_field_name( 'use_headline' ); ?>"<?php checked( $use_headline ); ?> />
+			<label for="<?php echo $this->get_field_id( 'use_headline' ); ?>"><?php _e( 'Display headline of most-recent post in taxonomy?', 'largo' ); ?></label>
 		</p>
 
 		<script>
