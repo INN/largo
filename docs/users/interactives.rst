@@ -16,7 +16,7 @@ Note that the full-width template has no sidebar, and when used the content will
 Embedding Interactives and Other Visual Content
 ===========
 
-It's possible to embed interactive and visual content via iframes or oembed content sources. In such cases the content is hosted on another web server, and the embed makes it possible to display the content on your post page. 
+It's possible to embed interactive content from other content sources. In such cases the content is hosted on another web server, and the embed makes it possible to display the content on your post page. 
 
 Embedding a YouTube video is a common example. Other examples include Google Maps, sortable data tables, and a wide range of other interactive applications hosted outside your site. On any WordPress website, there are two issues that can prevent the content from displaying correctly:
 
