@@ -1,4 +1,6 @@
-## Code Allowed in WordPress/Largo Posts and Pages
+=============
+Code Allowed in WordPress/Largo Posts and Pages
+=============
 
 Here is a list of html elements that **are** allowed by default in posts and pages on WordPress websites:
 
