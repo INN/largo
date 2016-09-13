@@ -20,8 +20,8 @@ It's possible to embed interactive content from other content sources. In such c
 
 Embedding a YouTube video is a common example. Other examples include Google Maps, sortable data tables, and a wide range of other interactive applications hosted outside your site. On any WordPress website, there are two issues that can prevent the content from displaying correctly:
 
-- The content may contain iframes, scripts, and other code that might not be allowed by WordPress, so the code is stripped when you publish the post.
-- The embedded content may display on your post page, but won't responsively resize for tablets and smartphones.
+- The content may contain iframes, scripts, and other code that isn't allowed by WordPress, so the code is stripped when you publish the post.
+- The embedded content may display on your post or page, but won't responsively resize for tablets and smartphones.
 
 Allowed Code in WordPress
 -----------------
