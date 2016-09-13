@@ -1,0 +1,85 @@
+## Code Allowed in WordPress/Largo Posts and Pages
+
+Here is a list of html elements that **are** allowed by default in posts and pages on WordPress websites:
+
+- address
+- a
+- abbr
+- acronym
+- area
+- article
+- aside
+- audio
+- b
+- bdo
+- big
+- blockquote
+- br
+- button 
+- caption
+- cite
+- code
+- col
+- colgroup
+- del
+- dd
+- dfn
+- details
+- div
+- dl
+- dt
+- em
+- fieldset
+- figure
+- figcaption
+- font
+- footer
+- form
+- h1, h2, h3, h4, h5, and h6
+- header
+- hgroup
+- hr
+- i
+- img
+- ins
+- kbd
+- label
+- li
+- map
+- mark
+- menu
+- nav
+- p
+- pre
+- q
+- s
+- samp
+- span
+- section
+- small
+- strike
+- strong
+- sub
+- summary
+- sup
+- table
+- tbody
+- td
+- textarea
+- tfoot
+- th
+- thead
+- title
+- tr
+- track
+- tt
+- u
+- ul
+- ol
+- var
+- video
+
+WordPress Codex Reference on Allowed HTML
+------------------------
+
+For more on what html is allowed, and how it's allowed in WordPress, see the `WordPress Codex for the function reference on allowed html <https://codex.wordpress.org/Function_Reference/wp_kses_allowed_html>`_.
