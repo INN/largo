@@ -4,14 +4,14 @@ Embedding Interactives
 
 Posts can display a wide variety of interactive content, like maps, data tables, and other content from other sources. Most regular posts should use the One Column (Standard) template, since this provides the best reading experience when the post is comprised of mainly text. For posts containing interactives and visual elements wider than the One Column Template, you can optionally select the Full-widget template in the Layout Options panel.
 
-The full-width template should be used judiciously, and only when the one-column template is too narrow for display of embedded, interactive, and other visual content. Consider the content from the reader's point of view, and select the full-width template only if it enhances the user experience.
+The full-width template should be used judiciously, and only when the one-column template is too narrow for display of embedded, interactive, and other visual content. Consider the content from the reader's point of view, and select the full-width template only if it enhances the user experience. Note that if you include text in the post in addition to your graphic, the line length will be the full width of the page. This is too long for optimal readability so you might consider using the standard one column template instead.
 
 Using the Full-width template in a post
 ==========
 
 To apply the full-width template to a post, select it from the dropdown menu in the post's **Layout Options** panel. 
 
-Note that the full-width template has no sidebar, and when used the content will fill most of the width of the post page.
+Note that the full-width template has no sidebar, and when used the content will fill the full width of the container (1170px).
 
 Embedding Interactives and Other Visual Content
 ===========
@@ -39,7 +39,7 @@ In this case you can use the `Pym Shortcode plugin <https://github.com/INN/pym-s
 
 Use of Pym.js with WordPress posts and pages requires:
 
-- Hosting the embedded content on another web server. You can use any server, including Amazon Web Services or any other web server you have access to. The embedded content should not contain any design elements other than the actual content you want to display in WordPress.
+- Hosting the embedded content on another web server. You can use any server, including Amazon Web Services or any other web server you have access to. Unfortunately, our hosting company is optimized for hosting only your WordPress website so we're not able to host standalone data apps and interactives. The content of the iframe should not contain any design elements other than the actual content you want to display in WordPress (things like navigation, excess padding around the edges of the graphic, etc.).
 - The Pym script must be included on the web page where the embedded content is hosted.
 - The Pym Shortcode plugin must be installed and activated on your WordPress site. 
 
