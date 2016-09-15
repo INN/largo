@@ -34,7 +34,6 @@ function largo_widgets() {
 		'largo_taxonomy_list_widget' => '/inc/widgets/largo-taxonomy-list.php',
 		'largo_twitter_widget' => '/inc/widgets/largo-twitter.php',
 		'largo_related_posts_widget' => '/inc/widgets/largo-related-posts.php',
-		'largo_explore_related_widget' => '/inc/widgets/largo-explore-related.php',
 		'largo_author_widget' => '/inc/widgets/largo-author-bio.php',
 		'largo_featured_widget' => '/inc/widgets/largo-featured.php',
 		'largo_tag_list_widget' => '/inc/widgets/largo-tag-list.php',

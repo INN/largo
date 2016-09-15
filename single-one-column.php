@@ -2,7 +2,7 @@
 /**
  * Single Post Template: One Column (Standard Layout)
  * Template Name: One Column (Standard Layout)
- * Description: Shows the post but does not load any sidebars.
+ * Description: Shows the post with a small right sidebar 
  */
 
 global $shown_ids;

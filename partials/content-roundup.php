@@ -15,14 +15,14 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 
 	<?php
-		// Special treatment for posts that are in the Homepage Featured prominence taxonomy term and have thumbnails or videos.
-		$entry_classes = 'entry-content';
-		echo '<div class="' . $entry_classes . '">';
-
-		if ( largo_has_categories_or_tags() && $tags === 'top' ) {
-		 	echo '<h5 class="top-tag">' . largo_top_term( $args = array( 'echo' => FALSE ) ) . '</h5>';
-		}
+	// Special treatment for posts that are in the Homepage Featured prominence taxonomy term and have thumbnails or videos.
+	$entry_classes = 'entry-content';
 	?>
+		<div class="<?php echo $entry_classes; ?>">
+
+		<?php if ( largo_has_categories_or_tags() && $tags === 'top' && largo_top_term() ) : ?> 
+			<h5 class="top-tag"><?php largo_top_term( $args = array( 'echo' => FALSE ) ); ?></h5>
+		<?php endif; ?>
 
 		<h2 class="entry-title">
 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>

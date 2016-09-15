@@ -2,8 +2,8 @@
 
 // The top term
 $top_term_args = array('echo' => false);
-if ( isset($instance['show_top_term']) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() ) { ?>
-	<h5 class="top-tag"><?php echo largo_top_term($top_term_args); ?></h5>
+if ( isset( $instance['show_top_term'] ) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() && largo_top_term( $top_term_args ) ) { ?>
+	<h5 class="top-tag"><?php echo largo_top_term( $top_term_args ); ?></h5>
 <?php }
 
 // the thumbnail image (if we're using one)

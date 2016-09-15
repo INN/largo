@@ -65,7 +65,7 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 				while ( $substories->have_posts() ) : $substories->the_post(); $shown_ids[] = get_the_ID();
 					if ( $count <= 3 ) : ?>
 						<div <?php post_class( 'story' ); ?> >
-							<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>
+							<?php if ( largo_has_categories_or_tags() && $tags === 'top' && largo_top_term() ) : ?>
 								<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 							<?php endif; ?>
 							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>

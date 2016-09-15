@@ -168,8 +168,8 @@ function largo_update_widgets() {
 
 	$checks['show_related_content'] = array(
 		'values' => array('1'),
-		'widget' => 'largo-explore-related',
-		'settings' => array('title' => __( 'More About', 'largo' ), 'topics' => 6, 'posts' => 3),
+		'widget' => 'largo-related-posts',
+		'settings' => array('title' => __( 'Read Next', 'largo' ), 'qty' => 1),
 	);
 
 	$checks['show_next_prev_nav_single'] = array(
@@ -502,7 +502,8 @@ function largo_set_new_option_defaults() {
  * Make sure custom CSS is regenerated if we're using custom LESS variables
  */
 function largo_update_custom_less_variables() {
-	if (Largo::is_less_enabled()) {
+	$largo = Largo::get_instance();	
+	if ( $largo->is_less_enabled() ) {
 		$variables = Largo_Custom_Less_Variables::get_custom_values();
 		$escaped = array();
 

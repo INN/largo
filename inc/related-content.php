@@ -620,8 +620,20 @@ class Largo_Related {
 	 */
 	protected function get_term_posts() {
 
-		//we've gone back and forth through all the post's series, now let's try traditional taxonomies
-		$taxonomies = get_the_terms( $this->post_id, array( 'category', 'post_tag' ) );
+		//we've gone back and forth through all the post's series, now let's try traditional taxonomies	
+		$taxonomies = array();
+		foreach ( array( 'categories', 'tags' ) as $_taxonomy ) {
+			$_terms = get_object_term_cache( $this->post_id, $_taxonomy );
+
+			if ( false === $_terms ) {
+				$_terms = wp_get_object_terms( $this->post_id, $_taxonomy );
+				wp_cache_add( $this->post_id, $taxonomies, $_taxonomy . '_relationships' );
+			}
+			
+			if ( is_array( $_terms ) ) {
+				$taxonomies = array_merge( $taxonomies, $_terms );
+			}
+		}
 
 		//loop thru taxonomies, much like series, and get posts
 		if ( is_array($taxonomies) ) {

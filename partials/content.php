@@ -36,9 +36,9 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 		if ( $featured ) $entry_classes .= ' span10 with-hero';
 		echo '<div class="' . $entry_classes . '">';
 
-		if ( largo_has_categories_or_tags() && $tags === 'top' ) {
-		 	echo '<h5 class="top-tag">' . largo_top_term( $args = array( 'echo' => FALSE ) ) . '</h5>';
-		}
+		if ( largo_has_categories_or_tags() && $tags === 'top' && largo_top_term() ) { ?>
+			<h5 class="top-tag"><?php largo_top_term( $args = array( 'echo' => FALSE ) ) ?></h5>
+		<?php }
 
 		if ( !$featured ) {
 			echo '<div class="has-thumbnail '.$hero_class.'"><a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a></div>';

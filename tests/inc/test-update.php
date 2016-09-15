@@ -138,7 +138,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals('largo-post-series-links-widget-2', $widgets['article-bottom'][1]);
 		$this->assertEquals('largo-tag-list-widget-2', $widgets['article-bottom'][2]);
 		$this->assertEquals('largo-author-widget-2', $widgets['article-bottom'][3]);
-		$this->assertEquals('largo-explore-related-widget-2', $widgets['article-bottom'][4]);
+		$this->assertEquals('largo-related-posts-widget-2', $widgets['article-bottom'][4]);
 		$this->assertEquals('largo-prev-next-post-links-widget-2', $widgets['article-bottom'][5]);
 
 		// Cleanup
@@ -318,6 +318,11 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_update_prominence_term_description_single() {
+		$term9 = get_term_by('slug', 'term-9', 'prominence', 'ARRAY_A');
+		if ( ! $term9 ) {
+			wp_insert_term( 'term-9', 'prominence', array( 'description' => 'Term Description 9' ) );
+		}
+
 		$update = array(
 			'name' => 'Term 9',
 			'description' => 'Term 9 From Outer Space',

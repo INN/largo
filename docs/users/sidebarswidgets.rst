@@ -87,11 +87,6 @@ Largo Donate Widget
 
 Shows a donate message and button with a link to a donation page. You can change the message, button text, and/or link on a per-widget basis if you need to for different pages/sections of your site. By default, the link used in this widget is the one set under the **Appearance > Theme Options > Basic Settings** menu (also used for the donate button in the site header).
 
-Largo Explore Related
----------------------
-
-A tabbed widget to show related stories by category/tag. This widget works only on single-post pages, and fits best in the Article Bottom widget area. We recommend using the Largo Related posts widget instead but this widget is retained for backwards compatibility.
-
 Largo Facebook Widget
 ---------------------
 
@@ -221,6 +216,7 @@ Widgets Deprecated in 0.5x
 =========================
 
 - **Largo Featured Posts** - Now just use the Largo Recent Posts widget and limit to the desired term in the Prominence taxonomy.
+- **Largo Explore Related** - Replaced by the Largo Related posts widget.
 
 Sidebar Options
 ===============

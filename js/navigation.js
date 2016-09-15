@@ -42,22 +42,6 @@
       // Open the drop down
       openMenu = false;
 
-      // Handle the tap for the drop down
-      $('ul.nav').on(mobileEvent + '.largo', 'li', function(event) {
-        var li = $(event.currentTarget);
-
-        if (!li.is('.open')) {
-          // The link when the menu is closed
-          closeOpenMenu();
-          li.addClass('open');
-          openMenu = li;
-        } else if ($(event.target).is('b.caret')) {
-          // The caret when the menu is open
-          li.removeClass('open');
-          openMenu = false;
-        }
-      });
-
       // Call this to close the open menu
       var closeOpenMenu = function() {
         if (openMenu) {

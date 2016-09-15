@@ -1,7 +1,6 @@
 <?php
 
 // Test functions in inc/related-content.php
-
 class RelatedContentTestFunctions extends wp_UnitTestCase{
 	function setUp() {
 		parent::setUp();
