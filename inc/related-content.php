@@ -4,52 +4,58 @@
  * Show related tags and subcategories for each main category
  * Used on category.php to display a list of related terms
  *
- * @since 1.0
+ * @since 0.5.5
+ * @return String HTML '' if there are no related topics or a UL if there are related topics
  */
 
 function largo_get_related_topics_for_category( $obj ) {
-    $MAX_RELATED_TOPICS = 5;
+	$MAX_RELATED_TOPICS = 5;
 
-    if (!isset($obj->post_type)) {
-    	$obj->post_type = 0;
-    }
+	if (!isset($obj->post_type)) {
+		$obj->post_type = 0;
+	}
 
-    if ( $obj->post_type ) {
-        if ( $obj->post_type == 'nav_menu_item' ) {
-            $cat_id = $obj->object_id;
-        }
+	if ( $obj->post_type ) {
+		if ( $obj->post_type == 'nav_menu_item' ) {
+			$cat_id = $obj->object_id;
+		}
+	} else {
+		$cat_id = $obj->cat_ID;
+	}
 
-    }else {
-    $cat_id = $obj->cat_ID;
-    }
+	// spit out the subcategories
+	$outarray = array();
+	$cats = _subcategories_for_category( $cat_id );
 
-    $out = "<ul>";
-	
-	$title_ul = apply_filters( 'largo_related_topics_title_ul', __( 'Related Topics:' , 'largo' ) );
-	$out .= '<li><strong>' . $title_ul . '</strong></li>';
-         
-    // spit out the subcategories
-    $cats = _subcategories_for_category( $cat_id );
+	foreach ( $cats as $c ) {
+		$outarray[] = sprintf( '<li><a href="%s">%s</a></li>',
+			get_category_link( $c->term_id ), $c->name
+		);
+	}
 
-    foreach ( $cats as $c ) {
-        $out .= sprintf( '<li><a href="%s">%s</a></li>',
-            get_category_link( $c->term_id ), $c->name
-        );
-    }
+	if ( count( $cats ) < $MAX_RELATED_TOPICS ) {
+		$tags = _tags_associated_with_category( $cat_id,
+			$MAX_RELATED_TOPICS - count( $cats ) );
 
-    if ( count( $cats ) < $MAX_RELATED_TOPICS ) {
-        $tags = _tags_associated_with_category( $cat_id,
-            $MAX_RELATED_TOPICS - count( $cats ) );
+		foreach ( $tags as $t ) {
+			$outarray[] = sprintf( '<li><a href="%s">%s</a></li>',
+				get_tag_link( $t->term_id ), $t->name
+			);
+		}
+	}
 
-        foreach ( $tags as $t ) {
-            $out .= sprintf( '<li><a href="%s">%s</a></li>',
-                get_tag_link( $t->term_id ), $t->name
-            );
-        }
-    }
+	$out = '';
 
-    $out .= "</ul>";
-    return $out;
+	// Generate the <ul>
+	if ( count( $outarray ) > 0 ) {
+		$out = "<ul>";
+		$title_ul = apply_filters( 'largo_related_topics_title_ul', __( 'Related Topics:' , 'largo' ) );
+		$out .= '<li><strong>' . $title_ul . '</strong></li>';
+		$out .= join( '', $outarray );
+		$out .= "</ul>";
+	}
+
+	return $out;
 }
 
 function _tags_associated_with_category( $cat_id, $max = 5 ) {

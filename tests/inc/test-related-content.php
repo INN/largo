@@ -9,6 +9,10 @@ class RelatedContentTestFunctions extends wp_UnitTestCase{
 	function test_largo_get_related_topics_for_category() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 
+		// if a category has no related topics (in cats or tags), it outputs empty string
+		// if a category has fewer than 5 related categories, and it has tags, it backfills with tags
+		// if it has 5 related categories and any number of tags, it just outputs categories
+		// in any case where there are related terms, the output contains apply_filters( 'largo_related_topics_title_ul', __( 'Related Topics:' , 'largo' ) );
 	}
 
 	function test__tags_associated_with_category() {
