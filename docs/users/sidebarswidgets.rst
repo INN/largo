@@ -97,6 +97,11 @@ Largo Facebook Widget
 
 Shows a Facebook "like" box/feed. This will only work for Facebook Pages, which are by default public, not personal Facebook accounts. If you get an error message saying "Error: Not a valid Facebook Page url," it typically means the url is not a public Facebook Page.
 
+Largo Featured Posts Widget
+---------------------------
+
+Displays a list of posts from one of the **Post Prominence** terms with titles, optional thumbnail images, and excerpts. The widget title defaults to "In Case You Missed It" but this can be changed in the widget settings. You can set which Post Prominence term is used for display of posts, how many posts to show, how to display the thumbnail, and the excerpt length.
+
 Largo Follow
 ------------
 
@@ -129,23 +134,23 @@ Largo Recent Posts
 
 This is a powerful widget to show recent posts in various formats with the option to limit by category, tag, custom taxonomy term and/or author. This widget has many options that enable display of a filtered set of articles or excerpts based on criteria of your choosing. You can limit by author and/or category, and then further limit by tag. You can limit by a custom taxonomy like Post Prominence, Series, or Post Types (the latter two need to be enabled in **Appearance > Theme Options > Advanced**), and you can combine these filters as needed. 
 
-Limiting by taxonomies and their terms requires using the "slug" for each. To start with, here are the available taxonomies with their names and slugs:
+You can show posts by all authors and/or categories by using the dropdown menu in the widget settings. 
+
+Limiting by the custom taxonomies and their terms requires using the “slug” for the taxonomy in the Taxonomy field:
 
 ===============   ======================================================
-Taxonomy Name     Taxonomy Slug
+Custom Taxonomy   Taxonomy Slug
 ===============   ======================================================
-Categories        category
-Tags              post_tag
 Post Prominence   prominence
 Series            series
 Post Types        post-type
 ===============   ======================================================
 
-Each term within a taxonomy also has a name and a slug. For example, the slug for a tag of "social media" would be "social-media". You can find the slugs for the terms in any taxonomy by checking its settings page, which lists the names and their slugs.
+Each term within a taxonomy also has a slug. For example, the slug for a tag of "social media" would be "social-media". You can find the slugs for the terms in any taxonomy by checking its settings page, which lists the names and their slugs.
 
-If you want to limit by custom taxonomy, enter the taxonomy's slug in the Taxonomy field, and then the term's slug in the Term field. For example if you want to display Post Prominence content assigned to "Featured in Series", you'll enter "prominence" as the Taxonomy and "series-featured" as the Term. 
+Enter the custom taxonomy's slug in the Taxonomy field, and the term's slug in the Term field. For example if you want to display Post Prominence content assigned to "Featured in Series", you'll enter "prominence" as the Taxonomy and "series-featured" as the Term. 
 
-After setting the limits on the content you want displayed, you can adjust how it's displayed.  You can set how thumbnails, excerpts, bylines, and top terms are displayed, and add a More link to a URL. One additional setting may be very helpful: Depending on how you limit by taxonomy etc., you may want to select the option to Avoid Duplicate Posts which will cause this widget to skip any posts that are already shown elsewhere on the page.
+After setting the limits on the content you want displayed, you can adjust how it's displayed.  You can set how thumbnails, excerpts, bylines, and top terms are displayed, and add a More link to a URL. You may also want to select the option to **Avoid Duplicate Posts** which will cause this widget to skip any posts that are already shown elsewhere on the page.
 
 Largo Related Posts
 -------------------
@@ -189,13 +194,14 @@ On Twitter you can create widgets for a user timeline, favorites, list, or searc
 
 *Note: In most cases the Largo Twitter Widget will work fine if you just set the Twitter Widget ID. As a fallback in case of errors loading scripts from Twitter, it's a good idea to also add the Twitter Username, List slug, and search query in the settings*.
 
-Largo Roundups Widget
----------------------
+Added Plugin Widgets
+--------------------
 
-If you have the **Link Roundups** plugin installed, this widget will display the most recent Link Roundup posts. You can change the number of posts to show, limit display to a category, and add a More link at the bottom of the widget. 
+INN builds and maintains several WordPress plugins that provide additional functionality and add their own widgets. For more information about the plugins and documentation on using these widgets see:
 
-For more on how this works see the `Link Roundups widget documentation <https://github.com/INN/link-roundups/blob/master/README.md>`_.
-
+- `Link Roundups plugin <https://wordpress.org/plugins/link-roundups/>`_
+- `Doubleclick for Wordpress plugin <https://wordpress.org/plugins/doubleclick-for-wp//>`_
+- `Analytic Bridge plugin <https://github.com/INN/analytic-bridge>`_
 
 Widgets Deprecated in 0.4x
 =========================
@@ -207,6 +213,20 @@ Widgets Deprecated in 0.5x
 =========================
 
 - **Largo Featured Posts** - Now just use the Largo Recent Posts widget and limit to the desired term in the Prominence taxonomy.
+
+Default WordPress Widgets Disabled
+==================================
+
+Several standard WordPress widgets are deregistered (disabled) in Largo, since we provide alternative widgets with similar functionality more useful in the Largo theme. These widgets are deregistered in `inc/widgets.php` and include:
+
+- Pages
+- Calendar
+- Links
+- Tag Cloud
+- Meta
+- Recent Comments
+- RSS
+- Recent Posts
 
 Sidebar Options
 ===============
