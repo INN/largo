@@ -135,16 +135,23 @@ class Navis_Media_Credit {
     }
 
 
-    /**
-     * navis_add_caption_shortcode(): replaces the built-in caption shortcode
-     * with one that supports a credit field.
-     */
+	/**
+	 * Navis' add_caption_shortcode(): replaces the built-in caption shortcode
+	 * with one that supports a credit field.
+	 *
+	 * @param string $html
+	 * @param string $id
+	 * @param string $caption Image caption
+	 * @param string $title Image title attribute
+	 * @param string $align Image css alignment property
+	 * @param string $url Image src URL
+	 * @param string $size Image size (thumbnail, medium, large, full, or one added with add_image_size() )
+	 * @param string $alt Alt text for the image
+	 *
+	 * @see the original WordPress function: https://developer.wordpress.org/reference/functions/image_add_caption/
+	 */
     function add_caption_shortcode( $html, $id, $caption, $title, $align, $url, $size, $alt = '' ) {
         $creditor = navis_get_media_credit( $id );
-
-        if ( empty( $caption ) && !$creditor->to_string()) {
-            return $html;
-        };
 
         $id = ( 0 < (int) $id ) ? 'attachment_' . $id : '';
         if ( ! preg_match( '/width="([0-9]+)/', $html, $matches ) )
@@ -152,8 +159,8 @@ class Navis_Media_Credit {
 
         $width = $matches[1];
 
-        // XXX: not sure what this does
-        $html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)\s?/', '$1', $html );
+        // Tries to remove the class "align*" in the passed $html
+        $html = preg_replace( '/(class=["\'][^\'"]*)align(none|left|right|center)/', '$1', $html );
         if ( empty($align) )
             $align = 'none';
 
@@ -193,7 +200,13 @@ class Navis_Media_Credit {
         }
 
         // XXX: maybe remove module and image classes at some point
-        $out = sprintf( '<div %s class="wp-caption module image %s" style="max-width: %spx;">%s', $id, $align, $width, do_shortcode( $content ) );
+        $out = sprintf(
+			'<div %s class="wp-caption module image %s" style="max-width: %spx;">%s',
+			$id,
+			$align,
+			$width,
+			do_shortcode( $content )
+		);
         if ( $credit ) {
             $out .= sprintf( '<p class="wp-media-credit">%s</p>', $credit );
         }
@@ -257,7 +270,9 @@ class Media_Credit {
             return esc_attr( $this->credit );
         } elseif ( $this->org ) {
             return esc_attr( $this->org );
-        }
+        } else {
+			return false;
+		}
     }
 
     function update( $field, $value ) {
