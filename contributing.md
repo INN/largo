@@ -24,3 +24,4 @@ And of course you can always email us: [nerds@inn.org](mailto:nerds@inn.org).
 - Follow all standards from the INN Nerds [coding style guide](https://github.com/INN/docs/tree/master/style-guides/code).
 - Use [markdown syntax](http://daringfireball.net/projects/markdown/syntax) for all text documents.
 - Pull requests for new functionality should be accompanied by tests wherever possible.
+- Changes to PHP code regarding the Load More Posts functionality **[must](https://tools.ietf.org/html/rfc2119) include tests** for the change and for regression. Tests for LMP are no longer optional.
