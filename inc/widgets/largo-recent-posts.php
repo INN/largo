@@ -76,6 +76,9 @@ class largo_recent_posts_widget extends WP_Widget {
 			);
 		}
 
+		$query_args['no_found_rows'] = 1;
+		$query_args['suppress_filters'] = 1;
+
 		echo '<ul>';
 
 		$my_query = new WP_Query( $query_args );
