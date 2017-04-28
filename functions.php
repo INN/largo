@@ -203,6 +203,11 @@ class Largo {
 		if ( ! function_exists( 'clean_contact_func' ) ) {
 			require_once dirname( __FILE__ ) . '/lib/clean-contact/clean_contact.php';
 		}
+		
+		// load theme tour
+		if (is_admin() && isset($_GET['activated']) && 'themes.php' == $GLOBALS['pagenow'] || $_GET['welcome_tour']) {
+    		require_once dirname( __FILE__ ) . '/inc/welcome-tour.php';
+		}
 
 	}
 
