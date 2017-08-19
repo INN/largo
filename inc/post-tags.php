@@ -42,7 +42,7 @@ if ( ! function_exists( 'largo_modified_time' ) ) {
 
 /**
  * Given a time, if it was less than 24 hours ago return how many hours ago that was, otherwise return the 'F j, Y' formatted date
- * @param int $modified the Unix timestamp for the modified date
+ * @param int $time the Unix timestamp for the modified date
  * @return string HTML for the either "x hours ago" or the submitted date, formatted
  * @since 0.5.5
  * @see https://secure.php.net/manual/en/function.date.php
@@ -51,15 +51,12 @@ if ( ! function_exists( 'largo_modified_time' ) ) {
 function largo_time_diff( $time ) {
 	$time_difference = current_time( 'timestamp' ) - $time;
 
-	if ( $time_difference < 86400 ) {
-		$output = sprintf( __( '<span class="time-ago">%s ago</span>', 'largo' ),
-			human_time_diff( $time, current_time( 'timestamp' ) )
-		);
-	} else {
-		$output = date( 'F j, Y', $time );
-	}
+	$time = $time_difference < 86400
+        ? human_time_diff( $time, current_time( 'timestamp' ) )
+        : date( 'F j, Y', $time );
 
-	return $output;
+	return sprintf( __( '<span class="time-ago">%s ago</span>', 'largo' ), $time );
+
 }
 
 /**
