@@ -198,6 +198,31 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
 }
 
 /**
+ * Filter the <title> in the header
+ *
+ */
+if( ! function_exists( 'largo_wp_title' ) ) {
+	function largo_wp_title( ) {
+
+		global $page, $paged;
+//		wp_title( '|', true, 'right' );
+		bloginfo( 'name' ); // Add the blog name.
+
+		// Add the blog description for the home/front page.
+		$site_description = get_bloginfo( 'description', 'display' );
+		if ( $site_description && ( is_home() || is_front_page() ) )
+			echo " | $site_description";
+
+		// Add a page number if necessary:
+		if ( $paged >= 2 || $page >= 2 )
+			echo ' | ' . 'Page ' . max( $paged, $page );
+
+	}
+}
+add_filter( 'wp_title', 'largo_wp_title' );
+
+
+/**
  * Remove extraneous <head> elements
  *
  * @since 0.3
