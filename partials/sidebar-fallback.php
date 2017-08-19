@@ -15,7 +15,7 @@ the_widget('largo_follow_widget', array(
 
 if (of_get_option('donate_link')) {
 	the_widget('largo_donate_widget', array(
-		'title' => __('Support ' . get_bloginfo('name'), 'largo'),
+		'title' => __('Support ', 'largo') . get_bloginfo('name'),
 		'cta_text' => __('We depend on your support. A generous gift in any amount helps us continue to bring you this service.', 'largo'),
 		'button_text' => __('Donate Now', 'largo'),
 		'button_url' => esc_url( of_get_option( 'donate_link' ) ),

@@ -31,12 +31,12 @@ class largo_twitter_widget extends WP_Widget {
 			case 'likes':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/likes';
 				/* translators: @username's Likes on Twitter */
-				$widget_text = __( $instance['twitter_username'] . '\'s Likes on Twitter', 'largo' );
+				$widget_text = $instance['twitter_username'] . __( '\'s Likes on Twitter', 'largo' );
 				break;
 			case 'list':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/lists/' . $instance['twitter_list_slug'];
 				/* translators: Tweets from [list URL] */
-				$widget_text = __( 'A Twitter List by ' . $instance['twitter_username'], 'largo' );
+				$widget_text = __( 'A Twitter List by ', 'largo' ) . $instance['twitter_username'];
 				break;
 			case 'collection':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/timelines/' . $instance['twitter_collection_id'];
@@ -45,7 +45,7 @@ class largo_twitter_widget extends WP_Widget {
 			default: //timeline, probably
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'];
 				/* translators: Tweets by @username */
-				$widget_text = __( 'Tweets by @' . $instance['twitter_username'], 'largo' );
+				$widget_text = __( 'Tweets by @', 'largo' ) . $instance['twitter_username'];
 		}
 			
 		$widget_embed = sprintf( '<a class="twitter-timeline" href="%1$s">%2$s</a>',

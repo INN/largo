@@ -149,7 +149,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' => __( 'Recent ' . of_get_option( 'posts_term_plural', 'Posts' ), 'largo' ),
+			'title' => __( 'Recent ', 'largo' ) . of_get_option( 'posts_term_plural', 'Posts' ),
 			'num_posts' => 5,
 			'avoid_duplicates' => '',
 			'thumbnail_display' => 'small',

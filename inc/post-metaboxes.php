@@ -239,7 +239,7 @@ function largo_custom_related_meta_box_display() {
 	$value = get_post_meta( $post->ID, 'largo_custom_related_posts', true );
 
 	echo '<p><strong>' . __('Related Posts', 'largo') . '</strong><br />';
-	echo __('To override the default related posts functionality enter specific related post IDs separated by commas.') . '</p>';
+	echo __( 'To override the default related posts functionality enter specific related post IDs separated by commas.', 'largo' ) . '</p>';
 	echo '<input type="text" name="largo_custom_related_posts" value="' . esc_attr( $value ) . '" />';
 }
 largo_register_meta_input( 'largo_custom_related_posts', 'sanitize_text_field' );

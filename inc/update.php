@@ -96,8 +96,8 @@ function largo_register_update_page() {
 	if ( largo_need_updates() ) {
 		add_submenu_page(
 			'index.php',
-			esc_html__( 'Update Largo' ),
-			esc_html__( 'Update Largo' ),
+			esc_html__( 'Update Largo', 'largo' ),
+			esc_html__( 'Update Largo', 'largo' ),
 			'update_themes',
 			'update-largo',
 			'largo_update_page_template'
@@ -1193,8 +1193,8 @@ function largo_block_theme_options_for_update() {
 		});
 
 		add_theme_page(
-			__( 'Theme Options', 'options_framework_theme' ),
-			__( 'Theme Options', 'options_framework_theme' ),
+			__( 'Theme Options', 'largo' ),
+			__( 'Theme Options', 'largo' ),
 			'update_themes',
 			'largo-block-theme-options',
 			'largo_block_theme_options'

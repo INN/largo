@@ -185,7 +185,7 @@ function largo_home_series_stories_data() {
 
 	$series_stories = array();
 
-	$uncategorized_term = get_term_by('name', __('Uncategorized'), 'category');
+	$uncategorized_term = get_term_by('name', __('Uncategorized', 'largo'), 'category');
 	$series_terms = wp_get_post_terms($big_story->ID, 'series');
 	$category_terms = wp_list_filter(
 		wp_get_post_terms($big_story->ID, 'category'),

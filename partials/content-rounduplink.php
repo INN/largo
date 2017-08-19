@@ -24,7 +24,7 @@ $custom = get_post_custom($post->ID);
 		echo '</p>';
 	}
 	if ( isset($custom['lr_source'][0] ) ) {
-		echo '<p class="source">' . __('Source: ', 'argo-links') . '<span>';
+		echo '<p class="source">' . __('Source: ', 'largo') . '<span>';
 		echo ( isset( $custom['lr_url'][0] ) ) ? '<a href="' . $custom['lr_url'][0] . '">' . $custom['lr_source'][0] . '</a>' : $custom['lr_source'][0];
 		echo '</span></p>';
 	}

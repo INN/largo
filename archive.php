@@ -55,7 +55,7 @@ $queried_object = get_queried_object();
 				 */
 				$title = apply_filters(
 					'largo_archive_' . $post_type . '_title',
-					__( post_type_archive_title( '', false ), 'largo' )
+					post_type_archive_title( '', false )
 				);
 				/**
 				 * Make the feed url of the post_type archive filterable

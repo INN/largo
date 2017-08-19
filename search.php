@@ -101,7 +101,7 @@ get_header();
 			<h3 class="recent-posts clearfix">
 				<?php
 					printf( __('Your search for <span class="search-term">%s</span> returned ', 'largo'), get_search_query() );
-					printf( _n( '%s result', '%s results', $wp_query->found_posts ), number_format_i18n( $wp_query->found_posts ) );
+					printf( _n( '%s result', '%s results', $wp_query->found_posts, 'largo' ), number_format_i18n( $wp_query->found_posts ) );
 					printf( '<a class="rss-link" href="%1$s"><i class="icon-rss"></i></a>', get_search_feed_link() );
 				?>
 			</h3>
