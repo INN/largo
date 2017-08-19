@@ -205,7 +205,6 @@ if( ! function_exists( 'largo_wp_title' ) ) {
 	function largo_wp_title( ) {
 
 		global $page, $paged;
-//		wp_title( '|', true, 'right' );
 		bloginfo( 'name' ); // Add the blog name.
 
 		// Add the blog description for the home/front page.
