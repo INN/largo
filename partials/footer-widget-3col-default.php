@@ -5,11 +5,12 @@
 </div>
 
 <div class="span6 widget-area" role="complementary">
-	<?php if ( ! dynamic_sidebar( 'footer-2' ) ) {
+	<?php
 
 /**
  * @see https://github.com/INN/largo/issues/1467
  */
+//    if ( ! dynamic_sidebar( 'footer-2' ) ) {
 //		the_widget( 'largo_featured_widget', array(
 //				'term' => 'footer-featured',
 //				'title' => __('In Case You Missed It', 'largo'),
@@ -19,7 +20,8 @@
 //				'thumb' => 'before'
 //			)
 //		);
-	}
+//	}
+
 	?>
 </div>
 
