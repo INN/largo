@@ -6,15 +6,19 @@
 
 <div class="span6 widget-area" role="complementary">
 	<?php if ( ! dynamic_sidebar( 'footer-2' ) ) {
-		the_widget( 'largo_featured_widget', array(
-				'term' => 'footer-featured',
-				'title' => __('In Case You Missed It', 'largo'),
-				'widget_class' => 'default',
-				'num_posts' => 2,
-				'num_sentences' => 2,
-				'thumb' => 'before'
-			)
-		);
+
+/**
+ * @see https://github.com/INN/largo/issues/1467
+ */
+//		the_widget( 'largo_featured_widget', array(
+//				'term' => 'footer-featured',
+//				'title' => __('In Case You Missed It', 'largo'),
+//				'widget_class' => 'default',
+//				'num_posts' => 2,
+//				'num_sentences' => 2,
+//				'thumb' => 'before'
+//			)
+//		);
 	}
 	?>
 </div>
