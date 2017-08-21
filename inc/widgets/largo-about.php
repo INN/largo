@@ -50,9 +50,14 @@ class largo_about_widget extends WP_Widget {
 		if ( of_get_option( 'site_blurb' ) ) {
 			echo '<p>' . of_get_option( 'site_blurb' ) . '</p>';
 		} else {
-			echo '<p class="error"><strong>';
-			_e( 'You have not set a description for your site.</strong> Add a site description by visiting the Largo Theme Options page.', 'largo' );
-			echo '</p>';
+		    $link_title = __( 'The Largo Theme Options page', 'largo' );
+		    $options_url = site_url( '/wp-admin/themes.php?page=options-framework' );
+			$message = sprintf(
+				__( '%sYou have not set a description for your site.%s Add a site description by visiting %sthe Largo Theme Options page%s.', 'largo' ),
+                '<strong>','</strong>',
+                "<a href=\"{$options_url}\" title=\"{$link_title}\">", '</a>'
+            );
+			echo "<p class=\"error\">{$message}</p>";
 		}
 
 		echo $args[ 'after_widget' ];
