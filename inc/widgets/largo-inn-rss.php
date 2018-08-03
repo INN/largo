@@ -26,6 +26,21 @@ class largo_INN_RSS_widget extends WP_Widget {
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Stories From Other INN Members', 'largo') : $instance['title'], $instance, $this->id_base);
 
+		if ( empty( $rss) || is_wp_error( $rss ) ) {
+			echo sprintf(
+				'<!-- %1$s -->',
+				esc_html__( 'The INN Members RSS feed is not returning a valid RSS feed at this point in time.', 'largo' )
+			);
+			if ( WP_DEBUG || LARGO_DEBUG ) {
+				echo sprintf(
+					'<!-- %1$s -->',
+					esc_html( var_export( $rss, true ) )
+				);
+			}
+
+			return;
+		}
+
 		echo $before_widget;
 
 		if ( $title ) echo $before_title . $title . $after_title;
