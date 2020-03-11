@@ -18,6 +18,9 @@ Particular thanks go to outside contributor [@seanchayes](https://github.com/sea
 ### Potentially-breaking changes
 
 - Replace `#header-social` in CSS files with `.header-social` to mach updated markup. [Pull request #1826](https://github.com/INN/largo/pull/1826) for [issue #1781](https://github.com/INN/largo/issues/1781).
+- Removes the Largo Staff Roster Widget. [Pull request #1763](https://github.com/INN/largo/pull/1763/) for [issue #1505](https://github.com/INN/largo/issues/1505).
+- Removes the `[roster]` shortcode that can be used to output a list of staff. [Pull request #1763](https://github.com/INN/largo/pull/1763/) for [issue #1505](https://github.com/INN/largo/issues/1505).
+- Deprecates the functions `largo_render_user_list` and `largo_render_staff_list_shortcode`. [Pull request #1763](https://github.com/INN/largo/pull/1763/) for [issue #1505](https://github.com/INN/largo/issues/1505).
 
 ## [Largo 0.6.4](https://github.com/INN/largo/compare/v0.6.3...v0.6.4)
 

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Deprecated functions
+ */
 
 /**
  * Wrapper for wp_nav_menu() that previously cached nav menus. Removed caching mechanism and
@@ -52,3 +55,29 @@ function largo_fb_user_is_followable( $username = '' ) {
 	return false;
 }
 
+/**
+ * Former shortcode version of `largo_render_user_list`
+ *
+ * @param $atts array The attributes of the shortcode.
+ * @since 0.4
+ * @deprecated 0.7
+ * @link https://github.com/INN/staff
+ * @link https://github.com/INN/largo/issues/1505
+ */
+function largo_render_staff_list_shortcode($atts=array()) {
+	error_log(var_export( 'function largo_render_staff_list_shortcode is deprecated. Use INN\'s Staff plugin instead', true));
+}
+
+/**
+ * Formerly, a list of user profiles based on the array of users passed
+ *
+ * @param $users array The WP_User objects to use in rendering the list.
+ * @param $show_users_with_empty_desc bool Whether we should skip users that have no bio/description.
+ * @since 0.4
+ * @deprecated 0.7
+ * @link https://github.com/INN/staff
+ * @link https://github.com/INN/largo/issues/1505
+ */
+function largo_render_user_list($users, $show_users_with_empty_desc=false) {
+	error_log(var_export( 'function largo_render_user_list is deprecated. Use INN\'s Staff plugin instead', true));
+}
