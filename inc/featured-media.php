@@ -305,7 +305,7 @@ function largo_enqueue_featured_media_js( $hook ) {
 			'image_title' => __( 'Featured image', 'largo' ),
 			'gallery_title' => __( 'Featured gallery', 'largo' ),
 			'error_invalid_url' => __( 'Error: please enter a valid URL.', 'largo' ),
-			'error_occurred' => __( 'An error ocurred', 'largo' ),
+			'error_occurred' => __( 'An error occurred', 'largo' ),
 			'set_featured' => __( 'Set as featured', 'largo' ),
 			'confirm_remove_featured' => __( 'Yes, remove featured media', 'largo' ),
 			'remove_featured_title' => __( 'Remove featured', 'largo' )
