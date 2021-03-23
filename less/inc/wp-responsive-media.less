@@ -69,9 +69,16 @@ img[class*="wp-image-"] {
 }
 @media @tabletDown {
   .alignwide {
-    // these values match the padding on #page, plus the padding on #entry-content, halved
+    // these values match the padding on #page, plus the padding on .entry-content, halved
     margin-left: ~"calc(-0.5 * (2.5vw + 6.38297872%) )";
     margin-right: ~"calc(-0.5 * (2.5vw + 6.38297872%) )";
+  }
+}
+@media @mobile {
+  .alignwide {
+    // these values match the padding on #page. .entry-content has no padding.
+    margin-left: ~"calc(-0.5 * 2.5vw )";
+    margin-right: ~"calc(-0.5 * 2.5vw )";
   }
 }
 

@@ -34,6 +34,83 @@
       box-sizing: border-box;
     }
   }
+  &.alignwide {
+    &:not(.navis-slideshow) {
+      .classic & {
+        figcaption {
+          @media ( min-width: 1229px ) {
+            margin-left: ~"calc( 0.5 * ( 100vw - 1170px ) )"; // the left margin on #page, as a negative.
+            transform: none;
+          }
+          @media ( max-width: 1228px ) {
+            margin-left: 2.5vw; // the left margin on #page, as a negative.
+            transform: none;
+          }
+          @media ( max-width: 768px ) {
+            margin-left: 2.5vw;
+            margin-right: 2.5vw;
+          }
+        }
+      }
+      figcaption {
+        margin-right: calc(0.5 * (95vw * 0.17021276594) );
+        margin-left: calc(0.5 * (95vw * 0.17021276594) );
+        @media (max-width: 979px) {
+          margin-left: calc(0.5 * (2.5vw + 6.38297872%) );
+          margin-right: calc(0.5 * (2.5vw + 6.38297872%) );
+        } 
+      }
+    }
+  }
+  &.alignfull {
+    width: 100%;
+    margin-left: 0%;
+    transform: unset;
+    max-width: 100%;
+    &:not(.navis-slideshow) {
+      .classic & {
+        img {
+    
+          // because #page does not have box-sizing: border-box but does have padding 0 2.5%
+          // 1170px * 1.05 = 1228.5px
+          //
+          // 1170px: the max-width of #page;
+          // 2.5vw: padding-left and padding-right on #page when #page is whole width of viewport
+          // 24px: padding-left on #sidebar.widget
+          // 2.12765957%: margin-left on #sidebar since it is a .span4
+          // 1170px * 2.12765957%: acceptable bleed from #content into the gutter of the sidebar, at that viewport width
+          // 95vw * 2.12765957%: acceptable bleed, below that viewport width
+          @media ( min-width: 1229px ) {
+            width: ~"calc( 100% + ( 0.5 * ( 100vw - 1170px ) ) + ( 1170px * 0.0212765957 ) )"; // the column width plus the left margin on #page, plus the bleed figure
+            margin-left: ~"calc( -0.5 * ( 100vw - 1170px ) )"; // the left margin on #page, as a negative.
+            transform: none;
+          }
+          @media ( max-width: 1228px ) {
+            width: ~"calc( 100% + 2.5vw + ( 95vw * 0.0212765957 ) )"; // the column width plus the left margin on #page, plus the bleed figure
+            margin-left: -2.5vw; // the left margin on #page, as a negative.
+            transform: none;
+          }
+          @media ( max-width: 768px ) {
+            width: 100vw;
+          }
+        }
+      }
+      img {
+        width: 100vw;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        max-width: none;
+      }
+    }
+  }
+  &.alignwide,
+  &.alignfull {
+    &.navis-slideshow {
+      figcaption {
+        width: 100%;
+      }
+    }
+  }
 }
 .wp-block-gallery {
   // standard block display
