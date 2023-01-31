@@ -1,36 +1,52 @@
 <?php
+/**
+ * PHPUnit bootstrap file.
+ *
+ * @package Largo
+ */
 
-$wp_tests_dir = getenv('WP_TESTS_DIR');
-require_once $wp_tests_dir . '/includes/functions.php';
+$_tests_dir = getenv( 'WP_TESTS_DIR' );
 
-$basename = basename(dirname(__DIR__));
+if ( ! $_tests_dir ) {
+	$_tests_dir = rtrim( sys_get_temp_dir(), '/\\' ) . '/wordpress-tests-lib';
+}
 
-$GLOBALS['wp_tests_options'] = array(
-	'stylesheet' => $basename,
-	'template' => $basename
-);
+if ( ! file_exists( $_tests_dir . '/includes/functions.php' ) ) {
+	echo "Could not find {$_tests_dir}/includes/functions.php, have you run bin/install-wp-tests.sh ?" . PHP_EOL;
+	exit( 1 );
+}
 
-tests_add_filter('set_current_user', function($arg) {
-	$user = wp_get_current_user();
-	$user->set_role('administrator');
-	return $arg;
-}, 1, 10);
+// Give access to tests_add_filter() function.
+require_once "{$_tests_dir}/includes/functions.php";
 
-tests_add_filter('filesystem_method', function($arg) {
-	return 'direct';
-}, 1, 10);
+/**
+ * Registers theme.
+ */
+function _register_theme() {
 
-// require and activate gutenberg
-tests_add_filter( 'muplugins_loaded', function($arg) {
-	if ( getenv( 'GUTENBERG' ) == 1 ) {
-		require ABSPATH . 'wp-content/plugins/gutenberg/gutenberg.php';
-		$plugins = get_option( 'active_plugins' );
-		$plugins[] = 'gutenberg/gutenberg.php';
-		$ret = update_option( 'active_plugins', $plugins );
-	}
-	return $arg;
-});
+	$theme_dir     = dirname( __DIR__ );
+	$current_theme = basename( $theme_dir );
+	$theme_root    = dirname( $theme_dir );
+
+	add_filter( 'theme_root', function () use ( $theme_root ) {
+		return $theme_root;
+	} );
+
+	register_theme_directory( $theme_root );
+
+	add_filter( 'pre_option_template', function () use ( $current_theme ) {
+		return $current_theme;
+	} );
+
+	add_filter( 'pre_option_stylesheet', function () use ( $current_theme ) {
+		return $current_theme;
+	} );
+}
+
+tests_add_filter( 'muplugins_loaded', '_register_theme' );
 
 require dirname(__FILE__) . '/mock/mock-options-framework.php';
 require dirname(__FILE__) . '/mock/mock-admin-functions.php';
-require $wp_tests_dir . '/includes/bootstrap.php';
+
+// Start up the WP testing environment.
+require "{$_tests_dir}/includes/bootstrap.php";

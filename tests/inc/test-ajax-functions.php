@@ -2,8 +2,8 @@
 
 class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		// Test data
 		$this->post_count = 10;
@@ -118,8 +118,8 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 
 class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		// Test data
 		$this->post_count = 10;

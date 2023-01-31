@@ -3,8 +3,8 @@
 // Test functions in inc/avatars/admin.php and inc/avatars/functions.php
 class AvatarsTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		include_once dirname(dirname(__DIR__)) . '/inc/avatars/admin.php';
 
@@ -100,8 +100,8 @@ class AvatarsTestFunctions extends WP_UnitTestCase {
 // Ajax function(s) from inc/avatars/admin.php
 class AvatarsTestAdminAjaxFunctions extends WP_Ajax_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		// Test data
 		$this->avatar_id = $this->factory->post->create(array('post_type' => 'attachment'));

@@ -4,11 +4,6 @@
 
 class DisclaimerWidgetTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
-
-	}
-
 	function test_enabled_disclaimer() {
 
 		global $wp_widget_factory;

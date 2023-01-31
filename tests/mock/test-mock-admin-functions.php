@@ -1,8 +1,8 @@
 <?php
 class MockAdminTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 	}
 
 	function test_mock_in_admin() {

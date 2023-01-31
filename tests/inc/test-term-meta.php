@@ -5,8 +5,8 @@
  */
 
 class TermMetaTestFunctions extends WP_UnitTestCase {
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 		$this->post_id = $this->factory->post->create(array());
 
 		// the category

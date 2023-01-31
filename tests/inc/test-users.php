@@ -3,8 +3,8 @@
 // Test functions in inc/users.php
 class UsersTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		// Test data
 		$this->author_user_ids = $this->factory->user->create_many(10, array('role' => 'author'));

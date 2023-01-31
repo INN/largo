@@ -3,10 +3,6 @@
 // Test functions in inc/custom-less-variables.php
 class LESSTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
-	}
-
 	function test_largo_custom_less_cariables_init() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}

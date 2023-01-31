@@ -1,9 +1,6 @@
 <?php
 
 class FeaturedContentTestFunctions extends WP_UnitTestCase {
-	function setUp() {
-		parent::setUp();
-	}
 
 	function test_largo_get_featured_posts() {
 		$this->markTestIncomplete('This test has not been implemented yet.');

@@ -165,14 +165,14 @@ if ( ! function_exists( 'largo_seo' ) ) {
 		// if the blog is set to private WordPress already adds noindex,nofollow.
 		if ( get_option( 'blog_public' ) ) {
 			if ( is_date() || ( is_archive() && of_get_option( 'noindex_archives' ) ) ) {
-				wp_no_robots();
+				wp_robots_no_robots();
 			}
 		} else {
-			wp_no_robots();
+			wp_robots_no_robots();
 		}
 
 		if ( is_404() || is_search() ) {
-			wp_no_robots();
+			wp_robots_no_robots();
 		}
 
 		// single posts get a bunch of other google news specific meta tags.

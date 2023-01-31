@@ -2,10 +2,6 @@
 
 class HeaderFooterTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
-	}
-
 	function test_largo_header() {
 		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
 		largo_header();
