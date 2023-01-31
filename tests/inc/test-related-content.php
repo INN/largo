@@ -2,8 +2,8 @@
 
 // Test functions in inc/related-content.php
 class RelatedContentTestFunctions extends wp_UnitTestCase{
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 	}
 
 	function test_largo_get_related_topics_for_category() {
@@ -70,8 +70,8 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	public $series;
 	public $considered;
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		// The category
 		$this->cat_id = $this->factory->category->create();

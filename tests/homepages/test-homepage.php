@@ -2,8 +2,8 @@
 
 class HomepageTest extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 		// Make sure options get zeroed out after each test.
 		of_reset_options();
 
@@ -11,8 +11,8 @@ class HomepageTest extends WP_UnitTestCase {
 		largo_register_default_homepage_layouts();
 	}
 
-	function tearDown() {
-		parent::tearDown();
+	function tear_down() {
+		parent::tear_down();
 		// cleanup
 		unset($GLOBALS['largo_homepage_factory']);
 		$GLOBALS['largo_homepage_factory'] = new HomepageLayoutFactory();
@@ -30,7 +30,7 @@ class HomepageTest extends WP_UnitTestCase {
 		of_set_option('series_enabled', 1);
 
 		foreach ($largo_homepage_factory->layouts as $key => $value)
-			$this->assertInternalType('object', $value);
+			$this->assertTrue( is_object( $value ) );
 	}
 
 	function test_largo_get_home_layouts_series_disabled() {
@@ -39,7 +39,7 @@ class HomepageTest extends WP_UnitTestCase {
 		of_set_option('series_enabled', 0);
 
 		foreach ($largo_homepage_factory->layouts as $key => $value)
-			$this->assertInternalType('object', $value);
+			$this->assertTrue( is_object( $value ) );
 	}
 
 	function test_largo_get_home_thumb() {

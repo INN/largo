@@ -2,8 +2,8 @@
 
 class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		$this->post = $this->factory->post->create();
 		$this->attachment = $this->factory->post->create(array('post_type' => 'attachment'));
@@ -133,8 +133,8 @@ class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 
 class FeaturedMediaTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		$this->post = $this->factory->post->create();
 		$this->attachment = $this->factory->post->create(array('post_type' => 'attachment'));

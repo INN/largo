@@ -1,8 +1,8 @@
 <?php
 class TaxonomiesTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		// Make sure options are zeroed out after each test
 		of_reset_options();

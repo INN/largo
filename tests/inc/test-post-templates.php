@@ -3,8 +3,8 @@
 class PostTemplatesTestFunctions extends WP_UnitTestCase {
 	private $ids = array();
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 	}
 
 	function test_get_post_templates() {

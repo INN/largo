@@ -2,8 +2,8 @@
 
 class UpdateTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		remove_filter('sanitize_option_optionsframework', 'optionsframework_validate');
 		remove_filter('sanitize_option_' . get_option('stylesheet'), 'optionsframework_validate');
@@ -31,9 +31,9 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		));
 	}
 
-	function tearDown() {
+	function tear_down() {
 		of_reset_options();
-		parent::tearDown();
+		parent::tear_down();
 	}
 
 	function test_largo_version() {
@@ -192,8 +192,10 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 			'largo-follow-widget-2', $widgets['article-bottom'][0],
 			"First widget: largo_instantiate_widget did not create the expected Largo Follow widget in the first position of the Article Bottom sidebar.");
 
-		$this->assertInternalType(
-			'array', $ret, "First widget: largo_instantiate_widget did not return an array");
+		$this->assertTrue(
+			is_array( $ret ),
+			"First widget: largo_instantiate_widget did not return an array"
+		);
 
 		$this->assertEquals(
 			'largo-follow-widget-2', $ret['id'],
@@ -212,7 +214,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 			'largo-about-widget-2', $widgets['article-bottom'][1],
 			"Second widget: largo_instantiate_widget did not create the expected Largo About widget in the second position of the Article Bottom sidebar.");
 
-		$this->assertInternalType('array', $ret, "Second widget: largo_instantiate_widget did not return an array");
+		$this->assertTrue( is_array( $ret ), "Second widget: largo_instantiate_widget did not return an array" );
 
 		$this->assertEquals(
 			'largo-about-widget-2', $ret['id'],
@@ -477,8 +479,8 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 
 class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		remove_filter('sanitize_option_optionsframework', 'optionsframework_validate');
 		remove_filter('sanitize_option_' . get_option('stylesheet'), 'optionsframework_validate');

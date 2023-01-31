@@ -1,9 +1,6 @@
 <?php
 
 class TaxonomyListWidgetTestFunctions extends WP_UnitTestCase {
-	function setUp() {
-		parent::setUp();
-	}
 
 	// Check custom functionality in the update method.
 	function test_update() {

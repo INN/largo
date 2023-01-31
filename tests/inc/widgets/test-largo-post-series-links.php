@@ -2,11 +2,6 @@
 
 class PostSeriesLinksWidgetTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
-
-	}
-
 	function test_enabled_widget() {
 
 		global $wp_widget_factory;

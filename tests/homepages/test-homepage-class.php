@@ -6,8 +6,8 @@ class TestHomepageLayout extends Homepage {
 
 class HomepageClassTest extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		$this->layoutOptions = array(
 			'name' => 'Test Homepage Layout',
@@ -37,7 +37,7 @@ class HomepageClassTest extends WP_UnitTestCase {
 		$wp_scripts = new WP_Scripts;
 	}
 
-	function tearDown() {
+	function tear_down() {
 		global $wp_styles, $wp_scripts;
 		$wp_styles = $this->wp_styles_backup;
 		$wp_scripts = $this->wp_scripts_backup;

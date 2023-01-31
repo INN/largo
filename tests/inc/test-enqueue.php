@@ -2,9 +2,6 @@
 
 class EnqueueTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
-	}
 
 	function test_largo_enqueue_js() {
 		// Modernizr
@@ -37,7 +34,7 @@ class EnqueueTestFunctions extends WP_UnitTestCase {
 }
 
 class EnqueueTestFunctions_Gutenberg extends WP_UnitTestCase {
-	function setUp() {
+	function set_up() {
 		// @see wp_version_check();
 		require( ABSPATH . WPINC . '/version.php' );
 		if (
@@ -47,7 +44,7 @@ class EnqueueTestFunctions_Gutenberg extends WP_UnitTestCase {
 			$this->markTestSkipped( 'Skipping Gutenberg tests in non-gutenberg environment' );
 		}
 
-		parent::setUp();
+		parent::set_up();
 	}
 
 	// helper to activate gutenberg

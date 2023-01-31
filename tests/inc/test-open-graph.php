@@ -2,8 +2,8 @@
 
 class OpenGraphTestFunctions extends WP_UnitTestCase {
 
-	function setUp() {
-		parent::setUp();
+	function set_up() {
+		parent::set_up();
 
 		$this->post_excerpt = <<<EOT
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus purus id pharetra dapibus.
@@ -28,7 +28,7 @@ EOT;
 		ob_start();
 		largo_opengraph();
 		$capture = ob_get_clean();
-		$this->assertContains(
+		$this->assertStringContainsString(
 			esc_attr( largo_twitter_url_to_username( $test ) ),
 			$capture,
 			"The twitter account 'inn' is not found in the open graph output"
